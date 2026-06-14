@@ -93,11 +93,9 @@
       # 7. Homarr (O seu Dashboard Rival)
       homarr = {
         image = "ghcr.io/homarr-labs/homarr:latest";
-        extraOptions = [ "--network=host" ];
         ports = [ "8083:7575" ];
         environment = {
           SECRET_ENCRYPTION_KEY = "28fc6b3f07d57c4d4349bd976ad5d247aef82d2e3afe3e78dced7444d374e7bd";
-          PORT = "8083";
         };
         volumes = [
           "homarr_configs:/app/data/configs:Z"
@@ -123,7 +121,7 @@
         image = "ghcr.io/alexta69/metube:latest";
         ports = [ "8081:8081" ];
         volumes = [
-          "/home/jellyfin/media/youtube:Z"
+          "/home/youtube:Z"
         ];
       };
 
