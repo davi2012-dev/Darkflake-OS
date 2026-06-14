@@ -64,7 +64,8 @@
 
   nixpkgs.config.allowUnfree = true;
   programs.ccache.enable = true;
-  programs.nixbit.enable = false;
+  programs.nixbit.enable = true;
+  programs.nixbit.repository = "https://github.com/davi2012-dev/Darkflake-OS";
   programs.nix-required-mounts.enable = true;
 
   # --- 6. GNU Guix Integration ---
