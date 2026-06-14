@@ -111,7 +111,7 @@
           "/home/jellyfin/config:/config:Z"
           "/home/jellyfin/media:/media:Z"
           "/home/jellyfin/cache:/cache:Z"
-          "/home/jellyfin/media/youtube:Z"
+          "/home/jellyfin/media/youtube:/youtube:Z"
         ];
         extraOptions = [ "--device=/dev/dri:/dev/dri" ];
       };
@@ -121,7 +121,7 @@
         image = "ghcr.io/alexta69/metube:latest";
         ports = [ "8081:8081" ];
         volumes = [
-          "/home/youtube:Z"
+          "/home/jellyfin/media/youtube:/youtube:Z"
         ];
       };
 
