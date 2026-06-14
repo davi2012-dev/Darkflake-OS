@@ -12,7 +12,6 @@
   };
   };
   programs.streamcontroller.enable = true;
-  programs.cfs-zen-tweaks.enable = true;
   # 2. Pacotes de Diversão e Lazer
   environment.systemPackages = with pkgs; [
     # Jogos e Emuladores
