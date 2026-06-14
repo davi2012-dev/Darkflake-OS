@@ -124,6 +124,28 @@
           "/home/jellyfin/media/youtube:/youtube:Z"
         ];
       };
+      # Netdata Hardened Ajustado (Segurança Avançada)
+      netdata = {
+        image = "dhi.io/netdata:2-debian"; # Ou a imagem estável equivalente que você testar
+        ports = [ "19999:19999" ];
+        
+        # Como a imagem roda com o usuário 999 (netdata) e não root,
+        # precisamos dar as permissões exatas via Linux Capabilities sem escancarar o sistema.
+        extraOptions = [
+          "--cap-add=SYS_PTRACE"      # Permite monitorar os processos do host
+          "--security-opt=no-new-privileges:true" # Impede que o container eleve privilégios
+          "--user=999:999"            # Força a execução com o usuário não-root da tabela
+        ];
+
+        volumes = [
+          "netdata_config:/etc/netdata:Z"
+          "netdata_lib:/var/lib/netdata:Z"
+          "netdata_cache:/var/cache/netdata:Z"
+          "/proc:/host/proc:ro"
+          "/sys:/host/sys:ro"
+          "/etc/os-release:/host/etc/os-release:ro"
+        ];
+      };
 
     };
   };
