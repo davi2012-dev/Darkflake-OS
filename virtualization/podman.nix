@@ -134,7 +134,6 @@
         extraOptions = [
           "--cap-add=SYS_PTRACE"      # Permite monitorar os processos do host
           "--security-opt=no-new-privileges:true" # Impede que o container eleve privilégios
-          "--user=999:999"            # Força a execução com o usuário não-root da tabela
         ];
 
         volumes = [
