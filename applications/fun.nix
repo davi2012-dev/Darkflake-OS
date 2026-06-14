@@ -1,0 +1,66 @@
+{ config, pkgs, ... }: {
+  # 1. Habilita o Steam 
+  programs.steam = {
+  enable = true;
+  remotePlay.openFirewall = true; 
+  dedicatedServer.openFirewall = true;
+  localNetworkGameTransfers.openFirewall = true;
+  extest.enable = true;
+  protontricks.enable = true;
+  gamescopeSession = {
+  enable = true;
+  };
+  };
+  programs.streamcontroller.enable = true;
+  programs.cfs-zen-tweaks.enable = true;
+  # 2. Pacotes de Diversão e Lazer
+  environment.systemPackages = with pkgs; [
+    # Jogos e Emuladores
+    azahar
+    hydralauncher
+    yabause
+    ppsspp
+    dolphin-emu
+    pcsx2            
+    heroic            
+    prismlauncher    
+    ryubing
+    retroarch
+    retroarch-joypad-autoconfig
+    supertuxkart
+    supertux
+    dosbox
+    np2kai
+    rpcs3
+    extremetuxracer
+    tuxpaint
+    steam-rom-manager
+    sgdboop
+    steamtinkerlaunch
+    mangohud
+    # Visual e Personalização
+    cmatrix
+    speechd
+    espeak-ng         
+    pipes            
+    hollywood
+    asciiquarium         
+    sl
+    cowsay
+    oneko
+    figlet
+    espeak
+    cava
+    xeyes
+    gnugo
+    nyancat
+    links2
+    peaclock
+    openrgb-with-all-plugins
+    bibata-cursors
+    papirus-icon-theme
+  ];
+
+  # 3. Gamemode (Melhora a performance do i5 nos jogos)
+  programs.gamemode.enable = true;
+}
