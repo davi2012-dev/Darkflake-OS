@@ -126,7 +126,7 @@
       };
       # Netdata Hardened Ajustado (Segurança Avançada)
       netdata = {
-        image = "dhi.io/netdata:2-debian"; # Ou a imagem estável equivalente que você testar
+        image = "docker.io/netdata/netdata:stable"; # Ou a imagem estável equivalente que você testar
         ports = [ "19999:19999" ];
         
         # Como a imagem roda com o usuário 999 (netdata) e não root,
