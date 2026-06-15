@@ -25,7 +25,7 @@
   };
 
   # --- 3. Nix Config & Performance ---
-  nix.channel.enable = true;
+  nix.channel.enable = false;
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" "ca-derivations" "pipe-operators" "recursive-nix" "dynamic-derivations" "fetch-tree"  ];
     auto-optimise-store = true;
