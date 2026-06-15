@@ -22,7 +22,6 @@
     tpm.enable = true;               # Emula o chip TPM virtual (fundamental com o SecureBoot)
 
     # Otimizações de compartilhamento de arquivos com o Host físico
-    nixStore9pCache = "loose";       # Cache de alta performance na RAM para ler o host
     useHostCerts = true;             # Herda os certificados SSL do host (evita erros de rede)
     
     # Comportamento do armazenamento temporário
