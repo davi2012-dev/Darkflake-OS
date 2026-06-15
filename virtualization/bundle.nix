@@ -14,6 +14,7 @@
     useEFIBoot = true;
     useSecureBoot = true;
     mountHostNixStore = true;
+    useHostCerts = true;
     writableStore = true;
   };
 
