@@ -1,11 +1,16 @@
 { config, pkgs, ... }: {
+
+  # Ativa o suporte geral a containers no NixOS
   virtualisation.containers.enable = true;
 
+  # Configuração global do Podman Engine
   virtualisation.podman = {
     enable = true;
     dockerSocket.enable = true;
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
+    
+    # Faxina automática para o Kubernetes e os deploys não estourarem o SSD da VM
     autoPrune = {
       enable = true;
       dates = "weekly";
@@ -13,7 +18,7 @@
     };
   };
 
-  # CONFIGURAÇÃO DECLARATIVA DOS CONTAINERS
+  # CONFIGURAÇÃO DECLARATIVA DOS CONTAINERS (OCI)
   virtualisation.oci-containers = {
     backend = "podman";
     containers = {
@@ -90,7 +95,7 @@
         dependsOn = [ "nextcloud-db" ];
       };
 
-      # 7. Homarr (O seu Dashboard Rival)
+      # 7. Homarr (Dashboard)
       homarr = {
         image = "ghcr.io/homarr-labs/homarr:latest";
         ports = [ "8083:7575" ];
@@ -103,7 +108,7 @@
         ];
       };
 
-      # 8. Jellyfin
+      # 8. Jellyfin (Com repasse de aceleração de vídeo por hardware)
       jellyfin = {
         image = "docker.io/jellyfin/jellyfin:latest";
         ports = [ "8096:8096" ];
@@ -116,7 +121,7 @@
         extraOptions = [ "--device=/dev/dri:/dev/dri" ];
       };
 
-      # 9. MeTube (salva direto no Jellyfin)
+      # 9. MeTube (Direcionado para a pasta de mídias do Jellyfin)
       metube = {
         image = "ghcr.io/alexta69/metube:latest";
         ports = [ "8081:8081" ];
@@ -124,18 +129,15 @@
           "/home/jellyfin/media/youtube:/youtube:Z"
         ];
       };
-      # Netdata Hardened Ajustado (Segurança Avançada)
-      netdata = {
-        image = "docker.io/netdata/netdata:stable"; # Ou a imagem estável equivalente que você testar
-        ports = [ "19999:19999" ];
-        
-        # Como a imagem roda com o usuário 999 (netdata) e não root,
-        # precisamos dar as permissões exatas via Linux Capabilities sem escancarar o sistema.
-        extraOptions = [
-          "--cap-add=SYS_PTRACE"      # Permite monitorar os processos do host
-          "--security-opt=no-new-privileges:true" # Impede que o container eleve privilégios
-        ];
 
+      # 10. Netdata Hardened Ajustado (Segurança Avançada e Monitoramento)
+      netdata = {
+        image = "docker.io/netdata/netdata:stable";
+        ports = [ "19999:19999" ];
+        extraOptions = [
+          "--cap-add=SYS_PTRACE"                  # Permite monitorar os processos do host
+          "--security-opt=no-new-privileges:true" # Impede elevação de privilégios dentro do container
+        ];
         volumes = [
           "netdata_config:/etc/netdata:Z"
           "netdata_lib:/var/lib/netdata:Z"
@@ -149,6 +151,7 @@
     };
   };
 
+  # Ferramentas auxiliares instaladas no sistema para gerenciar e debugar os containers
   environment.systemPackages = with pkgs; [
     podman-compose
     podman-tui
