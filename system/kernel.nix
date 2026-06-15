@@ -102,7 +102,8 @@
     "nct6775"             # Sensores Nuvoton comuns em desktops
     "intel_rapl_common"   # Telemetria de energia Intel
 
-    # --- Armazenamento e Sistemas de Arquivos ---
+   # --- Armazenamento e Sistemas de Arquivos ---
+    "iso9660"
     "vfat"
     "ntfs3"               # Driver NTFS moderno
     "fuse"                # Flatpaks, AppImages, Rclone
