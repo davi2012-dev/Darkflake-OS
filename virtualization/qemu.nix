@@ -11,8 +11,7 @@
 
     # 3. Argumentos Extras do QEMU (Passa o processador real do seu PC para dentro da VM)
     options = [
-      "-cpu host"              # Garante que as flags de virtualização aninhada do seu processador passem adiante
+      "-cpu host"            
     ];
   };
-
 }
