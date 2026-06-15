@@ -1,14 +1,31 @@
 { config, pkgs, lib, ... }: {
-  # Desabilita completamente o Lanzaboote
-  boot.lanzaboote.enable = lib.mkForce false;
-
-  # Habilita o systemd-boot simples
+  
   boot.loader = {
-    systemd-boot.enable = true;
+    systemd-boot.enable = lib.mkForce false;
     efi.canTouchEfiVariables = true;
   };
 
-  # (Opcional) Se quiser manter o Secure Boot sem o Lanzaboote, 
-  # você pode usar sbctl manualmente, mas é mais complexo.
-  # Por ora, deixe o Secure Boot desligado na BIOS.
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+    
+    autoGenerateKeys = {
+      enable = true;
+    };
+
+    autoEnrollKeys = {
+      enable = true;
+    };
+  };
+
+  boot.plymouth.enable = true;
+  boot.consoleLogLevel = 0;
+  boot.initrd.verbose = false;
+  boot.hardwareScan = true;
+
+  boot.tmp = {
+    cleanOnBoot = true;
+    useTmpfs = true;
+    tmpfsSize = "50%";
+  };
 }
