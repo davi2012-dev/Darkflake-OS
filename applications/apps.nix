@@ -40,7 +40,7 @@
     git
     lazygit             # Interface TUI para git
     vscodium 
-    foot
+    ghostty
     distrobox           # Rodar outras distros no terminal
     distrobox-tui
     distroshelf         # Menu para gerenciar suas distroboxes
