@@ -2,6 +2,12 @@
 
 let
   justfileContent = pkgs.writeText "justfile" ''
+    # Receita padrão (não faz nada perigoso)
+    default:
+        @echo "Uso: njust hmx"
+        @echo "       njust --help"
+
+    # Instala o Honeymux (só com argumento hmx)
     hmx:
         curl -fsSL https://get.hmx.dev | bash
   '';
