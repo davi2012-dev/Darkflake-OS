@@ -70,7 +70,10 @@
     "joydev"              # Joysticks clássicos
     "evdev"               # Input avançado
     "hid_generic"
-
+    "ahci"
+    "9pnet_virtio"
+    "9p"
+    "9pnet"
     # --- Áudio, Monitores e Periféricos ---
     "snd_seq"             # MIDI
     "i2c_dev"             # Controle de brilho DDC/CI e RGB de placas-mãe
