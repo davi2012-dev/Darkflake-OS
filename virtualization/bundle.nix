@@ -5,6 +5,7 @@
     ./podman.nix
     ./libvirtd.nix
     ./waydroid.nix
+    "${modulesPath}/virtualisation/qemu-vm.nix"
     ./home-assistant.nix
     ./qemu.nix
     ./vswitch.nix
