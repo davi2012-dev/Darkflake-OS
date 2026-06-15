@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs,  modulesPath, ... }: {
 
   # 1. Importação dos sub-módulos isolados
   imports = [
