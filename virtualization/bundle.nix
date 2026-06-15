@@ -4,6 +4,6 @@
     ./libvirtd.nix
     ./waydroid.nix
     ./home-assistant.nix
-    #./xen.nix
+    ./xen.nix
   ];
 }
