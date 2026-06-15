@@ -1,5 +1,6 @@
 { config, pkgs, ... }: {
 
+  virtualisation.nixStore9pCache = "loose";
   virtualisation.qemu = {
     # 1. Performance Bruta e Aceleração de Hardware
     forceAccel = true;         # Força o uso do KVM por hardware; se falhar, o build avisa
