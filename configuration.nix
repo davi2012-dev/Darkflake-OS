@@ -23,6 +23,7 @@
     ./security/bundle.nix
     # 4. Interface e Aplicativos
     ./applications/apps.nix
+    ./applications/just.nix
     ./applications/fun.nix       
 
   ];
