@@ -61,6 +61,10 @@
     "8021q"               # VLANs
     "tpm_tis"
     "tpm_crb"
+    "sch_htb"
+    "sch_ingress"
+    "sch_fq"
+    "sch_fq_codel"
     # --- Controles, Input e Hardware Gamer ---
     "uinput"              # OpenRGB, Controles Virtuais, Emuladores
     "joydev"              # Joysticks clássicos
