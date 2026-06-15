@@ -24,6 +24,8 @@
 
     # Otimizações de compartilhamento de arquivos com o Host físico
     useHostCerts = true;             # Herda os certificados SSL do host (evita erros de rede)
+    nixStore9pCache = "loose";
+    mountHostNixStore = true;
     
     # Comportamento do armazenamento temporário
     writableStore = true;
