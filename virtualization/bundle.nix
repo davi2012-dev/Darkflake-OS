@@ -35,7 +35,7 @@
     # Isolamento de aplicativos em modo Sandbox (AppVM) para o seu usuário
     appvm = {
       enable = true;
-      user = "davi"; 
+      user = "guest"; 
     };
   };
 
