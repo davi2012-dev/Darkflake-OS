@@ -17,20 +17,20 @@
     # Resolução e Tela (Para quando abrir a interface gráfica da VM)
     graphics = true;
     resolution = { x = 1920; y = 1080; };
-    spiceUSBRedirection.enable = true;
+    spiceUSBRedirection.enable = false;
     # Inicialização moderna, Firmware e Segurança Estilo Hardware Real
-    useEFIBoot = true;
-    useSecureBoot = true;
-    tpm.enable = true;               # Emula o chip TPM virtual (fundamental com o SecureBoot)
+    useEFIBoot = false;
+    useSecureBoot = false;
+    tpm.enable = false;               # Emula o chip TPM virtual (fundamental com o SecureBoot)
 
     # Otimizações de compartilhamento de arquivos com o Host físico
-    mountHostNixStore = true;
-    nixStore9pCache = "loose";       # Cache de alta performance na RAM para ler o host
-    useHostCerts = true;             # Herda os certificados SSL do host (evita erros de rede)
+    mountHostNixStore = false;
+    #nixStore9pCache = "loose";       # Cache de alta performance na RAM para ler o host
+    useHostCerts = false;             # Herda os certificados SSL do host (evita erros de rede)
     
     # Comportamento do armazenamento temporário
-    writableStore = true;
-    writableStoreUseTmpfs = true;    # Grava modificações temporárias do OS direto na RAM
+    writableStore = false;
+    writableStoreUseTmpfs = false;    # Grava modificações temporárias do OS direto na RAM
 
     # Isolamento de aplicativos em modo Sandbox (AppVM) para o seu usuário
     appvm = {
