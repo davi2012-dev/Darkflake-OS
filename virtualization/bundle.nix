@@ -14,7 +14,6 @@
   # 2. Configurações Globais de Virtualização da VM
   virtualisation = {
     # Resolução e Tela (Para quando abrir a interface gráfica da VM)
-    graphics = true;
     resolution = { x = 1920; y = 1080; };
     spiceUSBRedirection.enable = true;
     # Inicialização moderna, Firmware e Segurança Estilo Hardware Real
