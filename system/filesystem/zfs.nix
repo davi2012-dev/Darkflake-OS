@@ -4,7 +4,7 @@
 
   boot.supportedFilesystems = [ "zfs" ];
   boot.initrd.supportedFilesystems = [ "zfs" ];
-  boot.zfs.devNodes = "/dev/disk/by-id"; 
+  boot.zfs.devNodes = "/dev/disk/by-path";
   boot.zfs.requestEncryptionCredentials = true;
   boot.zfs.forceImportRoot = true; 
   
