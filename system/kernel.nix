@@ -25,7 +25,7 @@
     "loglevel=3"
     "rd.systemd.show_status=false"
     "rd.udev.log_level=3"
-    "udev.log_priority=3"
+    "rd.udev.log_priority=3"
     "vt.global_cursor_default=0" 
 
     # Hardening do Kernel (Segurança)
@@ -47,9 +47,21 @@
   ];
 
   # --- 3. Carga de Módulos do Kernel ---
-  # IMPORTANTE: Como 'lockKernelModules' está ativo, TODOS os módulos necessários para o seu hardware
-  # e fluxo de trabalho diário DEVEM estar listados aqui, pois o kernel não carregará nada depois.
   boot.kernelModules = [
+    # =========================================================================
+    # 🚀 ADICIONADOS PARA SUPORTE COMPLETO ÀS VMs (VIRTIO, 9P, GRAFICOS E USB)
+    # =========================================================================
+    "virtio_pci"          # Barramento virtualizado essencial para mapear o hardware
+    "virtio_blk"          # Driver do Disco Rápido Virtual (diskInterface = "virtio")
+    "virtio_gpu"          # Aceleração gráfica moderna do QEMU dentro da VM
+    "qxl"                 # Driver de vídeo básico alternativo para a janela gráfica
+    "tap"                 # Necessário para os túneis de rede da interface virtual
+    "uhci_hcd"            # Controladora USB (Essencial para o spiceUSBRedirection)
+    "ehci_hcd"            # Controladora USB 2.0 para redirecionamento estável
+    "nvme"                # Driver para o seu SSD real M.2 caso o host precise
+    "sd_mod"              # Módulo básico de gerenciamento de discos do sistema
+    # =========================================================================
+
     # --- Virtualização, Containers e Redes ---
     "kvm-intel"           # Aceleração Intel (mude para "k10temp" / "kvm-amd" se sua CPU for AMD)
     "tun"                 # VPNs (Tailscale, WireGuard)
@@ -65,6 +77,7 @@
     "sch_ingress"
     "sch_fq"
     "sch_fq_codel"
+
     # --- Controles, Input e Hardware Gamer ---
     "uinput"              # OpenRGB, Controles Virtuais, Emuladores
     "joydev"              # Joysticks clássicos
@@ -74,6 +87,7 @@
     "9pnet_virtio"
     "9p"
     "9pnet"
+
     # --- Áudio, Monitores e Periféricos ---
     "snd_seq"             # MIDI
     "i2c_dev"             # Controle de brilho DDC/CI e RGB de placas-mãe
@@ -81,6 +95,7 @@
     "snd_usb_audio"       # Interfaces de som USB
     "snd_aloop"           # Loopback de áudio (OBS Studio)
     "hidp"
+
     # --- Sensores e Monitoramento ---
     "coretemp"            # Temperatura CPU Intel (Mude para "k10temp" se for AMD)
     "it87"                # Sensores de ventoinha/tensão
@@ -104,6 +119,7 @@
     "veth"
     "zfs"
     "amdgpu"
+
     # --- PCI Passthrough (VMs com GPU dedicada) ---
     "vfio"
     "vfio_iommu_type1"
@@ -150,7 +166,7 @@
     "fs.protected_regular" = 2;
     "fs.suid_dumpable" = 0;
     "dev.tty.legacy_tiocsti" = 0;
-    "fs.proc_can_see_other_uid" = 0;            # Usuários não veem processos uns dos outros
+    "fs.proc_can_see_other_uid" = 0;            # Usuários não veem processos uns dos olfactory
     "kernel.dmesg_restrict" = 1;                # Bloqueia leitura do dmesg para usuários comuns
   };
 
@@ -158,7 +174,7 @@
   boot.blacklistedKernelModules = [ 
     "ax25" "netrom" "rose" "dccp" "sctp" "rds" "tipc" 
     "hfs" "hfsplus" "jffs2"                          
-    "firewire-core"                 
+    "firewire-core"                  
   ];
 
   # --- 6. Firmware e Segurança de Imagem ---
