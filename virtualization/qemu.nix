@@ -5,7 +5,7 @@
     forceAccel = true;         # Força o uso do KVM por hardware; se falhar, o build avisa
     diskInterface = "virtio";   # Usa drivers VirtIO para leitura/escrita de disco ultra rápidas
     enableSharedMemory = true; # Compartilhamento eficiente de RAM entre as camadas virtuais
-
+    virtioKeyboard = false;
     # 2. Suporte a Integração (Opcional, mas ajuda muito no monitoramento)
     guestAgent.enable = true;  # Permite que o host se comunique melhor com o agente interno da VM
 
