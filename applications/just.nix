@@ -27,6 +27,7 @@ let
           pkgs.gawk
           pkgs.gnused
           pkgs.gnugrep
+          pkgs.gzip
         ]}
     '';
   };
