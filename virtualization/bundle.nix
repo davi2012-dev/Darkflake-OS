@@ -19,6 +19,7 @@
     mountHostNixStore = true;
     useHostCerts = true;
     writableStore = true;
+    writableStoreUseTmpfs = true;
   };
 
 }
