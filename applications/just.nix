@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
-
+{ pkgs, lib, ... }@args:
 let
   justfileContent = pkgs.writeText "justfile" ''
     hmx:
@@ -14,6 +13,6 @@ pkgs.symlinkJoin {
     mkdir -p $out/bin
     makeWrapper ${pkgs.just}/bin/just $out/bin/njust \
       --add-flags "--justfile ${justfileContent}" \
-      --set PATH ${pkgs.tmux}/bin:${pkgs.curl}/bin:$PATH
+      --set PATH ${lib.makeBinPath [ pkgs.tmux pkgs.curl ]}
   '';
 }
