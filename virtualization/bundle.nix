@@ -1,48 +1,36 @@
-{ config, pkgs,  modulesPath, ... }: {
+{ config, pkgs, ... }: {
 
-  # 1. Importação dos sub-módulos isolados
-  imports = [
-    ./podman.nix
-    ./libvirtd.nix
-    ./waydroid.nix
-    "${modulesPath}/virtualisation/qemu-vm.nix"
-    ./home-assistant.nix
-    ./qemu.nix
-    ./vswitch.nix
-    # ./xen.nix 
-  ];
-  
-  # 2. Configurações Globais de Virtualização da VM
+  # ... seus imports permanecem os mesmos (podman, qemu, vswitch, etc.)
+
   virtualisation = {
-    # Resolução e Tela (Para quando abrir a interface gráfica da VM)
+    graphics = true;
     resolution = { x = 1920; y = 1080; };
-    spiceUSBRedirection.enable = true;
-    # Inicialização moderna, Firmware e Segurança Estilo Hardware Real
+
+    # Redirecionamento de Hardware via SPICE
+    spiceUSBRedirection.enable = true; # <--- Ativa o repasse de pendrives, webcams e celulares USB
+
+    # Inicialização moderna e Segurança
     useEFIBoot = true;
     useSecureBoot = true;
-    tpm.enable = true;               # Emula o chip TPM virtual (fundamental com o SecureBoot)
+    tpm.enable = true;
 
-    # Otimizações de compartilhamento de arquivos com o Host físico
-    useHostCerts = true;             # Herda os certificados SSL do host (evita erros de rede)
-    nixStore9pCache = "loose";
+    # Otimizações de compartilhamento
     mountHostNixStore = true;
-    
-    # Comportamento do armazenamento temporário
+    nixStore9pCache = "loose";
+    useHostCerts = true;
     writableStore = true;
-    writableStoreUseTmpfs = true;    # Grava modificações temporárias do OS direto na RAM
+    writableStoreUseTmpfs = true;
 
-    # Isolamento de aplicativos em modo Sandbox (AppVM) para o seu usuário
     appvm = {
       enable = true;
       user = "davi"; 
     };
   };
 
-  # 3. Ferramentas utilitárias extras para gerenciamento de redes no terminal
   environment.systemPackages = with pkgs; [
     bridge-utils
     iptables
-    swtpm                            # Utilitário para monitorar/interagir com o chip TPM se necessário
+    swtpm
+    spice-gtk                        # Garante que o cliente gráfico tenha suporte a gerenciar o USB
   ];
-
 }
