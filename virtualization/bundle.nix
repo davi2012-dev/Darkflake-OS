@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
 
-  # 1. Importação dos sub-módulos que isolamos
+  # 1. Importação dos sub-módulos isolados
   imports = [
     ./podman.nix
     ./libvirtd.nix
@@ -8,20 +8,21 @@
     ./home-assistant.nix
     ./qemu.nix
     ./vswitch.nix
-    # ./xen.nix # Comentado, caso queira reativar o Xen depois
+    # ./xen.nix 
   ];
   
   # 2. Configurações Globais de Virtualização da VM
   virtualisation = {
-    # Resolução e Tela (Para quando você abrir a interface gráfica da VM)
+    # Resolução e Tela (Para quando abrir a interface gráfica da VM)
     graphics = true;
     resolution = { x = 1920; y = 1080; };
 
-    # Inicialização moderna e Firmware
+    # Inicialização moderna, Firmware e Segurança Estilo Hardware Real
     useEFIBoot = true;
     useSecureBoot = true;
+    tpm.enable = true;               # Emula o chip TPM virtual (fundamental com o SecureBoot)
 
-    # Otimizações de compartilhamento com o Host físico
+    # Otimizações de compartilhamento de arquivos com o Host físico
     mountHostNixStore = true;
     nixStore9pCache = "loose";       # Cache de alta performance na RAM para ler o host
     useHostCerts = true;             # Herda os certificados SSL do host (evita erros de rede)
@@ -37,12 +38,11 @@
     };
   };
 
-  # 3. Pacotes globais necessários para sustentar essa estrutura
+  # 3. Ferramentas utilitárias extras para gerenciamento de redes no terminal
   environment.systemPackages = with pkgs; [
-    qemu_kvm
-    libvirt
     bridge-utils
     iptables
+    swtpm                            # Utilitário para monitorar/interagir com o chip TPM se necessário
   ];
 
 }
