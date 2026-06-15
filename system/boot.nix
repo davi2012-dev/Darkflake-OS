@@ -12,9 +12,6 @@
     autoEnrollKeys.enable = true;
   };
 
-  # ⚠️ LINHA OBRIGATÓRIA PARA O XEN (do PR #387)
-  boot.bootspec.extensions."org.xenproject.bootspec.v1".vmlinux = "${config.system.build.kernel.dev}/vmlinux";
-
   boot.plymouth.enable = true;
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
