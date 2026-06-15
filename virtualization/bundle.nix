@@ -8,7 +8,7 @@
     ./waydroid.nix
     ./home-assistant.nix
     ./qemu.nix
-    ./vswitch.nix
+    #./vswitch.nix
     # ./xen.nix 
   ];
   
