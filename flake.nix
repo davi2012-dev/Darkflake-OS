@@ -26,7 +26,7 @@
     };
 
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.0.0";
+      url = "github:CertainLach/lanzaboote/feat/xen";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
