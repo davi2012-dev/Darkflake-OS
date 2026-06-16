@@ -59,7 +59,6 @@
     winboat
     # --- Utilitários e Organização ---
     iredis
-    unstable.redisinsight
     flameshot           # Screenshots
     localsend           # Transferir arquivos via Wi-Fi
     obsidian            # Suas notas
