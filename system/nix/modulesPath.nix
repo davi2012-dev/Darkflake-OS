@@ -4,7 +4,6 @@
   imports = [
     # === CONFIG ===
     "${modulesPath}/config/debug-info.nix"
-    "${modulesPath}/config/unix.nix"
     "${modulesPath}/config/networking.nix"
     "${modulesPath}/config/locale.nix"
     "${modulesPath}/config/users-groups.nix"
