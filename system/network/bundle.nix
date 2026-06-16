@@ -10,27 +10,32 @@
      ./Adguard.nix 
      ./fail2ban.nix 
      ./searxng.nix   
-]; 
+   ]; 
 
+   # --- IDENTIFICAÇÃO DO SISTEMA ---
    networking.hostName = "Darkflake"; 
+
+   # --- BLOQUEIO NATIVO DE MALWARE/ADS (Steven Black) ---
+   networking.stevenblack.enable = true;
+
+   # --- PRIVACIDADE E ROTEAMENTO ---
+   networking.tempAddresses = "default"; # Ativa IPs temporários/aleatórios no IPv6
+
+   # --- CONFIGURAÇÃO DE DNS ESTRITA ---
    networking.nameservers = [ 
      "127.0.0.1" 
      "::1" 
    ]; 
-
    networking.networkmanager.dns = "none"; 
-   networking.stevenblack.enable = true;
-   networking.tempAddresses = true;
-   networking.useNetworkd = true;
-   networking.wireless.enableHardening = true;
    networking.resolvconf.enable = false; 
    services.resolved.enable = false; 
 
+   # --- GERENCIAMENTO DE REDE (NetworkManager + IWD) ---
    networking.networkmanager = { 
      enable = true; 
      wifi.backend = "iwd"; 
-     wifi.macAddress = "random"; 
-     ethernet.macAddress = "random"; 
+     wifi.macAddress = "random";     # MAC Aleatório no Wi-Fi
+     ethernet.macAddress = "random"; # MAC Aleatório no Cabo
    }; 
 
    # --- CONFIGURAÇÃO ULTRA-SEGURA DE HORA (NTS) ---
