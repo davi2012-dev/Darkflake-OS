@@ -1,1 +1,7 @@
-{ config, pkgs, inputs, unstable, ... }: {
+{ unstable, ... }:
+
+{
+  environment.systemPackages = [
+    # unstable.algum-outro-app
+  ];
+}
