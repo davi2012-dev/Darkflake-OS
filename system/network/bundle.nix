@@ -19,6 +19,9 @@
    ]; 
 
    networking.networkmanager.dns = "none"; 
+   networking.stevenblack.enable = true;
+   networking.tempAddresses = true;
+   networking.useNetworkd = true;
    networking.wireless.enableHardening = true;
    networking.resolvconf.enable = false; 
    services.resolved.enable = false; 
