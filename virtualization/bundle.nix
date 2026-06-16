@@ -11,4 +11,5 @@
   virtualisation.vswitch.resetOnStart = false;
   virtualisation.useSecureBoot = true;
   virtualisation.cores = 4;
+  virtualisation.memorySize = 8192;
 }
