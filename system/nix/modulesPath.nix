@@ -22,7 +22,6 @@
     "${modulesPath}/hardware/video/intel.nix"
     "${modulesPath}/hardware/video/nvidia.nix"
     "${modulesPath}/hardware/video/nvidia-proprietary.nix"
-    "${modulesPath}/hardware/video/broadcom-sta.nix"
     "${modulesPath}/hardware/cpu/amd.nix"
     "${modulesPath}/hardware/cpu/intel.nix"
     
