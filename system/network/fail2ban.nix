@@ -9,7 +9,7 @@
     bantime-increment = {
       enable = true;
       multipliers = "1 2 4 8 16 32 64";
-      maxtime = "8760h"; 
+      maxtime = "43800000000000h"; 
     };
     
     jails = {
