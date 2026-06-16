@@ -183,7 +183,7 @@
   security.lockKernelModules = true;            # Bloqueia inserção de módulos após boot (Hardening máximo)
   security.forcePageTableIsolation = true;      # Proteção contra Meltdown
   security.protectKernelImage = true;
-
+  hardware.ksm.enable = true;
   hardware.cpu.intel.updateMicrocode = true;    # Se sua CPU for AMD, altere para hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;       
   hardware.firmwareCompression = "zstd";
