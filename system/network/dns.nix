@@ -7,6 +7,13 @@
 
   services.unbound = {
     enable = true;
+
+    # SOLUÇÃO DO COMPILADOR: Sobrescreve o pacote padrão do Unbound no NixOS
+    # para incluir os módulos do Redis (hiredis) que estavam faltando
+    package = pkgs.unbound.override {
+      withHiredis = true;
+    };
+
     settings = {
       server = {
         interface = [ "127.0.0.1" "::1" ];
@@ -17,8 +24,8 @@
           "::1/128 allow"
         ];
 
-        # MODIFICAÇÃO ESSENCIAL: Adiciona o cachedb na ordem de processamento de módulos
-        module-config = "\"validator cachedb iterator\"";
+        # CORREÇÃO DE ASPAS: Módulos definidos de forma limpa para leitura do parser
+        module-config = "validator cachedb iterator";
 
         # PERFORMANCE
         num-threads = 4;
@@ -83,13 +90,11 @@
         harden-large-queries = true;
       };
 
-      # 2. NOVA SEÇÃO: Conecta o backend de cache ao seu redis encapsulado
+      # 2. SEÇÃO CACHEDB: Conecta o backend ao Redis de forma limpa e sem aspas internas extras
       cachedb = {
         backend = "redis";
-        # Semente aleatória para assinar as entradas do cache
-        secret-seed = "\"darkflake-dns-crypto-seed-ram\""; 
-        # Caminho exato do socket que você acabou de validar com o iredis
-        redis-server-path = "\"/run/redis-meu-banco/redis.sock\"";
+        secret-seed = "darkflake-dns-crypto-seed-ram"; 
+        redis-server-path = "/run/redis-meu-banco/redis.sock";
         redis-timeout = 100;
       };
 
