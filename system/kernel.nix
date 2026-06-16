@@ -1,7 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable,  ... }:
 {
   # --- 1. Seleção do Kernel ---
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = unstable.linuxPackages_zen;
+  boot.zfs.package = unstable.zfs;
   
   # --- 2. Parâmetros de Boot: Performance Bruta e Blindagem ---
   boot.kernelParams = [
