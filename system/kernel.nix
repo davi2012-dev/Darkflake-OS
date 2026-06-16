@@ -1,25 +1,26 @@
 { config, pkgs, ... }:
 {
+  # --- 1. Seleção do Kernel ---
   boot.kernelPackages = pkgs.linuxPackages_zen;
   
   # --- 2. Parâmetros de Boot: Performance Bruta e Blindagem ---
   boot.kernelParams = [
     # Performance de Processamento e Latência
-    "threadirqs"                   # Força threads para interrupções (ganho de latência)
-    "preempt=full"                 # Preempção total para resposta instantânea
-    "skew_tick=1"                  # Ajuda em CPUs com jitter de clock
-    "nosoftlockup"                 # Ganho em cargas extremas
-    "kvm.intel_nested=1"           # Virtualização aninhada Intel
-    "kvm.amd_nested=1"             # Virtualização aninhada AMD
-    "intel_pstate=active"          # Driver de performance Intel
-    "psi=1"                        # Pressure Stall Information ativo
-    "transparent_hugepage=madvise" # Alocação inteligente de Huge Pages
-    "lru_gen=1"                    # Multi-Gen LRU ativo (melhora paginação sob estresse)
-    "panic=10"                     # Reboot automático após 10s de Kernel Panic
-    "nmi_watchdog=0"               # Desativa watchdog para liberar ciclos de CPU
+    "threadirqs"                    # Força threads para interrupções (ganho de latência)
+    "preempt=full"                  # Preempção total para resposta instantânea
+    "skew_tick=1"                   # Ajuda em CPUs com jitter de clock
+    "nosoftlockup"                  # Ganho em cargas extremas
+    "kvm.intel_nested=1"            # Virtualização aninhada Intel
+    "kvm.amd_nested=1"              # Virtualização aninhada AMD
+    "intel_pstate=active"           # Driver de performance Intel
+    "psi=1"                         # Pressure Stall Information ativo
+    "transparent_hugepage=madvise"  # Alocação inteligente de Huge Pages
+    "lru_gen=1"                     # Multi-Gen LRU ativo (melhora paginação sob estresse)
+    "panic=10"                      # Reboot automático após 10s de Kernel Panic
+    "nmi_watchdog=0"                # Desativa watchdog para liberar ciclos de CPU
     "memory_hotplug=on"
 
-    # Silenciar o Boot (Clean Boot)
+    # Silenciar o Boot (Clean Boot / Flicker-Free)
     "quiet"
     "splash"
     "loglevel=3"
@@ -29,30 +30,28 @@
     "vt.global_cursor_default=0" 
 
     # Hardening do Kernel (Segurança)
-    "slab_nomerge"                 # Impede fusão de caches slab (trava ataques de heap)
-    "page_alloc.shuffle=1"         # Randomização de RAM (ASLR no hardware)
-    "vsyscall=none"                # Mata syscalls obsoletas que são vetores de ataque
-    "debugfs=off"                  # Fecha a porta para ferramentas de depuração maliciosas
-    "randomize_kstack_offset=on"   # Proteção extra contra estouro de pilha
-    "init_on_alloc=1"              # Zera páginas de memória ao alocar
-    "init_on_free=1"               # Zera páginas de memória ao liberar
+    "slab_nomerge"                  # Impede fusão de caches slab (trava ataques de heap)
+    "page_alloc.shuffle=1"          # Randomização de RAM (ASLR no hardware)
+    "vsyscall=none"                 # Mata syscalls obsoletas que são vetores de ataque
+    "debugfs=off"                   # Fecha a porta para ferramentas de depuração maliciosas
+    "randomize_kstack_offset=on"    # Proteção extra contra estouro de pilha
+    "init_on_alloc=1"               # Zera páginas de memória ao alocar
+    "init_on_free=1"                # Zera páginas de memória ao liberar
     "page_poisoning=off"
     "module.sig_enforce=1"   
-    "mce=on"                       # Machine Check Exception ativo
-    "ras=on"                       # Reliability, Availability, and Serviceability
-    "lockdown=confidentiality"     # Impede o espaço de usuário de extrair dados do kernel
-    "mitigations=auto"             # Mitigações de CPU padrão (mude para 'off' se quiser máxima performance a custo de segurança)
-    "intel_iommu=on"               # Isolamento de hardware IOMMU
-    "iommu=pt"                     # Performance de IOMMU em modo pass-through
+    "mce=on"                        # Machine Check Exception ativo
+    "ras=on"                        # Reliability, Availability, and Serviceability
+    "lockdown=confidentiality"      # Impede o espaço de usuário de extrair dados do kernel
+    "mitigations=auto"              # Mitigações de CPU padrão
+    "intel_iommu=on"                # Isolamento de hardware IOMMU
+    "iommu=pt"                      # Performance de IOMMU em modo pass-through
   ];
 
   # --- 3. Carga de Módulos do Kernel ---
   boot.kernelModules = [
-    # =========================================================================
-    # 🚀 ADICIONADOS PARA SUPORTE COMPLETO ÀS VMs (VIRTIO, 9P, GRAFICOS E USB)
-    # =========================================================================
+    # Suporte Completo às VMs (VirtIO, Redes e Armazenamento)
     "virtio_pci"          # Barramento virtualizado essencial para mapear o hardware
-    "virtio_blk"          # Driver do Disco Rápido Virtual (diskInterface = "virtio")
+    "virtio_blk"          # Driver do Disco Rápido Virtual
     "virtio_gpu"          # Aceleração gráfica moderna do QEMU dentro da VM
     "qxl"                 # Driver de vídeo básico alternativo para a janela gráfica
     "tap"                 # Necessário para os túneis de rede da interface virtual
@@ -60,10 +59,7 @@
     "ehci_hcd"            # Controladora USB 2.0 para redirecionamento estável
     "nvme"                # Driver para o seu SSD real M.2 caso o host precise
     "sd_mod"              # Módulo básico de gerenciamento de discos do sistema
-    # =========================================================================
-
-    # --- Virtualização, Containers e Redes ---
-    "kvm-intel"           # Aceleração Intel (mude para "k10temp" / "kvm-amd" se sua CPU for AMD)
+    "kvm-intel"           # Aceleração de Hardware para CPU Intel (i5 7ª Gen)
     "tun"                 # VPNs (Tailscale, WireGuard)
     "bridge"              # Redes em ponte (Docker/Virt-Manager)
     "vhost_net"           # Performance de rede em VMs
@@ -78,7 +74,7 @@
     "sch_fq"
     "sch_fq_codel"
 
-    # --- Controles, Input e Hardware Gamer ---
+    # Controles, Input e Hardware Gamer
     "uinput"              # OpenRGB, Controles Virtuais, Emuladores
     "joydev"              # Joysticks clássicos
     "evdev"               # Input avançado
@@ -88,21 +84,21 @@
     "9p"
     "9pnet"
 
-    # --- Áudio, Monitores e Periféricos ---
+    # Áudio, Monitores e Periféricos
     "snd_seq"             # MIDI
-    "i2c_dev"             # Controle de brilho DDC/CI e RGB de placas-mãe
+    "i2c_dev"             # Controle de brilho DDC/CI e RGB
     "snd_hda_intel"       # Áudio integrado
     "snd_usb_audio"       # Interfaces de som USB
     "snd_aloop"           # Loopback de áudio (OBS Studio)
     "hidp"
 
-    # --- Sensores e Monitoramento ---
-    "coretemp"            # Temperatura CPU Intel (Mude para "k10temp" se for AMD)
+    # Sensores e Monitoramento
+    "coretemp"            # Temperatura CPU Intel
     "it87"                # Sensores de ventoinha/tensão
     "nct6775"             # Sensores Nuvoton comuns em desktops
     "intel_rapl_common"   # Telemetria de energia Intel
 
-   # --- Armazenamento e Sistemas de Arquivos ---
+    # Armazenamento e Sistemas de Arquivos
     "iso9660"
     "vfat"
     "ntfs3"               # Driver NTFS moderno
@@ -119,9 +115,9 @@
     "thunderbolt"         # Suporte a portas Thunderbolt
     "veth"
     "zfs"
-    "amdgpu"
+    "amdgpu"              # Driver nativo de código aberto para a sua RX 550
 
-    # --- PCI Passthrough (VMs com GPU dedicada) ---
+    # PCI Passthrough (VMs com GPU dedicada)
     "vfio"
     "vfio_iommu_type1"
     "vfio_pci"
@@ -137,12 +133,15 @@
     "vm.nr_hugepages" = 0;
     "vm.transparent_hugepage" = "madvise";
     "vm.transparent_hugepage_defrag" = "defer+madvise";
-    "vm.max_map_count" = 1048576;               # Essencial para jogos pesados via Proton/Steam (ex: Cyberpunk)
-    "vm.compaction_proactiveness" = 0;          # Evita gagueiras (stuttering) em background
+    "vm.max_map_count" = 1048576;               # Essencial para jogos pesados via Proton/Steam
+    "vm.compaction_proactiveness" = 0;          # Evita engasgos (stuttering) em background
     "vm.lru_gen_stats" = 2;
+
+    # Ajustes do Motor KSM (Kernel Samepage Merging) para unificar RAM repetida de VMs
     "vm.ksm_max_page_sharing" = 256;
     "vm.ksm_scan_delay_millisecs" = 20;
     "vm.ksm_pages_to_scan" = 100;
+
     # Rede: Performance e Redução de Bufferbloat
     "net.core.somaxconn" = 8192;                # Maior fila de conexões para apps de rede e servidores
 
@@ -169,7 +168,7 @@
     "fs.protected_regular" = 2;
     "fs.suid_dumpable" = 0;
     "dev.tty.legacy_tiocsti" = 0;
-    "fs.proc_can_see_other_uid" = 0;            # Usuários não veem processos uns dos olfactory
+    "fs.proc_can_see_other_uid" = 0;            # Usuários não veem processos uns dos outros
     "kernel.dmesg_restrict" = 1;                # Bloqueia leitura do dmesg para usuários comuns
   };
 
@@ -177,18 +176,33 @@
   boot.blacklistedKernelModules = [ 
     "ax25" "netrom" "rose" "dccp" "sctp" "rds" "tipc" 
     "hfs" "hfsplus" "jffs2"                          
-    "firewire-core"                  
+    "firewire-core"                                  
   ];
 
-  # --- 6. Firmware e Segurança de Imagem ---
-  security.unprivilegedUsernsClone = true;      # Necessário para caixas de areia do Chrome/Flatpak funcionarem
+  # --- 6. Serviços Otimizados (Redis via Unix Sockets) ---
+  services.redis.servers."meu-banco" = {
+    enable = true;
+    port = 0;                                   # Desativa rede TCP por segurança
+    unixSocket = "/run/redis-meu-banco/redis.sock"; # Comunicação ultra-rápida em memória RAM
+    unixSocketPerm = 660;                       # Apenas o dono e o grupo gerenciam os dados
+  };
+
+  # --- 7. Firmware, Gráficos e Segurança de Imagem ---
+  security.unprivilegedUsernsClone = true;      # Necessário para sandboxes (Chrome/Flatpak) funcionar
   security.lockKernelModules = true;            # Bloqueia inserção de módulos após boot (Hardening máximo)
   security.forcePageTableIsolation = true;      # Proteção contra Meltdown
   security.protectKernelImage = true;
-  hardware.ksm.enable = true;
-  hardware.cpu.intel.updateMicrocode = true;    # Se sua CPU for AMD, altere para hardware.cpu.amd.updateMicrocode = true;
+  
+  # Gráficos da GPU AMD RX 550
+  hardware.amdgpu.initrd.enable = true;         # Ativa o KMS no Stage 1 para evitar piscadas no boot
+  
+  # Gerenciamento de Hardware e RAM
+  hardware.ksm.enable = true;                   # Ativa o agregador de páginas idênticas de RAM
+  hardware.cpu.intel.updateMicrocode = true;    # Correções de segurança da CPU Intel i5
   hardware.enableRedistributableFirmware = true;       
   hardware.firmwareCompression = "zstd";
   hardware.wirelessRegulatoryDatabase = true;
-  programs.tmux.secureSocket = true;
+  
+  # Segurança adicionais de Ferramentas
+  programs.tmux.secureSocket = true;            # Joga os sockets do tmux no caminho seguro do /run
 }
