@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  # 1. IMPORTANTE: Garante que o usuário do Unbound tenha acesso ao grupo do Redis
+  # para conseguir ler e escrever no arquivo .sock
+  users.users.unbound.extraGroups = [ "redis" ];
+
   services.unbound = {
     enable = true;
     settings = {
@@ -12,6 +16,9 @@
           "127.0.0.0/8 allow"
           "::1/128 allow"
         ];
+
+        # MODIFICAÇÃO ESSENCIAL: Adiciona o cachedb na ordem de processamento de módulos
+        module-config = "\"validator cachedb iterator\"";
 
         # PERFORMANCE
         num-threads = 4;
@@ -74,6 +81,16 @@
         tls-use-sni = true;
         verbosity = 1;
         harden-large-queries = true;
+      };
+
+      # 2. NOVA SEÇÃO: Conecta o backend de cache ao seu redis encapsulado
+      cachedb = {
+        backend = "redis";
+        # Semente aleatória para assinar as entradas do cache
+        secret-seed = "\"darkflake-dns-crypto-seed-ram\""; 
+        # Caminho exato do socket que você acabou de validar com o iredis
+        redis-server-path = "\"/run/redis-meu-banco/redis.sock\"";
+        redis-timeout = 100;
       };
 
       # Encaminhamento apenas para os TLDs desejados
