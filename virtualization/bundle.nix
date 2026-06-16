@@ -9,6 +9,5 @@
   virtualisation.appvm.user = "davi";
   virtualisation.vswitch.enable = true;
   virtualisation.vswitch.resetOnStart = false;
-  virtualisation.useSecureBoot = true;
   virtualisation.writableStore = true;
 }
