@@ -19,6 +19,7 @@
    ]; 
 
    networking.networkmanager.dns = "none"; 
+   networking.wireless.enableHardening = true;
    networking.resolvconf.enable = false; 
    services.resolved.enable = false; 
 
