@@ -140,7 +140,9 @@
     "vm.max_map_count" = 1048576;               # Essencial para jogos pesados via Proton/Steam (ex: Cyberpunk)
     "vm.compaction_proactiveness" = 0;          # Evita gagueiras (stuttering) em background
     "vm.lru_gen_stats" = 2;
-
+    "vm.ksm_max_page_sharing" = 256;
+    "vm.ksm_scan_delay_millisecs" = 20;
+    "vm.ksm_pages_to_scan" = 100;
     # Rede: Performance e Redução de Bufferbloat
     "net.core.somaxconn" = 8192;                # Maior fila de conexões para apps de rede e servidores
 
@@ -187,5 +189,6 @@
   hardware.cpu.intel.updateMicrocode = true;    # Se sua CPU for AMD, altere para hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;       
   hardware.firmwareCompression = "zstd";
-  hardware.wirelessRegulatoryDatabase = true;  
+  hardware.wirelessRegulatoryDatabase = true;
+  programs.tmux.secureSocket = true;
 }
