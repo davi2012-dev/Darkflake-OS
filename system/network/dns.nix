@@ -1,15 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  # 1. IMPORTANTE: Permissão para ler o socket
-  users.users.unbound.extraGroups = [ "redis" ];
-
   services.unbound = {
     enable = true;
-    
-    # O PULO DO GATO: Diz ao módulo para injetar o suporte ao Redis automaticamente
-    enableRedis = true;
-
     settings = {
       server = {
         interface = [ "127.0.0.1" "::1" ];
@@ -19,9 +12,6 @@
           "127.0.0.0/8 allow"
           "::1/128 allow"
         ];
-
-        # Módulos na ordem correta
-        module-config = "validator cachedb iterator";
 
         # PERFORMANCE
         num-threads = 4;
@@ -86,15 +76,7 @@
         harden-large-queries = true;
       };
 
-      # Conecta o backend ao seu redis.sock
-      cachedb = {
-        backend = "redis";
-        secret-seed = "darkflake-dns-crypto-seed-ram"; 
-        redis-server-path = "/run/redis-meu-banco/redis.sock";
-        redis-timeout = 100;
-      };
-
-      # Encaminhamento TLS dos TLDs
+      # Encaminhamento apenas para os TLDs desejados
       forward-zone = [
         {
           name = "com.";
