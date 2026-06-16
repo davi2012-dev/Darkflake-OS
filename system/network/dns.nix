@@ -1,18 +1,14 @@
 { config, pkgs, ... }:
 
 {
-  # 1. IMPORTANTE: Garante que o usuário do Unbound tenha acesso ao grupo do Redis
-  # para conseguir ler e escrever no arquivo .sock
+  # 1. IMPORTANTE: Permissão para ler o socket
   users.users.unbound.extraGroups = [ "redis" ];
 
   services.unbound = {
     enable = true;
-
-    # SOLUÇÃO DO COMPILADOR: Sobrescreve o pacote padrão do Unbound no NixOS
-    # para incluir os módulos do Redis (hiredis) que estavam faltando
-    package = pkgs.unbound.override {
-      withHiredis = true;
-    };
+    
+    # O PULO DO GATO: Diz ao módulo para injetar o suporte ao Redis automaticamente
+    enableRedis = true;
 
     settings = {
       server = {
@@ -24,7 +20,7 @@
           "::1/128 allow"
         ];
 
-        # CORREÇÃO DE ASPAS: Módulos definidos de forma limpa para leitura do parser
+        # Módulos na ordem correta
         module-config = "validator cachedb iterator";
 
         # PERFORMANCE
@@ -90,7 +86,7 @@
         harden-large-queries = true;
       };
 
-      # 2. SEÇÃO CACHEDB: Conecta o backend ao Redis de forma limpa e sem aspas internas extras
+      # Conecta o backend ao seu redis.sock
       cachedb = {
         backend = "redis";
         secret-seed = "darkflake-dns-crypto-seed-ram"; 
@@ -98,7 +94,7 @@
         redis-timeout = 100;
       };
 
-      # Encaminhamento apenas para os TLDs desejados
+      # Encaminhamento TLS dos TLDs
       forward-zone = [
         {
           name = "com.";
