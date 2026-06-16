@@ -37,6 +37,7 @@
     sgdboop
     steamtinkerlaunch
     mangohud
+    er-patcher
     # Visual e Personalização
     cmatrix
     speechd
