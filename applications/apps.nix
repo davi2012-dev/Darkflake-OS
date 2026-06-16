@@ -58,7 +58,7 @@
     mission-center      # Monitor de sistema estilo Windows 11
     winboat
     # --- Utilitários e Organização ---
-    iredis
+    #iredis
     redisinsight
     flameshot           # Screenshots
     localsend           # Transferir arquivos via Wi-Fi
