@@ -1,10 +1,10 @@
 { config, pkgs, ... }: {
   services.fail2ban = {
     enable = true;
-    banaction = "nftables";   # <--- ESSENCIAL
+    banaction = "nftables";   # <-- ESSENCIAL (sem -multiport)
 
-    # Define o caminho do nftables no fail2ban.conf
-    daemonConfig = {
+    # Substitua daemonConfig por daemonSettings
+    daemonSettings = {
       Definition.nftables = "/run/current-system/sw/bin/nft";
     };
 
@@ -22,7 +22,7 @@
       filter = "sshd";
       maxretry = 3;
       backend = "systemd";
-      banaction = "nftables";   # reforça
+      banaction = "nftables";   # reforço
     };
   };
 }
