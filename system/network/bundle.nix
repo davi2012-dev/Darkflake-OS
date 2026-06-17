@@ -8,7 +8,7 @@
      ./firewall.nix 
      ./analysis.nix  
      ./Adguard.nix 
-     ./fail2ban.nix 
+     ./crowdsec.nix
      ./searxng.nix   
    ]; 
 
