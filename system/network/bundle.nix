@@ -9,6 +9,7 @@
      ./analysis.nix  
      ./Adguard.nix 
      ./searxng.nix   
+     ./caddy.nix
    ]; 
 
    # --- IDENTIFICAÇÃO DO SISTEMA ---
