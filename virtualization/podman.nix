@@ -88,6 +88,7 @@
           MYSQL_DATABASE = "nextcloud";
           MYSQL_USER = "nextcloud";
           MYSQL_PASSWORD = "sua_senha_nextcloud_aqui";
+          NEXTCLOUD_TRUSTED_DOMAINS = "localhost nextcloud.Darkflake.local Darkflake.local";
         };
         volumes = [
           "nextcloud_data:/var/www/html:Z"
