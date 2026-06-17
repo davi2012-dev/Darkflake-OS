@@ -25,4 +25,5 @@ services.fail2ban = {
     backend = "systemd";
     banaction = "nftables";   # reforça aqui também
   };
-};
+ };
+}
