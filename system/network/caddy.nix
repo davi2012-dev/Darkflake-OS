@@ -5,8 +5,6 @@
   enable = true;
   email = "DaviMigue@proton.me";  # Pode manter, mas não será usado
 
-  # Remove o globalConfig
-
   virtualHosts = {
     "nextcloud.Darkflake.local" = {
       extraConfig = ''
