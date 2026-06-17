@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   services.fail2ban = {
     enable = true;
-    banaction = "nftables-multiport";
+    banaction = "nftables-allports";
     
     maxretry = 5; 
     bantime = "24h"; 
