@@ -1,19 +1,36 @@
 { config, pkgs, ... }: {
   services.crowdsec = {
     enable = true;
-    # Opcional: inscrever na rede colaborativa
-    # enrollKeyFile = "/path/to/enroll-key";
+    # Se quiser participar da rede colaborativa:
+    # enrollKeyFile = "/path/to/key";
     settings = {
-      api.server = {
+      # Configuração da API local
+      lapi = {
         listen_uri = "127.0.0.1:8080";
+      };
+      # Opcional: central API (capi)
+      # capi = {
+      #   enabled = true;
+      # };
+    };
+    # Para o CrowdSec funcionar, você precisa definir fontes de log (acquisitions)
+    # Exemplo simples para SSH:
+    acquisitions = {
+      "sshd" = {
+        filenames = [ "/var/log/auth.log" ];
+        labels = {
+          type = "syslog";
+        };
       };
     };
   };
 
-  # Bouncer para nftables (bloqueia os IPs)
+  # Bouncer para nftables (bloqueia IPs)
   services.crowdsec-firewall-bouncer = {
     enable = true;
-    # Configuração para nftables (já que você usa networking.nftables.enable = true)
-    # Veja a documentação oficial para detalhes[reference:10]
+    # Configuração se necessário
+    # settings = {
+    #   api_url = "http://127.0.0.1:8080";
+    # };
   };
 }
