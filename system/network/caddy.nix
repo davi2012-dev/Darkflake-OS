@@ -1,10 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  # Serviço Caddy
   services.caddy = {
-    enable = true;
-    email = "DaviMigue@proton.me";  # Obrigatório para Let's Encrypt
+  enable = true;
+  email = "DaviMigue@proton.me";  # Pode manter, mas não será usado
+  globalConfig = ''
+    tls internal
+  '';
 
     # Defina os virtual hosts para cada serviço
     virtualHosts = {
