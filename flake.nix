@@ -65,6 +65,11 @@
       
       systems = [ "x86_64-linux" ];
 
+      # --- CORREÇÃO AQUI: Importa os módulos para que o perSystem conheça as opções novas ---
+      imports = [
+        inputs.treefmt-nix.flakeModule
+      ];
+
       perSystem = { system, pkgs, ... }: {
         _module.args.pkgs = import nixpkgs {
           inherit system;
@@ -103,7 +108,7 @@
               { package = "ripsecrets"; }
             ];
             motd = ''
-              {202}🔨 Bem-vindo ao Shell de Desenvolvimento Darkflake
+              {202}🔨 Bem-vindo ao Shell de Desenvolvimento Darkflake (Garuda-Engine Active){reset} ❄️
             '';
           };
 
@@ -112,14 +117,14 @@
           package = pkgs.prek;
           hooks = {
             check-json.enable = true;
-            detect-private-keys.enable = true; # Bloqueia vazamento de chaves criptográficas
+            detect-private-keys.enable = true; 
             check-yaml.enable = true;
-            ripsecrets.enable = true;          # Pega tokens e senhas antes de comitar
+            ripsecrets.enable = true;          
           };
           src = ./.;
         };
 
-        # Configuração do formatador automático treefmt
+        # Agora o flake-parts vai entender esse bloco perfeitamente!
         treefmt = {
           build.check = true;
           programs = {
