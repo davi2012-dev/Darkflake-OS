@@ -9,56 +9,56 @@
     # Defina os virtual hosts para cada serviço
     virtualHosts = {
       # Exemplo: nextcloud.seudominio.local
-      "nextcloud.seudominio.local" = {
+      "nextcloud.Darkflake.local" = {
         extraConfig = ''
           reverse_proxy localhost:8085
         '';
       };
 
-      "jellyfin.seudominio.local" = {
+      "jellyfin.Darkflake.local" = {
         extraConfig = ''
           reverse_proxy localhost:8096
         '';
       };
 
-      "librechat.seudominio.local" = {
+      "librechat.Darkflake.local" = {
         extraConfig = ''
           reverse_proxy localhost:3080
         '';
       };
 
-      "homarr.seudominio.local" = {
+      "homarr.Darkflake.local" = {
         extraConfig = ''
           reverse_proxy localhost:8083
         '';
       };
 
-      "stirling.seudominio.local" = {
+      "stirling.Darkflake.local" = {
         extraConfig = ''
           reverse_proxy localhost:8089
         '';
       };
 
-      "metube.seudominio.local" = {
+      "metube.Darkflake.local" = {
         extraConfig = ''
           reverse_proxy localhost:8081
         '';
       };
 
-      "netdata.seudominio.local" = {
+      "netdata.Darkflake.local" = {
         extraConfig = ''
           reverse_proxy localhost:19999
         '';
       };
 
-      "ha.seudominio.local" = {
+      "ha.Darkflake.local" = {
         extraConfig = ''
           reverse_proxy localhost:8123
         '';
       };
 
       # Portainer já tem HTTPS nativo (9443), mas você pode querer proxyar também
-      "portainer.seudominio.local" = {
+      "portainer.Darkflake.local" = {
         extraConfig = ''
           reverse_proxy localhost:9443 {
             transport http {
