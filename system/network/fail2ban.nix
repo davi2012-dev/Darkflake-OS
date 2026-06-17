@@ -2,12 +2,9 @@
 services.fail2ban = {
   enable = true;
   banaction = "nftables";   
-
-  # Adicione o caminho absoluto para evitar problemas de PATH
-  extraConfig = ''
-    [Definition]
-    nftables = /run/current-system/sw/bin/nft
-  '';
+  daemonConfig = {
+  Definition.nftables = "/run/current-system/sw/bin/nft";
+};
 
   maxretry = 5;
   bantime = "24h";
