@@ -1,5 +1,5 @@
 {
-  description = "Darkflake: + Repos Extras + Home Manager + NUR + MCP-NixOS + CachyOS Kernel";
+  description = "Darkflake: + Repos Extras + Home Manager + NUR + MCP-NixOS + CachyOS Kernel + Garuda Dev Automation";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
@@ -7,6 +7,14 @@
     nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+
+    # --- INPUTS HERDADOS DO GARUDA (AUTOMAÇÃO DE DEV) ---
+    devshell.url = "github:numtide/devshell";
+    devshell.inputs.nixpkgs.follows = "nixpkgs";
+
+    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
+    pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
+    # ----------------------------------------------------
 
     # Adicionando o MCP-NixOS nos inputs
     mcp-nixos.url = "github:utensils/mcp-nixos";
@@ -52,12 +60,12 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = inputs@{ flake-parts, nixpkgs, nixpkgs-unstable, mcp-nixos, nix-cachyos-kernel, ... }:
+  outputs = inputs@{ flake-parts, nixpkgs, nixpkgs-unstable, mcp-nixos, nix-cachyos-kernel, self, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       
       systems = [ "x86_64-linux" ];
 
-      perSystem = { system, ... }: {
+      perSystem = { system, pkgs, ... }: {
         _module.args.pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
@@ -66,6 +74,60 @@
           inherit system;
           config.allowUnfree = true;
         };       
+
+        # --- FUSÃO GARUDA: Criação do ambiente de desenvolvimento automatizado ---
+        devShells.default = 
+          let
+            makeDevshell = import "${inputs.devshell}/modules" pkgs;
+            mkShell = config: (makeDevshell {
+              configuration = {
+                inherit config;
+                imports = [ ];
+              };
+            }).shell;
+          in
+          mkShell {
+            devshell = {
+              name = "Darkflake-DevShell";
+              startup = {
+                infra-nix-shell.text = ''
+                  export LC_ALL="C.UTF-8"
+                  export NIX_PATH=nixpkgs=${nixpkgs}
+                '';
+                pre-commit-hooks.text = self.checks.${system}.pre-commit-check.shellHook;
+              };
+            };
+            commands = [
+              { package = "deadnix"; }
+              { package = "statix"; }
+              { package = "ripsecrets"; }
+            ];
+            motd = ''
+              {202}🔨 Bem-vindo ao Shell de Desenvolvimento Darkflake
+            '';
+          };
+
+        # --- FUSÃO GARUDA: Hooks de Segurança para o seu Git ---
+        checks.pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
+          package = pkgs.prek;
+          hooks = {
+            check-json.enable = true;
+            detect-private-keys.enable = true; # Bloqueia vazamento de chaves criptográficas
+            check-yaml.enable = true;
+            ripsecrets.enable = true;          # Pega tokens e senhas antes de comitar
+          };
+          src = ./.;
+        };
+
+        # Configuração do formatador automático treefmt
+        treefmt = {
+          build.check = true;
+          programs = {
+            deadnix.enable = true;
+            nixfmt.enable = true;
+            statix.enable = true;
+          };
+        };
       }; 
 
       flake = {
@@ -93,7 +155,6 @@
             inputs.nixos-hardware.nixosModules.common-cpu-intel
             inputs.nix-index-db.nixosModules.nix-index
             
-            # Modificado para incluir o overlay do CachyOS junto com o do MCP-NixOS
             {
               nixpkgs.overlays = [ 
                 mcp-nixos.overlays.default 
