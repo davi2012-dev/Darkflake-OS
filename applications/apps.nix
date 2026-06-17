@@ -8,7 +8,7 @@
 
   environment.systemPackages = with pkgs; [
     # --- Internet e Comunicação ---
-    firedragon-catppuccin-bin
+    librewolf
     vesktop             # Discord com melhorias (Vencord)
     beeper              # O app de chat universal moderno
     crow-translate      # Tradutor rápido
