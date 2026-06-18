@@ -4,6 +4,13 @@
   boot.kernelPackages = unstable.linuxPackages_zen;
   boot.zfs.package = unstable.zfs;
   
+  # --- Configuração do Crash Dump (Kdump) ---
+  boot.crashDump = {
+    enable = true;
+    reservedMemory = "128M"; # Reserva 128MB da RAM para o kernel de resgate em caso de pânico
+    kernelParams = [ "1" "loglevel=3" ]; # Inicia o kernel de resgate direto no modo mono-usuário (rescue)
+  };
+  
   # --- 2. Parâmetros de Boot: Performance Bruta e Blindagem ---
   boot.kernelParams = [
     # Performance de Processamento e Latência
@@ -17,7 +24,7 @@
     "psi=1"                         # Pressure Stall Information ativo
     "transparent_hugepage=madvise"  # Alocação inteligente de Huge Pages
     "lru_gen=1"                     # Multi-Gen LRU ativo (melhora paginação sob estresse)
-    "panic=10"                      # Reboot automático após 10s de Kernel Panic
+    "panic=10"                      # Reboot automático após 10s de Kernel Panic (se o kexec falhar)
     "nmi_watchdog=0"                # Desativa watchdog para liberar ciclos de CPU
     "memory_hotplug=on"
 
@@ -156,7 +163,10 @@
     "kernel.printk" = "3 3 3 3";
     "kernel.yama.ptrace_scope" = 1;             # Impede processos não-filhos de espionar a memória com ptrace
     "dev.tty.ldisc_autoload" = 0;
+    
+    # PERMISSÃO DO KEXEC: Mantido em 0 para permitir que o boot.crashDump funcione corretamente
     "kernel.kexec_load_disabled" = 0;
+    
     "kernel.unprivileged_bpf_disabled" = 1;     # Bloqueia ataques via eBPF não privilegiado
     "vm.unprivileged_userfaultfd" = 0;
     "kernel.kptr_restrict" = 2;                 # Esconde endereços de ponteiros do kernel em /proc
