@@ -16,9 +16,7 @@
 
   # 2. Integra o AppArmor com o barramento de mensagens do sistema
   services.dbus.apparmor = "enabled";
-  
-  # Evita quebras na autenticação básica do sistema
-  security.pam.services.login.enableAppArmor = lib.mkForce false;
+  security.pam.services.login.enableAppArmor = true
 
   # 3. Automação: Força o AppArmor a carregar antes dos outros serviços
   systemd.services.apparmor.serviceConfig = {
