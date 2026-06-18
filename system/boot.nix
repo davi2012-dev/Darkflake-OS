@@ -16,7 +16,7 @@
   boot.plymouth.enable = true;
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
-  boot.initrd.services.systemd.enable = true;
+  boot.initrd.systemd.enable = true;
   boot.hardwareScan = true;
   boot.tmp = {
     cleanOnBoot = true;
