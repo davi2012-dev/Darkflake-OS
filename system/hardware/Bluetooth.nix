@@ -48,9 +48,6 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="2dc8", ATTRS{idProduct}=="6012", TAG+="uaccess"
   '';
 
-  # --- 3. Gaming e Performance (Geral) ---
-  programs.gamemode.enable = true;
-
   # --- 4. Configuração do Pipewire ---
   services.pipewire = {
     enable = true;
