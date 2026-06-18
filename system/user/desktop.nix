@@ -19,6 +19,7 @@
   appstream.enable = true;
   security.rtkit.enable = true;
   security.polkit.enable = true;
+  services.hardware.openrgb.enable = true;
 
   security.chromiumSuidSandbox.enable = true;
   services.tailscale.enable = true;
