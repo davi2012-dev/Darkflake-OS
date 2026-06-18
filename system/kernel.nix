@@ -3,14 +3,7 @@
   # --- 1. Seleção do Kernel ---
   boot.kernelPackages = unstable.linuxPackages_zen;
   boot.zfs.package = unstable.zfs;
-  
-  # --- Configuração do Crash Dump (Kdump) ---
-  boot.crashDump = {
-    enable = true;
-    kernel = "/run/current-system/kernel.efi";
-    kernelParams = [ "1" "loglevel=3" ]; # Inicia o kernel de resgate direto no modo mono-usuário (rescue)
-  };
-  
+
   # --- 2. Parâmetros de Boot: Performance Bruta e Blindagem ---
   boot.kernelParams = [
     # Performance de Processamento e Latência
@@ -163,9 +156,7 @@
     "kernel.printk" = "3 3 3 3";
     "kernel.yama.ptrace_scope" = 1;             # Impede processos não-filhos de espionar a memória com ptrace
     "dev.tty.ldisc_autoload" = 0;
-    
-    # PERMISSÃO DO KEXEC: Mantido em 0 para permitir que o boot.crashDump funcione corretamente
-    "kernel.kexec_load_disabled" = 0;
+    "kernel.kexec_load_disabled" = 1;
     
     "kernel.unprivileged_bpf_disabled" = 1;     # Bloqueia ataques via eBPF não privilegiado
     "vm.unprivileged_userfaultfd" = 0;
