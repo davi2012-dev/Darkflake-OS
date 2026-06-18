@@ -1,7 +1,8 @@
 { config, pkgs, ... }: {
 
   # --- 1. Desativar Módulos Inúteis / Perigosos ---
-  # Bloqueia rede/HTTP via Bluetooth e esconde o nome real do PC na busca pública
+  # "network" mata os perfis PAN (Personal Area Network) e DUN (Dial-Up Networking).
+  # Sem eles, o BlueZ é incapaz de criar interfaces de rede (como bnep0) ou encapsular tráfego HTTP/IP.
   hardware.bluetooth.disabledPlugins = [ "network" "hostname" ];
 
   # --- 2. Hardware Bluetooth (Performance Máxima + Segurança) ---
@@ -11,25 +12,25 @@
     
     settings = {
       General = {
-        # Perfis básicos ativos (Removido o Socket genérico por segurança)
+        # Mantém apenas Áudio e Mídia. Controles usam HID direto que o Udev gerencia.
         Enable = "Source,Sink,Media"; 
         Experimental = true;
-        FastConnectable = true; # Estado de alerta para pareamento instantâneo
-        Class = "0xFFE100";     # Ativa todos os recursos de serviços principais
-        MultiProfile = "multiple"; # Gerencia controles e fones juntos sem travar
+        FastConnectable = true; # Seu estado de alerta instantâneo mantido
+        Class = "0xFFE100";     
+        MultiProfile = "multiple"; 
         KernelExperimental = "6fbaf188-05e0-496a-9885-d6ddfdb4e03e,330859bc-7506-492d-9370-9a6f0614037f";
         
-        # --- Anti-Preguiça ---
-        DiscoverableTimeout = 0; # Nunca desiste de buscar dispositivos sozinho
-        PairableTimeout = 0;     # Mantém a permissão de pareamento sempre pronta
+        # Mantidos em 0 (Anti-Preguiça) conforme o seu plano original
+        DiscoverableTimeout = 0; 
+        PairableTimeout = 0;     
         
-        # --- Blindagem contra Ataques Aéreos ---
-        SecureConnectionsOnly = "true"; # Exige criptografia AES forte (bloqueia interceptação)
-        JustWorksRepairing = "never";    # Impede ataques que forçam re-pareamento invisível
-        Privacy = "device";             # Rotaciona o endereço MAC para evitar rastreamento físico
+        # Suas travas aéreas de criptografia originais
+        SecureConnectionsOnly = "true"; 
+        JustWorksRepairing = "never";    
+        Privacy = "device";              
       };
       Policy = {
-        AutoEnable = "true"; # Garante o chip ligado e ativo após boot
+        AutoEnable = "true"; 
       };
     };
   };
@@ -76,13 +77,13 @@
           "bluez5.enable-sbc-xq" = true;
           "bluez5.enable-msbc" = true;   
           "bluez5.enable-hw-volume" = true;
-          "bluez5.codecs" = [ "ldac" "aptx_hd" "aptx" "aac" "sbc_xq" ]; # Codecs de Alta Fidelidade
+          "bluez5.codecs" = [ "ldac" "aptx_hd" "aptx" "aac" "sbc_xq" ]; 
           "bluez5.roles" = [ "a2dp_sink" "a2dp_source" "headset_head_unit" "headset_audio_gateway" ];
         };
       };
       "11-bluez-policy" = {
         "wireplumber.settings" = {
-          "bluetooth.autoswitch-to-headset-profile" = true; # Ativa microfone inteligente em chamadas
+          "bluetooth.autoswitch-to-headset-profile" = true; 
         };
       };
     };
