@@ -7,7 +7,6 @@
   # --- Configuração do Crash Dump (Kdump) ---
   boot.crashDump = {
     enable = true;
-    reservedMemory = "128M"; # Reserva 128MB da RAM para o kernel de resgate em caso de pânico
     kernelParams = [ "1" "loglevel=3" ]; # Inicia o kernel de resgate direto no modo mono-usuário (rescue)
   };
   
