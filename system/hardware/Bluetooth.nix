@@ -1,29 +1,43 @@
 { config, pkgs, ... }: {
 
-  # --- 1. Hardware Bluetooth com Tecnologia Experimental ---
+  # --- 1. Desativar Módulos Inúteis / Perigosos ---
+  # Bloqueia rede/HTTP via Bluetooth e esconde o nome real do PC na busca pública
+  hardware.bluetooth.disabledPlugins = [ "network" "hostname" ];
+
+  # --- 2. Hardware Bluetooth (Performance Máxima + Segurança) ---
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
     
     settings = {
       General = {
-        Enable = "Source,Sink,Media,Socket";
+        # Perfis básicos ativos (Removido o Socket genérico por segurança)
+        Enable = "Source,Sink,Media"; 
         Experimental = true;
-        FastConnectable = true;
-        Class = "0x00FFE100";
-        MultiProfile = "multiple";
+        FastConnectable = true; # Estado de alerta para pareamento instantâneo
+        Class = "0xFFE100";     # Ativa todos os recursos de serviços principais
+        MultiProfile = "multiple"; # Gerencia controles e fones juntos sem travar
         KernelExperimental = "6fbaf188-05e0-496a-9885-d6ddfdb4e03e,330859bc-7506-492d-9370-9a6f0614037f";
+        
+        # --- Anti-Preguiça ---
+        DiscoverableTimeout = 0; # Nunca desiste de buscar dispositivos sozinho
+        PairableTimeout = 0;     # Mantém a permissão de pareamento sempre pronta
+        
+        # --- Blindagem contra Ataques Aéreos ---
+        SecureConnectionsOnly = "true"; # Exige criptografia AES forte (bloqueia interceptação)
+        JustWorksRepairing = "never";    # Impede ataques que forçam re-pareamento invisível
+        Privacy = "device";             # Rotaciona o endereço MAC para evitar rastreamento físico
       };
       Policy = {
-        AutoEnable = "true";
+        AutoEnable = "true"; # Garante o chip ligado e ativo após boot
       };
     };
   };
 
-  # Driver para controle de Xbox
+  # Driver de alta performance para controles de Xbox
   hardware.xpadneo.enable = true;
 
-  # --- 2. Regras do Udev para Controles (Acesso sem Root) ---
+  # --- 3. Regras do Udev para Controles (Acesso Direto sem Root) ---
   services.udev.packages = [ pkgs.game-devices-udev-rules ];
   services.udev.extraRules = ''
     SUBSYSTEMS=="usb", TAG+="uaccess"
@@ -38,7 +52,7 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="02ea", TAG+="uaccess"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="0b12", TAG+="uaccess"
 
-    # PlayStation 4 e 5
+    # PlayStation 4 e 5 (DualShock 4 / DualSense)
     SUBSYSTEM=="usb", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="05c4", TAG+="uaccess"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="09cc", TAG+="uaccess"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="0ce6", TAG+="uaccess"
@@ -48,7 +62,7 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="2dc8", ATTRS{idProduct}=="6012", TAG+="uaccess"
   '';
 
-  # --- 4. Configuração do Pipewire ---
+  # --- 4. Configuração do Servidor de Áudio Pipewire ---
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -62,13 +76,13 @@
           "bluez5.enable-sbc-xq" = true;
           "bluez5.enable-msbc" = true;   
           "bluez5.enable-hw-volume" = true;
-          "bluez5.codecs" = [ "ldac" "aptx_hd" "aptx" "aac" "sbc_xq" ]; 
+          "bluez5.codecs" = [ "ldac" "aptx_hd" "aptx" "aac" "sbc_xq" ]; # Codecs de Alta Fidelidade
           "bluez5.roles" = [ "a2dp_sink" "a2dp_source" "headset_head_unit" "headset_audio_gateway" ];
         };
       };
       "11-bluez-policy" = {
         "wireplumber.settings" = {
-          "bluetooth.autoswitch-to-headset-profile" = true; 
+          "bluetooth.autoswitch-to-headset-profile" = true; # Ativa microfone inteligente em chamadas
         };
       };
     };
