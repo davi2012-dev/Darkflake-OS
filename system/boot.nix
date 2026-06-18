@@ -3,6 +3,7 @@
   boot.loader = {
     systemd-boot.enable = lib.mkForce false;
     efi.canTouchEfiVariables = true;
+    boot.loader.efi.efiSysMountPoint = "/boot";
   };
 
   boot.lanzaboote = {
