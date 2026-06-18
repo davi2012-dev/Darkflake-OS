@@ -7,6 +7,7 @@
   # --- Configuração do Crash Dump (Kdump) ---
   boot.crashDump = {
     enable = true;
+    kernel = "/run/current-system/kernel.efi";
     kernelParams = [ "1" "loglevel=3" ]; # Inicia o kernel de resgate direto no modo mono-usuário (rescue)
   };
   
