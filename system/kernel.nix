@@ -156,7 +156,7 @@
     "kernel.printk" = "3 3 3 3";
     "kernel.yama.ptrace_scope" = 1;             # Impede processos não-filhos de espionar a memória com ptrace
     "dev.tty.ldisc_autoload" = 0;
-    "kernel.kexec_load_disabled" = 1;
+    "kernel.kexec_load_disabled" = 0;
     "kernel.unprivileged_bpf_disabled" = 1;     # Bloqueia ataques via eBPF não privilegiado
     "vm.unprivileged_userfaultfd" = 0;
     "kernel.kptr_restrict" = 2;                 # Esconde endereços de ponteiros do kernel em /proc
