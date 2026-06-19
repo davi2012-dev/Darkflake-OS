@@ -40,6 +40,7 @@
     er-patcher
     # Visual e Personalização
     cmatrix
+    gpufetch
     speechd
     espeak-ng         
     pipes            
