@@ -37,6 +37,7 @@
     bat
     nil
     deadnix
+    ripsecrets
     # --- Desenvolvimento e Sistema ---
     git
     lazygit             # Interface TUI para git
