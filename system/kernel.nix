@@ -151,6 +151,8 @@
   hardware.enableRedistributableFirmware = true;       
   hardware.firmwareCompression = "zstd";
   hardware.wirelessRegulatoryDatabase = true;
+  hardware.cpu.intel.sgx.enableDcapCompat = true;
+  hardware.amdgpu.zluda.enable = true;
   
   # Segurança adicionais de Ferramentas
   programs.tmux.secureSocket = true;            
