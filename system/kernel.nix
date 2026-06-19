@@ -58,6 +58,7 @@
     "xen-blkfront"
     "xen-netfront"
     "xen-pciback"
+    "wireguard"
     "qxl"                 # Driver de vídeo básico alternativo para a janela gráfica
     "tap"                 # Necessário para os túneis de rede da interface virtual
     "uhci_hcd"            # Controladora USB (Essencial para o spiceUSBRedirection)
