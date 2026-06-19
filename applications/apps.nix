@@ -38,6 +38,7 @@
     nil
     deadnix
     ripsecrets
+    amdgpu_top
     # --- Desenvolvimento e Sistema ---
     git
     lazygit             # Interface TUI para git
