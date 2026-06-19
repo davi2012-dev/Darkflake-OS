@@ -14,7 +14,7 @@
   hardware.amdgpu = {
     # Ativa o suporte OpenCL usando a pilha moderna do ROCm
     opencl.enable = true;
-    overdrive.enable = false; 
+    overdrive.enable = true; 
   };
 
   # --- 4. Serviços do Sistema e Integração ---
