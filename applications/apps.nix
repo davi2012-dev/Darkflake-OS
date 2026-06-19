@@ -50,6 +50,7 @@
     topgrade            # Atualiza TUDO (Nix, Flatpak, Firmware) de uma vez
     termius
     nixfmt
+    statix
     # --- Diagnóstico e Stress ---
     outils              # Ferramentas clássicas estilo BSD
     stress-ng           # Stress test de hardware
