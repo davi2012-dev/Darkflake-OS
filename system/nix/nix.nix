@@ -75,7 +75,7 @@
     gc.enable = true;
     publish = {
       enable = true;
-      generateKeyPair = false;
+      generateKeyPair = true;
     };
     substituters.urls = [
       "https://ci.guix.gnu.org"
