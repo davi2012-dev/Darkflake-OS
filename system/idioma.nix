@@ -4,7 +4,12 @@
   i18n.defaultLocale = "pt_BR.UTF-8";
 
   # Teclado no Terminal (Console)
-  console.keyMap = "br-abnt2";
+  console = {
+    enable = true;
+    keyMap = "br-abnt2";               # Define o layout do teclado no terminal para ABNT2
+    font = "Lat2-Terminus16";          # Uma fonte limpa e legível para modo texto
+    earlySetup = true;                 # Carrega o teclado e fonte direto na initrd (evita bug de travar no boot)
+  };
 
   # Teclado no X11 (GDM, Xorg, etc)
   services.xserver.xkb = {
