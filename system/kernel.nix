@@ -196,7 +196,7 @@
 
   # --- 7. Firmware, Gráficos e Segurança de Imagem ---
   security.unprivilegedUsernsClone = true;      # Necessário para sandboxes (Chrome/Flatpak) funcionar
-  security.lockKernelModules = true;            # Bloqueia inserção de módulos após boot (Hardening máximo)
+  security.lockKernelModules = false;            # Bloqueia inserção de módulos após boot (Hardening máximo)
   security.forcePageTableIsolation = true;      # Proteção contra Meltdown
   security.protectKernelImage = true;
   
