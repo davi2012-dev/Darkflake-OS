@@ -138,7 +138,7 @@
 
   # --- 7. Firmware, Gráficos e Segurança de Imagem ---
   security.unprivilegedUsernsClone = true;      
-  security.lockKernelModules = true;            # Mantido trancado pós-boot sem quebrar o Waydroid
+  security.lockKernelModules = true;           
   security.forcePageTableIsolation = true;      
   security.protectKernelImage = true;
   
