@@ -153,7 +153,8 @@
   hardware.wirelessRegulatoryDatabase = true;
   hardware.cpu.intel.sgx.enableDcapCompat = true;
   hardware.amdgpu.zluda.enable = true;
-  
+  hardware.intel-gpu-tools.enable = true;
+
   # Segurança adicionais de Ferramentas
   programs.tmux.secureSocket = true;            
 }
