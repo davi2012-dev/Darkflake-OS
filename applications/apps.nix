@@ -49,6 +49,7 @@
     gearlever           # Gerenciar AppImages com interface
     topgrade            # Atualiza TUDO (Nix, Flatpak, Firmware) de uma vez
     termius
+    nixfmt
     # --- Diagnóstico e Stress ---
     outils              # Ferramentas clássicas estilo BSD
     stress-ng           # Stress test de hardware
