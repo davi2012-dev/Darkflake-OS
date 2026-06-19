@@ -1,24 +1,23 @@
 { config, pkgs, ... }: {
-  # Horário e Localidade
+  # --- 1. Horário e Localidade ---
   time.timeZone = "America/Bahia";
   i18n.defaultLocale = "pt_BR.UTF-8";
 
-  # Teclado no Terminal (Console)
+  # --- 2. Teclado no Terminal (Console TTY) ---
   console = {
     enable = true;
-    keyMap = "br-abnt2";               # Define o layout do teclado no terminal para ABNT2
-    font = "Lat2-Terminus16";          # Uma fonte limpa e legível para modo texto
-    earlySetup = true;                 # Carrega o teclado e fonte direto na initrd (evita bug de travar no boot)
+    keyMap = "br-abnt2";               # Layout do teclado no terminal puro
+    font = "Lat2-Terminus16";          # Fonte nítida para modo texto
+    earlySetup = true;                 # Carrega na initrd para evitar bugs de exibição no boot
   };
 
-  # Teclado no X11 (GDM, Xorg, etc)
+  # --- 3. Teclado no Servidor Gráfico (X11 / Wayland / Display Managers) ---
   services.xserver.xkb = {
     layout = "br";
     variant = "abnt2";
   };
 
-  # Teclado no Wayland (Gnome moderno usa isso)
-  # No Gnome, ele costuma herdar do X11, mas para garantir:
+  # --- 4. Variáveis Regionais Extras (Formatos de Data, Moeda e Medidas) ---
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "pt_BR.UTF-8";
     LC_IDENTIFICATION = "pt_BR.UTF-8";
