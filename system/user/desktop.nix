@@ -14,8 +14,6 @@
   hardware.amdgpu = {
     # Ativa o suporte OpenCL usando a pilha moderna do ROCm
     opencl.enable = true;
-
-    # Se você quiser habilitar overclocking/controle fino de energia no futuro (Overdrive)
     overdrive.enable = false; 
   };
 
