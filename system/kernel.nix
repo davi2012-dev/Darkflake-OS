@@ -49,15 +49,13 @@
   ];
 
   # --- 3. Carga de Módulos do Kernel ---
-  # Bypassa o lock pós-boot jogando o driver do Waydroid diretamente no Stage 1 da Ramdisk
-  boot.initrd.kernelModules = [ "binder_linux" ];
 
   boot.kernelModules = [
     # Suporte Completo às VMs (VirtIO, Redes e Armazenamento)
     "virtio_pci" "virtio_blk" "virtio_gpu" "xen-blkfront" "xen-netfront" "xen-pciback"
     "wireguard" "qxl" "tap" "uhci_hcd" "ehci_hcd" "nvme" "sd_mod"
     "kvm-intel" "tun" "bridge" "vhost_net" "macvlan" "ipvlan" "bonding" "8021q"
-    "tpm_tis" "tpm_crb" "sch_htb" "sch_ingress" "sch_fq" "sch_fq_codel"
+    "tpm_tis" "tpm_crb" "sch_htb" "sch_ingress" "sch_fq" "sch_fq_codel" "binder_linux"
 
     # Controles, Input e Hardware Gamer
     "uinput" "joydev" "evdev" "hid_generic" "ahci" "9pnet_virtio" "9p" "9pnet"
