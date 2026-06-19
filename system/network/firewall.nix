@@ -83,8 +83,8 @@
     "net.ipv4.conf.default.send_redirects" = 0;
     "net.ipv4.conf.all.accept_redirects" = 0;
     "net.ipv4.conf.default.accept_redirects" = 0;
-    "net.ipv6.conf.all.accept_redirects" = 0;
-    "net.ipv6.conf.default.accept_redirects" = 0;
+    "net.v6.conf.all.accept_redirects" = 0;
+    "net.v6.conf.default.accept_redirects" = 0;
 
     # Mitigação de SYN Flood agressiva na fila do Kernel
     "net.core.netdev_max_backlog" = 250000;
