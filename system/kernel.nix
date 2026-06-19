@@ -54,6 +54,7 @@
     "virtio_pci"          # Barramento virtualizado essencial para mapear o hardware
     "virtio_blk"          # Driver do Disco Rápido Virtual
     "virtio_gpu"          # Aceleração gráfica moderna do QEMU dentro da VM
+    "binder_linux"
     "qxl"                 # Driver de vídeo básico alternativo para a janela gráfica
     "tap"                 # Necessário para os túneis de rede da interface virtual
     "uhci_hcd"            # Controladora USB (Essencial para o spiceUSBRedirection)
