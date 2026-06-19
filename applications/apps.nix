@@ -36,6 +36,7 @@
     wiremix
     bat
     nil
+    deadnix
     # --- Desenvolvimento e Sistema ---
     git
     lazygit             # Interface TUI para git
