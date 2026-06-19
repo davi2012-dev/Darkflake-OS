@@ -4,11 +4,18 @@
   security.apparmor = {
     enable = true;
     enableCache = true;
-    killUnconfinedConfinables = true; # Organizado dentro do bloco do apparmor
+    killUnconfinedConfinables = true;
     packages = with pkgs; [ 
       apparmor-profiles 
       roddhjav-apparmor-rules 
     ];
+    
+    # IMPORTANTE: Copia e ativa todos os perfis do roddhjav direto no boot
+    policies = {
+      "roddhjav-rules".profile = ''
+        include "${pkgs.roddhjav-apparmor-rules}/etc/apparmor.d/"
+      '';
+    };
   };
 
   # Configuração de ordem do LSM (Linux Security Modules)
