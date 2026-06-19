@@ -42,6 +42,14 @@
     enableSSHSupport = true;
   };
 
+  # --- 3. Otimizações de Hardware para AMD GPU ---
+  hardware.amdgpu = {
+    # Ativa o suporte OpenCL usando a pilha moderna do ROCm (essencial para ferramentas dev e transcoding)
+    opencl.enable = true;
+
+    # Se você quiser habilitar overclocking/controle fino de energia no futuro (Overdrive)
+    overdrive.enable = false; 
+  };
   # --- 4. Gerenciamento de Energia ---
   powerManagement = {
     enable = true;
