@@ -38,7 +38,7 @@
   # Driver de alta performance para controles de Xbox
   hardware.xpadneo.enable = true;
   hardware.xone.enable = true;
-
+  hardware.i2c.enable  = true;
   # --- 3. Regras do Udev para Controles (Acesso Direto sem Root) ---
   services.udev.packages = [ pkgs.game-devices-udev-rules ];
   services.udev.extraRules = ''
