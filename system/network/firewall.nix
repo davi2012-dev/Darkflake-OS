@@ -36,7 +36,7 @@
       41641 # Tailscale
     ];
 
-    trustedInterfaces = [ "waydroid0" "tailscale0" "lo" "podman+" "veth+" "proton+" "wg+" "tun+" ];
+    trustedInterfaces = [ "waydroid0" "tailscale0" "lo" "podman+" "veth+" "proton+" "wg+" "tun+" "pvpn+"  ];
 
     extraInputRules = ''
       # Bloqueia pacotes inválidos imediatamente
