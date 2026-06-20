@@ -75,7 +75,6 @@
     waydroid-helper
     mcp-nixos
     kando
-    activitywatch
     kdePackages.qtwebsockets
     # --- Produtividade ---
     onlyoffice-desktopeditors
