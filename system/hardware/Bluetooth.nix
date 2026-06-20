@@ -71,6 +71,9 @@
   };
 
   # --- 5. Configuração do Servidor de Áudio Pipewire ---
+  services.pipewire.audio.enable = true;
+  services.pipewire.socketActivation = true;
+  services.pipewire.raopOpenFirewall = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
