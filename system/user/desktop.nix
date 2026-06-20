@@ -32,9 +32,6 @@
   security.rtkit.enable = true;               # Prioridade de tempo real para o áudio (PipeWire)
   security.polkit.enable = true;              # Elevação de privilégios gráfica
   security.chromiumSuidSandbox.enable = true;
-  services.amberol.enable = true;
-  services.amberol.enableRecoloring = true;
-  services.amberol.replaygain = "album";
   programs.dconf.enable = true; 
  
   # Ferramentas de Hardware e Monitoramento
