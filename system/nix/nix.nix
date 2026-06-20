@@ -56,7 +56,7 @@
   # --- 4. FORÇAR x86-64-v3 (NOVO BLOCO) ---
   nixpkgs.hostPlatform = {
     system = "x86_64-linux";
-    gcc.arch = "x86-64-v3";
+    cpu = "x86-64-v3";
   };
 
   # --- 5. Demais configs (Nix-LD, Packages, Guix...) ---
