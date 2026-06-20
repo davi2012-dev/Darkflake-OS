@@ -24,9 +24,7 @@
   programs.fuse.enable = true;                # Essencial para AppImages/Flatpaks montarem partições
   services.xscreensaver.enable = true;
   services.playerctld.enable = true;
-  services.easyeffects.enable = true;
   services.voxtype.enable = true; 
-  services.easyeffects.preset =  "davi";
   services.xsettingsd.enable = true;
   # Segurança e Sandboxing
   security.rtkit.enable = true;               # Prioridade de tempo real para o áudio (PipeWire)
