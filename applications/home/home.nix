@@ -2,7 +2,7 @@
 
 {
   # 1. Suporte a XDG
-  xdg.enable = true;
+  xdg.enable = true; 
 
   # 2. Variáveis de Sessão
   home.sessionVariables = {
@@ -26,7 +26,12 @@
     ./mpv.nix
   ];
 
-  # 4. Pacotes
+  # 4 X11
+  xsession.preferStatusNotifierItems = true;
+  xsession.numlock.enable = true;
+
+
+  # 5. Pacotes
   home.packages = with pkgs; [
     tree
     wget
@@ -46,7 +51,7 @@
     (if stdenv.isLinux then platformio else platformio-core)
   ];
 
-  # 5. Compatibilidade
+  # 6 . Compatibilidade
   programs.man.generateCaches =
     lib.mkIf pkgs.stdenv.isDarwin false;
 
