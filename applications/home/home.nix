@@ -30,7 +30,16 @@
   xsession.preferStatusNotifierItems = true;
   xsession.numlock.enable = true;
 
-
+  # deamon 
+  services.activitywatch.enable = true;
+  services.amberol.enable = true;
+  services.amberol.enableRecoloring = true;
+  services.amberol.replaygain = "album";
+  services.easyeffects.enable = true;
+  services.easyeffects.preset = "gamer";
+  services.caffeine.enable = true;
+  services.xsettingsd.enable = true;
+  
   # 5. Pacotes
   home.packages = with pkgs; [
     tree
