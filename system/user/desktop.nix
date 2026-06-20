@@ -3,8 +3,6 @@
 {
   # --- 1. Servidor Gráfico e Display Manager ---
   services.xserver.enable = true;
-  xsession.preferStatusNotifierItems = true;
-  xsession.numlock.enable = true;
   # Display Manager customizado do seu setup
   services.displayManager.plasma-login-manager.enable = true;
 
