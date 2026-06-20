@@ -1,8 +1,6 @@
 { config, pkgs, ... }: {
 
   # --- 1. Desativar Módulos Inúteis / Perigosos ---
-  # "network" mata os perfis PAN (Personal Area Network) e DUN (Dial-Up Networking).
-  # Sem eles, o BlueZ é incapaz de criar interfaces de rede (como bnep0) ou encapsular tráfego HTTP/IP.
   hardware.bluetooth.disabledPlugins = [ "network" "hostname" ];
 
   # --- 2. Hardware Bluetooth (Performance Máxima + Segurança) ---
@@ -12,19 +10,16 @@
     
     settings = {
       General = {
-        # Mantém apenas Áudio e Mídia. Controles usam HID direto que o Udev gerencia.
         Enable = "Source,Sink,Media"; 
         Experimental = true;
-        FastConnectable = true; # Seu estado de alerta instantâneo mantido
+        FastConnectable = true;
         Class = "0xFFE100";     
         MultiProfile = "multiple"; 
         KernelExperimental = "6fbaf188-05e0-496a-9885-d6ddfdb4e03e,330859bc-7506-492d-9370-9a6f0614037f";
         
-        # Mantidos em 0 (Anti-Preguiça) conforme o seu plano original
         DiscoverableTimeout = 0; 
         PairableTimeout = 0;     
         
-        # Suas travas aéreas de criptografia originais
         SecureConnectionsOnly = "true"; 
         JustWorksRepairing = "never";    
         Privacy = "device";              
@@ -35,11 +30,12 @@
     };
   };
 
-  # Driver de alta performance para controles de Xbox
+  # Driver de alta performance para controles de Xbox e outros
   hardware.xpadneo.enable = true;
   hardware.xone.enable = true;
   hardware.i2c.enable  = true;
   hardware.uinput.enable = true;
+
   # --- 3. Regras do Udev para Controles (Acesso Direto sem Root) ---
   services.udev.packages = [ pkgs.game-devices-udev-rules ];
   services.udev.extraRules = ''
@@ -65,7 +61,16 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="2dc8", ATTRS{idProduct}=="6012", TAG+="uaccess"
   '';
 
-  # --- 4. Configuração do Servidor de Áudio Pipewire ---
+  # --- 4. System76 Scheduler (Ajustado Especialmente para o Kernel BORE) ---
+  services.system76-scheduler = {
+    enable = true;
+    # CRÍTICO: Desativa os perfis CFS padrão para o System76 não bagunçar o agendamento do BORE
+    settings.cfsProfiles.enable = false; 
+    # Mantém apenas o boost focado em processos, garantindo prioridade ao Pipewire
+    settings.processScheduler.pipewireBoost.enable = true;
+  };
+
+  # --- 5. Configuração do Servidor de Áudio Pipewire ---
   services.pipewire = {
     enable = true;
     alsa.enable = true;
