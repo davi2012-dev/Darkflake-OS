@@ -24,13 +24,12 @@
   programs.fuse.enable = true;                # Essencial para AppImages/Flatpaks montarem partições
   services.xscreensaver.enable = true;
   services.playerctld.enable = true;
-  services.voxtype.enable = true; 
+  programs.dconf.enable = true; 
   services.xsettingsd.enable = true;
   # Segurança e Sandboxing
   security.rtkit.enable = true;               # Prioridade de tempo real para o áudio (PipeWire)
   security.polkit.enable = true;              # Elevação de privilégios gráfica
   security.chromiumSuidSandbox.enable = true;
-  programs.dconf.enable = true; 
  
   # Ferramentas de Hardware e Monitoramento
   services.hardware.openrgb.enable = true;    # Controle de iluminação RGB
