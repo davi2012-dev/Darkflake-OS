@@ -24,7 +24,6 @@
   programs.fuse.enable = true;                # Essencial para AppImages/Flatpaks montarem partições
   services.xscreensaver.enable = true;
   services.playerctld.enable = true;
-  services.activitywatch.enable = true;
   services.easyeffects.enable = true;
   services.voxtype.enable = true; 
   services.easyeffects.preset =  "davi";
