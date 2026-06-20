@@ -16,7 +16,7 @@
     ];
   };
 
-  # --- 2. NH ---
+  # --- 2. NH: O Assistente Moderno ---
   programs.nh = {
     enable = true;
     clean.enable = true;
@@ -24,21 +24,19 @@
     flake = "/etc/nixos";
   };
 
-  # --- 3. Nix Config & Performance (ATUALIZADO) ---
+  # --- 3. Nix Config & Performance ---
   nix.channel.enable = false;
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" "ca-derivations" "pipe-operators" "recursive-nix" "dynamic-derivations" "fetch-tree" ];
+    experimental-features = [ "nix-command" "flakes" "ca-derivations" "pipe-operators" "recursive-nix" "dynamic-derivations" "fetch-tree"  ];
     auto-optimise-store = true;
     substituters = [
       "https://cache.nixos.org/"
-      "https://nixpkgs-x86-64-v3.cachix.org"
       "https://nix-community.cachix.org"
       "https://hyprland.cachix.org" 
+      "https://attic.xuyh0120.win/lantian"
       "https://chaotic-nyx.cachix.org"
     ];
     trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "nixpkgs-x86-64-v3.cachix.org-1:4NbB5kY+Fz4z6L+OE34r3Qk3y1xxk1u4e+FYsCmPgl4="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
       "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
@@ -50,16 +48,9 @@
     max-jobs = "auto";
     http-connections = 50;
     connect-timeout = 5;
-    system-features = [ "gccarch-x86-64-v3" ];
   };
 
-  # --- 4. FORÇAR x86-64-v3 (NOVO BLOCO) ---
-  nixpkgs.hostPlatform = {
-    system = "x86_64-linux";
-    cpu = "x86-64-v3";
-  };
-
-  # --- 5. Demais configs (Nix-LD, Packages, Guix...) ---
+  # --- 5. Nix-LD (Suporte a Binários Externos) ---
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     stdenv.cc.cc zlib fuse3 openssl icu nss curl expat glibc 
