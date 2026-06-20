@@ -6,7 +6,7 @@
     extraGroups = [ "networkmanager" "wheel" "video" "podman" "libvirtd" "gamemode" "wireshark" ];
     hashedPassword = "$y$j9T$LqaPp07vOk4t3YmqRo8uk/$hFD63tEFFiTFfShOOklyJ1Ne8V8MzTPtyoSVdmvtQ4C";
 
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 ZYRNCvzt09cASt7y6Vt0fjrSwH17BZQLrMZfgnXHins davi@Darkflake" ];
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINVu0z9sm4lfgen07lnSkPW/8IiV+N1uGG/Tua9i05le davi@Darkflake" ];
   };
 
   users.users.guest = {
