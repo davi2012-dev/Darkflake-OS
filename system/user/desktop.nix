@@ -22,7 +22,6 @@
   services.fstrim.enable = true;              # Coleta de lixo/otimização automática para SSDs
   services.upower.enable = true;              # Estatísticas de bateria e energia de periféricos
   programs.fuse.enable = true;                # Essencial para AppImages/Flatpaks montarem partições
-  services.xscreensaver.enable = true;
   services.playerctld.enable = true;
   programs.dconf.enable = true; 
   services.xsettingsd.enable = true;
