@@ -24,7 +24,7 @@
   programs.fuse.enable = true;                # Essencial para AppImages/Flatpaks montarem partições
   services.playerctld.enable = true;
   programs.dconf.enable = true; 
-  services.xsettingsd.enable = true;
+  services.xscreensaver.enable = true;
   # Segurança e Sandboxing
   security.rtkit.enable = true;               # Prioridade de tempo real para o áudio (PipeWire)
   security.polkit.enable = true;              # Elevação de privilégios gráfica
