@@ -1,58 +1,81 @@
 { config, pkgs, ... }: { 
-   services.openssh = { 
-     enable = true; 
-     startWhenNeeded = true; 
+  services.openssh = { 
+    enable = true; 
+    startWhenNeeded = true; 
 
-     settings = { 
-       AllowTcpForwarding = false; 
-       X11Forwarding = false; 
-       AllowAgentForwarding = false; 
-       PermitTunnel = false; 
+    settings = { 
+      AllowTcpForwarding = false; 
+      X11Forwarding = false; 
+      AllowAgentForwarding = false; 
+      PermitTunnel = false; 
 
-       PasswordAuthentication = false; 
-       KbdInteractiveAuthentication = false; 
-       PermitRootLogin = "no"; 
+      PasswordAuthentication = false; 
+      KbdInteractiveAuthentication = false; 
+      PermitRootLogin = "no"; 
 
-       ClientAliveInterval = 300; 
-       ClientAliveCountMax = 2; 
+      ClientAliveInterval = 300; 
+      ClientAliveCountMax = 2; 
 
-       LoginGraceTime = 20; 
-       MaxAuthTries = 3; 
-       MaxSessions = 2; 
-       MaxStartups = "10:30:60"; 
+      LoginGraceTime = 20; 
+      MaxAuthTries = 3; 
+      MaxSessions = 2; 
+      MaxStartups = "10:30:60"; 
 
-       LogLevel = "VERBOSE"; 
+      LogLevel = "VERBOSE"; 
 
-       # Algoritmos modernos 
-       KexAlgorithms = [ 
-         "mlkem768x25519-sha256" 
-         "curve25519-sha256" 
-       ]; 
+      # Algoritmos modernos 
+      KexAlgorithms = [ 
+        "mlkem768x25519-sha256" 
+        "curve25519-sha256" 
+      ]; 
 
-       Ciphers = [ 
-         "aes256-gcm@openssh.com" 
-         "chacha20-poly1305@openssh.com" 
-       ]; 
+      Ciphers = [ 
+        "aes256-gcm@openssh.com" 
+        "chacha20-poly1305@openssh.com" 
+      ]; 
 
-       Macs = [ 
-         "hmac-sha2-512-etm@openssh.com" 
-         "umac-128-etm@openssh.com" 
-       ]; 
+      Macs = [ 
+        "hmac-sha2-512-etm@openssh.com" 
+        "umac-128-etm@openssh.com" 
+      ]; 
 
-       # reduz fingerprinting 
-       VersionAddendum = "none"; 
+      # reduz fingerprinting 
+      VersionAddendum = "none"; 
 
-       # evita variáveis perigosas 
-       PermitUserEnvironment = false; 
+      # evita variáveis perigosas 
+      PermitUserEnvironment = false; 
 
-       # menos superfície 
-       Compression = false; 
+      # menos superfície 
+      Compression = false; 
 
-       # idle sessions 
-       TCPKeepAlive = false; 
+      # idle sessions 
+      TCPKeepAlive = false; 
 
-       # chave pública apenas 
-       PubkeyAuthentication = true; 
-     }; 
-   }; 
- }
+      # chave pública apenas 
+      PubkeyAuthentication = true; 
+    }; 
+  }; 
+
+  # --- Endurecimento profundo do SSHd via Systemd (Template p/ Socket Activation) ---
+systemd.services."sshd@".serviceConfig = {
+  ProtectSystem = "strict";
+  ProtectHome = "read-only";           # Permite ler ~/.ssh/authorized_keys
+  PrivateTmp = true;
+  ProtectControlGroups = true;
+  ProtectKernelModules = true;
+  ProtectKernelTunables = true;
+
+  NoNewPrivileges = true;              # Impede escalada APÓS o login (seguro)
+  RestrictRealtime = true;
+  RestrictSUIDSGID = true;
+  RestrictNamespaces = true;
+
+  MemoryDenyWriteExecute = false;      # Correto para o SSH (privilege separation)
+
+  SystemCallArchitectures = "native";
+  # AQUI ESTÁ A CORREÇÃO: Mantenha o @system-service, bloqueie apenas @resources
+  # (que tem chamadas perigosas como ioperm, iopl, etc.)
+  # NÃO bloqueie @privileged (senão o setuid do SSH quebra)
+  SystemCallFilter = [ "@system-service" "~@resources" ];
+};
+}
