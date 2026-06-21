@@ -151,6 +151,10 @@
   hardware.enableRedistributableFirmware = true;       
   hardware.firmwareCompression = "zstd";
   hardware.wirelessRegulatoryDatabase = true;
+  hardware.cpu.x86.msr.enable = true;
+  hardware.cpu.x86.msr.group = "wheel";
+  hardware.cpu.x86.msr.settings.allow-writes = "off";
+  hardware.cpu.x86.msr.mode = "0640";
   hardware.cpu.intel.sgx.enableDcapCompat = true;
   hardware.amdgpu.zluda.enable = true;
   hardware.intel-gpu-tools.enable = true;
