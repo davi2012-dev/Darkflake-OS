@@ -78,6 +78,10 @@
     "net.ipv4.conf.all.accept_source_route" = 0;
     "net.ipv4.conf.default.accept_source_route" = 0;
 
+    # ADICIONADO: Ativa logs para pacotes falsificados/impossíveis (Cobrado pelo Lynis)
+    "net.ipv4.conf.all.log_martians" = 1;
+    "net.ipv4.conf.default.log_martians" = 1;
+
     # Correções extras de segurança de rede cobradas em auditorias (Lynis)
     "net.ipv4.conf.all.send_redirects" = 0;
     "net.ipv4.conf.default.send_redirects" = 0;
@@ -85,6 +89,9 @@
     "net.ipv4.conf.default.accept_redirects" = 0;
     "net.v6.conf.all.accept_redirects" = 0;
     "net.v6.conf.default.accept_redirects" = 0;
+    "net.v6.conf.all.forwarding" = 1; 
+    "net.v6.conf.all.accept_source_route" = 0;
+    "net.v6.conf.default.accept_source_route" = 0;
 
     # Mitigação de SYN Flood agressiva na fila do Kernel
     "net.core.netdev_max_backlog" = 250000;
