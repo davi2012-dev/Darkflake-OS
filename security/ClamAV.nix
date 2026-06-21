@@ -52,10 +52,12 @@
       # 3. PERMISSÕES DE ESCRITA (Só onde ele realmente precisa gravar)
       # O sistema fica Read-Only, exceto essas pastas:
       ReadWritePaths = [
-        "/var/lib/clamav"    # Onde as assinaturas (vírus definitions) são baixadas
-        "/var/log/clamav"    # Onde ele escreve os logs
-        "/tmp"               # Necessário para arquivos temporários durante o scan
-        "/var/tmp"
+      "/var/lib/clamav"
+      "/var/log/clamav"
+      "/tmp"
+      "/var/tmp"
+      "/run/clamav"   
+      "/var/run/clamav" 
       ];
 
       # 4. ISOLAMENTO DE SISTEMA DE ARQUIVOS (O MÁXIMO QUE DÁ)
