@@ -64,18 +64,12 @@ systemd.services."sshd@".serviceConfig = {
   ProtectControlGroups = true;
   ProtectKernelModules = true;
   ProtectKernelTunables = true;
-
   NoNewPrivileges = true;              # Impede escalada APÓS o login (seguro)
   RestrictRealtime = true;
   RestrictSUIDSGID = true;
   RestrictNamespaces = true;
-
   MemoryDenyWriteExecute = false;      # Correto para o SSH (privilege separation)
-
   SystemCallArchitectures = "native";
-  # AQUI ESTÁ A CORREÇÃO: Mantenha o @system-service, bloqueie apenas @resources
-  # (que tem chamadas perigosas como ioperm, iopl, etc.)
-  # NÃO bloqueie @privileged (senão o setuid do SSH quebra)
   SystemCallFilter = [ "@system-service" "~@resources" ];
 };
 }
