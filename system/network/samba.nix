@@ -81,6 +81,6 @@
 
      # Filtro de Chamadas do Sistema (Syscalls autorizadas adaptadas para o Samba)
      SystemCallArchitectures = "native";
-     SystemCallFilter = [ "@system-service" "~@privileged" "~@resources" ];
+     SystemCallFilter = [ "@system-service" "~@resources" ];
    };
 }
