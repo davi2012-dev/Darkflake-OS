@@ -56,20 +56,37 @@
     }; 
   }; 
 
-  # --- Endurecimento profundo do SSHd via Systemd (Template p/ Socket Activation) ---
-systemd.services."sshd@".serviceConfig = {
-  ProtectSystem = "strict";
-  ProtectHome = "read-only";           # Permite ler ~/.ssh/authorized_keys
-  PrivateTmp = true;
-  ProtectControlGroups = true;
-  ProtectKernelModules = true;
-  ProtectKernelTunables = true;
-  NoNewPrivileges = true;              # Impede escalada APÓS o login (seguro)
-  RestrictRealtime = true;
-  RestrictSUIDSGID = true;
-  RestrictNamespaces = true;
-  MemoryDenyWriteExecute = false;      # Correto para o SSH (privilege separation)
-  SystemCallArchitectures = "native";
-  SystemCallFilter = [ "@system-service" "~@resources" ];
-};
+  # --- ENDURECIMENTO PROFUNDO (CORRIGIDO) ---
+  systemd.services."sshd@".serviceConfig = {
+    # PERMITE ESCRITA NOS DIRETÓRIOS QUE O SSH PRECISA
+    ReadWritePaths = [
+      "/run/sshd"          # Socket de autenticação
+      "/var/empty"         # Diretório chroot para privilege separation
+      "/var/log"           # Para logs (se você ativar)
+    ];
+
+    # Restrições de sistema de arquivos
+    ProtectSystem = "strict";          # Máxima proteção (read-only em todo o sistema)
+    ProtectHome = "read-only";         # Permite ler ~/.ssh/authorized_keys
+    PrivateTmp = "yes";                # Isola /tmp
+    ProtectControlGroups = "yes";
+    ProtectKernelModules = "yes";
+    ProtectKernelTunables = "yes";
+
+    # Sandbox de privilégios
+    NoNewPrivileges = "yes";
+    RestrictRealtime = "yes";
+    RestrictSUIDSGID = "yes";
+    RestrictNamespaces = "yes";
+
+    # O SSH não usa JIT, então podemos ativar
+    MemoryDenyWriteExecute = "yes";
+
+    # Filtro de syscalls (seguro, sem bloquear setuid)
+    SystemCallArchitectures = "native";
+    SystemCallFilter = [
+      "@system-service"
+      "~@resources"        # Bloqueia ioperm, iopl, etc.
+    ];
+  };
 }
