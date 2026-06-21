@@ -60,7 +60,7 @@
    # --- Endurecimento profundo do processo smbd via Systemd ---
    systemd.services.samba-smbd.serviceConfig = {
      # Restrições de Sistema de Arquivos
-     ReadWritePaths = [ "/var/log/samba" "/var/lib/samba"  "/srv/samba/public"
+     ReadWritePaths = [ "/var/log/samba" "/var/lib/samba"  "/srv/samba/public" ];
      ProtectSystem = "full";             # Transforma /usr, /boot, /etc em Read-Only (Não usamos 'strict' para ele poder mapear /srv)
      ProtectHome = "read-only";          # Permite ler se houver compartilhamento no /home, mas não gravar
      PrivateTmp = true;                  # Cria um /tmp exclusivo e isolado para o Samba
