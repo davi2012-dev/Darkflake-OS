@@ -34,65 +34,55 @@
 
   # --- NOVO HARDENING PROFUNDO (IGUAL AO SSH/SAMBA) ---
   systemd.services.clamav-daemon = {
-    serviceConfig = {
-      # 1. PRIVILÉGIOS MÍNIMOS (O ClamAV precisa de root pra escanear, mas vamos limitar o que ele pode fazer)
-      Capabilities = "CAP_SYS_ADMIN CAP_IPC_LOCK"; # Mantido
-      User = lib.mkForce "root";
-      Group = lib.mkForce "root";
+  serviceConfig = {
+    # RODE DIRETAMENTE COMO O USUÁRIO clamav (NÃO PRECISA DE setuid)
+    User = lib.mkForce "clamav";
+    Group = lib.mkForce "clamav";
 
-      # 2. PRIORIDADE EXTREMA (Não muda, é bom)
-      CPUSchedulingPolicy = "fifo";
-      CPUSchedulingPriority = 60;
-      IOSchedulingClass = "realtime";
-      IOSchedulingPriority = 0;
-      OOMScoreAdjust = 50;
-      Restart = "always";
-      RestartSec = "1s";
+    # PERMISSÕES CAP (o usuário clamav precisa de CAP_SYS_ADMIN para escanear)
+    CapabilityBoundingSet = [ "CAP_SYS_ADMIN" "CAP_IPC_LOCK" ];
+    AmbientCapabilities = [ "CAP_SYS_ADMIN" "CAP_IPC_LOCK" ];
 
-      # 3. PERMISSÕES DE ESCRITA (Só onde ele realmente precisa gravar)
-      # O sistema fica Read-Only, exceto essas pastas:
-      ReadWritePaths = [
+    # PRIORIDADE (mantida)
+    CPUSchedulingPolicy = "fifo";
+    CPUSchedulingPriority = 60;
+    IOSchedulingClass = "realtime";
+    IOSchedulingPriority = 0;
+    OOMScoreAdjust = 50;
+    Restart = "always";
+    RestartSec = "1s";
+
+    # PERMISSÕES DE ESCRITA (mantidas)
+    ReadWritePaths = [
       "/var/lib/clamav"
       "/var/log/clamav"
       "/tmp"
       "/var/tmp"
-      "/run/clamav"   
-      "/var/run/clamav" 
-      ];
+      "/run/clamav"
+      "/var/run/clamav"
+    ];
 
-      # 4. ISOLAMENTO DE SISTEMA DE ARQUIVOS (O MÁXIMO QUE DÁ)
-      # Não podemos por "strict" ou "full" porque ele precisa ler o sistema inteiro para te proteger.
-      # Mas podemos bloquear ESCRITAS em todo lugar (exceto as pastas acima) com ReadWritePaths.
-      # Vamos usar "strict" + ReadWritePaths, mas o ClamAV precisa ler /usr, /etc, /home...
-      # Então usamos "full" (que deixa /usr, /boot, /etc apenas leitura) e bloqueamos escrita no resto.
-      ProtectSystem = "full";           # /usr, /boot, /etc ficam Read-Only (ninguém altera)
-      ProtectHome = "read-only";        # O ClamAV pode LER o /home, mas NÃO PODE GRAVAR nele. Seguro!
-      PrivateTmp = lib.mkForce "yes";                # Isola o /tmp do ClamAV (se invadirem, não veem os outros processos)
-      ProtectControlGroups = true;      # Bloqueia cgroups
-      ProtectKernelModules = true;      # Impede carregar módulos do kernel
-      ProtectKernelTunables = true;     # Impede alterar parâmetros do kernel (/proc/sys)
+    # ISOLAMENTO (mantido)
+    ProtectSystem = "full";
+    ProtectHome = "read-only";
+    PrivateTmp = lib.mkForce "yes";
+    ProtectControlGroups = true;
+    ProtectKernelModules = true;
+    ProtectKernelTunables = true;
 
-      # 5. SANDBOX DE PRIVILÉGIOS (O MAIS IMPORTANTE)
-      NoNewPrivileges = true;           # Se invadirem, não viram root
-      RestrictRealtime = true;          
-      RestrictSUIDSGID = true;          
-      RestrictNamespaces = true;        # Impede criar containers ou montar coisas novas
+    # REMOVA O NoNewPrivileges (ou defina como false)
+    NoNewPrivileges = false;   # <-- ESSENCIAL!
 
-      # 6. MEMÓRIA (Cuidado aqui!)
-      # ATENÇÃO: O ClamAV usa Bytecode (uma máquina virtual interna para detectar vírus).
-      # Se você ativar MemoryDenyWriteExecute = true, o Bytecode do ClamAV pode quebrar
-      # e ele vai deixar de detectar vírus que usam assinaturas Bytecode.
-      # Portanto, mantemos FALSE, igual ao Samba.
-      MemoryDenyWriteExecute = false;
+    RestrictRealtime = true;
+    RestrictSUIDSGID = true;
+    RestrictNamespaces = true;
+    MemoryDenyWriteExecute = false;
 
-      # 7. FILTRO DE SYSYSTEM CALLS (O "CANCELADOR" DE EXPLOITS)
-      SystemCallArchitectures = "native";
-      SystemCallFilter = [
-        "@system-service"
-        "~@resources"     # Bloqueia ioperm, iopl (acesso direto a hardware)
-      ];
-    };
+    SystemCallArchitectures = "native";
+    SystemCallFilter = [ "@system-service" "~@resources" ];
   };
+ };
+};
 
   # --- CRIA AS PASTAS DE LOG E ASSINATURA COM PERMISSÕES CERTAS ---
   systemd.tmpfiles.rules = [
