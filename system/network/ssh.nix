@@ -45,40 +45,4 @@
       PubkeyAuthentication = true; 
     }; 
   }; 
-
-  # --- HARDENING QUE FUNCIONA (testado) ---
-  systemd.services."sshd@".serviceConfig = {
-    # DIRETÓRIOS QUE O SSH PRECISA LER/ESCREVER
-    ReadWritePaths = [
-      "/run/sshd"
-      "/var/empty"
-    ];
-
-    # Proteções (sem exageros)
-    ProtectSystem = "full";           # /usr, /boot, /etc read-only
-    ProtectHome = "read-only";        # Leitura de ~/.ssh autorizada
-    PrivateTmp = "yes";               # Isola /tmp
-    ProtectControlGroups = "yes";
-    ProtectKernelModules = "yes";
-    ProtectKernelTunables = "yes";
-
-    # Sem escalada de privilégios
-    NoNewPrivileges = "yes";
-    RestrictRealtime = "yes";
-    RestrictSUIDSGID = "yes";
-    RestrictNamespaces = "yes";
-
-    # Proteção de memória (SSH não precisa de JIT)
-    MemoryDenyWriteExecute = "yes";
-
-    # Syscalls filtradas (sem bloquear setuid)
-    SystemCallArchitectures = "native";
-    SystemCallFilter = [
-      "@system-service"
-      "~@resources"
-    ];
-
-    # Evita problemas de limite de arquivos abertos
-    LimitNOFILE = 4096;
-  };
 }
