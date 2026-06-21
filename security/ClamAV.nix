@@ -82,7 +82,6 @@
     SystemCallFilter = [ "@system-service" "~@resources" ];
   };
  };
-};
 
   # --- CRIA AS PASTAS DE LOG E ASSINATURA COM PERMISSÕES CERTAS ---
   systemd.tmpfiles.rules = [
