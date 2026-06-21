@@ -23,7 +23,6 @@
 
       LogLevel = "VERBOSE"; 
 
-      # Algoritmos modernos 
       KexAlgorithms = [ 
         "mlkem768x25519-sha256" 
         "curve25519-sha256" 
@@ -39,54 +38,33 @@
         "umac-128-etm@openssh.com" 
       ]; 
 
-      # reduz fingerprinting 
       VersionAddendum = "none"; 
-
-      # evita variáveis perigosas 
       PermitUserEnvironment = false; 
-
-      # menos superfície 
       Compression = false; 
-
-      # idle sessions 
       TCPKeepAlive = false; 
-
-      # chave pública apenas 
       PubkeyAuthentication = true; 
     }; 
   }; 
 
-  # --- ENDURECIMENTO PROFUNDO (CORRIGIDO) ---
+  # --- HARDENING MÍNIMO (APENAS O ESSENCIAL) ---
   systemd.services."sshd@".serviceConfig = {
-    # PERMITE ESCRITA NOS DIRETÓRIOS QUE O SSH PRECISA
+    # Permissões de escrita
     ReadWritePaths = [
-      "/run/sshd"          # Socket de autenticação
-      "/var/empty"         # Diretório chroot para privilege separation
-      "/var/log"           # Para logs (se você ativar)
+      "/run/sshd"
+      "/var/empty"
     ];
 
-    # Restrições de sistema de arquivos
-    ProtectSystem = "strict";          # Máxima proteção (read-only em todo o sistema)
-    ProtectHome = "read-only";         # Permite ler ~/.ssh/authorized_keys
-    PrivateTmp = "yes";                # Isola /tmp
-    ProtectControlGroups = "yes";
-    ProtectKernelModules = "yes";
-    ProtectKernelTunables = "yes";
-
-    # Sandbox de privilégios
+    # Apenas algumas proteções básicas (nada que impeça o funcionamento)
+    ProtectSystem = "full";          # Menos restritivo que "strict"
+    ProtectHome = "read-only";
+    PrivateTmp = "yes";
     NoNewPrivileges = "yes";
-    RestrictRealtime = "yes";
-    RestrictSUIDSGID = "yes";
-    RestrictNamespaces = "yes";
-
-    # O SSH não usa JIT, então podemos ativar
-    MemoryDenyWriteExecute = "yes";
-
-    # Filtro de syscalls (seguro, sem bloquear setuid)
     SystemCallArchitectures = "native";
     SystemCallFilter = [
       "@system-service"
-      "~@resources"        # Bloqueia ioperm, iopl, etc.
+      "~@resources"
     ];
+    # Remove tudo que possa quebrar:
+    # - RestrictNamespaces, RestrictRealtime, RestrictSUIDSGID (deixamos desativados)
   };
 }
