@@ -85,6 +85,4 @@
     "d /run/searx 0755 searx searx -"
   ];
 
-  # --- INSTALA O PACOTE (caso não venha com o módulo) ---
-  environment.systemPackages = with pkgs; [ searxng ];
 }
