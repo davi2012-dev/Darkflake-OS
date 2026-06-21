@@ -65,7 +65,7 @@
       # Então usamos "full" (que deixa /usr, /boot, /etc apenas leitura) e bloqueamos escrita no resto.
       ProtectSystem = "full";           # /usr, /boot, /etc ficam Read-Only (ninguém altera)
       ProtectHome = "read-only";        # O ClamAV pode LER o /home, mas NÃO PODE GRAVAR nele. Seguro!
-      PrivateTmp = true;                # Isola o /tmp do ClamAV (se invadirem, não veem os outros processos)
+      PrivateTmp = lib.mkForce "yes";                # Isola o /tmp do ClamAV (se invadirem, não veem os outros processos)
       ProtectControlGroups = true;      # Bloqueia cgroups
       ProtectKernelModules = true;      # Impede carregar módulos do kernel
       ProtectKernelTunables = true;     # Impede alterar parâmetros do kernel (/proc/sys)
