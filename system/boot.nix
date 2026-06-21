@@ -21,6 +21,7 @@
   };
 
   boot.bootspec.enableValidation = true;
+  boot.initrd.includeDefaultModules = true;
   boot.plymouth.enable = true;
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
