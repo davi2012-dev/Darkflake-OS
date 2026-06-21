@@ -89,7 +89,6 @@
       SystemCallArchitectures = "native";
       SystemCallFilter = [
         "@system-service"
-        "~@privileged"    # Bloqueia setuid, setgid, etc (se invadirem, não viram outro usuário)
         "~@resources"     # Bloqueia ioperm, iopl (acesso direto a hardware)
       ];
     };
