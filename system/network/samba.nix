@@ -11,7 +11,7 @@
 
          # SMB moderno apenas 
          "server min protocol" = "SMB3_11"; 
-
+    
          # mata NetBIOS legado 
          "disable netbios" = "yes"; 
          "smb ports" = "445"; 
@@ -24,6 +24,7 @@
          "map to guest" = "never"; 
          "restrict anonymous" = "2"; 
          "server signing" = "mandatory"; 
+         "server smb encrypt" = "mandatory";
 
          # menos fingerprinting 
          "server string" = ""; 
@@ -59,6 +60,7 @@
    # --- Endurecimento profundo do processo smbd via Systemd ---
    systemd.services.samba-smbd.serviceConfig = {
      # Restrições de Sistema de Arquivos
+     ReadWritePaths = [ "/var/log/samba" "/var/lib/samba"  "/srv/samba/public"
      ProtectSystem = "full";             # Transforma /usr, /boot, /etc em Read-Only (Não usamos 'strict' para ele poder mapear /srv)
      ProtectHome = "read-only";          # Permite ler se houver compartilhamento no /home, mas não gravar
      PrivateTmp = true;                  # Cria um /tmp exclusivo e isolado para o Samba
