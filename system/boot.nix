@@ -21,7 +21,6 @@
   };
 
   boot.bootspec.enableValidation = true;
-  boot.tmp.cleanOnBoot = true;
   boot.tmp.tmpfsHugeMemoryPages = "within_size";
   boot.initrd.includeDefaultModules = true;
   boot.plymouth.enable = true;
