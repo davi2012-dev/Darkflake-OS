@@ -263,8 +263,18 @@
         }
         {
           type = "command";
+          key = "{$7}├ 󰩟  Placas   ";
+          text = "ip -4 -br addr | grep -v 'lo\\|virbr\\|docker\\|veth\\|br-' | awk '{printf \"%s: %s  \", $1, $3}' | sed 's/  $//' || echo 'nenhuma'";
+        }
+        {
+          type = "command";
           key = "{$7}├ 󰩟  Gateway   ";
           text = "ip route | grep default | awk '{print $3}' || echo 'nenhum'";
+        }
+        {
+          type = "command";
+          key = "{$8}├ 󰉫  Firewall ";
+          text = "if systemctl is-active --quiet nftables; then echo 'Active (nftables)'; else echo 'Inactive'; fi";
         }
         {
          type = "custom";
