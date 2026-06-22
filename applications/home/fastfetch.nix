@@ -60,6 +60,21 @@
           key =  "{$3}├   CPU        ";
         }
         {
+          type = "cpu";
+          key = "{$3}├ 󰘚  Cache L1 ";
+          format = "{cacheL1d} (D), {cacheL1i} (I)";
+        }
+        {
+          type = "cpu";
+          key = "{$3}├ 󰘚  Cache L2 ";
+          format = "{cacheL2} (U)";
+        }
+        {
+          type = "cpu";
+          key = "{$3}├ 󰘚  Cache L3 ";
+          format = "{cacheL3} (U)";
+        }
+        {
           type = "gpu";
           key =  "{$4}├ 󰾲  GPU        ";
         }
