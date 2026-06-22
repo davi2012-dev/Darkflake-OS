@@ -267,6 +267,25 @@
           type = "custom";
           format = "                󱄅 󱄅 󱄅 󱄅 󱄅 󱄅 󱄅 󱄅 󱄅 󱄅";
         }
+        {
+          type = "weather";
+          key = "{$1}├ 󰖐  Clima     ";
+          format = "{temperature} - {condition} ({city}, {state}, {country})";
+         }
+         {
+           type = "custom";
+           format = "{$10}{$11}{$9}{$12}{$8}{$12}{$7}{$12}{$6}{$12}{$5}{$12}{$4}{$12}{$3}{$12}{$2}{$12}{$1}{$13}  リヨウシャ";
+         }
+         {
+           type = "users";
+           key = "{$4}├ 󰋽  user ";
+           format = "{1}@{2} - {3}";
+         }
+        {
+           type = "wallpaper";
+           key = "{$6}├ 󰸉 wallpaper ";
+           format = "{1}";
+        }
       ];
     };
   };
