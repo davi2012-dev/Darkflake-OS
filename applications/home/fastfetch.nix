@@ -144,13 +144,13 @@
           key = "{$7}├   Terminal  ";
         }
         {
-          type = "exec";
+          type = "command";
           key = "├ 󰖪  TCP CC   ";
           command = "sysctl -n net.ipv4.tcp_congestion_control";
           format = "{0}";
         }
         {
-          type = "exec";
+          type = "command";
           key = "├ 󰧨  Scheduler";
           command = "uname -r | grep -o 'cachyos-bore' || echo 'outro'";
           format = "{0}";
@@ -160,7 +160,7 @@
           key = "{$6}├ 󰛖  Term Font ";
         }
         {
-          type = "exec";
+          type = "command";
           key = "{$10}├ 󰝚  Música   ";
           command = "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo 'nenhuma'";
           format = "{0}";
