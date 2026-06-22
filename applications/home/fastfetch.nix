@@ -146,6 +146,10 @@
           key = "{$9}├ 󰚗  Bootmgr  ";
         }
         {
+          type = "init";
+          key = "{$10}├ 󰗼  Init     ";
+        }
+        {
           type = "packages";
           key =  "{$9}├ 󰏖  Packages  ";
         }
