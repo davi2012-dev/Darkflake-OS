@@ -10,14 +10,13 @@
         framerate = 60;
         autosens = 1;
         sensitivity = 100;
-        bars = 0;          # 0 = automatic
+        bars = 0;          
         bar_height = 20;
         bar_width = 2;
         bar_spacing = 1;
         lower_cutoff_freq = 50;
         higher_cutoff_freq = 10000;
         sleep_timer = 0;
-        stereo = 1;
         reverse = 0;
         method = "pulse";
         source = "auto";
