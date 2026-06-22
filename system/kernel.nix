@@ -1,5 +1,4 @@
 { config, pkgs, unstable, lib, ... }:
-{
 let
   kernelPkg = unstable.linux_zen.override {
     structuredExtraConfig = with lib.kernel; {
@@ -12,8 +11,6 @@ in
   boot.zfs.package = unstable.zfs.override {
     kernel = kernelPkg;
   };
-
-  # O resto continua IGUAL, a partir da linha 16 em diante...
 }
 
   # --- 2. Parâmetros de Boot: Performance Bruta e Blindagem ---
