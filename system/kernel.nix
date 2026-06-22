@@ -1,17 +1,7 @@
 { config, pkgs, unstable, lib, ... }:
-let
-  kernelPkg = unstable.linux_zen.override {
-    structuredExtraConfig = with lib.kernel; {
-      SECURITY_LOCKDOWN_LSM = yes;
-    };
-  };
-in
-{
-  boot.kernelPackages = pkgs.linuxPackagesFor kernelPkg;
-  boot.zfs.package = unstable.zfs.override {
-    kernel = kernelPkg;
-  };
 
+boot.kernelPackages = unstable.linuxPackages_cachyos;
+boot.zfs.package = unstable.zfs;
 
   # --- 2. Parâmetros de Boot: Performance Bruta e Blindagem ---
   boot.kernelParams = [
