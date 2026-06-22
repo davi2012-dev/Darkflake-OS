@@ -221,6 +221,11 @@
           format = "{1} - {2}";
         }
         {
+          type = "command";
+          key = "{$7}├ 󰩟  Interfaces";
+          text = "ip -br addr | awk '{printf \"%s: %s  \", $1, $3}' | sed 's/  $//' || echo 'nenhuma'";
+        }
+        {
          type = "custom";
          format = "{$10}{$11}{$9}{$12}{$8}{$12}{$7}{$12}{$6}{$12}{$5}{$12}{$4}{$12}{$3}{$12}{$2}{$12}{$1}{$13}   ジカン";
         }
