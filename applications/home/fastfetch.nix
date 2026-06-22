@@ -56,6 +56,11 @@
           key =  "{$3}├   CPU        ";
         }
         {
+          type = "cpufreq";
+          key = "{$3}├ 󰘕  CPU Freq   ";
+          format = "{3}";
+        }
+        {
           type = "gpu";
           key =  "{$4}├ 󰾲  GPU        ";
         }
