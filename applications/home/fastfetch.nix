@@ -45,31 +45,31 @@
         }
         {
           type = "host";
-          key = "{$1}├   PC        ";
+          key =  "{$1}├   PC        ";
         }
         {
           type = "board";
-          key = "{$2}├ 󱔼  Board     ";
+          key =  "{$2}├ 󱔼  Board     ";
         }
         {
           type = "cpu";
-          key = "{$3}├   CPU        ";
+          key =  "{$3}├   CPU        ";
         }
         {
           type = "gpu";
-          key = "{$4}├ 󰾲  GPU        ";
+          key =  "{$4}├ 󰾲  GPU        ";
         }
         {
           type = "display";
-          key = "{$5}├ 󰍹  Display   ";
+          key =  "{$5}├ 󰍹  Display   ";
         }
         {
           type = "sound";
-          key = "{$6}├   Sound     ";
+          key =  "{$6}├   Sound     ";
         }
         {
           type = "battery";
-          key = "{$6}├ 󰢟  Battery   ";
+          key =  "{$6}├ 󰢟  Battery   ";
           format = "{manufacturer} {model-name} ({capacity})";
         }
         {
@@ -116,79 +116,74 @@
         }
         {
           type = "os";
-          key = "{$10}├   Distro    ";
+          key =  "{$10}├   Distro    ";
           format = "{name} {build-id} ({codename}) {arch}";
         }
         {
           type = "kernel";
-          key = "{$10}├   Kernel   ";
+          key =  "{$10}├   Kernel   ";
         }
         {
           type = "bios";
-          key = "{$9}├ 󰚗  BIOS      ";
+          key =  "{$9}├ 󰚗  BIOS      ";
         }
         {
           type = "packages";
-          key = "{$9}├ 󰏖  Packages  ";
+          key =  "{$9}├ 󰏖  Packages  ";
         }
         {
           type = "Processes";
-          key = "{$9}├ 󰑮  Processes ";
+          key =  "{$9}├ 󰑮  Processes ";
         }
         {
           type = "shell";
-          key = "{$8}├   Shell     ";
+          key =  "{$8}├   Shell     ";
         }
         {
           type = "terminal";
-          key = "{$7}├   Terminal  ";
+          key =  "{$7}├   Terminal  ";
         }
         {
           type = "command";
-          key = "├ 󰖪  TCP CC   ";
+          key =  "├ 󰖪  TCP Congestion Control";
           text = "sysctl -n net.ipv4.tcp_congestion_control";
         }
         {
-          type = "command";
-          key = "├ 󰧨  Scheduler";
-          text = "uname -r | grep -o 'cachyos-bore' || echo 'outro'";
-        }
-        {
           type = "terminalfont";
-          key = "{$6}├ 󰛖  Term Font ";
+          key =  "{$6}├ 󰛖  Term Font ";
         }
         {
           type = "command";
-          key = "├ 󰝚  Música   ";
+          key =  "├ 󰝚  Now Playing ";
           text = "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo 'nenhuma'";
         }
         {
           type = "de";
-          key = "{$5}├   DE        ";
+          key =  "{$5}├   DE        ";
         }
         {
           type = "lm";
-          key = "{$4}├ 󰧨  Login     ";
+          key =  "{$4}├ 󰧨  Login     ";
         }
         {
           type = "wm";
-          key = "{$3}├   Window    ";
+          key =  "{$3}├   Window    ";
         }
         {
           type = "wmtheme";
-          key = "{$2}├ 󰉼  Theme     ";
+          key =  "{$2}├ 󰉼  Theme     ";
         }
         {
           type = "font";
-          key = "{$2}├ 󰛖  Font      ";
+          key =  "{$2}├ 󰛖  Font      ";
         }
         {
           type = "opengl";
-          key = "{$1}├ 󰆧  OpenGL    ";
+          key =  "{$1}├ 󰆧  OpenGL    ";
         }
         {
           type = "vulkan";
-          key = "{$1}└ 󰈸  Vulkan    ";
+          key =  "{$1}└ 󰈸  Vulkan    ";
         }
         {
           type = "custom";
