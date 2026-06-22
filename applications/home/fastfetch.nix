@@ -138,6 +138,10 @@
           key =  "{$9}├ 󰚗  BIOS      ";
         }
         {
+          type = "bootmgr";
+          key = "{$9}├ 󰚗  Bootmgr  ";
+        }
+        {
           type = "packages";
           key =  "{$9}├ 󰏖  Packages  ";
         }
