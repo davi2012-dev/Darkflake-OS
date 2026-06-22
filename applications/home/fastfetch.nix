@@ -146,13 +146,11 @@
         {
           type = "custom";
           key = "├ 󰖪  TCP CC   ";
-          format = "{1}";
           command = "sysctl -n net.ipv4.tcp_congestion_control";
         }
         {
           type = "custom";
           key = "├ 󰧨  Scheduler";
-          format = "{1}";
           command = "uname -r | grep -o 'cachyos-bore' || echo 'outro'";
         }
         {
@@ -162,7 +160,6 @@
         {
           type = "custom";
           key = "{$10}├ 󰝚  Música   ";
-          format = "{1}";
           command = "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo 'nenhuma'";
         }
         {
