@@ -1,8 +1,16 @@
-{ config, pkgs, unstable,  ... }:
+{ config, pkgs, unstable, lib, ... }:
 {
-  # --- 1. Seleção do Kernel ---
-  boot.kernelPackages = unstable.linuxPackages;
-  boot.zfs.package = unstable.zfs;
+  # Kernel Zen com lockdown LSM forçado
+  boot.kernelPackages = pkgs.linuxPackagesFor (unstable.linux_zen.override {
+    structuredExtraConfig = with lib.kernel; {
+      SECURITY_LOCKDOWN_LSM = yes;
+    };
+  });
+
+  # ZFS sincronizado com o kernel customizado
+  boot.zfs.package = unstable.zfs.override {
+    kernel = boot.kernelPackages.kernel;
+  };
 
   # --- 2. Parâmetros de Boot: Performance Bruta e Blindagem ---
   boot.kernelParams = [
