@@ -122,7 +122,7 @@
         {
           type = "command";
           key = "{$8}├   Hypervisor";
-          text = "systemd-detect-virt 2>/dev/null '";
+          text = "systemd-detect-virt 2>/dev/null";
         }
         {
           type = "kernel";
