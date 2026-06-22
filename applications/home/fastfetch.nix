@@ -22,9 +22,9 @@
         percent = {
           type = 9;
           color = {
-            green = "#51bcfe";
-            yellow = "#abff4a";
-            red = "#ff8f45";
+            green = "#a6e3a1";
+            yellow = "#fab387";
+            red = "#f38ba8";
           };
         };
       };
