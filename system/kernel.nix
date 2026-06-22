@@ -165,6 +165,7 @@ in
   hardware.cpu.x86.msr.settings.allow-writes = "off";
   hardware.cpu.x86.msr.mode = "0640";
   hardware.cpu.intel.sgx.enableDcapCompat = true;
+  hardware.brillo.enable = true;
   hardware.amdgpu.zluda.enable = true;
   hardware.intel-gpu-tools.enable = true;
 
