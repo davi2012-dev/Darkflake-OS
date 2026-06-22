@@ -115,6 +115,12 @@
           };
         }
         {
+          type = "physicaldisk";
+          key = "{$8}├ 󰋊  Discos   ";
+          hideVirtual = true;       # Oculta discos virtuais (ex: loop devices)
+          hideUnused = true;        # Oculta discos não utilizados
+        }
+        {
          type = "custom";
          format = "{$10}{$11}{$9}{$12}{$8}{$12}{$7}{$12}{$6}{$12}{$5}{$12}{$4}{$12}{$3}{$12}{$2}{$12}{$1}{$13}   ソフトウェア";
         }
