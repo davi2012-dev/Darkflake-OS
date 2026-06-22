@@ -145,15 +145,13 @@
         }
         {
           type = "command";
-          key = "├ 󰖪  TCP CC   ";
+          key = "{$7}├ 󰖪  TCP CC   ";
           command = "sysctl -n net.ipv4.tcp_congestion_control";
-          format = "{0}";
         }
         {
           type = "command";
-          key = "├ 󰧨  Scheduler";
+          key = "{$7}├ 󰧨  Scheduler";
           command = "uname -r | grep -o 'cachyos-bore' || echo 'outro'";
-          format = "{0}";
         }
         {
           type = "terminalfont";
@@ -163,7 +161,6 @@
           type = "command";
           key = "{$10}├ 󰝚  Música   ";
           command = "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo 'nenhuma'";
-          format = "{0}";
         }
         {
           type = "de";
