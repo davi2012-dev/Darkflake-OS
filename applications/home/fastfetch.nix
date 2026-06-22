@@ -130,8 +130,8 @@
         }
         {
           type = "command";
-          key = "{$8}├ 󰿃  Kernel GPL";
-          text = "if [ $(cat /proc/sys/kernel/tainted 2>/dev/null) -eq 0 ]; then echo '✅ 100% GPL'; else echo '⚠️  Tainted (não-GPL)'; fi";
+          key = "{$8}├ 󰿃   License ";
+          text = "if [ $(cat /proc/sys/kernel/tainted 2>/dev/null) -eq 0 ]; then echo '100% GPL'; else echo 'Tainted (não-GPL)'; fi";
         }
         {
           type = "bios";
