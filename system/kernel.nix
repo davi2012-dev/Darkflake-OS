@@ -1,7 +1,7 @@
 { config, pkgs, unstable,  ... }:
 {
   # --- 1. Seleção do Kernel ---
-  boot.kernelPackages = pkgs.linuxPackagesFor unstable.linux_cachyos-bore;
+  boot.kernelPackages = unstable.linuxPackages;
   boot.zfs.package = unstable.zfs;
 
   # --- 2. Parâmetros de Boot: Performance Bruta e Blindagem ---
