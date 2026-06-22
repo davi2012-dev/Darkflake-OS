@@ -132,6 +132,11 @@
           key =  "{$9}├ 󰏖  Packages  ";
         }
         {
+          type = "command";
+          key = "{$8}├ 󰝤  AppArmor ";
+          text = "aa-status --enabled 2>/dev/null && echo \"Ativo ($(aa-status | grep -c 'profiles' | head -1) perfis)\" || echo 'Inativo'";
+        }
+        {
           type = "Processes";
           key =  "{$9}├ 󰑮  Processes ";
         }
@@ -222,8 +227,13 @@
         }
         {
           type = "command";
-          key = "{$7}├ 󰩟  Interfaces";
-          text = "ip -br addr | awk '{printf \"%s: %s  \", $1, $3}' | sed 's/  $//' || echo 'nenhuma'";
+          key = "{$7}├ 󰩟  Portas    ";
+          text = "ss -tuln | grep -E 'LISTEN|UDP' | awk '{print $5}' | cut -d: -f2 | sort -n | uniq | head -10 | tr '\n' ' ' | sed 's/ $//' || echo 'nenhuma'";
+        }
+        {
+          type = "command";
+          key = "{$7}├ 󰩟  Gateway   ";
+          text = "ip route | grep default | awk '{print $3}' || echo 'nenhum'";
         }
         {
          type = "custom";
