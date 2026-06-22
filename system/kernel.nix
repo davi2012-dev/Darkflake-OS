@@ -11,7 +11,7 @@ in
   boot.zfs.package = unstable.zfs.override {
     kernel = kernelPkg;
   };
-}
+
 
   # --- 2. Parâmetros de Boot: Performance Bruta e Blindagem ---
   boot.kernelParams = [
