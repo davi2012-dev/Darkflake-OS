@@ -1,5 +1,5 @@
 { config, pkgs, unstable, lib, ... }:
-
+{
 boot.kernelPackages = unstable.linuxPackages_cachyos;
 boot.zfs.package = unstable.zfs;
 
