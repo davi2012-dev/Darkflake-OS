@@ -142,6 +142,10 @@
           key =  "{$9}├ 󰚗  BIOS      ";
         }
         {
+          type = "tpm";
+          key = "{$9}├ 󰌆  TPM      ";
+        }
+        {
           type = "bootmgr";
           key = "{$9}├ 󰚗  Bootmgr  ";
         }
