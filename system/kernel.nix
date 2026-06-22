@@ -54,7 +54,7 @@ boot.zfs.package = unstable.zfs;
   boot.kernelModules = [
     # Suporte Completo às VMs (VirtIO, Redes e Armazenamento)
     "virtio_pci" "virtio_blk" "virtio_gpu" "xen-blkfront" "xen-netfront" "xen-pciback"
-    "wireguard" "qxl" "tap" "uhci_hcd" "ehci_hcd" "nvme" "sd_mod"
+    "wireguard" "qxl" "tap" "uhci_hcd" "ehci_hcd" "nvme" "sd_mod" "tcp_bbr3"
     "kvm-intel" "tun" "bridge" "vhost_net" "macvlan" "ipvlan" "bonding" "8021q"
     "tpm_tis" "tpm_crb" "sch_htb" "sch_ingress" "sch_fq" "sch_fq_codel" "binder_linux"
 
