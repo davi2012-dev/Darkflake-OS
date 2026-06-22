@@ -115,10 +115,9 @@
           };
         }
         {
-          type = "physicaldisk";
-          key = "{$8}├ 󰋊  Discos   ";
-          hideVirtual = true;       # Oculta discos virtuais (ex: loop devices)
-          hideUnused = true;        # Oculta discos não utilizados
+            type = "command";
+            key = "{$8}├ 󰋊  Virtual  ";
+            text = "lsblk -o NAME,SIZE,TYPE | grep -E '^loop|^zram' | awk '{print $1 \" (\" $2 \")\"}' | tr '\n' ' ' | sed 's/ $//' || echo 'Nenhum'";
         }
         {
          type = "custom";
