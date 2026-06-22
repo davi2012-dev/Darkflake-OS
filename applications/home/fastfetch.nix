@@ -145,8 +145,8 @@
         }
         {
           type = "command";
-          key = "{$7}├ 󰖪  TCP CC   ";
-          command = "sysctl -n net.ipv4.tcp_congestion_control";
+          key = "├ 󰖪  TCP CC   ";
+          text = "sysctl -n net.ipv4.tcp_congestion_control";
         }
         {
           type = "command";
@@ -159,8 +159,8 @@
         }
         {
           type = "command";
-          key = "{$10}├ 󰝚  Música   ";
-          command = "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo 'nenhuma'";
+          key = "├ 󰝚  Música   ";
+          text = "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo 'nenhuma'";
         }
         {
           type = "de";
