@@ -1,6 +1,6 @@
 { config, pkgs, unstable, lib, ... }:
 {
-boot.kernelPackages = unstable.linuxPackages_cachyos;
+boot.kernelPackages = pkg.linuxPackages_cachyos;
 boot.zfs.package = unstable.zfs;
 
   # --- 2. Parâmetros de Boot: Performance Bruta e Blindagem ---
