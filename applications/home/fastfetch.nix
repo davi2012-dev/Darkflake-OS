@@ -120,6 +120,11 @@
           format = "{name} {build-id} ({codename}) {arch}";
         }
         {
+          type = "command";
+          key = "{$8}├   Hypervisor";
+          text = "systemd-detect-virt 2>/dev/null || echo 'Nenhum (Bare Metal)'";
+        }
+        {
           type = "kernel";
           key =  "{$10}├   Kernel   ";
         }
@@ -133,7 +138,7 @@
         }
         {
           type = "command";
-          key = "{$8}├ 󰝤  AppArmor ";
+          key = "{$8}├   AppArmor ";
           text = "aa-status --enabled 2>/dev/null && echo \"Ativo ($(aa-status | grep -c 'profiles' | head -1) perfis)\" || echo 'Inativo'";
         }
         {
