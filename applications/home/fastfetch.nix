@@ -150,8 +150,8 @@
         }
         {
           type = "command";
-          key = "{$7}├ 󰧨  Scheduler";
-          command = "uname -r | grep -o 'cachyos-bore' || echo 'outro'";
+          key = "├ 󰧨  Scheduler";
+          text = "uname -r | grep -o 'cachyos-bore' || echo 'outro'";
         }
         {
           type = "terminalfont";
