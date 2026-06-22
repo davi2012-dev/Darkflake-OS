@@ -1,11 +1,13 @@
 { config, pkgs, unstable, lib, ... }:
 {
 boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
+boot.extraModulePackages = with config.boot.kernelPackages; [ tcp_bbr3 ];
 boot.zfs.package = unstable.zfs;
 
   # --- 2. Parâmetros de Boot: Performance Bruta e Blindagem ---
   boot.kernelParams = [
     # Performance de Processamento e Latência
+    "bbr3"
     "threadirqs"                    # Força threads para interrupções (ganho de latência)
     "preempt=full"                  # Preempção total para resposta instantânea
     "skew_tick=1"                   # Ajuda em CPUs com jitter de clock
