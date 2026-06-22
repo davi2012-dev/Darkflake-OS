@@ -160,6 +160,12 @@
           key = "{$6}├ 󰛖  Term Font ";
         }
         {
+          type = "custom";
+          key = "{$10}├ 󰝚  Música   ";
+          format = "{1}";
+          command = "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo 'nenhuma'";
+        }
+        {
           type = "de";
           key = "{$5}├   DE        ";
         }
