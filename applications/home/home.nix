@@ -24,6 +24,7 @@
     ./fastfetch.nix
     ./spotify.nix
     ./mpv.nix
+    ./cava.nix
   ];
 
   # 4 X11
