@@ -36,6 +36,7 @@
   enable = true;
   package = pkgs.aw-server-rust;
   };
+  services.blanket.enable = true;
   services.amberol.enable = true;
   services.amberol.enableRecoloring = true;
   services.amberol.replaygain = "album";
