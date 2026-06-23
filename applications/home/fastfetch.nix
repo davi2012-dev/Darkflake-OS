@@ -229,6 +229,16 @@
           format = "{1}";
         }
         {
+          type = "wayland";
+          key = "{$1}├ 󰌌 Wayland ";
+          format = "{version} ({compositor})";
+        }
+        {
+          type = "xorg";
+          key = "{$1}├ 󰅶 X.Org ";
+          format = "{version}";
+        }
+        {
          type = "custom";
          format = "{$1}{$11}{$2}{$12}{$3}{$12}{$4}{$12}{$5}{$12}{$6}{$12}{$7}{$12}{$8}{$12}{$9}{$12}{$10}{$13}   セツゾクセイ";
         }
