@@ -234,11 +234,6 @@
           text = "X -version 2>&1 | grep 'X Server' | awk '{print $3}' || echo 'N/A'";
         }
         {
-          type = "command";
-          key = "{$1}├  Wayland ";
-          text = "if [ \"$XDG_SESSION_TYPE\" = \"wayland\" ]; then pkg-config --modversion wayland-client 2>/dev/null | xargs -I {} echo \"{} (KWin)\"; else echo 'Não está no Wayland'; fi";
-        }
-        {
          type = "custom";
          format = "{$1}{$11}{$2}{$12}{$3}{$12}{$4}{$12}{$5}{$12}{$6}{$12}{$7}{$12}{$8}{$12}{$9}{$12}{$10}{$13}   セツゾクセイ";
         }
