@@ -32,7 +32,10 @@
   xsession.numlock.enable = true;
 
   # deamon 
-  services.activitywatch.enable = true;
+  services.activitywatch = {
+  enable = true;
+  package = pkgs.aw-server-rust;
+  };
   services.amberol.enable = true;
   services.amberol.enableRecoloring = true;
   services.amberol.replaygain = "album";
