@@ -10,7 +10,7 @@
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
     
-    # Faxina automática para o Kubernetes e os deploys não estourarem o SSD da VM
+    # Faxina automática para os deploys não estourarem o SSD 
     autoPrune = {
       enable = true;
       dates = "weekly";
@@ -59,6 +59,7 @@
           CONFIG_BYPASS_VALIDATION = "true";
           CREW_SECRET = "ZkahHL3KRtZ5JT/N9lGqqFoERSFLkK6F92nk9GPhYQ4=";
           JWT_SECRET = "+7glROSrzmEs+/YfRr7dBtk4Rc8LLrI81dsxN8Gp8qE=";
+          TRUSTED_PROXIES = "127.0.0.1";
           REFRESH_TOKEN_SECRET = "1UQiAma+QslvZMFSQUdwDChqy3UeBeUnoHtN1Atp0kc=";
           ALLOW_REGISTRATION = "true";
         };
@@ -88,7 +89,7 @@
           MYSQL_DATABASE = "nextcloud";
           MYSQL_USER = "nextcloud";
           MYSQL_PASSWORD = "sua_senha_nextcloud_aqui";
-          NEXTCLOUD_TRUSTED_DOMAINS = "localhost nextcloud.Darkflake.local Darkflake.local";
+          TRUSTED_PROXIES = "127.0.0.1";
         };
         volumes = [
           "nextcloud_data:/var/www/html:Z"
