@@ -111,7 +111,7 @@
         }
         {
           type = "disk";
-          key = "{$10}└  Home ";
+          key = "{$10}├  Home ";
           folders = [ "/home" ];
           percent = {
             type = 3;
@@ -221,7 +221,7 @@
         }
         {
           type = "vulkan";
-          key =  "{$1}└ 󰈸 Vulkan ";
+          key =  "{$1}├  󰈸 Vulkan ";
         }
         {
           type = "opencl";
@@ -230,7 +230,7 @@
         }
         {
           type = "command";
-          key = "{$1}├  Xorg ";
+          key = "{$1}└  Xorg ";
           text = "X -version 2>&1 | grep 'X Server' | awk '{print $3}' || echo 'N/A'";
         }
         {
@@ -275,7 +275,7 @@
         }
         {
           type = "command";
-          key = "{$8}├ 󰉫 Firewall ";
+          key = "{$8}└ 󱨑 Firewall ";
           text = "if systemctl is-active --quiet nftables; then echo 'Active (nftables)'; else echo 'Inactive'; fi";
         }
         {
@@ -294,11 +294,11 @@
         }
         {
           type = "uptime";
-          key = "{$6}└  Uptime ";
+          key = "{$6}├  Uptime ";
         }
         {
           type = "command";
-          key = "{$7}├ 󰖐 Clima ";
+          key = "{$7}└ 󰖐 Clima ";
           text = "curl -s 'wttr.in/Ituberá?format=%t+%C+%l' 2>/dev/null | sed 's/+/ /g' || echo '--'";
         }
         {
@@ -317,7 +317,7 @@
         }
         {
           type = "command";
-          key =  "├ 󰝚  Now Playing ";
+          key =  "└ 󰝚  Now Playing ";
           text = "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo 'nenhuma'";
         }
         {
