@@ -45,45 +45,45 @@
         }
         {
           type = "chassis";
-          key = "{$2}├ 󰡪  Chassis  ";
+          key = "{$2}├ 󰡪 Chassis  ";
         }
         {
            type = "command";
-           key = "{$8}├ 󰋽  Hostname ";
+           key = "{$8}├ 󰋽 Hostname ";
            text = "hostname 2>/dev/null || echo 'desconhecido'";
         }
         {
           type = "board";
-          key =  "{$2}├ 󱔼  Board     ";
+          key =  "{$2}├ 󱔼 Board     ";
         }
         {
           type = "tpm";
-          key = "{$9}├ 󰌆  TPM      ";
+          key = "{$9}├ 󰌆 TPM      ";
         }
         {
           type = "cpu";
-          key =  "{$3}├   CPU        ";
+          key =  "{$3}├  CPU        ";
         }
         {
           type = "gpu";
-          key =  "{$4}├ 󰾲  GPU        ";
+          key =  "{$4}├ 󰾲 GPU        ";
         }
         {
           type = "display";
-          key =  "{$5}├ 󰍹  Display   ";
+          key =  "{$5}├ 󰍹 Display   ";
         }
         {
           type = "sound";
-          key =  "{$6}├   Sound     ";
+          key =  "{$6}├  Sound     ";
         }
         {
           type = "battery";
-          key =  "{$6}├ 󰢟  Battery   ";
+          key =  "{$6}├ 󰢟 Battery   ";
           format = "{manufacturer} {model-name} ({capacity})";
         }
         {
           type = "memory";
-          key = "{$7}├   Memory    ";
+          key = "{$7}├  Memory    ";
           percent = {
             type = 3;
             green = 30;
@@ -92,7 +92,7 @@
         }
         {
           type = "swap";
-          key = "{$8}├ 󰯍  Swap      ";
+          key = "{$8}├ 󰯍 Swap      ";
           percent = {
             type = 3;
             green = 30;
@@ -101,7 +101,7 @@
         }
         {
           type = "disk";
-          key = "{$9}├   NixOS     ";
+          key = "{$9}├  NixOS     ";
           folders = [ "/" ];
           percent = {
             type = 3;
@@ -111,7 +111,7 @@
         }
         {
           type = "disk";
-          key = "{$10}└   Home      ";
+          key = "{$10}└  Home      ";
           folders = [ "/home" ];
           percent = {
             type = 3;
@@ -120,102 +120,112 @@
           };
         }
         {
+          type = "disk";
+          key = "{$10}└  Guix     ";
+          folders = [ "/gnu/store" ];
+          percent = {
+            type = 3;
+            green = 30;
+            yellow = 70;
+        };
+        }
+        {
          type = "custom";
          format = "{$10}{$11}{$9}{$12}{$8}{$12}{$7}{$12}{$6}{$12}{$5}{$12}{$4}{$12}{$3}{$12}{$2}{$12}{$1}{$13}   ソフトウェア";
         }
         {
           type = "os";
-          key =  "{$10}├   Distro    ";
+          key =  "{$10}├  Distro    ";
           format = "{name} {build-id} ({codename}) {arch}";
         }
         {
           type = "command";
-          key = "{$8}├   Hypervisor";
+          key = "{$8}├  Hypervisor";
           text = "systemd-detect-virt 2>/dev/null";
         }
         {
           type = "kernel";
-          key =  "{$10}├   Kernel   ";
+          key =  "{$10}├  Kernel   ";
         }
         {
           type = "command";
-          key = "{$8}├ 󰿃   License ";
+          key = "{$8}├ 󰿃 License ";
           text = "if [ $(cat /proc/sys/kernel/tainted 2>/dev/null) -eq 0 ]; then echo '100% GPL'; else echo 'Tainted (não-GPL)'; fi";
         }
         {
           type = "bios";
-          key =  "{$9}├ 󰚗  BIOS      ";
+          key =  "{$9}├ 󰚗 BIOS      ";
         }
         {
           type = "command";
-          key = "{$8}├ 󰒅  Secure Boot";
+          key = "{$8}├ 󰒅 Secure Boot";
           text = "bootctl status 2>/dev/null | grep 'Secure Boot' | awk '{print $3}' || echo 'N/A'";
         }
         {
           type = "bootmgr";
-          key = "{$9}├ 󰚗  Bootmgr  ";
+          key = "{$9}├ 󰚗 Bootmgr  ";
         }
         {
           type = "command";
           key = "{$8}├  󰗼 Init     ";
-          text = "if [ -x /sbin/init ]; then basename /sbin/init; elif [ -x /usr/lib/systemd/systemd ]; then echo 'systemd'; else echo 'desconhecido'; fi";
+          text = "if ps -p 1 -o comm= | grep -q systemd; then echo \"systemd ($(systemd --version | head -1 | awk '{print $2}'))\"; else echo 'desconhecido'; fi";
         }
         {
           type = "packages";
-          key =  "{$9}├ 󰏖  Packages  ";
+          key =  "{$9}├ 󰏖 Packages  ";
         }
         {
           type = "command";
-          key = "{$8}├   AppArmor ";
+          key = "{$8}├  AppArmor ";
           text = "aa-status --enabled 2>/dev/null && echo \"Ativo ($(aa-status | grep -c 'profiles' | head -1) perfis)\" || echo 'Inativo'";
         }
         {
           type = "Processes";
-          key =  "{$9}├ 󰑮  Processes ";
+          key =  "{$9}├ 󰑮 Processes ";
         }
         {
           type = "shell";
-          key =  "{$8}├   Shell     ";
+          key =  "{$8}├  Shell     ";
         }
         {
           type = "terminal";
-          key =  "{$7}├   Terminal  ";
+          key =  "{$7}├  Terminal  ";
         }
         {
           type = "terminalfont";
-          key =  "{$6}├ 󰛖  Term Font ";
+          key =  "{$6}├ 󰛖 Term Font ";
         }
         {
           type = "de";
-          key =  "{$5}├   DE        ";
+          key =  "{$5}├  Desktop Environment        ";
         }
         {
           type = "lm";
-          key =  "{$4}├ 󰧨  Login     ";
+          key =  "{$4}├ 󰧨 Login     ";
         }
         {
           type = "wm";
-          key =  "{$3}├   Window    ";
+          key =  "{$3}├  Window Managers    ";
         }
         {
           type = "wmtheme";
-          key =  "{$2}├ 󰉼  Theme     ";
+          key =  "{$2}├ 󰉼 Theme     ";
         }
         {
           type = "font";
-          key =  "{$2}├ 󰛖  Font      ";
+          key =  "{$2}├ 󰛖 Font      ";
         }
         {
           type = "opengl";
-          key =  "{$1}├ 󰆧  OpenGL    ";
+          key =  "{$1}├ 󰆧 OpenGL    ";
         }
         {
           type = "vulkan";
-          key =  "{$1}└ 󰈸  Vulkan    ";
+          key =  "{$1}└ 󰈸 Vulkan    ";
         }
         {
           type = "opencl";
-          key = "{$1}├ 󰆧  OpenCL   ";
+          key = "{$1}├ 󰆧 OpenCL   ";
           format = "{1}";
         }
         {
