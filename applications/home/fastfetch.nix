@@ -168,8 +168,8 @@
         }
         {
           type = "command";
-          key = "{$7}├ 󰡨  Podman   ";
-          text = "podman ps --format '{{.Names}}' | wc -l | xargs -I {} echo {} running || echo '0'";
+          key = "{$7}├   Podman   ";
+          text = "sudo podman ps --format '{{.Names}}' | wc -l | xargs -I {} echo {} running || echo '0'";
         }
         {
           type = "shell";
