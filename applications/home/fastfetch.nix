@@ -167,7 +167,7 @@
         }
         {
           type = "command";
-          key = "{$8}├  󰗼 Init ";
+          key = "{$8}├ 󰗼 Init ";
           text = "if ps -p 1 -o comm= | grep -q systemd; then echo \"systemd ($(systemd --version | head -1 | awk '{print $2}'))\"; else echo 'desconhecido'; fi";
         }
         {
