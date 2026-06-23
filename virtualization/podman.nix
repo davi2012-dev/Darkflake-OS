@@ -169,6 +169,7 @@
       ports = [ "7000:7000" ];  # porta HTTP (pode mudar se quiser)
       environment = {
       DOMAIN = "chat.Darkflake.local";
+      TRUSTED_PROXIES = "127.0.0.1";
       SECRET = "77d44da1481f6c2765cc211a63728961684fb4d49e8f20a3b7b5da81f8e0e2ed";
 
     # (Opcional) Se quiser usar HTTPS com certificado próprio, veja a doc
