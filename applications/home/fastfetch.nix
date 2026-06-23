@@ -285,23 +285,6 @@
         }
         {
           type = "command";
-          key = "{$7}├ 󰄹  Rede     ";
-          text = ''
-          stats=$(ifstat -i wlan0 1 1 | tail -n1)
-          rx=$(echo $stats | awk '{print $1}')
-          tx=$(echo $stats | awk '{print $2}')
-          max_speed=100
-          rx_percent=$(echo "scale=0; $rx * 100 / $max_speed" | bc)
-          tx_percent=$(echo "scale=0; $tx * 100 / $max_speed" | bc)
-          [ $rx_percent -gt 100 ] && rx_percent=100
-          [ $tx_percent -gt 100 ] && tx_percent=100
-          rx_bar=$(printf '%*s' $((rx_percent / 2)) | tr ' ' '■')
-          tx_bar=$(printf '%*s' $((tx_percent / 2)) | tr ' ' '■')
-          echo "↓ $rx_bar ↑ $tx_bar"
-          '';
-        }
-        {
-          type = "command";
           key = "{$8}├ 󰉫  Firewall ";
           text = "if systemctl is-active --quiet nftables; then echo 'Active (nftables)'; else echo 'Inactive'; fi";
         }
