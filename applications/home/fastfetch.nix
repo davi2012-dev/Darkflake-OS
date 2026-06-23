@@ -48,12 +48,17 @@
           key = "{$2}├ 󰡪  Chassis  ";
         }
         {
-          type = "host";
-          key =  "{$1}├   PC        ";
+           type = "command";
+           key = "{$8}├ 󰋽  Hostname ";
+           text = "hostname 2>/dev/null || echo 'desconhecido'";
         }
         {
           type = "board";
           key =  "{$2}├ 󱔼  Board     ";
+        }
+        {
+          type = "tpm";
+          key = "{$9}├ 󰌆  TPM      ";
         }
         {
           type = "cpu";
@@ -147,16 +152,13 @@
           text = "bootctl status 2>/dev/null | grep 'Secure Boot' | awk '{print $3}' || echo 'N/A'";
         }
         {
-          type = "tpm";
-          key = "{$9}├ 󰌆  TPM      ";
-        }
-        {
           type = "bootmgr";
           key = "{$9}├ 󰚗  Bootmgr  ";
         }
         {
-          type = "init";
-          key = "{$10}├ 󰗼  Init     ";
+          type = "command";
+          key = "{$8}├  󰗼 Init     ";
+          text = "if [ -x /sbin/init ]; then basename /sbin/init; elif [ -x /usr/lib/systemd/systemd ]; then echo 'systemd'; else echo 'desconhecido'; fi";
         }
         {
           type = "packages";
@@ -180,18 +182,8 @@
           key =  "{$7}├   Terminal  ";
         }
         {
-          type = "command";
-          key =  "├ 󰖪  TCP Congestion Control";
-          text = "sysctl -n net.ipv4.tcp_congestion_control";
-        }
-        {
           type = "terminalfont";
           key =  "{$6}├ 󰛖  Term Font ";
-        }
-        {
-          type = "command";
-          key =  "├ 󰝚  Now Playing ";
-          text = "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo 'nenhuma'";
         }
         {
           type = "de";
@@ -247,6 +239,11 @@
           showErrors = "never";
         }
         {
+          type = "command";
+          key =  "├ 󰖪  TCP Congestion Control";
+          text = "sysctl -n net.ipv4.tcp_congestion_control";
+        }
+        {
           type = "dns";
           key = "{$4}├ 󱦂  DNS       ";
         }
@@ -275,6 +272,23 @@
           type = "command";
           key = "{$7}├ 󰩟  Gateway   ";
           text = "ip route | grep default | awk '{print $3}' || echo 'nenhum'";
+        }
+        {
+          type = "command";
+          key = "{$7}├ 󰄹  Rede     ";
+          text = ''
+          stats=$(ifstat -i wlan0 1 1 | tail -n1)
+          rx=$(echo $stats | awk '{print $1}')
+          tx=$(echo $stats | awk '{print $2}')
+          max_speed=100
+          rx_percent=$(echo "scale=0; $rx * 100 / $max_speed" | bc)
+          tx_percent=$(echo "scale=0; $tx * 100 / $max_speed" | bc)
+          [ $rx_percent -gt 100 ] && rx_percent=100
+          [ $tx_percent -gt 100 ] && tx_percent=100
+          rx_bar=$(printf '%*s' $((rx_percent / 2)) | tr ' ' '■')
+          tx_bar=$(printf '%*s' $((tx_percent / 2)) | tr ' ' '■')
+          echo "↓ $rx_bar ↑ $tx_bar"
+          '';
         }
         {
           type = "command";
@@ -317,6 +331,11 @@
            type = "wallpaper";
            key = "{$6}├ 󰸉 wallpaper ";
            format = "{1}";
+        }
+        {
+          type = "command";
+          key =  "├ 󰝚  Now Playing ";
+          text = "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo 'nenhuma'";
         }
         {
           type = "custom";
