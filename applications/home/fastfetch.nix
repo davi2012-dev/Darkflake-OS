@@ -158,7 +158,7 @@
         }
         {
           type = "command";
-          key = "{$8}├ 󰒅 Secure Boot";
+          key = "{$8}├  Secure Boot";
           text = "bootctl status 2>/dev/null | grep 'Secure Boot' | awk '{print $3}' || echo 'N/A'";
         }
         {
