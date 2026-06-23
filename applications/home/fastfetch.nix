@@ -54,27 +54,27 @@
         }
         {
           type = "board";
-          key =  "{$2}├ 󱔼 Board     ";
+          key =  "{$2}├ 󱔼 Board ";
         }
         {
           type = "tpm";
-          key = "{$9}├ 󰌆 TPM      ";
+          key = "{$9}├ 󰌆 TPM ";
         }
         {
           type = "cpu";
-          key =  "{$3}├  CPU        ";
+          key =  "{$3}├  CPU ";
         }
         {
           type = "gpu";
-          key =  "{$4}├ 󰾲 GPU        ";
+          key =  "{$4}├ 󰾲 GPU ";
         }
         {
           type = "display";
-          key =  "{$5}├ 󰍹 Display   ";
+          key =  "{$5}├ 󰍹 Display ";
         }
         {
           type = "sound";
-          key =  "{$6}├  Sound     ";
+          key =  "{$6}├  Sound ";
         }
         {
           type = "battery";
@@ -83,7 +83,7 @@
         }
         {
           type = "memory";
-          key = "{$7}├  Memory    ";
+          key = "{$7}├  Memory ";
           percent = {
             type = 3;
             green = 30;
@@ -92,7 +92,7 @@
         }
         {
           type = "swap";
-          key = "{$8}├ 󰯍 Swap      ";
+          key = "{$8}├ 󰯍 Swap ";
           percent = {
             type = 3;
             green = 30;
@@ -101,7 +101,7 @@
         }
         {
           type = "disk";
-          key = "{$9}├  NixOS     ";
+          key = "{$9}├  NixOS ";
           folders = [ "/" ];
           percent = {
             type = 3;
@@ -111,7 +111,7 @@
         }
         {
           type = "disk";
-          key = "{$10}└  Home      ";
+          key = "{$10}└  Home ";
           folders = [ "/home" ];
           percent = {
             type = 3;
@@ -121,7 +121,7 @@
         }
         {
           type = "disk";
-          key = "{$10}└  Guix     ";
+          key = "{$10}└  Guix ";
           folders = [ "/gnu/store" ];
           percent = {
             type = 3;
@@ -135,7 +135,7 @@
         }
         {
           type = "os";
-          key =  "{$10}├  Distro    ";
+          key =  "{$10}├  Distro ";
           format = "{name} {build-id} ({codename}) {arch}";
         }
         {
@@ -145,7 +145,7 @@
         }
         {
           type = "kernel";
-          key =  "{$10}├  Kernel   ";
+          key =  "{$10}├  Kernel ";
         }
         {
           type = "command";
@@ -154,7 +154,7 @@
         }
         {
           type = "bios";
-          key =  "{$9}├ 󰚗 BIOS      ";
+          key =  "{$9}├ 󰚗 BIOS ";
         }
         {
           type = "command";
@@ -163,11 +163,11 @@
         }
         {
           type = "bootmgr";
-          key = "{$9}├ 󰚗 Bootmgr  ";
+          key = "{$9}├ 󰚗 Bootmgr ";
         }
         {
           type = "command";
-          key = "{$8}├  󰗼 Init     ";
+          key = "{$8}├  󰗼 Init ";
           text = "if ps -p 1 -o comm= | grep -q systemd; then echo \"systemd ($(systemd --version | head -1 | awk '{print $2}'))\"; else echo 'desconhecido'; fi";
         }
         {
@@ -185,11 +185,11 @@
         }
         {
           type = "shell";
-          key =  "{$8}├  Shell     ";
+          key =  "{$8}├  Shell ";
         }
         {
           type = "terminal";
-          key =  "{$7}├  Terminal  ";
+          key =  "{$7}├  Terminal ";
         }
         {
           type = "terminalfont";
@@ -197,35 +197,35 @@
         }
         {
           type = "de";
-          key =  "{$5}├  Desktop Environment        ";
+          key =  "{$5}├  Desktop Environment ";
         }
         {
           type = "lm";
-          key =  "{$4}├ 󰧨 Login     ";
+          key =  "{$4}├ 󰧨 Login ";
         }
         {
           type = "wm";
-          key =  "{$3}├  Window Managers    ";
+          key =  "{$3}├  Window Managers ";
         }
         {
           type = "wmtheme";
-          key =  "{$2}├ 󰉼 Theme     ";
+          key =  "{$2}├ 󰉼 Theme ";
         }
         {
           type = "font";
-          key =  "{$2}├ 󰛖 Font      ";
+          key =  "{$2}├ 󰛖 Font ";
         }
         {
           type = "opengl";
-          key =  "{$1}├ 󰆧 OpenGL    ";
+          key =  "{$1}├ 󰆧 OpenGL ";
         }
         {
           type = "vulkan";
-          key =  "{$1}└ 󰈸 Vulkan    ";
+          key =  "{$1}└ 󰈸 Vulkan ";
         }
         {
           type = "opencl";
-          key = "{$1}├ 󰆧 OpenCL   ";
+          key = "{$1}├ 󰆧 OpenCL ";
           format = "{1}";
         }
         {
@@ -234,58 +234,58 @@
         }
         {
           type = "bluetooth";
-          key = "{$1}├ 󰂱  Bluetooth ";
+          key = "{$1}├ 󰂱 Bluetooth ";
           format = "{1} - {4}";
         }
         {
           type = "bluetoothradio";
-          key = "{$1}├ 󰂯  BT Radio  ";
+          key = "{$1}├ 󰂯 BT Radio ";
           format = "{5}";
         }
         {
           type = "wifi";
-          key = "{$2}├   WiFi      ";
+          key = "{$2}├  WiFi ";
           format = "{4} - {7} - {13} GHz - {10}";
           showErrors = "never";
         }
         {
           type = "command";
-          key =  "├ 󰖪  TCP Congestion Control";
+          key =  "├ 󰖪 TCP Congestion Control";
           text = "sysctl -n net.ipv4.tcp_congestion_control";
         }
         {
           type = "dns";
-          key = "{$4}├ 󱦂  DNS       ";
+          key = "{$4}├ 󱦂 DNS ";
         }
         {
           type = "localip";
-          key = "{$6}├ 󰩟  Local IP  ";
+          key = "{$6}├ 󰩟 Local IP ";
           format = "{1} - {3}";
           showMac = true;
         }
         {
           type = "publicip";
-          key = "{$8}└ 󰩠  Public IP ";
+          key = "{$8}└ 󰩠 Public IP ";
           format = "{1} - {2}";
         }
         {
           type = "command";
-          key = "{$7}├ 󰩟  Portas    ";
+          key = "{$7}├ 󰩟 Portas ";
           text = "ss -tuln | grep -E 'LISTEN|UDP' | awk '{print $5}' | cut -d: -f2 | sort -n | uniq | head -10 | tr '\n' ' ' | sed 's/ $//' || echo 'nenhuma'";
         }
         {
           type = "command";
-          key = "{$7}├ 󰩟  Placas   ";
+          key = "{$7}├ 󰩟 Placas ";
           text = "ip -4 -br addr | grep -v 'lo\\|virbr\\|docker\\|veth\\|br-' | awk '{printf \"%s: %s  \", $1, $3}' | sed 's/  $//' || echo 'nenhuma'";
         }
         {
           type = "command";
-          key = "{$7}├ 󰩟  Gateway   ";
+          key = "{$7}├ 󰩟 Gateway ";
           text = "ip route | grep default | awk '{print $3}' || echo 'nenhum'";
         }
         {
           type = "command";
-          key = "{$8}├ 󰉫  Firewall ";
+          key = "{$8}├ 󰉫 Firewall ";
           text = "if systemctl is-active --quiet nftables; then echo 'Active (nftables)'; else echo 'Inactive'; fi";
         }
         {
@@ -294,21 +294,21 @@
         }
         {
           type = "DateTime";
-          key = "{$10}├ 󰥔  Date/Time ";
+          key = "{$10}├ 󰥔 Date/Time ";
         }
         {
-          key = "{$8}├   OS Age    ";
+          key = "{$8}├  OS Age ";
           type = "disk";
           folders = "/";
           format = "{create-time:10} ({days} days)";
         }
         {
           type = "uptime";
-          key = "{$6}└   Uptime    ";
+          key = "{$6}└  Uptime ";
         }
         {
           type = "command";
-          key = "{$7}├ 󰖐  Clima     ";
+          key = "{$7}├ 󰖐 Clima ";
           text = "curl -s 'wttr.in/Ituberá?format=%t+%C+%l' 2>/dev/null | sed 's/+/ /g' || echo '--'";
         }
         {
@@ -317,7 +317,7 @@
         }
         {
            type = "users";
-           key = "{$4}├ 󰋽  user ";
+           key = "{$4}├ 󰋽 user ";
            format = "{1}@{2} - {3}";
         }
         {
