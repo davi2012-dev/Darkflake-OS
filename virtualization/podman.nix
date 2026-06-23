@@ -158,6 +158,7 @@
           "/etc/localtime:/etc/localtime:ro"
         ];
         environment = {
+          TRUSTED_PROXIES = "127.0.0.1";
           TZ = "America/Sao_Paulo";
         };
         extraOptions = [
