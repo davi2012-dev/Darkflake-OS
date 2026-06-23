@@ -229,14 +229,14 @@
           format = "{1}";
         }
         {
-          type = "wayland";
-          key = "{$1}├ 󰌌 Wayland ";
-          format = "{version} ({compositor})";
+          type = "command";
+          key = "{$1}├ 󰅶 Xorg ";
+          text = "X -version 2>&1 | grep 'X Server' | awk '{print $3}' || echo 'N/A'";
         }
         {
-          type = "xorg";
-          key = "{$1}├ 󰅶 X.Org ";
-          format = "{version}";
+          type = "command";
+          key = "{$1}├ 󰌌 Wayland ";
+          text = "wayland-info 2>&1 | grep 'interface:' | head -1 | awk '{print $3}' || echo 'N/A'";
         }
         {
          type = "custom";
