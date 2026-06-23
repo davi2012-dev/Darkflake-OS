@@ -254,11 +254,6 @@
           showErrors = "never";
         }
         {
-          type = "command";
-          key =  "├ 󰖪 TCP Congestion Control";
-          text = "sysctl -n net.ipv4.tcp_congestion_control";
-        }
-        {
           type = "dns";
           key = "{$4}├ 󱦂 DNS ";
         }
@@ -267,16 +262,6 @@
           key = "{$6}├ 󰩟 Local IP ";
           format = "{1} - {3}";
           showMac = true;
-        }
-        {
-          type = "publicip";
-          key = "{$8}└ 󰩠 Public IP ";
-          format = "{1} - {2}";
-        }
-        {
-          type = "command";
-          key = "{$7}├ 󰩟 Portas ";
-          text = "ss -tuln | grep -E 'LISTEN|UDP' | awk '{print $5}' | cut -d: -f2 | sort -n | uniq | head -10 | tr '\n' ' ' | sed 's/ $//' || echo 'nenhuma'";
         }
         {
           type = "command";
