@@ -167,6 +167,11 @@
           key =  "{$9}├ 󰑮  Processes ";
         }
         {
+          type = "command";
+          key = "{$7}├ 󰡨  Podman   ";
+          text = "podman ps --format '{{.Names}}' | wc -l | xargs -I {} echo {} running || echo '0'";
+        }
+        {
           type = "shell";
           key =  "{$8}├   Shell     ";
         }
