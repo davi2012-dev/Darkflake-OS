@@ -230,13 +230,13 @@
         }
         {
           type = "command";
-          key = "{$1}├ 󰅶 Xorg ";
+          key = "{$1}├  Xorg ";
           text = "X -version 2>&1 | grep 'X Server' | awk '{print $3}' || echo 'N/A'";
         }
         {
           type = "command";
-          key = "{$1}├ 󰌌 Wayland ";
-          text = "wayland-info 2>&1 | grep 'interface:' | head -1 | awk '{print $3}' || echo 'N/A'";
+          key = "{$1}├  Wayland ";
+          text = "if [ \"$XDG_SESSION_TYPE\" = \"wayland\" ]; then pkg-config --modversion wayland-client 2>/dev/null | xargs -I {} echo \"{} (KWin)\"; else echo 'Não está no Wayland'; fi";
         }
         {
          type = "custom";
