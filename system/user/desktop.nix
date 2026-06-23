@@ -62,7 +62,7 @@
   # --- 6. Portais XDG (COSMIC) ---
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkg.xdg-desktop-portal-cosmic];
+    extraPortals = [ pkgs.xdg-desktop-portal-cosmic];
     config.common.default = [ "cosmic" ];
   };
 }
