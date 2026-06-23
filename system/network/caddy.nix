@@ -36,6 +36,12 @@
           reverse_proxy localhost:8089
         '';
       };
+      "chat.Darkflake.local" = {
+        extraConfig = ''
+         tls internal
+         reverse_proxy localhost:7000
+       '';
+      };
       "metube.Darkflake.local" = {
         extraConfig = ''
           tls internal
