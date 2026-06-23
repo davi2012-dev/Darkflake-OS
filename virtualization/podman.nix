@@ -163,6 +163,26 @@
           "--network=host" # Crucial para o HA achar suas luzes/TVs no Wi-Fi
         ];
       };
+      # 12. Databag - Chat auto-hospedado para família
+     databag = {
+       image = "docker.io/balzack/databag:latest";
+      ports = [ "7000:7000" ];  # porta HTTP (pode mudar se quiser)
+      environment = {
+      DOMAIN = "chat.seudominio.com";
+      SECRET = "77d44da1481f6c2765cc211a63728961684fb4d49e8f20a3b7b5da81f8e0e2ed";
+
+    # (Opcional) Se quiser usar HTTPS com certificado próprio, veja a doc
+    # TLS_CERT = "/caminho/para/cert.pem";
+    # TLS_KEY  = "/caminho/para/key.pem";
+  };
+  volumes = [
+    "databag_data:/home/app/data:Z"   # persistência dos dados
+  ];
+  extraOptions = [
+    # Para garantir que o container possa se comunicar com a rede do host se necessário
+    # (mas normalmente não precisa)
+  ];
+};
 
     };
   };
