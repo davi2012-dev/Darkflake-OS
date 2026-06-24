@@ -92,6 +92,7 @@ boot.zfs.package = unstable.zfs;
     "vm.ksm_max_page_sharing" = 256;
     "vm.ksm_scan_delay_millisecs" = 20;
     "vm.ksm_pages_to_scan" = 100;
+    "vm.ksm_merge_across_nodes" = 0;
 
     # Hardening Focado em Memória e Exploit Protection (Cobrado pelo Lynis)
     "net.core.bpf_jit_harden" = 2;
