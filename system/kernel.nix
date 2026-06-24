@@ -139,6 +139,7 @@ boot.zfs.package = unstable.zfs;
   security.lockKernelModules = false;           
   security.forcePageTableIsolation = false;      
   security.protectKernelImage = true;
+  security.auditd.enable = true;
   
   # Gráficos da GPU AMD RX 550
   hardware.amdgpu.initrd.enable = true;          
