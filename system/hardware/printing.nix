@@ -46,7 +46,7 @@
   services.avahi = {
     enable = true;
     domainName = "local";
-    denyInterfaces = [ "docker0" "tun0" ];
+    allowInterfaces = [ "eth0" "wlan0" ];
     nssmdns4 = true;
     nssmdns6 = true;
     reflector = false;
