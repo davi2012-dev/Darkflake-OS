@@ -67,7 +67,6 @@
     flameshot           # Screenshots
     localsend           # Transferir arquivos via Wi-Fi
     obsidian            # Suas notas
-    plan9port           # Ferramentas do sistema Plan9
     bazaar              # Gerenciador de arquivos leve
     proton-pass
     proton-authenticator
