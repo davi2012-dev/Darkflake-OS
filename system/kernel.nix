@@ -88,12 +88,6 @@ boot.zfs.package = unstable.zfs;
     "vm.compaction_proactiveness" = 0;          
     "vm.lru_gen_stats" = 2;
 
-    # Ajustes do Motor KSM
-    "vm.ksm_max_page_sharing" = 256;
-    "vm.ksm_scan_delay_millisecs" = 20;
-    "vm.ksm_pages_to_scan" = 100;
-    "vm.ksm_merge_across_nodes" = 0;
-
     # Hardening Focado em Memória e Exploit Protection (Cobrado pelo Lynis)
     "net.core.bpf_jit_harden" = 2;
     "vm.memory_failure_recovery" = 1;
@@ -139,15 +133,19 @@ boot.zfs.package = unstable.zfs;
 
   # --- 7. Firmware, Gráficos e Segurança de Imagem ---
   security.unprivilegedUsernsClone = true;      
-  security.lockKernelModules = true;           
-  security.forcePageTableIsolation = true;      
+  security.lockKernelModules = false;           
+  security.forcePageTableIsolation = false;      
   security.protectKernelImage = true;
   
   # Gráficos da GPU AMD RX 550
   hardware.amdgpu.initrd.enable = true;          
   
   # Gerenciamento de Hardware e RAM
-  hardware.ksm.enable = true;                    
+  hardware.ksm = {
+    enable = true;
+    sleep = 20;               
+    pagesToScan = 100;        
+  };                   
   hardware.cpu.intel.updateMicrocode = true;    
   hardware.enableRedistributableFirmware = true;       
   hardware.firmwareCompression = "zstd";
