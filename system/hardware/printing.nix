@@ -46,7 +46,7 @@
   services.avahi = {
     enable = true;
     domainName = "local";
-    allowInterfaces = [ "eth0" "wlan0" ];
+    allowInterfaces = [ "wlan0" ];
     nssmdns4 = true;
     nssmdns6 = true;
     reflector = false;
