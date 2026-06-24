@@ -53,6 +53,7 @@
     termius
     nixfmt
     statix
+    cockpit-machines
     # --- Diagnóstico e Stress ---
     outils              # Ferramentas clássicas estilo BSD
     stress-ng           # Stress test de hardware
