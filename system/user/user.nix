@@ -3,7 +3,7 @@
   # --- 1. Configuração de Usuários ---
   users.users.davi = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "video" "podman" "libvirtd" "gamemode" "wireshark" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "podman" "libvirtd" "gamemode" "wireshark" "scanner"  ];
     hashedPassword = "$y$j9T$LqaPp07vOk4t3YmqRo8uk/$hFD63tEFFiTFfShOOklyJ1Ne8V8MzTPtyoSVdmvtQ4C";
 
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINVu0z9sm4lfgen07lnSkPW/8IiV+N1uGG/Tua9i05le davi@Darkflake" ];
