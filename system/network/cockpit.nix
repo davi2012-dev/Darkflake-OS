@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  cockpitService = "cockpit.service";  # Ou "cockpit-ws.service"
+  cockpitService = "cockpit.service";
 in {
   services.cockpit = {
     enable = true;
@@ -21,10 +21,11 @@ in {
       "/var/lib/cockpit"
       "/var/cache/cockpit"
       "/tmp"
-      "/run/cockpit"        # <-- ADICIONADO (sockets)
+      "/run/cockpit"
+      "/var/run/libvirt"
     ];
 
-    # 2. SISTEMA DE ARQUIVOS (MANTIDO)
+    # 2. SISTEMA DE ARQUIVOS 
     ProtectSystem = "full";
     ProtectHome = "read-only";
     PrivateTmp = "yes";
@@ -32,9 +33,7 @@ in {
     ProtectKernelModules = "yes";
     ProtectKernelTunables = "yes";
 
-    # 3. PRIVILÉGIOS (AJUSTADO PARA NÃO QUEBRAR)
-    # REMOVA NoNewPrivileges (ou desative) – o Cockpit precisa de setuid para sudo/pkexec
-    # NoNewPrivileges = false;   # <-- DESCOMENTE SE PRECISAR, MAS O PADRÃO É false
+    # 3. PRIVILÉGIOS 
 
     RestrictRealtime = "yes";
     RestrictSUIDSGID = "yes";
