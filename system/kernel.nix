@@ -145,7 +145,8 @@ boot.zfs.package = unstable.zfs;
     enable = true;
     sleep = 20;               
     pagesToScan = 100;        
-  };                   
+  };   
+
   hardware.cpu.intel.updateMicrocode = true;    
   hardware.enableRedistributableFirmware = true;       
   hardware.firmwareCompression = "zstd";
