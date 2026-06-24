@@ -20,6 +20,9 @@ boot.zfs.package = unstable.zfs;
     "panic=10"                      # Reboot automático após 10s de Kernel Panic
     "nmi_watchdog=0"                # Desativa watchdog para liberar ciclos de CPU
     "memory_hotplug=on"
+    "ksm.max_page_sharing=256"
+    "ksm.pages_to_scan=100"
+    "ksm.merge_across_nodes=0"
 
     # Silenciar o Boot (Clean Boot / Flicker-Free)
     "quiet"
@@ -143,9 +146,8 @@ boot.zfs.package = unstable.zfs;
   # Gerenciamento de Hardware e RAM
   hardware.ksm = {
     enable = true;
-    sleep = 20;               
-    pagesToScan = 100;        
-  };   
+    sleep = 20; 
+  };
 
   hardware.cpu.intel.updateMicrocode = true;    
   hardware.enableRedistributableFirmware = true;       
