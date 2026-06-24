@@ -134,25 +134,6 @@
          format = "{$10}{$11}{$9}{$12}{$8}{$12}{$7}{$12}{$6}{$12}{$5}{$12}{$4}{$12}{$3}{$12}{$2}{$12}{$1}{$13}   ソフトウェア";
         }
         {
-          type = "os";
-          key =  "{$10}├  Distro ";
-          format = "{name} {build-id} ({codename}) {arch}";
-        }
-        {
-          type = "command";
-          key = "{$8}├  Hypervisor";
-          text = "systemd-detect-virt 2>/dev/null";
-        }
-        {
-          type = "kernel";
-          key =  "{$10}├  Kernel ";
-        }
-        {
-          type = "command";
-          key = "{$8}├ 󰿃 License ";
-          text = "if [ $(cat /proc/sys/kernel/tainted 2>/dev/null) -eq 0 ]; then echo '100% GPL'; else echo 'Tainted (não-GPL)'; fi";
-        }
-        {
           type = "bios";
           key =  "{$9}├ 󰚗 BIOS ";
         }
@@ -167,12 +148,27 @@
         }
         {
           type = "command";
-          key = "{$8}├ 󰗼 Init ";
-          text = "if ps -p 1 -o comm= | grep -q systemd; then echo \"systemd ($(systemd --version | head -1 | awk '{print $2}'))\"; else echo 'desconhecido'; fi";
+          key = "{$8}├  Hypervisor";
+          text = "systemd-detect-virt 2>/dev/null";
         }
         {
-          type = "packages";
-          key =  "{$9}├ 󰏖 Packages  ";
+          type = "os";
+          key =  "{$10}├  Distro ";
+          format = "{name} {build-id} ({codename}) {arch}";
+        }
+        {
+          type = "kernel";
+          key =  "{$10}├  Kernel ";
+        }
+        {
+          type = "command";
+          key = "{$8}├ 󰿃 License ";
+          text = "if [ $(cat /proc/sys/kernel/tainted 2>/dev/null) -eq 0 ]; then echo '100% GPL'; else echo 'Tainted (não-GPL)'; fi";
+        }
+        {
+          type = "command";
+          key = "{$8}├ 󰗼 Init ";
+          text = "if ps -p 1 -o comm= | grep -q systemd; then echo \"systemd ($(systemd --version | head -1 | awk '{print $2}'))\"; else echo 'desconhecido'; fi";
         }
         {
           type = "command";
@@ -184,10 +180,6 @@
           key =  "{$9}├ 󰑮 Processes ";
         }
         {
-          type = "shell";
-          key =  "{$8}├  Shell ";
-        }
-        {
           type = "terminal";
           key =  "{$7}├  Terminal ";
         }
@@ -196,12 +188,16 @@
           key =  "{$6}├ 󰛖 Term Font ";
         }
         {
-          type = "de";
-          key =  "{$5}├  Desktop Environment ";
+          type = "shell";
+          key =  "{$8}├  Shell ";
         }
         {
           type = "lm";
           key =  "{$4}├ 󰧨 Login ";
+        }
+        {
+          type = "de";
+          key =  "{$5}├  Desktop Environment ";
         }
         {
           type = "wm";
