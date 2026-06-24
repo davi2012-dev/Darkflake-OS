@@ -38,6 +38,7 @@
     steamtinkerlaunch
     mangohud
     er-patcher
+    xbill
     # Visual e Personalização
     cmatrix
     gpufetch
