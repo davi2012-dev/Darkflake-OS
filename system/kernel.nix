@@ -84,7 +84,7 @@ boot.zfs.package = unstable.zfs;
     "vm.nr_hugepages" = 0;
     "vm.transparent_hugepage" = "madvise";
     "vm.transparent_hugepage_defrag" = "defer+madvise";
-    "vm.max_map_count" = 1048576;               
+    "vm.max_map_count" = 2147483642;               
     "vm.compaction_proactiveness" = 0;          
     "vm.lru_gen_stats" = 2;
 
