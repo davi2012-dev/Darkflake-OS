@@ -124,10 +124,10 @@ boot.zfs.package = unstable.zfs;
   ];
 
   # --- 6. Serviços Otimizados (Redis via Unix Sockets) ---
-  services.redis.servers."meu-banco" = {
+  services.redis.servers."unified" = {
     enable = true;
     port = 0;                                       
-    unixSocket = "/run/redis-meu-banco/redis.sock"; 
+    unixSocket = "/run/redis-unified/redis.sock"; 
     unixSocketPerm = 660;                           
   };
 
