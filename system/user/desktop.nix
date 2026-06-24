@@ -17,6 +17,7 @@
 
   # --- 4. Serviços do Sistema e Integração ---
   services.libinput.enable = true;
+  services.swapspace.enable
   services.blueman.enable = true;
   services.fstrim.enable = true;
   services.upower.enable = true;
