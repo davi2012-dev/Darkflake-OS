@@ -2,8 +2,6 @@
 
   # --- 1. Desativar Módulos Inúteis / Perigosos ---
   hardware.bluetooth.disabledPlugins = [ "network" "hostname" ];
-  hardware.alsa.enable = true;
-  hardware.alsa.enableOSSEmulation = true;
 
   # --- 2. Hardware Bluetooth (Performance Máxima + Segurança) ---
   hardware.bluetooth = {
