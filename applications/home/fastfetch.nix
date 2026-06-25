@@ -197,7 +197,7 @@
         }
         {
           type = "command";
-          key = "{$1}└  Xorg ";
+          key = "{$1}├  Xorg ";
           text = "X -version 2>&1 | grep 'X Server' | awk '{print $3}' || echo 'N/A'";
         }
         {
@@ -206,7 +206,7 @@
         }
         {
           type = "vulkan";
-          key =  "{$1}├  󰈸 Vulkan ";
+          key =  "{$1}├ 󰈸 Vulkan ";
         }
         {
           type = "opencl";
@@ -227,7 +227,7 @@
         }
         {
           type = "font";
-          key =  "{$2}├ 󰛖 Font ";
+          key =  "{$2}└ 󰛖 Font ";
         }
         {
          type = "custom";
@@ -276,7 +276,7 @@
         }
         {
          type = "custom";
-         format = "{$6}{$11}{$10}{$12}{$8}{$12}{$7}{$13}   ジカン";
+         format = "{$10}{$11}{$9}{$12}{$8}{$12}{$7}{$12}{$6}{$12}{$5}{$12}{$4}{$12}{$3}{$12}{$2}{$12}{$1}{$13}   ジカン";
         }
         {
           type = "uptime";
