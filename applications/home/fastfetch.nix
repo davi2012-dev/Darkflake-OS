@@ -218,12 +218,12 @@
           key =  "{$3}├  Window Managers ";
         }
         {
-          type = "wmtheme";
-          key =  "{$2}├ 󰉼 Theme ";
-        }
-        {
           type = "de";
           key =  "{$5}├  Desktop Environment ";
+        }
+        {
+          type = "wmtheme";
+          key =  "{$2}├ 󰉼 Theme ";
         }
         {
           type = "font";
@@ -268,11 +268,6 @@
         {
           type = "dns";
           key = "{$4}├ 󱦂 DNS ";
-        }
-        {
-          type = "command";
-          key = "{$7}├ 󰩟 Placas ";
-          text = "ip -4 -br addr | grep -v 'lo\\|virbr\\|docker\\|veth\\|br-' | awk '{printf \"%s: %s  \", $1, $3}' | sed 's/  $//' || echo 'nenhuma'";
         }
         {
           type = "command";
