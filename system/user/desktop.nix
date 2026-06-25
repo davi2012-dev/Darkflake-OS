@@ -22,6 +22,16 @@
     defaults.monitored = "-a -o on -S on -s (S/../.././02|L/../../7/04) -W 4,45,55";
   };
 
+  # --- Monitoramento para o SSD NVMe ---
+  services.nvme-rs = {
+    enable = true;
+    settings = {
+      check_interval_secs = 3600; # Verifica a integridade a cada 1 hora
+      thresholds = {
+        temp_warning = 70;        # Alerta se o NVMe passar de 70°C (eles esquentam mais que SATA)
+        wear_warning = 85;        # Alerta se o desgaste das células flash passar de 85%
+      };
+
   # ---  Serviços do Sistema e Integração ---
   services.libinput.enable = true;
   services.swapspace.enable = true;
