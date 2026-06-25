@@ -196,20 +196,9 @@
           key =  "{$4}├ 󰧨 Login ";
         }
         {
-          type = "de";
-          key =  "{$5}├  Desktop Environment ";
-        }
-        {
-          type = "wm";
-          key =  "{$3}├  Window Managers ";
-        }
-        {
-          type = "wmtheme";
-          key =  "{$2}├ 󰉼 Theme ";
-        }
-        {
-          type = "font";
-          key =  "{$2}├ 󰛖 Font ";
+          type = "command";
+          key = "{$1}└  Xorg ";
+          text = "X -version 2>&1 | grep 'X Server' | awk '{print $3}' || echo 'N/A'";
         }
         {
           type = "opengl";
@@ -225,23 +214,34 @@
           format = "{1}";
         }
         {
-          type = "command";
-          key = "{$1}└  Xorg ";
-          text = "X -version 2>&1 | grep 'X Server' | awk '{print $3}' || echo 'N/A'";
+          type = "wm";
+          key =  "{$3}├  Window Managers ";
+        }
+        {
+          type = "wmtheme";
+          key =  "{$2}├ 󰉼 Theme ";
+        }
+        {
+          type = "de";
+          key =  "{$5}├  Desktop Environment ";
+        }
+        {
+          type = "font";
+          key =  "{$2}├ 󰛖 Font ";
         }
         {
          type = "custom";
          format = "{$1}{$11}{$2}{$12}{$3}{$12}{$4}{$12}{$5}{$12}{$6}{$12}{$7}{$12}{$8}{$12}{$9}{$12}{$10}{$13}   セツゾクセイ";
         }
         {
-          type = "bluetooth";
-          key = "{$1}├ 󰂱 Bluetooth ";
-          format = "{1} - {4}";
-        }
-        {
           type = "bluetoothradio";
           key = "{$1}├ 󰂯 BT Radio ";
           format = "{5}";
+        }
+        {
+          type = "bluetooth";
+          key = "{$1}├ 󰂱 Bluetooth ";
+          format = "{1} - {4}";
         }
         {
           type = "wifi";
@@ -250,8 +250,9 @@
           showErrors = "never";
         }
         {
-          type = "dns";
-          key = "{$4}├ 󱦂 DNS ";
+          type = "command";
+          key = "{$7}├ 󰩟 Placas ";
+          text = "ip -4 -br addr | grep -v 'lo\\|virbr\\|docker\\|veth\\|br-' | awk '{printf \"%s: %s  \", $1, $3}' | sed 's/  $//' || echo 'nenhuma'";
         }
         {
           type = "localip";
@@ -261,13 +262,17 @@
         }
         {
           type = "command";
-          key = "{$7}├ 󰩟 Placas ";
-          text = "ip -4 -br addr | grep -v 'lo\\|virbr\\|docker\\|veth\\|br-' | awk '{printf \"%s: %s  \", $1, $3}' | sed 's/  $//' || echo 'nenhuma'";
+          key = "{$7}├ 󰩟 Gateway ";
+          text = "ip route | grep default | awk '{print $3}' || echo 'nenhum'";
+        }
+        {
+          type = "dns";
+          key = "{$4}├ 󱦂 DNS ";
         }
         {
           type = "command";
-          key = "{$7}├ 󰩟 Gateway ";
-          text = "ip route | grep default | awk '{print $3}' || echo 'nenhum'";
+          key = "{$7}├ 󰩟 Placas ";
+          text = "ip -4 -br addr | grep -v 'lo\\|virbr\\|docker\\|veth\\|br-' | awk '{printf \"%s: %s  \", $1, $3}' | sed 's/  $//' || echo 'nenhuma'";
         }
         {
           type = "command";
@@ -279,6 +284,10 @@
          format = "{$10}{$11}{$9}{$12}{$8}{$12}{$7}{$12}{$6}{$12}{$5}{$12}{$4}{$12}{$3}{$12}{$2}{$12}{$1}{$13}   ジカン";
         }
         {
+          type = "uptime";
+          key = "{$6}├  Uptime ";
+        }
+        {
           type = "DateTime";
           key = "{$10}├ 󰥔 Date/Time ";
         }
@@ -287,10 +296,6 @@
           type = "disk";
           folders = "/";
           format = "{create-time:10} ({days} days)";
-        }
-        {
-          type = "uptime";
-          key = "{$6}├  Uptime ";
         }
         {
           type = "command";
