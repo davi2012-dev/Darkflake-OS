@@ -39,14 +39,14 @@ boot.zfs.package = unstable.zfs;
     "vsyscall=none"                 # Mata syscalls obsoletas que são vetores de ataque
     "debugfs=off"                   # Fecha a porta para ferramentas de depuração maliciosas
     "randomize_kstack_offset=on"    # Proteção extra contra estouro de pilha
-    "init_on_alloc=1"               # Zera páginas de memória ao alocar
-    "init_on_free=1"                # Zera páginas de memória ao liberar
+    "init_on_alloc=0"               # Zera páginas de memória ao alocar
+    "init_on_free=0"                # Zera páginas de memória ao liberar
     "page_poisoning=off"
     "module.sig_enforce=1"   
     "mce=on"                        # Machine Check Exception ativo
     "ras=on"                        # Reliability, Availability, and Serviceability
     "lockdown=confidentiality"      # Impede o espaço de usuário de extrair dados do kernel
-    "mitigations=auto"              # Mitigações de CPU padrão
+    "mitigations=off"              # Mitigações de CPU padrão
     "intel_iommu=on"                # Isolamento de hardware IOMMU
     "iommu=pt"                      # Performance de IOMMU em modo pass-through
   ];
