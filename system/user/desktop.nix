@@ -3,7 +3,6 @@
 {
   # --- Servidor Gráfico e Display Manager ---
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
   services.displayManager.plasma-login-manager.enable = true;
 
   # ---  Ambiente de Desktop (KDE Plasma 6) ---
