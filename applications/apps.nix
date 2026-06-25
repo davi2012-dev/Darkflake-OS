@@ -21,7 +21,6 @@
     krita               # Pintura digital
     dippi               # Analisador de densidade de pixels
     cryptomator 
-    ladspaPlugins
     # --- Terminal Moderno (Rust Tools) ---
     fastfetch           # O substituto do neofetch
     btop               # Monitor de recursos visual
