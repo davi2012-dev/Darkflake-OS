@@ -41,6 +41,7 @@
   services.playerctld.enable = true;
   programs.dconf.enable = true;
   services.xscreensaver.enable = true;
+  services.irqbalance.enable = true;
   security.rtkit.enable = true;
   security.polkit.enable = true;
   security.chromiumSuidSandbox.enable = true;
