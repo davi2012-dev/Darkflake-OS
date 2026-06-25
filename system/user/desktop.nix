@@ -1,12 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  # --- 1. Servidor Gráfico e Display Manager ---
+  # --- Servidor Gráfico e Display Manager ---
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
   services.displayManager.plasma-login-manager.enable = true;
 
-  # --- 2. Ambiente de Desktop (KDE Plasma 6) ---
+  # ---  Ambiente de Desktop (KDE Plasma 6) ---
   services.desktopManager.plasma6.enable = true;
 
   # --- 3. Otimizações de Hardware para AMD GPU ---
@@ -15,7 +15,14 @@
     overdrive.enable = true;
   };
 
-  # --- 4. Serviços do Sistema e Integração ---
+  # --- Monitoramento de Saúde dos Discos (SATA) ---
+  services.smartd = {
+    enable = true;
+    autodetect = true;
+    defaults.monitored = "-a -o on -S on -s (S/../.././02|L/../../7/04) -W 4,45,55";
+  };
+
+  # ---  Serviços do Sistema e Integração ---
   services.libinput.enable = true;
   services.swapspace.enable = true;
   services.blueman.enable = true;
