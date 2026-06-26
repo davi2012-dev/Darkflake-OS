@@ -15,6 +15,7 @@
     ./system/user/desktop.nix
     ./system/hardware/Bluetooth.nix
     ./system/hardware/Audio/surround.nix
+    ./system/hardware/printing.nix
     # 3. Módulos Agrupados (Bundles)
     ./system/filesystem/bundle.nix  
     ./system/network/bundle.nix     
