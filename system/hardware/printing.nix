@@ -69,6 +69,7 @@ systemd.services.cups = {
       "~@module"
     ];
   };
+ };
 
   # ======== AVADHI ========
   services.avahi = {
