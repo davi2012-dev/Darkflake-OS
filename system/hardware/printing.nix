@@ -1,9 +1,11 @@
 { config, pkgs, ... }: {
 
+  # Cria /var/spool/cups automaticamente
   systemd.tmpfiles.rules = [
     "d /var/spool/cups 1777 root root -"
   ];
 
+  # Impressão
   services.printing = {
     enable = true;
     drivers = with pkgs; [ 
@@ -17,6 +19,7 @@
     openFirewall = false;
   };
 
+  # Hardening do CUPS (sem root)
   systemd.services.cups = {
     overrideStrategy = "asDropin";
     serviceConfig = {
@@ -61,16 +64,14 @@
     };
   };
 
-
-  # ======== AVADHI ========
+  # Descoberta de impressoras na rede
   services.avahi = {
     enable = true;
     domainName = "local";
-    allowInterfaces = [ "wlan0" ];
+    allowInterfaces = [ "wlan0" ];   # ou "enp*" se for cabo
     nssmdns4 = true;
     nssmdns6 = true;
     reflector = false;
-    publish.hinfo = false;
     publish = {
       enable = true;
       addresses = true;
@@ -78,7 +79,7 @@
     };
   };
 
-  # ======== Sane (scanners) ========
+  # Scanners
   hardware.sane = {
     enable = true;
     extraBackends = [ pkgs.hplipWithPlugin ];
