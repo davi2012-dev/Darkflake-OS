@@ -30,7 +30,7 @@
     extraRules = [{
       users = [ "davi" ];
       keepEnv = true;
-      persist = true;
+      persist = false;
     }];
   };
 
