@@ -39,7 +39,6 @@
   services.blanket.enable = true;
   services.amberol.enable = true;
   services.podman.autoUpdate.enable = true;
-  services.podman.enableTypeCheck = true;
   services.amberol.enableRecoloring = true;
   services.amberol.replaygain = "album";
   services.xsettingsd.enable = true;
