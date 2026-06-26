@@ -6,6 +6,10 @@
   # Configuração global do Podman Engine
   virtualisation.podman = {
     enable = true;
+    rootless = {    
+    enable = true;
+    setuid = true;  
+    };
     dockerSocket.enable = true;
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
