@@ -26,11 +26,23 @@
 systemd.services.cups = {
   overrideStrategy = "asDropin";
   serviceConfig = {
-    User = "cups";
-    Group = "cups";
+    # Usuário dinâmico – dispensa User/Group fixos
+    DynamicUser = true;
 
+    # Diretórios gerenciados pelo systemd (criam com permissões corretas)
+    StateDirectory = "cups";          # /var/lib/cups
+    RuntimeDirectory = "cups";        # /run/cups
+    CacheDirectory = "cups";          # /var/cache/cups (opcional)
+    LogsDirectory = "cups";           # /var/log/cups
+
+    # Caminhos que o serviço pode escrever (além dos gerenciados acima)
+    ReadWritePaths = [
+      "/var/spool/cups"               # spool de impressão
+      "/tmp"                          # temporários (opcional, mas mantido)
+    ];
+
+    # Proteções básicas
     ProtectSystem = "strict";
-    ReadWritePaths = [ "/var/spool/cups" "/var/log/cups" "/run/cups" "/tmp" ];
     ProtectHome = true;
     PrivateTmp = true;
     ProtectControlGroups = true;
@@ -38,15 +50,21 @@ systemd.services.cups = {
     ProtectKernelTunables = true;
     NoNewPrivileges = true;
 
-    CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" "CAP_DAC_OVERRIDE" ];
+    # Capacidades (sem CAP_SYS_RAWIO)
+    CapabilityBoundingSet = [
+      "CAP_NET_BIND_SERVICE"          # porta 631
+      "CAP_DAC_OVERRIDE"              # permissões de arquivo (pode ser necessário)
+    ];
     AmbientCapabilities = [ ];
 
+    # Namespaces – permite montagem para os diretórios gerenciados
     RestrictNamespaces = "~user pid net uts cgroup ipc";
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
     MemoryDenyWriteExecute = true;
     SystemCallArchitectures = "native";
 
+    # Acesso a dispositivos (impressoras)
     DeviceAllow = [
       "char-lp rw"
       "char-usb/lp rw"
@@ -54,10 +72,11 @@ systemd.services.cups = {
     ];
     DevicePolicy = "closed";
 
+    # Rede
     RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" "AF_NETLINK" ];
     PrivateNetwork = false;
 
-    # Filtro corrigido: nega TUDO que é perigoso
+    # Filtro de syscalls (bloqueia apenas os realmente perigosos)
     SystemCallFilter = [
       "~@raw-io"
       "~@clock"
@@ -67,7 +86,7 @@ systemd.services.cups = {
       "~@module"
     ];
   };
- };
+};
 
   # ======== AVADHI ========
   services.avahi = {
