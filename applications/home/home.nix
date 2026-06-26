@@ -45,7 +45,7 @@
   services.xsettingsd.enable = true;
   services.plan9port.plumber.enable = true;
   services.plan9port.fontsrv.enable = true;
-  services.plan9port.package = pkgs.plan9port-wayland;
+  services.plan9port.package = plan9port-wayland;
   # 5. Pacotes
   home.packages = with pkgs; [
     tree
