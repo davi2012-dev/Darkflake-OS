@@ -46,7 +46,7 @@ boot.zfs.package = unstable.zfs;
     "mce=on"                        # Machine Check Exception ativo
     "ras=on"                        # Reliability, Availability, and Serviceability
     "lockdown=confidentiality"      # Impede o espaço de usuário de extrair dados do kernel
-    "mitigations=off"              # Mitigações de CPU padrão
+    "mitigations=auto"              # Mitigações de CPU padrão
     "intel_iommu=on"                # Isolamento de hardware IOMMU
     "iommu=pt"                      # Performance de IOMMU em modo pass-through
   ];
