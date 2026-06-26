@@ -23,23 +23,29 @@
   };
 
   # Hardening do CUPS
-  systemd.services.cups.serviceConfig = {
-    ProtectSystem = "strict";
-    ReadWritePaths = [ "/var/spool/cups" "/var/log/cups" "/run/cups" "/tmp" ];
-    ProtectHome = true;
-    PrivateTmp = true;
-    ProtectControlGroups = true;
-    ProtectKernelModules = true;
-    ProtectKernelTunables = true;
-    NoNewPrivileges = true;
-    CapabilityBoundingSet = [ "CAP_SYS_RAWIO" "CAP_NET_BIND_SERVICE" ];
-    AmbientCapabilities = [ "CAP_SYS_RAWIO" "CAP_NET_BIND_SERVICE" ];
-    RestrictNamespaces = true;
-    RestrictRealtime = true;
-    RestrictSUIDSGID = true;
-    MemoryDenyWriteExecute = true;
-    SystemCallArchitectures = "native";
-    SystemCallFilter = [ "@system-service" "~@privileged" "~@resources" ];
+systemd.services.cups = {
+    overrideStrategy = "asDropin";
+    serviceConfig = {
+      ProtectSystem = "strict";
+      ReadWritePaths = [ "/var/spool/cups" "/var/log/cups" "/run/cups" "/tmp" ];
+      ProtectHome = true;
+      PrivateTmp = true;
+      ProtectControlGroups = true;
+      ProtectKernelModules = true;
+      ProtectKernelTunables = true;
+      NoNewPrivileges = true;
+      
+      # Mantendo capacidades cruciais para o daemon gerenciar o hardware e portas
+      CapabilityBoundingSet = [ "CAP_SYS_RAWIO" "CAP_NET_BIND_SERVICE" "CAP_DAC_OVERRIDE" ];
+      AmbientCapabilities = [ "CAP_SYS_RAWIO" "CAP_NET_BIND_SERVICE" ];
+      
+      # Afrouxando o namespace estrito para o systemd conseguir montar os ReadWritePaths acima
+      RestrictNamespaces = false; 
+      RestrictRealtime = true;
+      RestrictSUIDSGID = true;
+      MemoryDenyWriteExecute = true;
+      SystemCallArchitectures = "native";
+    };
   };
 
   # ======== AVADHI ========
