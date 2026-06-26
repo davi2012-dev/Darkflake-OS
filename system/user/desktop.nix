@@ -32,11 +32,6 @@
     };
   };
 
- # ---- swap -----
-  services.swapspace = {
-  enable = true;
-  swappath = "/mnt/swapspace";
-};
 
   services.libinput.enable = true;
   services.blueman.enable = true;
