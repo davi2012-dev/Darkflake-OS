@@ -32,11 +32,13 @@
     };
   };
 
-  services.libinput.enable = true;
+ # ---- swap -----
   services.swapspace = {
   enable = true;
   swappath = "/mnt/swapspace";
 };
+
+  services.libinput.enable = true;
   services.blueman.enable = true;
   services.fstrim.enable = true;
   services.upower.enable = true;
@@ -48,11 +50,9 @@
   security.rtkit.enable = true;
   security.polkit.enable = true;
   security.chromiumSuidSandbox.enable = true;
-
   services.hardware.openrgb.enable = true;
   programs.cpu-energy-meter.enable = true;
   programs.coolercontrol.enable = true;
-
   services.tailscale.enable = true;
   programs.feedbackd.enable = true;
   programs.mouse-actions.enable = true;
