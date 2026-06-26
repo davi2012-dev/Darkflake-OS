@@ -59,8 +59,6 @@ systemd.services.cups = {
 
     # Filtro corrigido: nega TUDO que é perigoso
     SystemCallFilter = [
-      "~@privileged"
-      "~@resources"
       "~@raw-io"
       "~@clock"
       "~@reboot"
