@@ -24,28 +24,50 @@
 
   # Hardening do CUPS
 systemd.services.cups = {
-    overrideStrategy = "asDropin";
-    serviceConfig = {
-      ProtectSystem = "strict";
-      ReadWritePaths = [ "/var/spool/cups" "/var/log/cups" "/run/cups" "/tmp" ];
-      ProtectHome = true;
-      PrivateTmp = true;
-      ProtectControlGroups = true;
-      ProtectKernelModules = true;
-      ProtectKernelTunables = true;
-      NoNewPrivileges = true;
-      
-      # Mantendo capacidades cruciais para o daemon gerenciar o hardware e portas
-      CapabilityBoundingSet = [ "CAP_SYS_RAWIO" "CAP_NET_BIND_SERVICE" "CAP_DAC_OVERRIDE" ];
-      AmbientCapabilities = [ "CAP_SYS_RAWIO" "CAP_NET_BIND_SERVICE" ];
-      
-      # Afrouxando o namespace estrito para o systemd conseguir montar os ReadWritePaths acima
-      RestrictNamespaces = false; 
-      RestrictRealtime = true;
-      RestrictSUIDSGID = true;
-      MemoryDenyWriteExecute = true;
-      SystemCallArchitectures = "native";
-    };
+  overrideStrategy = "asDropin";
+  serviceConfig = {
+    User = "cups";
+    Group = "cups";
+
+    ProtectSystem = "strict";
+    ReadWritePaths = [ "/var/spool/cups" "/var/log/cups" "/run/cups" "/tmp" ];
+    ProtectHome = true;
+    PrivateTmp = true;
+    ProtectControlGroups = true;
+    ProtectKernelModules = true;
+    ProtectKernelTunables = true;
+    NoNewPrivileges = true;
+
+    CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" "CAP_DAC_OVERRIDE" ];
+    AmbientCapabilities = [ ];
+
+    RestrictNamespaces = "~user pid net uts cgroup ipc";
+    RestrictRealtime = true;
+    RestrictSUIDSGID = true;
+    MemoryDenyWriteExecute = true;
+    SystemCallArchitectures = "native";
+
+    DeviceAllow = [
+      "char-lp rw"
+      "char-usb/lp rw"
+      "/dev/bus/usb rw"
+    ];
+    DevicePolicy = "closed";
+
+    RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" "AF_NETLINK" ];
+    PrivateNetwork = false;
+
+    # Filtro corrigido: nega TUDO que é perigoso
+    SystemCallFilter = [
+      "~@privileged"
+      "~@resources"
+      "~@raw-io"
+      "~@clock"
+      "~@reboot"
+      "~@swap"
+      "~@mount"
+      "~@module"
+    ];
   };
 
   # ======== AVADHI ========
