@@ -33,7 +33,10 @@
   };
 
   services.libinput.enable = true;
-  services.swapspace.enable = true;
+  services.swapspace = {
+  enable = true;
+  swappath = "/mnt/swapspace";
+};
   services.blueman.enable = true;
   services.fstrim.enable = true;
   services.upower.enable = true;
@@ -54,7 +57,6 @@
   programs.feedbackd.enable = true;
   programs.mouse-actions.enable = true;
   programs.mouse-actions.autorun = true;
-  programs.librepods.enable = true;
   services.spice-vdagentd.enable = true;
   nixowos.enable = true;  
 
