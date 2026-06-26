@@ -38,7 +38,6 @@
   services.fstrim.enable = true;
   services.upower.enable = true;
   programs.fuse.enable = true;
-  services.podman.enableTypeCheck = true;
   services.playerctld.enable = true;
   programs.dconf.enable = true;
   services.xscreensaver.enable = true;
