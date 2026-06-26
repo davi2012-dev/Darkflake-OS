@@ -38,6 +38,7 @@
   services.fstrim.enable = true;
   services.upower.enable = true;
   programs.fuse.enable = true;
+  services.podman.enableTypeCheck = true;
   services.playerctld.enable = true;
   programs.dconf.enable = true;
   services.xscreensaver.enable = true;
@@ -45,7 +46,7 @@
   security.rtkit.enable = true;
   security.polkit.enable = true;
   security.chromiumSuidSandbox.enable = true;
-
+ 
   services.hardware.openrgb.enable = true;
   programs.cpu-energy-meter.enable = true;
   programs.coolercontrol.enable = true;
