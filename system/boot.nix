@@ -36,6 +36,7 @@
 
   # --- OUTRAS CONFIGURAÇÕES DO SISTEMA ---
   boot.bootspec.enableValidation = true;
+  systemd.sysusers.enable = true;
   boot.plymouth.enable = true;
   boot.consoleLogLevel = 0;
   boot.hardwareScan = true;
