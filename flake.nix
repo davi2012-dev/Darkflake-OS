@@ -5,23 +5,15 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-
     flake-parts.url = "github:hercules-ci/flake-parts";
-
-    # --- INPUTS HERDADOS DO GARUDA (AUTOMAÇÃO DE DEV) ---
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
-
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
-    # ----------------------------------------------------
-
-    # Adicionando o MCP-NixOS nos inputs
     mcp-nixos.url = "github:utensils/mcp-nixos";
 
-    # --- NOVO INPUT: CachyOS Kernel ---
+    # --- CachyOS Kernel ---
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
-    # ----------------------------------
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -65,7 +57,6 @@
       
       systems = [ "x86_64-linux" ];
 
-      # --- CORREÇÃO AQUI: Importa os módulos para que o perSystem conheça as opções novas ---
       imports = [
         inputs.treefmt-nix.flakeModule
       ];
@@ -80,7 +71,7 @@
           config.allowUnfree = true;
         };       
 
-        # --- FUSÃO GARUDA: Criação do ambiente de desenvolvimento automatizado ---
+        # --- Criação do ambiente de desenvolvimento automatizado ---
         devShells.default = 
           let
             makeDevshell = import "${inputs.devshell}/modules" pkgs;
@@ -103,18 +94,18 @@
               };
             };
             commands = [
-              { package = "deadnix"; }
-              { package = "statix"; }
-              { package = "ripsecrets"; }
+              { package = pkgs.deadnix; } 
+              { package = pkgs.statix; }   
+              { package = pkgs.ripsecrets; } 
             ];
             motd = ''
-              {202}🔨 Bem-vindo ao Shell de Desenvolvimento Darkflake (Garuda-Engine Active){reset} ❄️
+              {202}🔨 Bem-vindo ao Shell de Desenvolvimento Darkflake ❄️
             '';
           };
 
         # --- FUSÃO GARUDA: Hooks de Segurança para o seu Git ---
         checks.pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-          package = pkgs.prek;
+          package = pkgs.pre-commit; 
           hooks = {
             check-json.enable = true;
             detect-private-keys.enable = true; 
@@ -124,12 +115,11 @@
           src = ./.;
         };
 
-        # Agora o flake-parts vai entender esse bloco perfeitamente!
         treefmt = {
           build.check = true;
           programs = {
             deadnix.enable = true;
-            nixfmt.enable = true;
+            nixfmt-rfc-style.enable = true; 
             statix.enable = true;
           };
         };
