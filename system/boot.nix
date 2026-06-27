@@ -15,7 +15,6 @@
   };
 
   # --- CONFIGURAÇÃO DO INITRD (SYSTEMD NO BOOT) ---
-  
   boot.initrd = {
     enable = true;
     systemd = {
@@ -34,10 +33,18 @@
     preferStaticEmulators = true;
   };
 
+  # --- TEMA DO PLYMOUTH (ANIMADO VIA FLAKE) ---
+  boot.plymouth = {
+    enable = true;
+    theme = "kartoza";
+    themePackages = [
+      inputs.kartoza-plymouth-theme.packages.${pkgs.system}.default
+    ];
+  };
+
   # --- OUTRAS CONFIGURAÇÕES DO SISTEMA ---
   systemd.shutdownRamfs.enable = true;
   boot.bootspec.enableValidation = true;
-  boot.plymouth.enable = true;
   boot.consoleLogLevel = 0;
   boot.hardwareScan = true;
   
