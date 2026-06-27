@@ -15,6 +15,7 @@
   };
 
   # --- CONFIGURAÇÃO DO INITRD (SYSTEMD NO BOOT) ---
+  
   boot.initrd = {
     enable = true;
     systemd = {
@@ -34,6 +35,7 @@
   };
 
   # --- OUTRAS CONFIGURAÇÕES DO SISTEMA ---
+  systemd.shutdownRamfs.enable = true;
   boot.bootspec.enableValidation = true;
   boot.plymouth.enable = true;
   boot.consoleLogLevel = 0;
