@@ -21,7 +21,6 @@
       enable = true; 
       tpm2.enable = true;
       tpm2.pcrphases.enable = true;
-      shutdownRamfs.enable = true;
     };
     includeDefaultModules = true;
     verbose = false;
