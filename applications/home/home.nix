@@ -25,7 +25,12 @@
     ./spotify.nix
     ./mpv.nix
     ./cava.nix
-    ./niri/default.nix
+    ./niri/settings.nix
+    ./niri/keybinds.nix
+    ./niri/rules.nix
+    ./niri/autostart.nix
+    ./niri/scripts.nix
+    ./niri/noctaliashell.nix
   ];
 
   # 4 X11
