@@ -38,7 +38,6 @@
   services.blueman.enable = true;
   services.sysstat.enable = true;
   services.collectd.enable = true;
-  services.oddjobd.enable = true;
   services.thermald.enable = true;
   services.fstrim.enable = true;
   services.upower.enable = true;
