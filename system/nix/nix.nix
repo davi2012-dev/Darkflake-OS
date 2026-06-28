@@ -35,11 +35,13 @@
       "https://hyprland.cachix.org" 
       "https://attic.xuyh0120.win/lantian"
       "https://chaotic-nyx.cachix.org"
+      "https://noctalia.cachix.org"
     ];
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
       "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
     ];
     max-substitution-jobs = 20;
     builders-use-substitutes = true;
