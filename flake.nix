@@ -12,6 +12,7 @@
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
     mcp-nixos.url = "github:utensils/mcp-nixos";
+    niri.url = "github:sodiboo/niri-flake";
 
     # --- CachyOS Kernel ---
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
