@@ -69,6 +69,11 @@
     enableSSHSupport = true;
   };
 
+  services.tuned = {
+    enable = true;
+    ppdSupport = true;
+  };
+
   powerManagement = {
     enable = true;
     powertop.enable = true;
