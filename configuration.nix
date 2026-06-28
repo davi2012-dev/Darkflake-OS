@@ -26,7 +26,6 @@
     ./applications/apps.nix
     ./applications/just.nix
     ./applications/fun.nix       
-    ./applications/home/niri.nix
   ];
 
   
