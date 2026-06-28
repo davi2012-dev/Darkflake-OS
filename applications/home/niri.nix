@@ -1,8 +1,7 @@
-{ pkgs, config, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 let
   # Função para os atalhos do Noctalia funcionarem perfeitamente no Niri
-  # Ela já gera a estrutura exata de lista que o spawn do Niri precisa
   noctalia = cmd: [ "noctalia-shell" "ipc" "call" ] ++ (pkgs.lib.splitString " " cmd);
 in
 {
@@ -52,21 +51,22 @@ in
         { command = [ "noctalia-shell" ]; }
       ];
 
-      # Configura os atalhos de teclado dentro do Niri usando a sintaxe correta
-      binds = with config.lib.niri.actions; {
-        # Corrigido: spawn precisa dos parênteses para processar a função 'noctalia' primeiro
-        "Mod+Space".action = spawn (noctalia "launcher toggle");
-        "Mod+P".action = spawn (noctalia "sessionMenu toggle");
+      # Configura os atalhos usando strings brutas para as ações nativas do Niri
+      # Isso evita depender de bibliotecas ausentes no config.lib
+      binds = {
+        # Atalhos do Noctalia usando a ação spawn interna do Niri
+        "Mod+Space".action.spawn = noctalia "launcher toggle";
+        "Mod+P".action.spawn = noctalia "sessionMenu toggle";
 
-        # Teclas de Volume (perfeito)
-        "XF86AudioLowerVolume".action = spawn (noctalia "volume decrease");
-        "XF86AudioRaiseVolume".action = spawn (noctalia "volume increase");
-        "XF86AudioMute".action = spawn (noctalia "volume muteOutput");
+        # Teclas de Volume
+        "XF86AudioLowerVolume".action.spawn = noctalia "volume decrease";
+        "XF86AudioRaiseVolume".action.spawn = noctalia "volume increase";
+        "XF86AudioMute".action.spawn = noctalia "volume muteOutput";
 
-        # Movimentação de janelas (perfeito)
-        "Mod+Left".action = focus-column-left;
-        "Mod+Right".action = focus-column-right;
-        "Mod+Q".action = close-window;
+        # Movimentação de janelas mapeada diretamente pelas ações mapeadas como conjuntos vazios (padrão do niri)
+        "Mod+Left".action.focus-column-left = { };
+        "Mod+Right".action.focus-column-right = { };
+        "Mod+Q".action.close-window = { };
       };
     };
   };
