@@ -2,6 +2,7 @@
 
 let
   # Função para os atalhos do Noctalia funcionarem perfeitamente no Niri
+  # Ela já gera a estrutura exata de lista que o spawn do Niri precisa
   noctalia = cmd: [ "noctalia-shell" "ipc" "call" ] ++ (pkgs.lib.splitString " " cmd);
 in
 {
@@ -53,18 +54,16 @@ in
 
       # Configura os atalhos de teclado dentro do Niri usando a sintaxe correta
       binds = with config.lib.niri.actions; {
-        # Abrir o Menu com Super + Espaço
-        "Mod+Space".action = spawn noctalia "launcher toggle";
+        # Corrigido: spawn precisa dos parênteses para processar a função 'noctalia' primeiro
+        "Mod+Space".action = spawn (noctalia "launcher toggle");
+        "Mod+P".action = spawn (noctalia "sessionMenu toggle");
 
-        # Menu de energia com Super + P
-        "Mod+P".action = spawn noctalia "sessionMenu toggle";
-
-        # Teclas de Volume
+        # Teclas de Volume (perfeito)
         "XF86AudioLowerVolume".action = spawn (noctalia "volume decrease");
         "XF86AudioRaiseVolume".action = spawn (noctalia "volume increase");
         "XF86AudioMute".action = spawn (noctalia "volume muteOutput");
 
-        # Movimentação básica de janelas do Niri (Corrigido para a sintaxe do módulo)
+        # Movimentação de janelas (perfeito)
         "Mod+Left".action = focus-column-left;
         "Mod+Right".action = focus-column-right;
         "Mod+Q".action = close-window;
