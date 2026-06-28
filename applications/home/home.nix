@@ -25,14 +25,13 @@
     ./spotify.nix
     ./mpv.nix
     ./cava.nix
-    ./niri/default.nix
   ];
 
   # 4 X11
   xsession.preferStatusNotifierItems = true;
   xsession.numlock.enable = true;
 
-  # deamon 
+  # daemon 
   services.activitywatch = {
   enable = true;
   package = pkgs.aw-server-rust;
