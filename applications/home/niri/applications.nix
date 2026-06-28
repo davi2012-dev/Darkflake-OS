@@ -4,9 +4,9 @@
 
 {
   #  browser = "${pkgs.firefox}/bin/firefox";
-  browser = "zen-beta";
+  browser = "librewolf";
   terminal = "ghostty";
-  fileManager = "thunar";
+  fileManager = "dolphin";
   appLauncher = "${pkgs.walker}/bin/walker";
 
   screenshotArea = "${pkgs.bash}/bin/bash -c '${pkgs.grim}/bin/grim -g \"\\\$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy'";
