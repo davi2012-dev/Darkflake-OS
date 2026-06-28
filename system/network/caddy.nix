@@ -1,100 +1,148 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  # Todos os seus domínios
+  domains = [
+    "nextcloud.darkflake.local"
+    "jellyfin.darkflake.local"
+    "librechat.darkflake.local"
+    "homarr.darkflake.local"
+    "stirling.darkflake.local"
+    "chat.darkflake.local"
+    "metube.darkflake.local"
+    "netdata.darkflake.local"
+    "ha.darkflake.local"
+    "portainer.darkflake.local"
+  ];
+
+  # --- GERA OS CERTIFICADOS DURANTE O BUILD (nixos-rebuild) ---
+  certs = pkgs.runCommand "caddy-local-certs" {
+    buildInputs = [ pkgs.openssl ];
+  } ''
+    mkdir -p $out
+
+    # 1. Cria a Autoridade Certificadora (CA) local
+    openssl genrsa -out $out/ca.key 2048
+    openssl req -x509 -new -nodes -key $out/ca.key -sha256 -days 3650 -out $out/ca.crt -subj "/CN=Darkflake Local CA"
+
+    # 2. Cria a chave do servidor (coringa para todos os subdomínios)
+    openssl genrsa -out $out/server.key 2048
+    openssl req -new -key $out/server.key -out $out/server.csr -subj "/CN=*.darkflake.local"
+
+    # 3. Configura o SAN (obrigatório para navegadores modernos)
+    echo "subjectAltName=DNS:*.darkflake.local" > $out/san.cnf
+
+    # 4. Assina o certificado do servidor com a CA local
+    openssl x509 -req -in $out/server.csr -CA $out/ca.crt -CAkey $out/ca.key -CAcreateserial -out $out/server.crt -days 3650 -sha256 -extfile $out/san.cnf
+
+    # Limpeza
+    rm $out/server.csr $out/san.cnf $out/ca.srl
+  '';
+
+  caCert = "${certs}/ca.crt";
+  serverCert = "${certs}/server.crt";
+  serverKey = "${certs}/server.key";
+in
 {
+  # --- INSTALA A CA NO SISTEMA (curl, wget, Chromium, etc. confiam) ---
+  security.pki.certificateFiles = [ caCert ];
+
+  # --- CONFIGURA O FIREFOX PARA USAR OS CERTIFICADOS DO SISTEMA ---
+  programs.firefox = {
+    enable = true;
+    policies = {
+      EnableEnterpriseRoots = true; # Firefox passa a confiar na CA do sistema
+    };
+  };
+
+  # --- CADDY USANDO OS CERTIFICADOS GERADOS NO BUILD ---
   services.caddy = {
     enable = true;
-    email = "DaviMigue@proton.me";
+    email = "DaviMigue@proton.me"; # opcional
 
     virtualHosts = {
-      "nextcloud.Darkflake.local" = {
+      "nextcloud.darkflake.local" = {
         extraConfig = ''
-          tls internal
+          tls ${serverCert} ${serverKey}
           reverse_proxy localhost:8085
         '';
       };
-      "jellyfin.Darkflake.local" = {
+      "jellyfin.darkflake.local" = {
         extraConfig = ''
-          tls internal
+          tls ${serverCert} ${serverKey}
           reverse_proxy localhost:8096
         '';
       };
-      "librechat.Darkflake.local" = {
+      "librechat.darkflake.local" = {
         extraConfig = ''
-          tls internal
+          tls ${serverCert} ${serverKey}
           reverse_proxy localhost:3080
         '';
       };
-      "homarr.Darkflake.local" = {
+      "homarr.darkflake.local" = {
         extraConfig = ''
-          tls internal
+          tls ${serverCert} ${serverKey}
           reverse_proxy localhost:8083
         '';
       };
-      "stirling.Darkflake.local" = {
+      "stirling.darkflake.local" = {
         extraConfig = ''
-          tls internal
+          tls ${serverCert} ${serverKey}
           reverse_proxy localhost:8089
         '';
       };
-      "chat.Darkflake.local" = {
+      "chat.darkflake.local" = {
         extraConfig = ''
-         tls internal
-         reverse_proxy localhost:7000
-       '';
+          tls ${serverCert} ${serverKey}
+          reverse_proxy localhost:7000
+        '';
       };
-      "metube.Darkflake.local" = {
+      "metube.darkflake.local" = {
         extraConfig = ''
-          tls internal
+          tls ${serverCert} ${serverKey}
           reverse_proxy localhost:8081
         '';
       };
-      "netdata.Darkflake.local" = {
+      "netdata.darkflake.local" = {
         extraConfig = ''
-          tls internal
+          tls ${serverCert} ${serverKey}
           reverse_proxy localhost:19999
         '';
       };
-      "ha.Darkflake.local" = {
+      "ha.darkflake.local" = {
         extraConfig = ''
-          tls internal
+          tls ${serverCert} ${serverKey}
           reverse_proxy localhost:8123
         '';
       };
-      "portainer.Darkflake.local" = {
+      "portainer.darkflake.local" = {
         extraConfig = ''
-          tls internal
+          tls ${serverCert} ${serverKey}
           reverse_proxy localhost:9443 {
             transport http {
               tls_insecure_skip_verify
             }
           }
         '';
-       };
+      };
     };
   };
 
-  # --- Endurecimento profundo do processo via Systemd (O que limpa a nota do Lynis) ---
+  # --- ENDURECIMENTO (opcional, mas mantido) ---
   systemd.services.caddy.serviceConfig = {
-    # Restrições de Sistema de Arquivos (Isolamento total)
-    ProtectSystem = "strict";            # Transforma o sistema em Read-Only para o Caddy
-    ProtectHome = true;                 # Impede leitura da pasta /home
-    PrivateTmp = true;                  # Cria um /tmp exclusivo e limpo
-    ProtectControlGroups = true;        # Bloqueia modificações nos cgroups do Kernel
-    ProtectKernelModules = true;        # Impede o processo de carregar módulos do Kernel
-    ProtectKernelTunables = true;       # Bloqueia alterações em caminhos como /proc/sys
-
-    # Isolamento de Privilégios e Usuário
-    NoNewPrivileges = true;             # Impede escalada de privilégios
-    CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ]; # Libera unicamente o bind de portas baixas (80/443)
+    ProtectSystem = "strict";
+    ProtectHome = true;
+    PrivateTmp = true;
+    ProtectControlGroups = true;
+    ProtectKernelModules = true;
+    ProtectKernelTunables = true;
+    NoNewPrivileges = true;
+    CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
     AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
-
-    # Restrições de Sandbox de Segurança
-    RestrictNamespaces = true;          
-    RestrictRealtime = true;            
-    RestrictSUIDSGID = true;            
-    MemoryDenyWriteExecute = true;      # Mitiga ataques de estouro de buffer (Buffer Overflow)
-
-    # Filtro de Chamadas do Sistema (Syscalls autorizadas)
+    RestrictNamespaces = true;
+    RestrictRealtime = true;
+    RestrictSUIDSGID = true;
+    MemoryDenyWriteExecute = true;
     SystemCallArchitectures = "native";
     SystemCallFilter = [ "@system-service" "~@privileged" "~@resources" ];
   };
