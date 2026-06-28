@@ -7,11 +7,17 @@
     nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     flake-parts.url = "github:hercules-ci/flake-parts";
     kartoza-plymouth-theme.url = "github:timlinux/kartoza-plymouth-theme";
+    hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
     mcp-nixos.url = "github:utensils/mcp-nixos";
+    
+    # Repositório correto do niri-flake
+    niri.url = "github:sodiboo/niri-flake";
+
+    # --- CachyOS Kernel ---
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
     home-manager = {
@@ -174,10 +180,12 @@
               };
               
               home-manager.users.davi = import ./applications/home/home.nix;
+
+              # 🌟 O SEGREDO ESTÁ AQUI: Injetando o módulo do Home Manager de forma isolada
               home-manager.sharedModules = [
                 inputs.sops-nix.homeManagerModules.sops
                 inputs.chaotic.homeManagerModules.default
-                inputs.niri.homeModules.niri 
+                inputs.niri.homeModules.niri # O módulo do Niri entra aqui!
               ];
             }
           ];
