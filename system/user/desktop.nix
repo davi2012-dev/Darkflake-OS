@@ -60,6 +60,7 @@
   programs.librepods.enable = true;                  
   services.spice-vdagentd.enable = true;
   nixowos.enable = true;
+  security.nixsecauditor.enable = true;
 
   services.earlyoom = {
     enable = true;
