@@ -7,6 +7,8 @@
     nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     flake-parts.url = "github:hercules-ci/flake-parts";
     kartoza-plymouth-theme.url = "github:timlinux/kartoza-plymouth-theme";
+    nur.url = "github:nix-community/NUR";
+    hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
