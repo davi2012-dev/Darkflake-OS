@@ -1,16 +1,10 @@
-{
-  inputs,
-  config,
-  ...
-}:
+{ config, ... }:
 
 {
-  imports = [
-    inputs.noctalia.homeModules.default
-  ];
 
-  programs.noctalia-shell = {
+  programs.noctalia = {
     enable = true;
+    systemd.enable = true; # Ativa o serviço integrado nativo da v5
 
     settings = {
       bar = {
@@ -20,9 +14,7 @@
         showCapsule = true;
         widgets = {
           left = [
-            {
-              id = "Launcher";
-            }
+            { id = "Launcher"; }
             {
               id = "Clock";
               formatHorizontal = "HH:mm ddd, MMM dd";
@@ -30,19 +22,13 @@
               useMonospacedFont = true;
               usePrimaryColor = false;
             }
-            {
-              id = "SystemMonitor";
-            }
+            { id = "SystemMonitor"; }
             {
               id = "VPN";
               displayMode = "alwaysShow";
             }
-            {
-              id = "ActiveWindow";
-            }
-            {
-              id = "MediaMini";
-            }
+            { id = "ActiveWindow"; }
+            { id = "MediaMini"; }
           ];
           center = [
             {
@@ -52,19 +38,13 @@
             }
           ];
           right = [
-            {
-              id = "Tray";
-            }
-            {
-              id = "NotificationHistory";
-            }
-            {
-              id = "Volume";
-            }
+            { id = "Tray"; }
+            { id = "NotificationHistory"; }
+            { id = "Volume"; }
             {
               id = "ControlCenter";
               useDistroLogo = true;
-              icon = "noctalia"; # used when distro logo is set to false
+              icon = "noctalia";
               enableColorization = true;
             }
           ];
@@ -73,6 +53,7 @@
 
       general = {
         avatarImage = "/home/${config.home.username}/.face";
+        launch_apps_as_systemd_services = true; # Recomendado pela doc ao usar systemd
       };
 
       colorSchemes.predefinedScheme = "Catppuccin-Lavender";
@@ -83,10 +64,7 @@
         useFahrenheit = true;
       };
 
-      network = {
-
-      };
+      network = { };
     };
-    # this may also be a string or a path to a JSON file.
   };
 }
