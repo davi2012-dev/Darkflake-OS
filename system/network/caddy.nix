@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 let
-  # Todos os seus domínios
   domains = [
     "nextcloud.darkflake.local"
     "jellyfin.darkflake.local"
