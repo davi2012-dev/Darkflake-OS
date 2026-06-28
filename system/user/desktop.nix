@@ -34,7 +34,6 @@
 
   # --- Serviços do Sistema e Integração ---
   services.libinput.enable = true;
-  services.stalld.enable = true;
   services.blueman.enable = true;
   services.sysstat.enable = true;
   services.collectd.enable = true;
