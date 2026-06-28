@@ -25,7 +25,6 @@
     ./spotify.nix
     ./mpv.nix
     ./cava.nix
-    ./niri.nix
   ];
 
   # 4 X11
