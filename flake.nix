@@ -185,7 +185,8 @@
               home-manager.sharedModules = [
                 inputs.sops-nix.homeManagerModules.sops
                 inputs.chaotic.homeManagerModules.default
-                inputs.niri.homeModules.niri # O módulo do Niri entra aqui!
+                inputs.niri.homeModules.niri
+                inputs.noctalia.homeModules.default
               ];
             }
           ];
