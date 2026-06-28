@@ -14,6 +14,8 @@
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
     mcp-nixos.url = "github:utensils/mcp-nixos";
+    
+    # Repositório correto do niri-flake
     niri.url = "github:sodiboo/niri-flake";
 
     # --- CachyOS Kernel ---
@@ -80,7 +82,6 @@
           config.allowUnfree = true;
         };       
 
-        # --- Criação do ambiente de desenvolvimento automatizado ---
         devShells.default = 
           let
             makeDevshell = import "${inputs.devshell}/modules" pkgs;
@@ -112,7 +113,6 @@
             '';
           };
 
-        # --- FUSÃO GARUDA: Hooks de Segurança para o seu Git ---
         checks.pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
           package = pkgs.pre-commit; 
           hooks = {
@@ -181,10 +181,10 @@
               };
               
               home-manager.users.davi = import ./applications/home/home.nix;
-
               home-manager.sharedModules = [
                 inputs.sops-nix.homeManagerModules.sops
                 inputs.chaotic.homeManagerModules.default
+                inputs.niri.homeModules.niri 
               ];
             }
           ];
