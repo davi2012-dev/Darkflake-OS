@@ -6,7 +6,8 @@ let
 in
 {
   imports = [
-    inputs.noctalia.homeModules.default # Importa o Noctalia
+    inputs.noctalia.homeModules.default 
+    inputs.chaotic.homeManagerModules.default
   ];
 
   # --- Configuração do Noctalia Shell ---
