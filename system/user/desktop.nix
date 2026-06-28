@@ -7,6 +7,7 @@
 
   # --- Ambiente de Desktop ---
   services.desktopManager.plasma6.enable = true;
+  programs.niri.enable = true;
 
   # --- Otimizações de Hardware para AMD GPU ---
   hardware.amdgpu = {
