@@ -181,6 +181,7 @@
 
               home-manager.sharedModules = [
                 inputs.sops-nix.homeManagerModules.sops
+                inputs.chaotic.homeManagerModules.default
               ];
             }
           ];
