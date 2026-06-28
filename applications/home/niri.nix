@@ -43,7 +43,7 @@ in
 
   # --- Configuração do Niri ---
   programs.niri = {
-    enable = true; # Ativa o Niri para o seu usuário davi
+    enable = true;
     settings = {
       
       # Inicia o Noctalia automaticamente junto com o Niri
@@ -51,23 +51,23 @@ in
         { command = [ "noctalia-shell" ]; }
       ];
 
-      # Configura os atalhos de teclado dentro do Niri
+      # Configura os atalhos de teclado dentro do Niri usando a sintaxe correta
       binds = with config.lib.niri.actions; {
         # Abrir o Menu com Super + Espaço
-        "Mod+Space".action.spawn = noctalia "launcher toggle";
+        "Mod+Space".action = spawn noctalia "launcher toggle";
 
         # Menu de energia com Super + P
-        "Mod+P".action.spawn = noctalia "sessionMenu toggle";
+        "Mod+P".action = spawn noctalia "sessionMenu toggle";
 
         # Teclas de Volume
-        "XF86AudioLowerVolume".action.spawn = noctalia "volume decrease";
-        "XF86AudioRaiseVolume".action.spawn = noctalia "volume increase";
-        "XF86AudioMute".action.spawn = noctalia "volume muteOutput";
+        "XF86AudioLowerVolume".action = spawn (noctalia "volume decrease");
+        "XF86AudioRaiseVolume".action = spawn (noctalia "volume increase");
+        "XF86AudioMute".action = spawn (noctalia "volume muteOutput");
 
-        # Movimentação básica de janelas do Niri (Exemplo)
-        "Mod+Left".action.focus-column-left = null;
-        "Mod+Right".action.focus-column-right = null;
-        "Mod+Q".action.close-window = null;
+        # Movimentação básica de janelas do Niri (Corrigido para a sintaxe do módulo)
+        "Mod+Left".action = focus-column-left;
+        "Mod+Right".action = focus-column-right;
+        "Mod+Q".action = close-window;
       };
     };
   };
