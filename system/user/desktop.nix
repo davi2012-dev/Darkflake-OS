@@ -77,7 +77,6 @@
   powerManagement = {
     enable = true;
     powertop.enable = true;
-    cpuFreqGovernor = "schedutil";
   };
 
   # --- Portais XDG para KDE ---
