@@ -13,6 +13,7 @@
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
     mcp-nixos.url = "github:utensils/mcp-nixos";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+    nixsecauditor.url = "github:unnamed-systems/nixsecauditor";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -51,7 +52,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = inputs@{ flake-parts, nixpkgs, nixpkgs-unstable, mcp-nixos, nix-cachyos-kernel, self, ... }:
+  outputs = inputs@{ flake-parts, nixpkgs, nixpkgs-unstable, mcp-nixos, nix-cachyos-kernel, self, nixsecauditor, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       
       systems = [ "x86_64-linux" ];
@@ -146,6 +147,7 @@
             inputs.impermanence.nixosModules.impermanence
             inputs.nixos-hardware.nixosModules.common-cpu-intel
             inputs.nix-index-db.nixosModules.nix-index
+            inputs.nixsecauditor.nixosModules.default
             
             {
               nixpkgs.overlays = [ 
