@@ -134,6 +134,8 @@
               system = "x86_64-linux";
               config.allowUnfree = true;
             };
+            # Injeta a coleção de pacotes do Guix adaptada para o Nix
+            guixpkgs = inputs.guixpkgs.packages."x86_64-linux";
           };
           
           modules = [
@@ -169,6 +171,8 @@
                   system = "x86_64-linux";
                   config.allowUnfree = true;
                 };
+                # Permite que você use pacotes do Guix dentro do arquivo home.nix também
+                guixpkgs = inputs.guixpkgs.packages."x86_64-linux";
               };
               
               home-manager.users.davi = import ./applications/home/home.nix;
