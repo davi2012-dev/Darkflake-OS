@@ -10,7 +10,7 @@
     # --- Internet e Comunicação ---
     vesktop             # Discord com melhorias (Vencord)
     beeper              # O app de chat universal moderno
-    guixpkgs.icecat
+    guixpkgs.firefox
     crow-translate      # Tradutor rápido
     tor-browser
 
