@@ -14,7 +14,22 @@
     overdrive.enable = true;
   };
 
-  # --- Monitoramento de Saúde dos Discos (novo) ---
+  # --- Gerenciamento Dinâmico de CPU ---
+  services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+    };
+  };
+
+  # --- Monitoramento de Saúde dos Discos ---
   services.smartd = {
     enable = true;
     autodetect = true;
@@ -37,7 +52,7 @@
   services.blueman.enable = true;
   services.sysstat.enable = true;
   services.collectd.enable = true;
-  services.thermald.enable = true;
+  services.thermald.enable = true; # Mantido para o seu processador Intel atual
   services.fstrim.enable = true;
   services.upower.enable = true;
   programs.fuse.enable = true;
@@ -73,14 +88,15 @@
     enableSSHSupport = true;
   };
 
+  # --- Otimização de Perfis com Tuned ---
   services.tuned = {
     enable = true;
-    ppdSupport = true;
+    ppdSupport = true; # Integração com o seletor de energia do Plasma 6
   };
 
   powerManagement = {
     enable = true;
-    powertop.enable = true;
+    powertop.enable = true; 
   };
 
   # --- Portais XDG para KDE ---
