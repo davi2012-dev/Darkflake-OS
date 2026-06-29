@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 let
-  # Wrapper com bubblewrap (isolamento total)
   librewolf-wrapped = pkgs.writeShellScriptBin "librewolf" ''
     exec ${pkgs.bubblewrap}/bin/bwrap \
       --unshare-all \
@@ -25,7 +24,6 @@ let
   '';
 in
 {
-  # 1. Configuração normal do LibreWolf (perfil, políticas)
   programs.librewolf = {
     enable = true;
     languagePacks = [ "pt-BR" ];
@@ -46,15 +44,14 @@ in
     };
   };
 
-  # 2. Substitui o binário e o atalho do menu automaticamente
   home.packages = [
-    librewolf-wrapped  # coloca o wrapper no PATH, com nome "librewolf"
+    librewolf-wrapped
   ];
 
-  # 3. Sobrescreve o lançador do menu para usar o wrapper
+  # Sobrescreve o lançador do menu para usar o wrapper (com tipos corretos)
   xdg.desktopEntries.librewolf = {
     name = "LibreWolf";
-    exec = "librewolf %U";  # agora aponta para o wrapper
+    exec = "librewolf %U";
     icon = "librewolf";
     type = "Application";
     categories = [ "Network" "WebBrowser" ];
@@ -64,7 +61,7 @@ in
       "x-scheme-handler/http" "x-scheme-handler/https"
     ];
     settings = {
-      StartupNotify = true;
+      StartupNotify = "true";   # ← string, não booleano
     };
   };
 }
