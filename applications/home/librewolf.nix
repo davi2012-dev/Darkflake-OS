@@ -6,9 +6,10 @@
     
     # Configurações de preferências do usuário
     settings = {
-      "webgl.disabled" = false;
+      "webgl.disabled" = true;
       "privacy.resistFingerprinting" = true;
       "privacy.trackingprotection.enabled" = true;
+      "identity.fxaccounts.enabled" = true;
     };
 
     # Ativa as políticas corporativas (Enterprise Policies) para injetar a flag de certificados
