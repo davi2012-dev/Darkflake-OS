@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  # Configuração do mecanismo de busca (SearXNG)
+  # Configuração do mecanismo de busca (SearXNG )
   searchConfig = pkgs.writeText "search.json.mozlz4" ''
     {
       "version": 6,
@@ -13,10 +13,10 @@ let
           "_name": "SearXNG",
           "_shortName": "searxng",
           "description": "Busca privada via SearXNG",
-          "iconURL": "http://search.darkflake.local/static/themes/simple/img/favicon.png",
+          "iconURL": "https://search.darkflake.local/static/themes/simple/img/favicon.png",
           "isDefault": true,
           "order": 1,
-          "searchForm": "http://search.darkflake.local",
+          "searchForm": "https://search.darkflake.local",
           "searchUrlGetParams": "q={searchTerms}&categories=general&language=pt",
           "suggestUrlGetParams": "q={searchTerms}",
           "type": "application/x-sj"
