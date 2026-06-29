@@ -3,7 +3,7 @@
 let
   # --- GERA OS CERTIFICADOS DURANTE O BUILD (nixos-rebuild) ---
   certs = pkgs.runCommand "caddy-local-certs-${builtins.toString builtins.currentTime}" {
-  buildInputs = [ pkgs.openssl ]
+  buildInputs = [ pkgs.openssl ];
   } ''
     mkdir -p $out
 
