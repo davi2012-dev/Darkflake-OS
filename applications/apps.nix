@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, unstable, ... }: {
+{ config, pkgs, lib, inputs, unstable, guixpkgs, ... }: {
 
   # ========== SUPORTE A APPIMAGE ==========
   programs.appimage = {
