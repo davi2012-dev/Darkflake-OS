@@ -4,10 +4,13 @@ let
   justfileContent = pkgs.writeText "justfile" ''
     default:
         @echo "Uso: njust hmx"
-        @echo "       njust --help"
+        @echo "     njust latesh"
 
     hmx:
         curl -fsSL https://get.hmx.dev | bash
+
+    latesh:
+        ssh -4 late.sh
   '';
   njust = pkgs.symlinkJoin {
     name = "njust";
