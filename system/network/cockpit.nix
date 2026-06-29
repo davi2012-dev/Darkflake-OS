@@ -8,7 +8,7 @@ in {
     settings = {
       WebService = {
         AllowUnencrypted = false;
-        Origins = lib.mkForce "https://localhost:9090 https://127.0.0.1:9090";
+        Origins = lib.mkForce "https://localhost:9090 https://127.0.0.1:9090 https://cockpit.darkflake.local";
       };
     };
   };
