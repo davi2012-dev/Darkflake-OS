@@ -1,16 +1,37 @@
 { config, pkgs, lib, ... }:
 
+let
+  librewolf-sandbox = pkgs.writeShellScriptBin "librewolf-sandbox" ''
+    exec ${pkgs.bubblewrap}/bin/bwrap \
+      --unshare-all \
+      --share-net \
+      --bind /nix /nix \
+      --bind /run/user/$(id -u) /run/user/$(id -u) \
+      --bind /tmp/.X11-unix /tmp/.X11-unix \
+      --bind /dev/dri /dev/dri \
+      --bind /sys/dev/char /sys/dev/char \
+      --dev /dev \
+      --proc /proc \
+      --tmpfs /tmp \
+      --bind "${config.home.homeDirectory}/.mozilla" "${config.home.homeDirectory}/.mozilla" \
+      --bind "${config.home.homeDirectory}/Downloads" "${config.home.homeDirectory}/Downloads" \
+      --ro-bind /etc /etc \
+      --ro-bind /usr /usr \
+      --ro-bind /bin /bin \
+      --ro-bind /lib /lib \
+      --ro-bind /lib64 /lib64 \
+      --chdir "${config.home.homeDirectory}" \
+      ${pkgs.librewolf}/bin/librewolf "$@"
+  '';
+in
 {
-  # 1. Configuração do LibreWolf dentro do Host (Gera o perfil e idioma)
   programs.librewolf = {
     enable = true;
     languagePacks = [ "pt-BR" ];
-    
     policies = {
       DisableTelemetry = true;
       Certificates.ImportEnterpriseRoots = true;
     };
-
     profiles.darkflake = {
       id = 0;
       isDefault = true;
@@ -19,33 +40,10 @@
         "webgl.disabled" = false;
         "privacy.resistFingerprinting" = true;
         "privacy.trackingprotection.enabled" = true;
-        # GARANTE O SUPORTE À CONTA SYNC:
-        "identity.fxaccounts.enabled" = true; 
+        "identity.fxaccounts.enabled" = true;
       };
     };
   };
 
-  # 2. Declaração da MicroVM Isolada (Estilo Qubes OS)
-  # Nota: Requer o input 'microvm' no seu flake.nix
-  microvm.vms.librewolf-vm = {
-    autostart = false; # Você inicia ela quando quiser navegar
-    config = { ... }: {
-      networking.hostName = "librewolf-appvm";
-      
-      # Compartilha a interface gráfica (Wayland/X11) do seu KDE com a VM
-      virtualisation.microvm = {
-        volumes = [ {
-          # Monta uma pasta persistente para salvar os dados da sua Conta/Sync
-          image = "/var/lib/microvms/librewolf-profile.img";
-          mountPoint = "/home/user/.mozilla";
-          size = 10240; # 10GB de espaço isolado para o perfil
-        } ];
-        
-        # Compartilha os sockets de vídeo e áudio para o navegador abrir na sua tela
-        shareDisplay = true; 
-      };
-
-      environment.systemPackages = [ pkgs.librewolf ];
-    };
-  };
+  home.packages = [ librewolf-sandbox ];
 }
