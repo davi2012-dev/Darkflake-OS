@@ -7,6 +7,7 @@ boot.zfs.package = unstable.zfs;
   boot.kernelParams = [
     # Performance de Processamento e Latência
     "bbr3"
+    "cpuidle.governor=teo"
     "threadirqs"                    # Força threads para interrupções (ganho de latência)
     "preempt=full"                  # Preempção total para resposta instantânea
     "skew_tick=1"                   # Ajuda em CPUs com jitter de clock
