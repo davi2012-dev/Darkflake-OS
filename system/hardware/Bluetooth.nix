@@ -39,27 +39,32 @@
   # --- 3. Regras do Udev para Controles (Acesso Direto sem Root) ---
   services.udev.packages = [ pkgs.game-devices-udev-rules ];
   services.udev.extraRules = ''
-    SUBSYSTEMS=="usb", TAG+="uaccess"
-    KERNEL=="hidraw*", TAG+="uaccess"
-    KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", OPTIONS+="static_node=uinput"
+  # --- Regras para controles (jogos) ---
+  SUBSYSTEMS=="usb", TAG+="uaccess"
+  KERNEL=="hidraw*", TAG+="uaccess"
+  KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", OPTIONS+="static_node=uinput"
 
-    # Xbox 360
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="028e", TAG+="uaccess"
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="0719", TAG+="uaccess"
-    
-    # Xbox One / Series
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="02ea", TAG+="uaccess"
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="0b12", TAG+="uaccess"
+  # Xbox 360
+  SUBSYSTEM=="usb", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="028e", TAG+="uaccess"
+  SUBSYSTEM=="usb", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="0719", TAG+="uaccess"
 
-    # PlayStation 4 e 5 (DualShock 4 / DualSense)
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="05c4", TAG+="uaccess"
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="09cc", TAG+="uaccess"
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="0ce6", TAG+="uaccess"
+  # Xbox One / Series
+  SUBSYSTEM=="usb", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="02ea", TAG+="uaccess"
+  SUBSYSTEM=="usb", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="0b12", TAG+="uaccess"
 
-    # 8BitDo
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="2dc8", ATTRS{idProduct}=="310b", TAG+="uaccess"
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="2dc8", ATTRS{idProduct}=="6012", TAG+="uaccess"
-  '';
+  # PlayStation 4 e 5
+  SUBSYSTEM=="usb", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="05c4", TAG+="uaccess"
+  SUBSYSTEM=="usb", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="09cc", TAG+="uaccess"
+  SUBSYSTEM=="usb", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="0ce6", TAG+="uaccess"
+
+  # 8BitDo
+  SUBSYSTEM=="usb", ATTRS{idVendor}=="2dc8", ATTRS{idProduct}=="310b", TAG+="uaccess"
+  SUBSYSTEM=="usb", ATTRS{idVendor}=="2dc8", ATTRS{idProduct}=="6012", TAG+="uaccess"
+
+  # --- Regra para ADIOS (scheduler de I/O) ---
+  ACTION=="add|change", KERNEL=="sd*|nvme*|mmcblk*", ATTR{queue/rotational}=="0", \
+    TEST{queue/scheduler}=="1", ATTR{queue/scheduler}="adios"
+'';
 
   # --- 4. System76 Scheduler (Ajustado Especialmente para o Kernel BORE) ---
   services.system76-scheduler = {
