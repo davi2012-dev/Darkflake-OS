@@ -27,6 +27,7 @@ let
           pkgs.curl
           pkgs.bash
           pkgs.coreutils
+          pkgs.openssh
           pkgs.gawk
           pkgs.gnused
           pkgs.gnugrep
