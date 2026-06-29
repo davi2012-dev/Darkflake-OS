@@ -16,13 +16,12 @@
         Class = "0xFFE100";     
         MultiProfile = "multiple"; 
         KernelExperimental = "6fbaf188-05e0-496a-9885-d6ddfdb4e03e,330859bc-7506-492d-9370-9a6f0614037f";
-        
         DiscoverableTimeout = 0; 
         PairableTimeout = 0;     
-        
         SecureConnectionsOnly = "true"; 
         JustWorksRepairing = "never";    
-        Privacy = "device";              
+        Privacy = "device";
+        UserspaceHID = true;
       };
       Policy = {
         AutoEnable = "true"; 
