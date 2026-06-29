@@ -1,40 +1,51 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+  # 1. Configuração do LibreWolf dentro do Host (Gera o perfil e idioma)
   programs.librewolf = {
-    # 1. Ativa o programa globalmente
     enable = true;
-
-    # 2. Define o pacote padrão do nixpkgs
-    package = pkgs.librewolf;
-
-    # 3. Força o pacote de idioma em Português do Brasil
     languagePacks = [ "pt-BR" ];
-
-    # 4. Políticas Globais (Afetam todo o sistema e garantem privacidade)
+    
     policies = {
       DisableTelemetry = true;
-      DisableFirefoxStudies = true;
-      DisablePocket = true;
-      
-      # Garante que o navegador confie nos certificados locais (ex: Caddy para o .local)
-      Certificates = {
-        ImportEnterpriseRoots = true;
-      };
+      Certificates.ImportEnterpriseRoots = true;
     };
 
-    # 5. Configuração do teu Perfil Declarativo
     profiles.darkflake = {
       id = 0;
       isDefault = true;
       name = "Darkflake";
-
       settings = {
-        "webgl.disabled" = false; # Mantém o WebGL ativo para poderes jogar no navegador
+        "webgl.disabled" = false;
         "privacy.resistFingerprinting" = true;
         "privacy.trackingprotection.enabled" = true;
-        "intl.accept_languages" = "pt-br,pt"; # Informa os sites para abrirem em português
+        # GARANTE O SUPORTE À CONTA SYNC:
+        "identity.fxaccounts.enabled" = true; 
       };
+    };
+  };
+
+  # 2. Declaração da MicroVM Isolada (Estilo Qubes OS)
+  # Nota: Requer o input 'microvm' no seu flake.nix
+  microvm.vms.librewolf-vm = {
+    autostart = false; # Você inicia ela quando quiser navegar
+    config = { ... }: {
+      networking.hostName = "librewolf-appvm";
+      
+      # Compartilha a interface gráfica (Wayland/X11) do seu KDE com a VM
+      virtualisation.microvm = {
+        volumes = [ {
+          # Monta uma pasta persistente para salvar os dados da sua Conta/Sync
+          image = "/var/lib/microvms/librewolf-profile.img";
+          mountPoint = "/home/user/.mozilla";
+          size = 10240; # 10GB de espaço isolado para o perfil
+        } ];
+        
+        # Compartilha os sockets de vídeo e áudio para o navegador abrir na sua tela
+        shareDisplay = true; 
+      };
+
+      environment.systemPackages = [ pkgs.librewolf ];
     };
   };
 }
