@@ -36,7 +36,6 @@ in
   # --- CADDY USANDO OS CERTIFICADOS GERADOS NO BUILD ---
   services.caddy = {
     enable = true;
-    email = "DaviMigue@proton.me"; # opcional
 
     virtualHosts = {
       "nextcloud.darkflake.local" = {
