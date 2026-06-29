@@ -1,7 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-  librewolf-sandbox = pkgs.writeShellScriptBin "librewolf-sandbox" ''
+  # Wrapper com bubblewrap (isolamento total)
+  librewolf-wrapped = pkgs.writeShellScriptBin "librewolf" ''
     exec ${pkgs.bubblewrap}/bin/bwrap \
       --unshare-all \
       --share-net \
@@ -9,7 +10,6 @@ let
       --bind /run/user/$(id -u) /run/user/$(id -u) \
       --bind /tmp/.X11-unix /tmp/.X11-unix \
       --bind /dev/dri /dev/dri \
-      --bind /sys/dev/char /sys/dev/char \
       --dev /dev \
       --proc /proc \
       --tmpfs /tmp \
@@ -25,6 +25,7 @@ let
   '';
 in
 {
+  # 1. Configuração normal do LibreWolf (perfil, políticas)
   programs.librewolf = {
     enable = true;
     languagePacks = [ "pt-BR" ];
@@ -45,5 +46,25 @@ in
     };
   };
 
-  home.packages = [ librewolf-sandbox ];
+  # 2. Substitui o binário e o atalho do menu automaticamente
+  home.packages = [
+    librewolf-wrapped  # coloca o wrapper no PATH, com nome "librewolf"
+  ];
+
+  # 3. Sobrescreve o lançador do menu para usar o wrapper
+  xdg.desktopEntries.librewolf = {
+    name = "LibreWolf";
+    exec = "librewolf %U";  # agora aponta para o wrapper
+    icon = "librewolf";
+    type = "Application";
+    categories = [ "Network" "WebBrowser" ];
+    mimeType = [
+      "text/html" "text/xml" "application/xhtml+xml"
+      "application/vnd.mozilla.xul+xml" "text/mml"
+      "x-scheme-handler/http" "x-scheme-handler/https"
+    ];
+    settings = {
+      StartupNotify = true;
+    };
+  };
 }
