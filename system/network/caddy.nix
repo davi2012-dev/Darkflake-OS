@@ -48,14 +48,6 @@ in
   # --- INSTALA A CA NO SISTEMA (curl, wget, Chromium, etc. confiam) ---
   security.pki.certificateFiles = [ caCert ];
 
-  # --- CONFIGURA O FIREFOX PARA USAR OS CERTIFICADOS DO SISTEMA ---
-  programs.firefox = {
-    enable = true;
-    policies = {
-      EnableEnterpriseRoots = true; # Firefox passa a confiar na CA do sistema
-    };
-  };
-
   # --- CADDY USANDO OS CERTIFICADOS GERADOS NO BUILD ---
   services.caddy = {
     enable = true;
