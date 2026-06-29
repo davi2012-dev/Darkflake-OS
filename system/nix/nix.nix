@@ -29,6 +29,7 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" "ca-derivations" "pipe-operators" "recursive-nix" "dynamic-derivations" "fetch-tree"  ];
     auto-optimise-store = true;
+    allow-impure = true;
     substituters = [
       "https://cache.nixos.org/"
       "https://nix-community.cachix.org"
