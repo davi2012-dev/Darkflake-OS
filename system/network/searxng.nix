@@ -11,7 +11,7 @@
       server = {
         port = 8080;
         bind_address = "127.0.0.1";
-        secret_key = "UmaSenhaSuperSecretaAquiParaOsCookies";
+        secret_key = "e0c1e9f73d6191a4eff1075036e1b4b80086a57c5cc0004b80a196d6c34fd84339c101a29caa075ee0e837243b4b3c13e451ddc0227d436bd349602b316f2b40";
       };
 
       ui = {
