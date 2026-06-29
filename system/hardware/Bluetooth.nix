@@ -62,6 +62,7 @@
 
   # --- Regra para ADIOS (scheduler de I/O) ---
   ACTION=="add|change", KERNEL=="sd*|nvme*|mmcblk*", ATTR{queue/rotational}=="0", TEST{queue/scheduler}=="1", ATTR{queue/scheduler}="adios"
+  '';
 
   # --- 4. System76 Scheduler (Ajustado Especialmente para o Kernel BORE) ---
   services.system76-scheduler = {
