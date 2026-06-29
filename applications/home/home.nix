@@ -25,7 +25,7 @@
     ./spotify.nix
     ./mpv.nix
     ./cava.nix
-    #./librewolf.nix
+    ./librewolf.nix
   ];
 
   # 4 X11
