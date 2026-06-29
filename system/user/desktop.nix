@@ -37,7 +37,7 @@
   services.blueman.enable = true;
   services.sysstat.enable = true;
   services.collectd.enable = true;
-  services.thermald.enable = true; # Mantido para o seu processador Intel atual
+  services.thermald.enable = true; 
   services.fstrim.enable = true;
   services.upower.enable = true;
   programs.fuse.enable = true;
