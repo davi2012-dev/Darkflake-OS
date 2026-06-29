@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  # Configuração do mecanismo de busca (SearXNG )
+  # Configuração do mecanismo de busca (SearXNG via HTTPS)
   searchConfig = pkgs.writeText "search.json.mozlz4" ''
     {
       "version": 6,
@@ -66,8 +66,8 @@ in
       isDefault = true;
       name = "Darkflake";
       settings = {
-        "webgl.disabled" = false;
-        "privacy.resistFingerprinting" = true;
+        "webgl.disabled" = true;
+        "privacy.resistFingerprinting" = false;
         "privacy.trackingprotection.enabled" = true;
         "identity.fxaccounts.enabled" = true;
         "sidebar.verticalTabs" = true;
