@@ -39,7 +39,6 @@
   services.collectd.enable = true;
   services.thermald.enable = true;
   services.fstrim.enable = true;
-  services.haveged.enable = true;
   services.upower.enable = true;
   programs.fuse.enable = true;
   services.playerctld.enable = true;
