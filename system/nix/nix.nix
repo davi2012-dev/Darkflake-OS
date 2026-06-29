@@ -8,30 +8,29 @@
     flake = "/etc/nixos";
   };
 
-  # ---  Nix Config & Performance ---
+# ---  Nix Config & Performance ---
   nix.channel.enable = false;
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" "ca-derivations" "pipe-operators" "recursive-nix" "dynamic-derivations" "fetch-tree"  ];
     auto-optimise-store = true;
     
-    # Adicionado o substituto do guixpkgs para evitar compilações longas
+    # Lista de substitutos limpa e otimizada
     substituters = [
       "https://cache.nixos.org/"
       "https://nix-community.cachix.org"
       "https://hyprland.cachix.org" 
-      "https://attic.xuyh0120.win/lantian"
       "https://chaotic-nyx.cachix.org"
       "https://noctalia.cachix.org"
       "https://guixpkgs.cachix.org" 
     ];
     
-    # Adicionada a chave pública do repositório de binários do guixpkgs
+    # Chaves públicas corrigidas (incluindo a chave real do guixpkgs)
     trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
       "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
-      "guixpkgs.cachix.org-1:R4N9asU0/H37Y47EosUvjKIDhGND2wDclpOfY+04Uo0="
+      "guixpkgs.cachix.org-1:rM4xwCs5NUy+FcCKkiWP/CmRaSVxxDPaKWZvM1bRopg="
     ];
     
     max-substitution-jobs = 20;
