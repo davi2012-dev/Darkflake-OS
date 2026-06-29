@@ -2,20 +2,34 @@
 
 {
   programs.librewolf = {
+    # 1. Ativa o programa globalmente
     enable = true;
-    
-    # Configurações de preferências do usuário
-    settings = {
-      "webgl.disabled" = true;
-      "privacy.resistFingerprinting" = true;
-      "privacy.trackingprotection.enabled" = true;
-      "identity.fxaccounts.enabled" = true;
+
+    # 2. Define o pacote (padrão estável do nixpkgs)
+    package = pkgs.librewolf;
+
+    # 3. Políticas Globais (Afetam todos os perfis do sistema)
+    policies = {
+      DisableTelemetry = true;
+      DisableFirefoxStudies = true;
+      DisablePocket = true;
+      
+      # Aquela flag que conversamos para aceitar os certificados locais do Caddy
+      Certificates = {
+        ImportEnterpriseRoots = true;
+      };
     };
 
-    # Ativa as políticas corporativas (Enterprise Policies) para injetar a flag de certificados
-    policies = {
-      Certificates = {
-        ImportEnterpriseRoots = true; # No Firefox/LibreWolf a flag de política chama-se assim
+    # 4. Configurações de Perfis (Onde entra a lista anterior)
+    profiles.darkflake = {
+      id = 0;
+      isDefault = true;
+      name = "Darkflake";
+
+      settings = {
+        "webgl.disabled" = false; # Mantém WebGL ativo para jogos de navegador
+        "privacy.resistFingerprinting" = true;
+        "privacy.trackingprotection.enabled" = true;
       };
     };
   };
