@@ -13,6 +13,8 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" "ca-derivations" "pipe-operators" "recursive-nix" "dynamic-derivations" "fetch-tree"  ];
     auto-optimise-store = true;
+    
+    # Adicionado o substituto do guixpkgs para evitar compilações longas
     substituters = [
       "https://cache.nixos.org/"
       "https://nix-community.cachix.org"
@@ -20,13 +22,18 @@
       "https://attic.xuyh0120.win/lantian"
       "https://chaotic-nyx.cachix.org"
       "https://noctalia.cachix.org"
+      "https://guixpkgs.cachix.org" 
     ];
+    
+    # Adicionada a chave pública do repositório de binários do guixpkgs
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
       "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      "guixpkgs.cachix.org-1:R4N9asU0/H37Y47EosUvjKIDhGND2wDclpOfY+04Uo0="
     ];
+    
     max-substitution-jobs = 20;
     builders-use-substitutes = true;
     sandbox = true;
@@ -55,18 +62,5 @@
   programs.nixbit.repository = "https://github.com/davi2012-dev/Darkflake-OS";
   programs.nix-required-mounts.enable = true;
 
-  # ---  GNU Guix Integration ---
-  services.guix = {
-    enable = true;
-    gc.enable = true;
-    publish = {
-      enable = true;
-      generateKeyPair = true;
-    };
-    substituters.urls = [
-      "https://ci.guix.gnu.org"
-      "https://bordeaux.guix.gnu.org"
-      "https://berlin.guix.gnu.org"
-    ];
-  };
+  # O bloco "services.guix" antigo foi completamente removido daqui!
 }
