@@ -12,6 +12,8 @@ let
     "netdata.darkflake.local"
     "ha.darkflake.local"
     "portainer.darkflake.local"
+    "search.darkflake.local"
+    "cockpit.darkflake.local"
   ];
 
   # --- GERA OS CERTIFICADOS DURANTE O BUILD (nixos-rebuild) ---
@@ -72,12 +74,28 @@ in
           reverse_proxy localhost:8096
         '';
       };
+      "search.darkflake.local" = {
+        extraConfig = ''
+          tls ${serverCert} ${serverKey}
+          reverse_proxy localhost:8080
+        '';
+      };
       "librechat.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
           reverse_proxy localhost:3080
         '';
       };
+      "cockpit.darkflake.local" = {
+        extraConfig = ''
+         tls ${serverCert} ${serverKey}
+         reverse_proxy localhost:9090 {
+         transport http {
+         tls_insecure_skip_verify
+      }
+    }
+  '';
+};
       "homarr.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
