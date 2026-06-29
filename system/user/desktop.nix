@@ -14,21 +14,6 @@
     overdrive.enable = true;
   };
 
-  # --- Gerenciamento Dinâmico de CPU ---
-  services.auto-cpufreq = {
-    enable = true;
-    settings = {
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-      };
-      battery = {
-        governor = "powersave";
-        turbo = "never";
-      };
-    };
-  };
-
   # --- Monitoramento de Saúde dos Discos ---
   services.smartd = {
     enable = true;
