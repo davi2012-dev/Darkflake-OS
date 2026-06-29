@@ -48,7 +48,7 @@ in
   # --- INSTALA A CA NO SISTEMA (curl, wget, Chromium, etc. confiam) ---
   security.pki.certificateFiles = [ caCert ];
 
-  # --- CADDY USANDO OS CERTIFICADOS GERADOS NO BUILD ---
+ # --- CADDY USANDO OS CERTIFICADOS GERADOS NO BUILD ---
   services.caddy = {
     enable = true;
     email = "DaviMigue@proton.me"; # opcional
@@ -80,14 +80,14 @@ in
       };
       "cockpit.darkflake.local" = {
         extraConfig = ''
-         tls ${serverCert} ${serverKey}
-         reverse_proxy localhost:9090 {
-         transport http {
-         tls_insecure_skip_verify
-      }
-    }
-  '';
-};
+          tls ${serverCert} ${serverKey}
+          reverse_proxy localhost:9090 {
+            transport http {
+              tls_insecure_skip_verify
+            }
+          }
+        '';
+      };
       "homarr.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
