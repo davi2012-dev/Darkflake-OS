@@ -1,21 +1,6 @@
 { config, pkgs, lib, ... }:
 
 let
-  domains = [
-    "nextcloud.darkflake.local"
-    "jellyfin.darkflake.local"
-    "librechat.darkflake.local"
-    "homarr.darkflake.local"
-    "stirling.darkflake.local"
-    "chat.darkflake.local"
-    "metube.darkflake.local"
-    "netdata.darkflake.local"
-    "ha.darkflake.local"
-    "portainer.darkflake.local"
-    "search.darkflake.local"
-    "cockpit.darkflake.local"
-  ];
-
   # --- GERA OS CERTIFICADOS DURANTE O BUILD (nixos-rebuild) ---
   certs = pkgs.runCommand "caddy-local-certs" {
     buildInputs = [ pkgs.openssl ];
@@ -48,7 +33,7 @@ in
   # --- INSTALA A CA NO SISTEMA (curl, wget, Chromium, etc. confiam) ---
   security.pki.certificateFiles = [ caCert ];
 
- # --- CADDY USANDO OS CERTIFICADOS GERADOS NO BUILD ---
+  # --- CADDY USANDO OS CERTIFICADOS GERADOS NO BUILD ---
   services.caddy = {
     enable = true;
     email = "DaviMigue@proton.me"; # opcional
@@ -137,7 +122,7 @@ in
     };
   };
 
-  # --- ENDURECIMENTO (opcional, mas mantido) ---
+  # --- ENDURECIMENTO ---
   systemd.services.caddy.serviceConfig = {
     ProtectSystem = "strict";
     ProtectHome = true;
