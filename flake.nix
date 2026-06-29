@@ -13,6 +13,7 @@
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
     mcp-nixos.url = "github:utensils/mcp-nixos";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+    guixpkgs.url = "github:fzakaria/guixpkgs";
     nixsecauditor.url = "github:unnamed-systems/nixsecauditor";
 
     home-manager = {
