@@ -2,10 +2,10 @@
 
 {
   sops.secrets."user-davi-hashed-password" = {
-    sopsFile = ./secrets.yaml;
+    sopsFile = ../secrets.yaml;
   };
 
   sops.secrets."user-guest-hashed-password" = {
-    sopsFile = ./secrets.yaml;
+    sopsFile = ../secrets.yaml;
   };
 }
