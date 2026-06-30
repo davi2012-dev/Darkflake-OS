@@ -13,6 +13,7 @@
     crow-translate      # Tradutor rápido
     tor-browser
     guixpkgs.hello
+    inputs.guixpkgs.lib.${system}.browser.icecat
 
     # --- Multimídia e Design ---
     mpv                 # Player de vídeo minimalista
