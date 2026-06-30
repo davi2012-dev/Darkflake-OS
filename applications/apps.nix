@@ -12,6 +12,7 @@
     beeper              # O app de chat universal moderno
     crow-translate      # Tradutor rápido
     tor-browser
+    guixpkgs.hello
 
     # --- Multimídia e Design ---
     mpv                 # Player de vídeo minimalista
