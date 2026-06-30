@@ -27,7 +27,8 @@
     extraPackages = with pkgs; [
       nixd
       alejandra
-      # Removido: nerdfonts.override ...
+      # (opcional) Para o dicionário pt_BR, você pode instalar o aspell com o dicionário
+      # aspellDicts.pt_BR
     ];
 
     plugins = {
@@ -44,6 +45,21 @@
         plugin = "LazyVim/LazyVim";
         opts = { colorscheme = "catppuccin"; };
       };
+      
+      yanky = inputs.lazyvim.lib.lazyConfig {
+        plugin = "gbprod/yanky.nvim";
+        opts = { };
+      };
+
+      inc-rename = inputs.lazyvim.lib.lazyConfig {
+        plugin = "smjonas/inc-rename.nvim";
+        opts = { };
+      };
+
+      mini-hipatterns = inputs.lazyvim.lib.lazyConfig {
+        plugin = "echasnovski/mini.hipatterns";
+        opts = { };
+      };
 
       harpoon = inputs.lazyvim.lib.lazyConfig {
         plugin = "ThePrimeagen/harpoon";
@@ -59,6 +75,17 @@
         plugin = "folke/todo-comments.nvim";
         opts = { };
       };
+
+      # ========== NOVOS PLUGINS ==========
+      
+      # GitHub: Navegue por issues, PRs, repositórios
+      octo = inputs.lazyvim.lib.lazyConfig {
+        plugin = "pwntester/octo.nvim";
+        opts = {
+          # Você pode adicionar seu token do GitHub aqui se quiser
+          # token = "seu_token_github";
+        };
+      };
     };
 
     config = {
@@ -68,12 +95,46 @@
         vim.opt.cursorline = true
         vim.opt.scrolloff = 8
         vim.opt.sidescrolloff = 8
+
+        -- ========== PORTUGUÊS (PT-BR) ==========
+        -- Ativa correção ortográfica com dicionário português e inglês
+        vim.opt.spell = true
+        vim.opt.spelllang = { "pt_br", "en" }
+        -- O arquivo de dicionário será criado em ~/.config/nvim/spell/pt_BR.utf-8.add
+        -- Para gerá-lo, execute dentro do Neovim: :mkspell! ~/.config/nvim/spell/pt_BR.utf-8.add
       '';
+      
       keymaps = ''
+        -- Atalhos existentes
         vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
         vim.keymap.set("n", "<leader>q", "<cmd>bd<cr>", { desc = "Close Buffer" })
         vim.keymap.set("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
         vim.keymap.set("n", "<S-Tab>", "<cmd>bprev<cr>", { desc = "Prev Buffer" })
+
+        -- ========== AJUDA ==========
+        -- Abre a documentação do Neovim via Telescope
+        vim.keymap.set("n", "<leader>hh", "<cmd>Telescope help_tags<cr>", { desc = "Help (Telescope)" })
+
+        -- ========== PODMAN ==========
+        -- Abre um terminal flutuante com o comando `podman ps -a`
+        vim.keymap.set("n", "<leader>pc", function()
+          local term = require("toggleterm.terminal").Terminal:new({
+            cmd = "podman ps -a",
+            direction = "float",
+            hidden = true,
+          })
+          term:toggle()
+        end, { desc = "Podman: List containers" })
+
+        -- Você pode criar outros atalhos para outros comandos do Podman:
+        -- vim.keymap.set("n", "<leader>pl", function()
+        --   local term = require("toggleterm.terminal").Terminal:new({
+        --     cmd = "podman logs -f",
+        --     direction = "float",
+        --     hidden = true,
+        --   })
+        --   term:toggle()
+        -- end, { desc = "Podman: Follow logs" })
       '';
     };
   };
