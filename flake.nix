@@ -15,6 +15,7 @@
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     guixpkgs.url = "github:fzakaria/guixpkgs";
     nixsecauditor.url = "github:unnamed-systems/nixsecauditor";
+    lazyvim.url = "github:pfassina/lazyvim-nix";
 
     home-manager = {
       url = "github:nix-community/home-manager";
