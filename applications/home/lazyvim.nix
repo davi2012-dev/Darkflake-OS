@@ -59,7 +59,7 @@
 
   # Correção: o plugin foi renomeado
   mini-hipatterns = inputs.lazyvim.lib.lazyConfig {
-    plugin = "nvim-mini/mini.hipatterns";   # <-- NOME CORRETO
+    plugin = "nvim-mini/mini.hipatterns";   
     opts = { };
   };
 
@@ -105,6 +105,8 @@
 
         -- ========== PORTUGUÊS (PT-BR) ==========
         -- Ativa correção ortográfica com dicionário português e inglês
+        vim.opt.lang = "pt_BR"
+        vim.opt.langmenu = "pt_BR"
         vim.opt.spell = true
         vim.opt.spelllang = { "pt_br", "en" }
         -- O arquivo de dicionário será criado em ~/.config/nvim/spell/pt_BR.utf-8.add
