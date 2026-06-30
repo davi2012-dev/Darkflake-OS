@@ -182,6 +182,7 @@
               home-manager.sharedModules = [
                 inputs.sops-nix.homeManagerModules.sops
                 inputs.chaotic.homeManagerModules.default
+                inputs.lazyvim.homeManagerModules.default
               ];
             }
           ];
