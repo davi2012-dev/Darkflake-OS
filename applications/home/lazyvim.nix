@@ -32,61 +32,68 @@
     ];
 
     plugins = {
-      catppuccin = inputs.lazyvim.lib.lazyConfig {
-        plugin = "catppuccin/nvim";
-        opts = {
-          flavour = "mocha";
-          transparent_background = false;
-          term_colors = true;
-        };
-      };
-
-      colorscheme = inputs.lazyvim.lib.lazyConfig {
-        plugin = "LazyVim/LazyVim";
-        opts = { colorscheme = "catppuccin"; };
-      };
-      
-      yanky = inputs.lazyvim.lib.lazyConfig {
-        plugin = "gbprod/yanky.nvim";
-        opts = { };
-      };
-
-      inc-rename = inputs.lazyvim.lib.lazyConfig {
-        plugin = "smjonas/inc-rename.nvim";
-        opts = { };
-      };
-
-      mini-hipatterns = inputs.lazyvim.lib.lazyConfig {
-        plugin = "echasnovski/mini.hipatterns";
-        opts = { };
-      };
-
-      harpoon = inputs.lazyvim.lib.lazyConfig {
-        plugin = "ThePrimeagen/harpoon";
-        opts = { };
-      };
-
-      undotree = inputs.lazyvim.lib.lazyConfig {
-        plugin = "mbbill/undotree";
-        opts = { };
-      };
-
-      todo-comments = inputs.lazyvim.lib.lazyConfig {
-        plugin = "folke/todo-comments.nvim";
-        opts = { };
-      };
-
-      # ========== NOVOS PLUGINS ==========
-      
-      # GitHub: Navegue por issues, PRs, repositórios
-      octo = inputs.lazyvim.lib.lazyConfig {
-        plugin = "pwntester/octo.nvim";
-        opts = {
-          # Você pode adicionar seu token do GitHub aqui se quiser
-          # token = "seu_token_github";
-        };
-      };
+  catppuccin = inputs.lazyvim.lib.lazyConfig {
+    plugin = "catppuccin/nvim";
+    opts = {
+      flavour = "mocha";
+      transparent_background = false;
+      term_colors = true;
     };
+  };
+
+  # A configuração do tema deve ser assim
+  colorscheme = inputs.lazyvim.lib.lazyConfig {
+    plugin = "LazyVim/LazyVim";
+    opts = { colorscheme = "catppuccin"; };
+  };
+  
+  yanky = inputs.lazyvim.lib.lazyConfig {
+    plugin = "gbprod/yanky.nvim";
+    opts = { };
+  };
+
+  inc-rename = inputs.lazyvim.lib.lazyConfig {
+    plugin = "smjonas/inc-rename.nvim";
+    opts = { };
+  };
+
+  # Correção: o plugin foi renomeado
+  mini-hipatterns = inputs.lazyvim.lib.lazyConfig {
+    plugin = "nvim-mini/mini.hipatterns";   # <-- NOME CORRETO
+    opts = { };
+  };
+
+  harpoon = inputs.lazyvim.lib.lazyConfig {
+    plugin = "ThePrimeagen/harpoon";
+    opts = { };
+  };
+
+  # Correção: undotree pode ser removido ou configurado corretamente
+  # Opção 1: Remover (se não for essencial)
+  # undotree = inputs.lazyvim.lib.lazyConfig {
+  #   plugin = "mbbill/undotree";
+  #   opts = { };
+  # };
+
+  # Opção 2: Manter, mas com a configuração adequada (se você realmente usa)
+  undotree = inputs.lazyvim.lib.lazyConfig {
+    plugin = "mbbill/undotree";
+    config = ''function()
+      require("undotree").setup()
+    end'';
+  };
+
+  todo-comments = inputs.lazyvim.lib.lazyConfig {
+    plugin = "folke/todo-comments.nvim";
+    opts = { };
+  };
+
+  # GitHub
+  octo = inputs.lazyvim.lib.lazyConfig {
+    plugin = "pwntester/octo.nvim";
+    opts = { };
+  };
+};
 
     config = {
       options = ''
