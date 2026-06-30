@@ -2,6 +2,7 @@
 
 {
   preservation.storage."/persist" = {
+    # Diretórios do sistema (globais)
     directories = [
       "/var/lib"
       "/etc/NetworkManager/system-connections"
@@ -10,6 +11,7 @@
       "/etc/machine-id"
     ];
 
+    # Configuração para o usuário davi
     users.davi = {
       directories = [
         "Downloads"
