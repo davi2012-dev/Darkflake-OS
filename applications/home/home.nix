@@ -26,6 +26,7 @@
     ./mpv.nix
     ./cava.nix
     ./librewolf.nix
+    ./neovim.nix
   ];
 
   # 4 X11
