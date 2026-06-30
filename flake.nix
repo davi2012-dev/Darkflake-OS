@@ -47,8 +47,8 @@
     affinity-nix.url = "github:mrshmllow/affinity-nix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     nix-index-db.url = "github:nix-community/nix-index-database";
-    impermanence.url = "github:nix-community/impermanence";
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    preservation.url = "github:nix-community/preservation";
     nil.url = "github:oxalica/nil";
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
@@ -147,10 +147,10 @@
             inputs.nixowos.nixosModules.default
             inputs.sops-nix.nixosModules.sops 
             inputs.nur.modules.nixos.default
-            inputs.impermanence.nixosModules.impermanence
             inputs.nixos-hardware.nixosModules.common-cpu-intel
             inputs.nix-index-db.nixosModules.nix-index
             inputs.nixsecauditor.nixosModules.default
+            inputs.preservation.nixosModules.preservation
             
             {
               nixpkgs.overlays = [ 
