@@ -1,10 +1,6 @@
-{ config, pkgs, lib, lazyvim, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
-  imports = [
-    lazyvim.homeManagerModules.default
-  ];
-
   programs.lazyvim = {
     enable = true;
 
@@ -30,11 +26,11 @@
     ];
 
     plugins = {
-      neorg = lazyvim.lib.lazyConfig {
+      neorg = inputs.lazyvim.lib.lazyConfig {
         plugin = "nvim-neorg/neorg";
         opts = {
           load = {
-            "core.defaults" = {};         
+            "core.defaults" = {};
             "core.norg.concealer" = {};
             "core.norg.qol.toc" = {};
             "core.norg.journal" = {
