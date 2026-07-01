@@ -19,21 +19,17 @@
         installDependencies = true;
         installRuntimeDependencies = true;
       };
-      
-      # IA Integrada para dar pitacos e autocompletar ideias no projeto
-      coding.copilot.enable = true; 
-      
+            
       # Interface e utilitários
       ui.mini-animate.enable = true;
       editor.dial.enable = true;
       coding.mini-surround.enable = true;
-      util.toggleterm.enable = true; # OBRIGATÓRIO para fazer o atalho do Podman funcionar!
+      util.toggleterm.enable = true; 
     };
 
     extraPackages = with pkgs; [
       nixd
       alejandra
-      copilot-node-agent # Agente necessário para a IA funcionar em segundo plano
     ];
 
     plugins = {
@@ -78,7 +74,6 @@
         end'';
       };
 
-      # Scaneia seus arquivos atrás de TODO:, FIXME:, IDEIA:
       todo-comments = inputs.lazyvim.lib.lazyConfig {
         plugin = "folke/todo-comments.nvim";
         opts = { };
@@ -87,6 +82,28 @@
       octo = inputs.lazyvim.lib.lazyConfig {
         plugin = "pwntester/octo.nvim";
         opts = { };
+      };
+
+      # ================= IA LOCAL (OLLAMA) =================
+      codecompanion = inputs.lazyvim.lib.lazyConfig {
+        plugin = "olimorris/codecompanion.nvim";
+        config = ''function()
+          require("codecompanion").setup({
+            strategies = {
+              chat = { adapter = "ollama" },
+              inline = { adapter = "ollama" },
+            },
+            adapters = {
+              ollama = function()
+                return require("codecompanion.adapters").extend("ollama", {
+                  schema = {
+                    model = { default = "qwen2.5-coder:1.5b" },
+                  },
+                })
+              end,
+            },
+          })
+        end'';
       };
     };
 
@@ -107,9 +124,7 @@
       
       keymaps = ''
         -- ========== ATALHOS ESTILO NANO ==========
-        -- Salvar com Ctrl + S em qualquer modo (Normal, Inserção, Visual)
         vim.keymap.set({'n', 'i', 'v'}, '<C-s>', '<Esc><cmd>w<cr>', { desc = "Save File (Nano Style)" })
-        -- Sair com Ctrl + X
         vim.keymap.set({'n', 'i', 'v'}, '<C-x>', '<Esc><cmd>q<cr>', { desc = "Exit (Nano Style)" })
 
         -- Buffer navegação
@@ -119,6 +134,10 @@
 
         -- ========== AJUDA DO TELESCOPE ==========
         vim.keymap.set("n", "<leader>hh", "<cmd>Telescope help_tags<cr>", { desc = "Help (Telescope)" })
+
+        -- ========== ATALHOS DA IA LOCAL ==========
+        vim.keymap.set({"n", "v"}, "<leader>ia", "<cmd>CodeCompanionActions<cr>", { desc = "IA: Actions" })
+        vim.keymap.set({"n", "v"}, "<leader>ic", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "IA: Toggle Chat" })
 
         -- ========== PODMAN HOME LAB ==========
         vim.keymap.set("n", "<leader>pc", function()
