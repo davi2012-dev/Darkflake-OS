@@ -72,7 +72,7 @@
           inherit system;
           config.allowUnfree = true;
         };       
-
+        packages.pythowo = pkgs.callPackage ./pythowo.nix {};
         devShells.default = 
           let
             makeDevshell = import "${inputs.devshell}/modules" pkgs;
