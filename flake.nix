@@ -98,6 +98,7 @@
               { package = pkgs.deadnix; } 
               { package = pkgs.statix; }   
               { package = pkgs.ripsecrets; } 
+              { package = self.packages.${system}.pythowo; }
             ];
             motd = ''
               {202}🔨 Bem-vindo ao Shell de Desenvolvimento Darkflake ❄️
