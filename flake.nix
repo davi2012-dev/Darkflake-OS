@@ -18,7 +18,7 @@
     lazyvim.url = "github:pfassina/lazyvim-nix";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -128,8 +128,7 @@
 
       flake = {
         nixosConfigurations."Darkflake" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          
+
           specialArgs = {
             inherit inputs;
             unstable = import nixpkgs-unstable {
@@ -141,6 +140,7 @@
           };
           
           modules = [
+            { nixpkgs.hostPlatform = "x86_64-linux"; }
             ./configuration.nix
             
             inputs.chaotic.nixosModules.default
