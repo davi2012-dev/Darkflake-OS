@@ -24,7 +24,6 @@
       ui.mini-animate.enable = true;
       editor.dial.enable = true;
       coding.mini-surround.enable = true;
-      util.toggleterm.enable = true; 
     };
 
     extraPackages = with pkgs; [
@@ -32,7 +31,7 @@
       alejandra
     ];
 
-    plugins = {
+plugins = {
       catppuccin = inputs.lazyvim.lib.lazyConfig {
         plugin = "catppuccin/nvim";
         opts = {
@@ -82,6 +81,17 @@
       octo = inputs.lazyvim.lib.lazyConfig {
         plugin = "pwntester/octo.nvim";
         opts = { };
+      };
+
+      # ================= TERMINAL FLUTUANTE (CORREÇÃO) =================
+      toggleterm = inputs.lazyvim.lib.lazyConfig {
+        plugin = "akinsho/toggleterm.nvim";
+        config = ''function()
+          require("toggleterm").setup({
+            open_mapping = [[<c-\>]], # Atalho padrão opcional extra
+            direction = "float",
+          })
+        end'';
       };
 
       # ================= IA LOCAL (OLLAMA) =================
