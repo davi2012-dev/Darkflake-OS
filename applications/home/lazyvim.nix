@@ -31,7 +31,7 @@
       alejandra
     ];
 
-plugins = {
+    plugins = {
       catppuccin = inputs.lazyvim.lib.lazyConfig {
         plugin = "catppuccin/nvim";
         opts = {
@@ -83,12 +83,12 @@ plugins = {
         opts = { };
       };
 
-      # ================= TERMINAL FLUTUANTE (CORREÇÃO) =================
+      # ================= TERMINAL FLUTUANTE =================
       toggleterm = inputs.lazyvim.lib.lazyConfig {
         plugin = "akinsho/toggleterm.nvim";
         config = ''function()
           require("toggleterm").setup({
-            open_mapping = [[<c-\>]], # Atalho padrão opcional extra
+            open_mapping = [[<c-\>]],
             direction = "float",
           })
         end'';
@@ -149,15 +149,8 @@ plugins = {
         vim.keymap.set({"n", "v"}, "<leader>ia", "<cmd>CodeCompanionActions<cr>", { desc = "IA: Actions" })
         vim.keymap.set({"n", "v"}, "<leader>ic", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "IA: Toggle Chat" })
 
-        -- ========== PODMAN HOME LAB ==========
-        vim.keymap.set("n", "<leader>pc", function()
-          local term = require("toggleterm.terminal").Terminal:new({
-            cmd = "podman ps -a",
-            direction = "float",
-            hidden = true,
-          })
-          term:toggle()
-        end, { desc = "Podman: List containers" })
+        -- ========== PODMAN HOME LAB (CORRIGIDO) ==========
+        vim.keymap.set("n", "<leader>pc", ":lua require('toggleterm').exec('podman ps -a')<CR>", { silent = true, desc = "Podman: List containers" })
       '';
     };
   };
