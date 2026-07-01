@@ -24,6 +24,9 @@
       ui.mini-animate.enable = true;
       editor.dial.enable = true;
       coding.mini-surround.enable = true;
+      
+      # ================= NAVEGADOR DE SÍMBOLOS =================
+      editor.aerial.enable = true;
     };
 
     extraPackages = with pkgs; [
@@ -148,6 +151,9 @@
         -- ========== ATALHOS DA IA LOCAL ==========
         vim.keymap.set({"n", "v"}, "<leader>ia", "<cmd>CodeCompanionActions<cr>", { desc = "IA: Actions" })
         vim.keymap.set({"n", "v"}, "<leader>ic", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "IA: Toggle Chat" })
+
+        -- ========== ATALHOS DO AERIAL =================
+        vim.keymap.set("n", "<leader>cs", "<cmd>AerialToggle<cr>", { desc = "Aerial: Code Symbols" })
 
         -- ========== PODMAN HOME LAB (CORRIGIDO) ==========
         vim.keymap.set("n", "<leader>pc", ":lua require('toggleterm').exec('podman ps -a')<CR>", { silent = true, desc = "Podman: List containers" })
