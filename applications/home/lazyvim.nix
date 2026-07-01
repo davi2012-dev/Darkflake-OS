@@ -4,7 +4,6 @@
   programs.lazyvim = {
     enable = true;
     installCoreDependencies = true;
-    defaultEditor = true;
 
     extras = {
       # Linguagens Inteligentes (LSP)
