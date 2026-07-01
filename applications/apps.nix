@@ -13,6 +13,7 @@
     crow-translate      # Tradutor rápido
     tor-browser
     guixpkgs.hello
+    inputs.self.packages.${pkgs.system}.pythowo
 
     # --- Multimídia e Design ---
     mpv                 # Player de vídeo minimalista
