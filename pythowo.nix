@@ -7,8 +7,8 @@ python3.pkgs.buildPythonApplication rec {
   src = fetchFromGitHub {
     owner = "virejdasani";
     repo = "pythOwO";
-    rev = "master"; # Aponta diretamente para o commit mais recente da branch principal
-    hash = "sha256-RndxU8r+qB6R8Kk6fL/i6A8YhE+YscX57U9b7zV6Kk4=";
+    rev = "master"; 
+    hash = "sha256-9Yy9oaW2NkxM+av3mgAYRAzOQjuZ2bV1w0fNd7u0yQ8=";
   };
 
   format = "other";
