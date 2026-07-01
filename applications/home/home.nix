@@ -9,6 +9,8 @@
     XDG_SCREENSHOTS_DIR = "${config.home.homeDirectory}/Pictures";
     XDG_PICTURES_DIR = "${config.home.homeDirectory}/Pictures";
     THEOSHELL_TRASH_DIR = "${config.xdg.dataHome}/theoshell/trash";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 
   # 3. Imports
