@@ -30,5 +30,4 @@ programs.lazyvim = {
     templ     # Go templ files
    ];
   };
- };
 }
