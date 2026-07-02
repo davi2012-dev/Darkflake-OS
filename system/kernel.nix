@@ -98,7 +98,6 @@ boot.zfs.package = unstable.zfs;
     "vm.overcommit_ratio" = 99;
     "vm.min_free_kbytes" = 65536;
     "vm.swappiness" = 10;
-    "vm.page-cluster" = 0;
     "vm.zone_reclaim_mode" = 0;
     "vm.oom_dump_tasks" = 0;
     "kernel.perf_event_paranoid" = 3;
