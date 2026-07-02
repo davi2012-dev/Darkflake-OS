@@ -91,6 +91,14 @@ boot.zfs.package = unstable.zfs;
     "vm.max_map_count" = 2147483642;               
     "vm.compaction_proactiveness" = 0;          
     "vm.lru_gen_stats" = 2;
+    "vm.overcommit_memory" = 2;
+    "vm.overcommit_ratio" = 90;
+    "vm.min_free_kbytes" = 65536;
+    "vm.swappiness" = 10;
+    "vm.page-cluster" = 0;
+    "vm.zone_reclaim_mode" = 0;
+    "vm.oom_dump_tasks" = 0;
+    "kernel.perf_event_paranoid" = 3;
 
     # Hardening Focado em Memória e Exploit Protection (Cobrado pelo Lynis)
     "net.core.bpf_jit_harden" = 2;
@@ -99,6 +107,12 @@ boot.zfs.package = unstable.zfs;
     "vm.mmap_rnd_compat_bits" = 16;
     "vm.mmap_rnd_bits" = 32;
     "vm.mmap_min_addr" = 65536;
+    "net.core.rmem_max" = 16777216;
+    "net.core.wmem_max" = 16777216;
+    "net.ipv4.tcp_rmem" = "4096 87380 16777216";
+    "net.ipv4.tcp_wmem" = "4096 65536 16777216";
+    "net.ipv4.tcp_mem" = "786432 1048576 1572864";
+    "net.ipv4.udp_mem" = "786432 1048576 1572864";
     "abi.vsyscall32" = 0;  
     "kernel.printk" = "3 3 3 3";
     "kernel.yama.ptrace_scope" = 1;              
