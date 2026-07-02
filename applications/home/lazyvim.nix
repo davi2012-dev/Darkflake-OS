@@ -28,5 +28,7 @@ programs.lazyvim = {
   treesitterParsers = with pkgs.vimPlugins.nvim-treesitter-parsers; [
     wgsl      # WebGPU Shading Language
     templ     # Go templ files
-  ];
-};
+   ];
+  };
+ };
+}
