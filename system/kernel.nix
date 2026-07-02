@@ -92,7 +92,7 @@ boot.zfs.package = unstable.zfs;
     "vm.compaction_proactiveness" = 0;          
     "vm.lru_gen_stats" = 2;
     "vm.overcommit_memory" = 2;
-    "vm.overcommit_ratio" = 90;
+    "vm.overcommit_ratio" = 99;
     "vm.min_free_kbytes" = 65536;
     "vm.swappiness" = 10;
     "vm.page-cluster" = 0;
@@ -155,8 +155,7 @@ boot.zfs.package = unstable.zfs;
   security.forcePageTableIsolation = false;      
   security.protectKernelImage = true;
   security.auditd.enable = true;
-  
-  # Gráficos da GPU AMD RX 550
+
   hardware.amdgpu.initrd.enable = true;          
   
   # Gerenciamento de Hardware e RAM
