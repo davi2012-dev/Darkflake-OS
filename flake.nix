@@ -135,12 +135,14 @@
               system = "x86_64-linux";
               config.allowUnfree = true;
             };
-            # Injeta a coleção de pacotes do Guix adaptada para o Nix
             guixpkgs = inputs.guixpkgs.packages."x86_64-linux";
           };
           
           modules = [
-            { nixpkgs.hostPlatform = "x86_64-linux"; }
+            { 
+              nixpkgs.hostPlatform = "x86_64-linux";
+              nixpkgs.buildPlatform = "x86_64-linux";
+            }
             ./configuration.nix
             
             inputs.chaotic.nixosModules.default
@@ -173,13 +175,11 @@
                   system = "x86_64-linux";
                   config.allowUnfree = true;
                 };
-                # Permite que você use pacotes do Guix dentro do arquivo home.nix também
                 guixpkgs = inputs.guixpkgs.packages."x86_64-linux";
               };
               
               home-manager.users.davi = import ./applications/home/home.nix;
 
-              # Injetando o módulo do Home Manager de forma isolada
               home-manager.sharedModules = [
                 inputs.sops-nix.homeManagerModules.sops
                 inputs.chaotic.homeManagerModules.default
