@@ -85,6 +85,16 @@
         opts = { };
       };
 
+      # ================= EMACS GAMES REPOSITORY =================
+      # Injetando o ikouchiha47/games.nvim diretamente no Nix
+      games-nvim = inputs.lazyvim.lib.lazyConfig {
+        plugin = "ikouchiha47/games.nvim";
+        config = ''function()
+          -- Carrega o repositório de jogos estilo emacs/terminal
+          -- Comandos disponíveis: :Hangman, :MineSweeper, :Pacman
+        end'';
+      };
+
       # ================= TERMINAL FLUTUANTE =================
       toggleterm = inputs.lazyvim.lib.lazyConfig {
         plugin = "akinsho/toggleterm.nvim";
@@ -92,6 +102,7 @@
           require("toggleterm").setup({
             open_mapping = [[<c-\>]],
             direction = "float",
+            }}
           })
         end'';
       };
@@ -135,9 +146,21 @@
       '';
       
       keymaps = ''
-        -- ========== ATALHOS ESTILO NANO ==========
-        vim.keymap.set({'n', 'i', 'v'}, '<C-s>', '<Esc><cmd>w<cr>', { desc = "Save File (Nano Style)" })
-        vim.keymap.set({'n', 'i', 'v'}, '<C-x>', '<Esc><cmd>q<cr>', { desc = "Exit (Nano Style)" })
+        -- ========== ATALHOS EMACS / DOOM EMACS EM FUSION ==========
+        -- Mapeamentos clássicos do gerenciador do Doom Emacs
+        vim.keymap.set("n", "<leader>.", "<cmd>Telescope find_files<cr>", { desc = "Emacs: Find File" })
+        vim.keymap.set("n", "<leader>,", "<cmd>Telescope buffers<cr>", { desc = "Emacs: Switch Buffer" })
+        vim.keymap.set("n", "<leader>bb", "<cmd>Telescope buffers<cr>", { desc = "Emacs: List Buffers" })
+        
+        -- ========== ARCADE / EMACS GAMES SHORTCUTS ==========
+        -- Atalhos Rápidos para abrir os games injetados do ikouchiha47
+        vim.keymap.set("n", "<leader>g pac", "<cmd>Pacman<cr>", { desc = "Arcade: Play Pacman" })
+        vim.keymap.set("n", "<leader>g mnv", "<cmd>MineSweeper<cr>", { desc = "Arcade: Play MineSweeper" })
+        vim.keymap.set("n", "<leader>g jof", "<cmd>Hangman<cr>", { desc = "Arcade: Play Jogo da Forca" })
+
+        -- ========== ATALHOS ESTILO NANO / GLOBAL ==========
+        vim.keymap.set({'n', 'i', 'v'}, '<C-s>', '<Esc><cmd>w<cr>', { desc = "Save File" })
+        vim.keymap.set({'n', 'i', 'v'}, '<C-x>', '<Esc><cmd>q<cr>', { desc = "Exit" })
 
         -- Buffer navegação
         vim.keymap.set("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
@@ -154,7 +177,7 @@
         -- ========== ATALHOS DO AERIAL =================
         vim.keymap.set("n", "<leader>cs", "<cmd>AerialToggle<cr>", { desc = "Aerial: Code Symbols" })
 
-        -- ========== PODMAN HOME LAB (CORRIGIDO) ==========
+        -- ========== PODMAN HOME LAB ==========
         vim.keymap.set("n", "<leader>pc", ":lua require('toggleterm').exec('podman ps -a')<CR>", { silent = true, desc = "Podman: List containers" })
       '';
     };
