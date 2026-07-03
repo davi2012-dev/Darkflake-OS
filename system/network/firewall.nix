@@ -64,9 +64,9 @@
     "net.core.default_qdisc" = "fq";
     "net.ipv4.tcp_congestion_control" = "bbr3";
     "net.ipv4.tcp_fastopen" = 3;
-    "net.ipv4.tcp_sack = 1"
-    "net.ipv4.tcp_window_scaling = 1"
-    "net.ipv4.tcp_frto = 2"
+    "net.ipv4.tcp_sack = 1";
+    "net.ipv4.tcp_window_scaling = 1";
+    "net.ipv4.tcp_frto = 2";
     
     # Proteção contra ataques baseados em ICMP
     "net.ipv4.icmp_echo_ignore_all" = 0; 
@@ -84,7 +84,7 @@
     # ADICIONADO: Ativa logs para pacotes falsificados/impossíveis (Cobrado pelo Lynis)
     "net.ipv4.conf.all.log_martians" = 1;
     "net.ipv4.conf.default.log_martians" = 1;
-    "net.ipv4.tcp_rfc1337 = 1"
+    "net.ipv4.tcp_rfc1337 = 1";
 
     # Correções extras de segurança de rede cobradas em auditorias (Lynis)
     "net.ipv4.conf.all.send_redirects" = 0;
