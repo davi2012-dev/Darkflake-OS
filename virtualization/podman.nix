@@ -8,8 +8,12 @@
     enable = true;
     dockerSocket.enable = true;
     dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
-    
+    defaultNetwork.settings.dns_enabled = false;
+    extraConfig = ''
+    [containers]
+    dns = ["10.88.0.1"]
+  '';
+}; 
     # Faxina automática para os deploys não estourarem o SSD 
     autoPrune = {
       enable = true;
