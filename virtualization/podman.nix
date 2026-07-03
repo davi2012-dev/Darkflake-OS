@@ -1,23 +1,13 @@
 { config, pkgs, ... }: {
 
-  # Ativa o suporte geral a containers no NixOS
   virtualisation.containers.enable = true;
 
-  # Configuração global do Podman Engine
   virtualisation.podman = {
     enable = true;
     dockerSocket.enable = true;
     dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = false;
+    defaultNetwork.settings.dns_enabled = false;  # Desativa o DNS interno
 
-    # Define o DNS para os contêineres (via containers.conf)
-    containersConf = {
-      containers = {
-        dns = [ "10.88.0.1" ];
-      };
-    };
-
-    # Faxina automática para os deploys não estourarem o SSD
     autoPrune = {
       enable = true;
       dates = "weekly";
@@ -25,7 +15,6 @@
     };
   };
 
-  # CONFIGURAÇÃO DECLARATIVA DOS CONTAINERS (OCI)
   virtualisation.oci-containers = {
     backend = "podman";
     containers = {
@@ -34,6 +23,7 @@
       stirling-pdf = {
         image = "docker.io/stirlingtools/stirling-pdf:latest";
         ports = [ "8089:8080" ];
+        extraOptions = [ "--dns=10.88.0.1" ];
       };
 
       # 2. Portainer
@@ -47,20 +37,23 @@
           "/run/podman/podman.sock:/var/run/docker.sock:Z"
           "portainer_data:/data:Z"
         ];
+        extraOptions = [ "--dns=10.88.0.1" ];
       };
 
-      # 3. MongoDB (Banco de dados do LibreChat)
+      # 3. MongoDB (LibreChat)
       librechat-db = {
         image = "docker.io/library/mongo:latest";
         volumes = [
           "librechat_mongo_data:/data/db:Z"
         ];
+        extraOptions = [ "--dns=10.88.0.1" ];
       };
 
-      # 4. LibreChat Principal
+      # 4. LibreChat
       librechat = {
         image = "ghcr.io/danny-avila/librechat:latest";
         ports = [ "3080:3080" ];
+        extraOptions = [ "--dns=10.88.0.1" ];
         environment = {
           MONGO_URI = "mongodb://librechat-db:27017/LibreChat";
           CONFIG_BYPASS_VALIDATION = "true";
@@ -73,7 +66,7 @@
         dependsOn = [ "librechat-db" ];
       };
 
-      # 5. MariaDB (Banco de dados do Nextcloud)
+      # 5. MariaDB (Nextcloud)
       nextcloud-db = {
         image = "docker.io/library/mariadb:latest";
         environment = {
@@ -85,12 +78,14 @@
         volumes = [
           "nextcloud_db_data:/var/lib/mysql:Z"
         ];
+        extraOptions = [ "--dns=10.88.0.1" ];
       };
 
-      # 6. Nextcloud Principal
+      # 6. Nextcloud
       nextcloud = {
         image = "docker.io/library/nextcloud:latest";
         ports = [ "8085:80" ];
+        extraOptions = [ "--dns=10.88.0.1" ];
         environment = {
           MYSQL_HOST = "nextcloud-db";
           MYSQL_DATABASE = "nextcloud";
@@ -104,10 +99,11 @@
         dependsOn = [ "nextcloud-db" ];
       };
 
-      # 7. Homarr (Dashboard)
+      # 7. Homarr
       homarr = {
         image = "ghcr.io/homarr-labs/homarr:latest";
         ports = [ "8083:7575" ];
+        extraOptions = [ "--dns=10.88.0.1" ];
         environment = {
           SECRET_ENCRYPTION_KEY = "28fc6b3f07d57c4d4349bd976ad5d247aef82d2e3afe3e78dced7444d374e7bd";
         };
@@ -117,35 +113,40 @@
         ];
       };
 
-      # 8. Jellyfin (Com repasse de aceleração de vídeo por hardware)
+      # 8. Jellyfin
       jellyfin = {
         image = "docker.io/jellyfin/jellyfin:latest";
         ports = [ "8096:8096" ];
+        extraOptions = [
+          "--dns=10.88.0.1"
+          "--device=/dev/dri:/dev/dri"
+        ];
         volumes = [
           "/home/jellyfin/config:/config:Z"
           "/home/jellyfin/media:/media:Z"
           "/home/jellyfin/cache:/cache:Z"
           "/home/jellyfin/media/youtube:/youtube:Z"
         ];
-        extraOptions = [ "--device=/dev/dri:/dev/dri" ];
       };
 
-      # 9. MeTube (Direcionado para a pasta de mídias do Jellyfin)
+      # 9. MeTube
       metube = {
         image = "ghcr.io/alexta69/metube:latest";
         ports = [ "8081:8081" ];
+        extraOptions = [ "--dns=10.88.0.1" ];
         volumes = [
           "/home/jellyfin/media/youtube:/youtube:Z"
         ];
       };
 
-      # 10. Netdata Hardened Ajustado (Segurança Avançada e Monitoramento)
+      # 10. Netdata
       netdata = {
         image = "docker.io/netdata/netdata:stable";
         ports = [ "19999:19999" ];
         extraOptions = [
-          "--cap-add=SYS_PTRACE"                  # Permite monitorar os processos do host
-          "--security-opt=no-new-privileges:true" # Impede elevação de privilégios dentro do container
+          "--dns=10.88.0.1"
+          "--cap-add=SYS_PTRACE"
+          "--security-opt=no-new-privileges:true"
         ];
         volumes = [
           "netdata_config:/etc/netdata:Z"
@@ -157,9 +158,13 @@
         ];
       };
 
-      # 11. Home Assistant (Injetado com sucesso no ecossistema)
+      # 11. Home Assistant
       homeassistant = {
         image = "ghcr.io/home-assistant/home-assistant:stable";
+        extraOptions = [
+          "--dns=10.88.0.1"
+          "--network=host"
+        ];
         volumes = [
           "/var/lib/homeassistant:/config"
           "/etc/localtime:/etc/localtime:ro"
@@ -168,36 +173,25 @@
           TRUSTED_PROXIES = "127.0.0.1";
           TZ = "America/Sao_Paulo";
         };
-        extraOptions = [
-          "--network=host" # Crucial para o HA achar suas luzes/TVs no Wi-Fi
+      };
+
+      # 12. Databag
+      databag = {
+        image = "docker.io/balzack/databag:latest";
+        ports = [ "7000:7000" ];
+        extraOptions = [ "--dns=10.88.0.1" ];
+        environment = {
+          DOMAIN = "chat.Darkflake.local";
+          TRUSTED_PROXIES = "127.0.0.1";
+          SECRET = "77d44da1481f6c2765cc211a63728961684fb4d49e8f20a3b7b5da81f8e0e2ed";
+        };
+        volumes = [
+          "databag_data:/home/app/data:Z"
         ];
       };
-      # 12. Databag - Chat auto-hospedado para família
-     databag = {
-       image = "docker.io/balzack/databag:latest";
-      ports = [ "7000:7000" ];  # porta HTTP (pode mudar se quiser)
-      environment = {
-      DOMAIN = "chat.Darkflake.local";
-      TRUSTED_PROXIES = "127.0.0.1";
-      SECRET = "77d44da1481f6c2765cc211a63728961684fb4d49e8f20a3b7b5da81f8e0e2ed";
-
-    # (Opcional) Se quiser usar HTTPS com certificado próprio, veja a doc
-    # TLS_CERT = "/caminho/para/cert.pem";
-    # TLS_KEY  = "/caminho/para/key.pem";
-  };
-  volumes = [
-    "databag_data:/home/app/data:Z"   # persistência dos dados
-  ];
-  extraOptions = [
-    # Para garantir que o container possa se comunicar com a rede do host se necessário
-    # (mas normalmente não precisa)
-  ];
-};
-
     };
   };
 
-  # Ferramentas auxiliares instaladas no sistema para gerenciar e debugar os containers
   environment.systemPackages = with pkgs; [
     podman-compose
     podman-tui
