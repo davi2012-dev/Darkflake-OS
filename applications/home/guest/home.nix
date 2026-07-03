@@ -11,12 +11,6 @@
     XDG_PICTURES_DIR = "${config.home.homeDirectory}/Pictures";
   };
 
-  #imports = [
-   # ./librewolf.nix
-   # ./mpv.nix
-   # ./spotify.nix
-  ];
-
   xsession.preferStatusNotifierItems = true;
   xsession.numlock.enable = true;
 
