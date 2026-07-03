@@ -21,7 +21,6 @@
     firefox
     vlc
     libreoffice
-    kate
     ark
     gwenview
     wget
