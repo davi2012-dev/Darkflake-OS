@@ -1,7 +1,9 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   networking.nftables.enable = true;
   networking.firewall = {
     enable = true;
+    defaultPolicy = "drop";
     allowPing = true;
     logRefusedConnections = true;
     rejectPackets = false;
@@ -18,24 +20,16 @@
     trustedInterfaces = [ "waydroid0" "tailscale0" "podman*" "veth*" "proton*" "wg*" "tun*" "pvpn*" ];
 
     extraInputRules = ''
-      type filter hook input priority filter; policy drop;
-      iifname { ${builtins.concatStringsSep "," config.networking.firewall.trustedInterfaces} } accept
-      ct state vmap { invalid : drop, established : accept, related : accept }
       tcp flags & (fin|syn|rst|ack) == syn ct count over 500 drop
       tcp flags & (fin|syn|rst|ack) == rst ct count over 20 drop
       tcp flags & (fin|syn|rst|psh|ack|urg) == 0 drop
       tcp flags & (fin|syn|rst|psh|ack|urg) == fin|syn|rst|psh|ack|urg drop
-      tcp dport { ${builtins.concatStringsSep "," (map toString config.networking.firewall.allowedTCPPorts)} } accept
-      udp dport { ${builtins.concatStringsSep "," (map toString config.networking.firewall.allowedUDPPorts)} } accept
       meta l4proto tcp ct state new tcp dport != { ${builtins.concatStringsSep "," (map toString config.networking.firewall.allowedTCPPorts)} } \
         limit rate over 2/minute burst 3 packets drop
-      icmp type echo-request accept
-      icmpv6 type echo-request accept
       tcp flags & (fin|syn|rst|ack) == syn log prefix "refused connection: " level info
     '';
 
     extraForwardRules = ''
-      type filter hook forward priority filter; policy drop;
       ct state invalid drop
     '';
   };
