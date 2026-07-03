@@ -92,6 +92,9 @@
     "net.v6.conf.all.forwarding" = 1; 
     "net.v6.conf.all.accept_source_route" = 0;
     "net.v6.conf.default.accept_source_route" = 0;
+    "net.ipv4.conf.all.secure_redirects" = 0;
+    "net.ipv4.conf.all.shared_media" = 0;
+    "net.ipv4.igmp_max_memberships" = 100;
 
     # Mitigação de SYN Flood agressiva na fila do Kernel
     "net.core.netdev_max_backlog" = 250000;
