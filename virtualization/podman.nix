@@ -5,22 +5,20 @@
 
   # Configuração global do Podman Engine
   virtualisation.podman = {
-    enable = true;
-    dockerSocket.enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = false;
-    extraConfig = ''
+  enable = true;
+  dockerSocket.enable = true;
+  dockerCompat = true;
+  defaultNetwork.settings.dns_enabled = false;
+  extraConfig = ''
     [containers]
     dns = ["10.88.0.1"]
   '';
-}; 
-    # Faxina automática para os deploys não estourarem o SSD 
-    autoPrune = {
-      enable = true;
-      dates = "weekly";
-      flags = [ "--all" ];
-    };
+  autoPrune = {
+    enable = true;
+    dates = "weekly";
+    flags = [ "--all" ];
   };
+};
 
   # CONFIGURAÇÃO DECLARATIVA DOS CONTAINERS (OCI)
   virtualisation.oci-containers = {
