@@ -18,8 +18,8 @@
 
   # --- 2. Trancando o Nix (Restrição de Acesso) ---
   nix.settings = {
-    allowed-users = [ "root" "@wheel" "guest" ];
-    trusted-users = [ "root" "davi" ];
+    allowed-users = [ "root" "@wheel" ];
+    trusted-users = [ "root" "davi"   ];
   };
 
   # --- 3. Segurança do Sistema e Elevação de Privilégios ---
