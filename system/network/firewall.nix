@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Desabilita o firewall padrão do NixOS para usar nossa tabela nftables
+  # Desabilita o firewall padrão do NixOS p
   networking.firewall.enable = false;
 
   # Ativa nftables e define a tabela personalizada
