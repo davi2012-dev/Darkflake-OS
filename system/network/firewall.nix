@@ -14,7 +14,7 @@
         family = "inet";
         content = ''
           chain input {
-            type filter hook input priority 0; policy drop;
+            type filter hook input priority 10; policy drop;
 
             # Loopback e interfaces confiáveis
             iifname { lo, waydroid0, tailscale0, podman*, veth*, proton*, wg*, tun*, pvpn* } accept
