@@ -4,6 +4,7 @@
     git-filter-repo
     git-crypt
     gh
+    jujutsu
   ];
 
   programs.git = {
