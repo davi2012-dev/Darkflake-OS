@@ -7,7 +7,7 @@
       http.address = "127.0.0.1:3000";
 
       dns = {
-        bind_hosts = [ "127.0.0.1" "::1" ];
+        bind_hosts = [ "10.88.0.1" "127.0.0.1" "::1"];
         port = 53;
 
         upstream_dns = [
