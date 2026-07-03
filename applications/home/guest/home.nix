@@ -12,9 +12,9 @@
   };
 
   #imports = [
-    ./librewolf.nix
-    ./mpv.nix
-    ./spotify.nix
+   # ./librewolf.nix
+   # ./mpv.nix
+   # ./spotify.nix
   ];
 
   xsession.preferStatusNotifierItems = true;
