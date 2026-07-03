@@ -178,7 +178,7 @@
                 guixpkgs = inputs.guixpkgs.packages."x86_64-linux";
               };
               
-              home-manager.users.davi = import ./applications/home/home.nix;
+              home-manager.users.davi = import ./applications/home/davi/home.nix;
 
               home-manager.sharedModules = [
                 inputs.sops-nix.homeManagerModules.sops
