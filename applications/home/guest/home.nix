@@ -20,11 +20,6 @@
   home.packages = with pkgs; [
     firefox
     vlc
-    libreoffice
-    ark
-    gwenview
-    wget
-    tree
   ];
 
   programs.home-manager.enable = true;
