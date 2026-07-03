@@ -15,7 +15,7 @@
       53 123 4460 631 5353 41641
     ];
 
-    trustedInterfaces = [ "waydroid0" "tailscale0" "lo" "podman+" "veth+" "proton+" "wg+" "tun+" "pvpn+" ];
+    trustedInterfaces = [ "waydroid0" "tailscale0" "podman*" "veth*" "proton*" "wg*" "tun*" "pvpn*" ];
 
     extraInputRules = ''
       type filter hook input priority filter; policy drop;
