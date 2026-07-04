@@ -17,6 +17,11 @@
       mupen64plus.enable = true;
       np2kai.enable = true;
       beetle-saturn.enable = true;
+      fmsx.enable = true;
+      virtualjaguar.enable = true;
+      mame.enable = true;
+      desmume.enable = true;
+      flycast.enable = true;
     };
 
     settings = {
