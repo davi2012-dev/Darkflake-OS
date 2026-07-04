@@ -17,19 +17,15 @@
     # Jogos e Emuladores
     azahar
     hydralauncher
-    yabause
     ppsspp
     dolphin-emu
     pcsx2            
     heroic            
     prismlauncher    
     ryubing
-    retroarch
-    retroarch-joypad-autoconfig
     supertuxkart
     supertux
     dosbox
-    np2kai
     rpcs3
     extremetuxracer
     tuxpaint
