@@ -22,6 +22,7 @@
       mame.enable = true;
       desmume.enable = true;
       flycast.enable = true;
+      fapple2.enable = true;
     };
 
     settings = {
