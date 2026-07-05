@@ -66,51 +66,10 @@
         hide-trustanchor = true;
         use-caps-for-id = true;
         do-not-query-localhost = false;
-        tls-cert-bundle = "/etc/ssl/certs/ca-certificates.crt";
 
-        tls-ciphers =
-          "ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305";
-
-        tls-use-sni = true;
         verbosity = 1;
         harden-large-queries = true;
       };
-
-      # Encaminhamento apenas para os TLDs desejados
-      forward-zone = [
-        {
-          name = "com.";
-          forward-tls-upstream = "yes";
-          forward-addr = [
-            "9.9.9.9@853#dns.quad9.net"
-            "1.1.1.1@853#cloudflare-dns.com"
-          ];
-        }
-        {
-          name = "org.";
-          forward-tls-upstream = "yes";
-          forward-addr = [
-            "9.9.9.9@853#dns.quad9.net"
-            "1.1.1.1@853#cloudflare-dns.com"
-          ];
-        }
-        {
-          name = "br.";
-          forward-tls-upstream = "yes";
-          forward-addr = [
-            "9.9.9.9@853#dns.quad9.net"
-            "1.1.1.1@853#cloudflare-dns.com"
-          ];
-        }
-        {
-          name = "net.";
-          forward-tls-upstream = "yes";
-          forward-addr = [
-            "9.9.9.9@853#dns.quad9.net"
-            "1.1.1.1@853#cloudflare-dns.com"
-          ];
-        }
-      ];
     };
   };
 }
