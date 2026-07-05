@@ -10,6 +10,7 @@
         "/etc/NetworkManager/system-connections"
         "/etc/ssh"
         "/etc/nixos"
+        "/home/games"
       ];
 
       files = [
