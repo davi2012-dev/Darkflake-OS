@@ -16,7 +16,7 @@
    networking.hostName = "Darkflake"; 
 
    # --- BLOQUEIO NATIVO DE MALWARE/ADS (Steven Black) ---
-   networking.stevenblack.enable = true;
+   networking.stevenblack.enable = false;
 
    # --- PRIVACIDADE E ROTEAMENTO ---
    networking.tempAddresses = "default"; # Ativa IPs temporários/aleatórios no IPv6
