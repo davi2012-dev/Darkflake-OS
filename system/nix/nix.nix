@@ -1,13 +1,6 @@
 { config, pkgs, lib, inputs, ... }: {
 
 
-  # --- Forçar TODO o sistema a usar Clang ---
-  nixpkgs.overlays = [
-    (self: super: {
-      stdenv = super.overrideCC super.stdenv super.clang;
-    })
-  ];
-
   # ---  NH: O Assistente Moderno ---
   programs.nh = {
     enable = true;
