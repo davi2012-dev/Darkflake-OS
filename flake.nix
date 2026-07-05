@@ -167,7 +167,6 @@
             inputs.nixsecauditor.nixosModules.default
             inputs.preservation.nixosModules.preservation
             inputs.disko.nixosModules.disko
-            ./system/persistence.nix
             {
               nixpkgs.overlays = [ 
                 mcp-nixos.overlays.default 
