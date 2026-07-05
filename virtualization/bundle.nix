@@ -4,7 +4,7 @@
     ./libvirtd.nix
     ./waydroid.nix
     ./lxc.nix
-    ./xem.nix
+    ./xen.nix
   ];
 
   virtualisation.appvm.enable = true;
