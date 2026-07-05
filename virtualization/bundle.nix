@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ./podman.nix
     ./waydroid.nix
