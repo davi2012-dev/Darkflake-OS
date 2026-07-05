@@ -28,7 +28,7 @@
     };
 
     lanzaboote = {
-      url = "github:nix-community/lanzaboote";
+      url = "github:nix-community/lanzaboote?ref=refs/pull/387/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
