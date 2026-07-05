@@ -12,6 +12,7 @@
         "/etc/nixos"
         "/home/games"
         "/home/jellyfin"
+        "/tmp"
       ];
 
       files = [
