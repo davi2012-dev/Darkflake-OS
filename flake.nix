@@ -37,6 +37,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    denix = {
+      url = "github:yunfachi/denix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -160,6 +171,7 @@
               nixpkgs.overlays = [ 
                 mcp-nixos.overlays.default 
                 nix-cachyos-kernel.overlays.pinned 
+                inputs.affinity-nix.overlays.default
               ];
             }
 
