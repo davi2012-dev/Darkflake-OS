@@ -19,7 +19,8 @@
     substituters = [
       "https://cache.nixos.org/"
       "https://nix-community.cachix.org"
-      "https://hyprland.cachix.org" 
+      "https://hyprland.cachix.org"
+      "https://cache.xinux.uz"
       "https://chaotic-nyx.cachix.org"
       "https://noctalia.cachix.org"
       "https://guixpkgs.cachix.org" 
