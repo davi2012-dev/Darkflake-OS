@@ -11,6 +11,7 @@
         "/etc/ssh"
         "/etc/nixos"
         "/home/games"
+        "/home/jellyfin"
       ];
 
       files = [
