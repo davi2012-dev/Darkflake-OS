@@ -166,6 +166,7 @@
             inputs.nix-index-db.nixosModules.nix-index
             inputs.nixsecauditor.nixosModules.default
             inputs.preservation.nixosModules.preservation
+            inputs.disko.nixosModules.disko
             
             {
               nixpkgs.overlays = [ 
