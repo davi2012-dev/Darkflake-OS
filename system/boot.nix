@@ -47,6 +47,8 @@
   boot.bootspec.enableValidation = true;
   boot.consoleLogLevel = 0;
   boot.hardwareScan = true;
+  boot.bootspec.extensions."org.xenproject.bootspec.v1".vmlinux =
+  "${config.system.build.kernel.dev}/vmlinux";
   
   # Gerenciamento avançado de arquivos temporários na RAM (Performance)
   boot.tmp = {
