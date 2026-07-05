@@ -3,6 +3,7 @@
     ./podman.nix
     ./libvirtd.nix
     ./waydroid.nix
+    ./lxc.nix
   ];
 
   virtualisation.appvm.enable = true;
