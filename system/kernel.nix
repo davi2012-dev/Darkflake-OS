@@ -1,7 +1,7 @@
 { config, pkgs, unstable, lib, ... }:
 {
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.zfs.package = unstable.zfs;
+  boot.kernelPackages = pkgs.linuxPackages;
+  boot.zfs.package = pkgs.zfs;
 
   # --- 2. Parâmetros de Boot ---
   boot.kernelParams = [
