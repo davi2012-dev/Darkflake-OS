@@ -68,10 +68,9 @@
       fsType = "zfs";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/9E63-0E3B";
+  fileSystems."/boot" = {
+      device = "/dev/disk/by-partlabel/disk-sda-ESP";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
     };
 
   swapDevices = [ ];
