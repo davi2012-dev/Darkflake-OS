@@ -1,4 +1,3 @@
-{ config, pkgs, lib, ... }:
 {
   disko.devices = {
     disk = {
@@ -48,7 +47,7 @@
     zpool = {
       rpool = {
         type = "zpool";
-        mode = "stripe";  
+        mode = "stripe";
         options = {
           ashift = "12";
           autotrim = "on";
