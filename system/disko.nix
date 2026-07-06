@@ -47,7 +47,7 @@
     zpool = {
       rpool = {
         type = "zpool";
-        mode = "stripe";
+        # mode removido - disko cria stripe por padrão com múltiplos discos
         options = {
           ashift = "12";
           autotrim = "on";
@@ -72,8 +72,6 @@
               compression = "on";
               atime = "off";
               recordsize = "128K";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/data/home" = {
@@ -83,8 +81,6 @@
               compression = "on";
               atime = "off";
               recordsize = "128K";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/data/games" = {
@@ -94,8 +90,6 @@
               compression = "on";
               atime = "off";
               recordsize = "128K";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/data/jellyfin" = {
@@ -105,8 +99,6 @@
               compression = "on";
               atime = "off";
               recordsize = "128K";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/data/media" = {
@@ -116,8 +108,6 @@
               compression = "off";
               atime = "off";
               recordsize = "1M";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/data/projects" = {
@@ -127,8 +117,6 @@
               compression = "zstd-fast";
               atime = "off";
               recordsize = "16K";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/persist" = {
@@ -138,8 +126,6 @@
               compression = "zstd";
               atime = "off";
               recordsize = "128K";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/system" = {
@@ -149,8 +135,6 @@
               compression = "on";
               atime = "off";
               recordsize = "128K";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/system/gnu" = {
@@ -160,8 +144,6 @@
               compression = "zstd-1";
               atime = "off";
               recordsize = "128K";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/system/nix" = {
@@ -171,8 +153,6 @@
               compression = "zstd-1";
               atime = "off";
               recordsize = "128K";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/system/root" = {
@@ -182,8 +162,6 @@
               compression = "on";
               atime = "off";
               recordsize = "128K";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/system/swap" = {
@@ -192,8 +170,6 @@
             options = {
               volsize = "16G";
               compression = "off";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/system/var" = {
@@ -203,8 +179,6 @@
               compression = "lz4";
               atime = "off";
               recordsize = "128K";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/system/var/cache" = {
@@ -214,8 +188,6 @@
               compression = "lz4";
               atime = "off";
               recordsize = "128K";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
           "encrypted/system/var/log" = {
@@ -225,8 +197,6 @@
               compression = "zstd";
               atime = "off";
               recordsize = "128K";
-              encryption = "aes-256-gcm";
-              keylocation = "none";
             };
           };
         };
