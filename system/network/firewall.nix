@@ -1,13 +1,11 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Desabilita o firewall padrão do NixOS p
   networking.firewall.enable = false;
 
-  # Ativa nftables e define a tabela personalizada
   networking.nftables = {
     enable = true;
-    checkRuleset = true; # verifica sintaxe durante o build
+    checkRuleset = true;
 
     tables = {
       filter = {
@@ -16,36 +14,23 @@
           chain input {
             type filter hook input priority 10; policy drop;
 
-            # Loopback e interfaces confiáveis
             iifname { lo, waydroid0, tailscale0, podman*, veth*, proton*, wg*, tun*, pvpn* } accept
-
-            # Conexões já estabelecidas e relacionadas
             ct state { established, related } accept
 
-            # Portas TCP permitidas
+            # === PORTAS EXTERNAS ===
             tcp dport { 22, 53, 80, 139, 443, 445, 631, 4460, 51820, 8080, 3000, 8123, 9090, 8083, 53317 } accept
 
-            # Portas UDP permitidas
             udp dport { 53, 123, 4460, 631, 5353, 41641 } accept
 
-            # Ping (ICMP)
             icmp type echo-request accept
             icmpv6 type echo-request accept
 
-            # Anti-DDoS
             tcp flags & (fin|syn|rst|ack) == syn ct count over 500 drop
             tcp flags & (fin|syn|rst|ack) == rst ct count over 20 drop
             tcp flags & (fin|syn|rst|psh|ack|urg) == 0 drop
             tcp flags & (fin|syn|rst|psh|ack|urg) == fin|syn|rst|psh|ack|urg drop
 
-            # Tarpit para scanners lentos (opcional)
-            meta l4proto tcp ct state new tcp dport != { 22,53,80,139,443,445,631,4460,51820,8080,3000,8123,9090,8083,53317 } \
-              limit rate over 2/minute burst 3 packets drop
-
-            # Log das conexões recusadas (opcional)
             tcp flags & (fin|syn|rst|ack) == syn log prefix "refused connection: " level info
-
-            # Tudo que não foi aceito acima será dropado (já garantido por policy drop)
           }
 
           chain forward {
@@ -61,7 +46,37 @@
     };
   };
 
-  # Sysctls
+  networking.hosts = {
+    "127.0.0.1" = [
+      "nextcloud.darkflake.local"
+      "jellyfin.darkflake.local"
+      "search.darkflake.local"
+      "librechat.darkflake.local"
+      "cockpit.darkflake.local"
+      "homarr.darkflake.local"
+      "stirling.darkflake.local"
+      "chat.darkflake.local"
+      "metube.darkflake.local"
+      "netdata.darkflake.local"
+      "ha.darkflake.local"
+      "portainer.darkflake.local"
+    ];
+    "::1" = [
+      "nextcloud.darkflake.local"
+      "jellyfin.darkflake.local"
+      "search.darkflake.local"
+      "librechat.darkflake.local"
+      "cockpit.darkflake.local"
+      "homarr.darkflake.local"
+      "stirling.darkflake.local"
+      "chat.darkflake.local"
+      "metube.darkflake.local"
+      "netdata.darkflake.local"
+      "ha.darkflake.local"
+      "portainer.darkflake.local"
+    ];
+  };
+
   boot.kernel.sysctl = {
     "net.core.default_qdisc" = "fq";
     "net.ipv4.tcp_congestion_control" = "bbr3";
