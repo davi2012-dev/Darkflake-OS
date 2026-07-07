@@ -10,7 +10,7 @@
   };
 
 # ---  Nix Config & Performance ---
-  nix.channel.enable = false;
+  nix.channel.enable = true;
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" "ca-derivations" "pipe-operators" "recursive-nix" "dynamic-derivations" "fetch-tree"  ];
     auto-optimise-store = true;
@@ -64,5 +64,4 @@
   programs.nixbit.repository = "https://github.com/davi2012-dev/Darkflake-OS";
   programs.nix-required-mounts.enable = true;
 
-  # O bloco "services.guix" antigo foi completamente removido daqui!
 }
