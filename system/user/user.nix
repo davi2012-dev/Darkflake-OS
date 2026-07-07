@@ -6,7 +6,7 @@
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" "video" "podman" "libvirtd" "gamemode" "wireshark" "scanner" ];
     hashedPasswordFile = config.sops.secrets."user-davi-hashed-password".path;
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINVu0z9sm4lfgen07lnSkPW/8IiV+N1uGG/Tua9i05le davi@Darkflake" ];
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzBpVHAyiVi9K/lYXC4QsIYkbUsSAhrzlF592oXtOyc davi@darkflake"
   };
 
   users.users.guest = {
