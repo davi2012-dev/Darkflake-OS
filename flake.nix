@@ -192,7 +192,6 @@
               };
               
               home-manager.users.davi = import ./applications/home/davi/home.nix;
-              home-manager.users.guest = import ./applications/home/guest/home.nix;
 
               home-manager.sharedModules = [
                 inputs.sops-nix.homeManagerModules.sops
