@@ -139,6 +139,7 @@
   security.forcePageTableIsolation = false;
   security.protectKernelImage = true;
   security.auditd.enable = true;
+  security.audit.enable = "lock";
 
   hardware.amdgpu.initrd.enable = true;
   hardware.ksm = {
