@@ -36,19 +36,12 @@
   services.chrony = {
     enable = true;
     servers = [
-      "time.cloudflare.com iburst nts require"
-      "nts.netnod.se iburst nts require"
-      "nts.ekspresso.se iburst nts require"
+      "time.cloudflare.com iburst nts"
+      "nts.netnod.se iburst nts"
+      "nts.ekspresso.se iburst nts"
     ];
     extraConfig = ''
-      server a.st1.ntp.br iburst nts require
-      server b.st1.ntp.br iburst nts require
-      server ptbtime1.ptb.de iburst nts require
-      nts_refclocks no
-      nts_timeout 5
-      nts_max_attempts 3
-      log nts
-      nts_exclude_unsafe yes
+      authselectmode require
     '';
   };
-}   
+}
