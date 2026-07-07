@@ -1,7 +1,7 @@
 { config, pkgs, unstable, lib, ... }:
 {
-  boot.kernelPackages = pkgs.linuxPackages;
-  boot.zfs.package = pkgs.zfs;
+  boot.kernelPackages =  unstable.pkgs.cachyosKernels.linuxPackages-cachyos-bore;
+  boot.zfs.package = unstable.zfs;
 
   # --- 2. Parâmetros de Boot ---
   boot.kernelParams = [
