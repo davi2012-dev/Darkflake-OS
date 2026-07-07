@@ -25,7 +25,8 @@
 
   networking.networkmanager = { 
     enable = true; 
-    wifi.backend = "iwd"; 
+    wifi.backend = "iwd";
+    wifi.scanRandMacAddress = true;
     wifi.macAddress = "random";
     ethernet.macAddress = "random";
   }; 
