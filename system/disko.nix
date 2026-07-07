@@ -17,6 +17,14 @@
                 mountOptions = [ "fmask=0022" "dmask=0022" ];
               };
             };
+            swap = {
+              size = "16G";
+              type = "8200"; # Linux swap
+              content = {
+                type = "filesystem";
+                format = "swap";
+              };
+            };
             zfs = {
               size = "100%";
               content = {
@@ -47,7 +55,6 @@
     zpool = {
       rpool = {
         type = "zpool";
-        # mode removido - disko cria stripe por padrão com múltiplos discos
         options = {
           ashift = "12";
           autotrim = "on";
@@ -77,7 +84,7 @@
           "encrypted/data/home" = {
             type = "zfs_fs";
             options = {
-              mountpoint = "/home";
+              mountpoint = "legacy";
               compression = "on";
               atime = "off";
               recordsize = "128K";
@@ -86,7 +93,7 @@
           "encrypted/data/games" = {
             type = "zfs_fs";
             options = {
-              mountpoint = "/home/games";
+              mountpoint = "legacy";
               compression = "on";
               atime = "off";
               recordsize = "128K";
@@ -95,7 +102,7 @@
           "encrypted/data/jellyfin" = {
             type = "zfs_fs";
             options = {
-              mountpoint = "/home/jellyfin";
+              mountpoint = "legacy";
               compression = "on";
               atime = "off";
               recordsize = "128K";
@@ -104,7 +111,7 @@
           "encrypted/data/media" = {
             type = "zfs_fs";
             options = {
-              mountpoint = "/home/media";
+              mountpoint = "legacy";
               compression = "off";
               atime = "off";
               recordsize = "1M";
@@ -113,7 +120,7 @@
           "encrypted/data/projects" = {
             type = "zfs_fs";
             options = {
-              mountpoint = "/home/projects";
+              mountpoint = "legacy";
               compression = "zstd-fast";
               atime = "off";
               recordsize = "16K";
@@ -122,7 +129,7 @@
           "encrypted/persist" = {
             type = "zfs_fs";
             options = {
-              mountpoint = "/persist";
+              mountpoint = "legacy";
               compression = "zstd";
               atime = "off";
               recordsize = "128K";
@@ -140,7 +147,7 @@
           "encrypted/system/gnu" = {
             type = "zfs_fs";
             options = {
-              mountpoint = "/gnu";
+              mountpoint = "legacy";
               compression = "zstd-1";
               atime = "off";
               recordsize = "128K";
@@ -149,7 +156,7 @@
           "encrypted/system/nix" = {
             type = "zfs_fs";
             options = {
-              mountpoint = "/nix";
+              mountpoint = "legacy";
               compression = "zstd-1";
               atime = "off";
               recordsize = "128K";
@@ -158,24 +165,16 @@
           "encrypted/system/root" = {
             type = "zfs_fs";
             options = {
-              mountpoint = "/";
+              mountpoint = "legacy";
               compression = "on";
               atime = "off";
               recordsize = "128K";
             };
           };
-          "encrypted/system/swap" = {
-            type = "zfs_volume";
-            size = "16G";
-            options = {
-              volsize = "16G";
-              compression = "off";
-            };
-          };
           "encrypted/system/var" = {
             type = "zfs_fs";
             options = {
-              mountpoint = "/var";
+              mountpoint = "legacy";
               compression = "lz4";
               atime = "off";
               recordsize = "128K";
@@ -184,7 +183,7 @@
           "encrypted/system/var/cache" = {
             type = "zfs_fs";
             options = {
-              mountpoint = "/var/cache";
+              mountpoint = "legacy";
               compression = "lz4";
               atime = "off";
               recordsize = "128K";
@@ -193,7 +192,7 @@
           "encrypted/system/var/log" = {
             type = "zfs_fs";
             options = {
-              mountpoint = "/var/log";
+              mountpoint = "legacy";
               compression = "zstd";
               atime = "off";
               recordsize = "128K";
