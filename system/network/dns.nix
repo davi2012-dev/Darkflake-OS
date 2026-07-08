@@ -41,6 +41,7 @@
         prefer-ip6 = false;
         edns-buffer-size = 1232;
         unwanted-reply-threshold = 10000;
+        root-hints = "${pkgs.dns-root-data}/root.hints";
 
         auto-trust-anchor-file = "/var/lib/unbound/root.key";
         harden-glue = true;
