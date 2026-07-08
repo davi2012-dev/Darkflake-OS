@@ -38,7 +38,7 @@ in
     enable = true;
 
     virtualHosts = {
-      "Adguard.darkflake.local" = {
+      "adguard.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
           reverse_proxy localhost:3000
