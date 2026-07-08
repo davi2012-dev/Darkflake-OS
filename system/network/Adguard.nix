@@ -17,9 +17,9 @@
         port = 53;
 
         upstream_dns = [
-          "127.0.0.1:5335"
-          "1.1.1.1"
-          "9.9.9.9"
+          "127.0.0.1:5335"           # Unbound (principal)
+          "1.1.1.1"                  # Fallback: Cloudflare
+          "9.9.9.9"                  # Fallback: Quad9
         ];
 
         bootstrap_dns = [
@@ -29,24 +29,6 @@
         ];
 
         upstream_dns_mode = "parallel";
-
-        safesearch = {
-          enabled = true;
-        };
-
-        safebrowsing = {
-          enabled = true;        
-        };
-
-        # Filtros adicionais (opcional)
-        filters = [
-          {
-            enabled = true;
-            url = "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt";
-            name = "AdGuard DNS filter";
-            id = 1;
-          }
-        ];
 
         blocking_mode = "nxdomain";
         cache_size = 67108864;
