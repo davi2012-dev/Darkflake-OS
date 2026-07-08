@@ -1,5 +1,6 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
 
+{
   services.adguardhome = {
     enable = true;
 
@@ -16,29 +17,42 @@
         ];
         port = 53;
 
-upstream_dns = [
-  "127.0.0.1:5354"
-  "127.0.0.1:5335"
-  "1.1.1.1"
-  "9.9.9.9"
-];
+        upstream_dns = [
+          "127.0.0.1:5354"
+          "127.0.0.1:5335"
+          "1.1.1.1"
+          "1.0.0.1"
+          "9.9.9.9"
+          "149.112.112.112"
+          "8.26.56.26"
+          "8.20.247.20"
+          "84.200.69.80"
+          "84.200.70.40"
+          "156.154.70.1"
+          "156.154.71.1"
+          "4.2.2.1"
+          "4.2.2.2"
+          "51.15.88.1"
+          "51.15.88.2"
+          "80.80.80.80"
+          "80.80.81.81"
+        ];
 
-bootstrap_dns = [
-  "127.0.0.1:5354"
-  "127.0.0.1:5335"
-  "1.1.1.1"
-  "9.9.9.9"
-];
+        bootstrap_dns = [
+          "127.0.0.1:5354"
+          "127.0.0.1:5335"
+          "1.1.1.1"
+          "9.9.9.9"
+        ];
 
-private_reverse_dns_servers = [
-  "127.0.0.1:5354"
-  "127.0.0.1:5335"
-  "1.1.1.1"
-  "9.9.9.9"
-];
+        private_reverse_dns_servers = [
+          "127.0.0.1:5354"
+          "127.0.0.1:5335"
+          "1.1.1.1"
+          "9.9.9.9"
+        ];
 
         upstream_dns_mode = "parallel";
-
         blocking_mode = "nxdomain";
         cache_size = 67108864;
         cache_ttl_min = 300;
@@ -48,7 +62,6 @@ private_reverse_dns_servers = [
         ratelimit = 20;
         refuse_any = true;
         filtering_enabled = true;
-
         protection_enabled = true;
         blocking_ipv4 = "";
         blocking_ipv6 = "";
@@ -66,5 +79,4 @@ private_reverse_dns_servers = [
       };
     };
   };
-
 }
