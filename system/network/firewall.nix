@@ -51,7 +51,7 @@
       "nextcloud.darkflake.local"
       "jellyfin.darkflake.local"
       "search.darkflake.local"
-      "Adguard.darkflake.local"
+      "adguard.darkflake.local"
       "librechat.darkflake.local"
       "cockpit.darkflake.local"
       "homarr.darkflake.local"
