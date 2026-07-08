@@ -33,9 +33,8 @@
 
         do-ip4 = true;
         do-ip6 = true;
-        prefer-ip6 = false;
+        prefer-ip6 = true;
 
-        # ATIVA UDP E TCP
         do-udp = true;
         do-tcp = true;
         edns-buffer-size = 1232;
