@@ -11,9 +11,15 @@
       ];
 
       server_names = [
-        "cloudflare-dnscrypt" 
-        "quad9-dnscrypt-main"
-        "scaleway-fr"
+      "cloudflare-dnscrypt"
+      "quad9-dnscrypt-main"
+      "scaleway-fr"
+      "adguard-dnscrypt"
+      "dnscrypt.eu-dk"
+      "dnscrypt.nl"
+      "dnscrypt.de"
+      "dns.digitale-gesellschaft.ch"
+      "ffmuc.net"
       ];
 
       require_nofilter = true;
@@ -21,12 +27,18 @@
       require_dnssec = true;
 
       anonymized_dns = {
-      routes = [
-      { server_name = "cloudflare-dnscrypt"; via = [ "anon-cs-de" ]; }
-      { server_name = "quad9-dnscrypt-main"; via = [ "anon-cs-nl" ]; }
-      { server_name = "scaleway-fr"; via = [ "anon-cs-fr" ]; }
-     ];
-    };
+  routes = [
+    { server_name = "cloudflare-dnscrypt"; via = [ "anon-cs-de" ]; }
+    { server_name = "quad9-dnscrypt-main"; via = [ "anon-cs-nl" ]; }
+    { server_name = "scaleway-fr"; via = [ "anon-cs-fr" ]; }
+    { server_name = "adguard-dnscrypt"; via = [ "anon-cs-nl" ]; }
+    { server_name = "dnscrypt.eu-dk"; via = [ "anon-cs-dk" ]; }
+    { server_name = "dnscrypt.nl"; via = [ "anon-cs-nl" ]; }
+    { server_name = "dnscrypt.de"; via = [ "anon-cs-de" ]; }
+    { server_name = "dns.digitale-gesellschaft.ch"; via = [ "anon-cs-ch" ]; }
+    { server_name = "ffmuc.net"; via = [ "anon-cs-de" ]; }
+  ];
+};
 
       force_tcp = false;
       ipv4_servers = true;
