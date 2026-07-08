@@ -16,17 +16,26 @@
         ];
         port = 53;
 
-        upstream_dns = [
-          "127.0.0.1:5335"           # Unbound (principal)
-          "1.1.1.1"                  # Fallback: Cloudflare
-          "9.9.9.9"                  # Fallback: Quad9
-        ];
+upstream_dns = [
+  "127.0.0.1:5353"
+  "127.0.0.1:5335"
+  "1.1.1.1"
+  "9.9.9.9"
+];
 
-        bootstrap_dns = [
-          "127.0.0.1:5335"
-          "1.1.1.1"
-          "9.9.9.9"
-        ];
+bootstrap_dns = [
+  "127.0.0.1:5353"
+  "127.0.0.1:5335"
+  "1.1.1.1"
+  "9.9.9.9"
+];
+
+private_reverse_dns_servers = [
+  "127.0.0.1:5353"
+  "127.0.0.1:5335"
+  "1.1.1.1"
+  "9.9.9.9"
+];
 
         upstream_dns_mode = "parallel";
 
