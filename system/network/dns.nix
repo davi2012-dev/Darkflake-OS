@@ -45,8 +45,6 @@
         unwanted-reply-threshold = 10000;
         root-hints = "${pkgs.dns-root-data}/root.hints";
 
-        # NÃO DEFINIR auto-trust-anchor-file (o módulo já define)
-
         harden-glue = true;
         harden-dnssec-stripped = true;
         harden-below-nxdomain = true;
