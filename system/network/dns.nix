@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
-{
+let
+  rootKey = pkgs.runCommand "root.key" {} ''
+    ${pkgs.unbound}/bin/unbound-anchor -a $out
+  '';
+in {
   services.unbound = {
     enable = true;
     settings = {
@@ -45,7 +49,10 @@
         unwanted-reply-threshold = 10000;
         root-hints = "${pkgs.dns-root-data}/root.hints";
 
-        auto-trust-anchor-file = "/var/lib/unbound/root.key";
+        # 🔥 USAR A ÂNCORA GERADA NO BUILD
+        auto-trust-anchor-file = "${rootKey}";
+        trust-anchor-signaling = no;
+
         harden-glue = true;
         harden-dnssec-stripped = true;
         harden-below-nxdomain = true;
