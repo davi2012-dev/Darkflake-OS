@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
-let
-  rootKey = pkgs.runCommand "root.key" {} ''
-    ${pkgs.unbound}/bin/unbound-anchor -a $out
-  '';
-in {
+{
   services.unbound = {
     enable = true;
     settings = {
@@ -49,9 +45,7 @@ in {
         unwanted-reply-threshold = 10000;
         root-hints = "${pkgs.dns-root-data}/root.hints";
 
-        # 🔥 USAR A ÂNCORA GERADA NO BUILD
-        auto-trust-anchor-file = "${rootKey}";
-        trust-anchor-signaling = no;
+        # NÃO DEFINIR auto-trust-anchor-file (o módulo já define)
 
         harden-glue = true;
         harden-dnssec-stripped = true;
@@ -80,4 +74,12 @@ in {
       };
     };
   };
+
+  # Gera a âncora DNSSEC se não existir
+  systemd.services.unbound.preStart = ''
+    if [ ! -f /var/lib/unbound/root.key ]; then
+      ${pkgs.unbound}/bin/unbound-anchor -a /var/lib/unbound/root.key
+      chown unbound:unbound /var/lib/unbound/root.key
+    fi
+  '';
 }
