@@ -39,7 +39,6 @@
         do-ip4 = true;
         do-ip6 = true;
         prefer-ip6 = true;
-        module-config = "dns64 validator iterator";
         dns64-prefix = "64:ff9b::/96";
         dns64-synthall = true;
         edns-buffer-size = 1232;
