@@ -18,10 +18,34 @@
 
         upstream_dns = [
           "127.0.0.1:5335"
+          "1.1.1.1"
+          "9.9.9.9"
         ];
 
         bootstrap_dns = [
           "127.0.0.1:5335"
+          "1.1.1.1"
+          "9.9.9.9"
+        ];
+
+        upstream_dns_mode = "parallel";
+
+        safesearch = {
+          enabled = true;
+        };
+
+        safebrowsing = {
+          enabled = true;        
+        };
+
+        # Filtros adicionais (opcional)
+        filters = [
+          {
+            enabled = true;
+            url = "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt";
+            name = "AdGuard DNS filter";
+            id = 1;
+          }
         ];
 
         blocking_mode = "nxdomain";
