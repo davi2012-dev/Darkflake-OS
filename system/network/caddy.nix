@@ -3,27 +3,27 @@
 let
   # --- GERA OS CERTIFICADOS DURANTE O BUILD (nixos-rebuild) ---
   certs = pkgs.runCommand "caddy-local-certs" {
-  buildInputs = [ pkgs.openssl ];
-} ''
-  mkdir -p $out
+    buildInputs = [ pkgs.openssl ];
+  } ''
+    mkdir -p $out
 
-  # 1. Cria a Autoridade Certificadora (CA) local
-  openssl genrsa -out $out/ca.key 2048
-  openssl req -x509 -new -nodes -key $out/ca.key -sha256 -days 3650 -out $out/ca.crt -subj "/CN=Darkflake Local CA"
+    # 1. Cria a Autoridade Certificadora (CA) local
+    openssl genrsa -out $out/ca.key 2048
+    openssl req -x509 -new -nodes -key $out/ca.key -sha256 -days 3650 -out $out/ca.crt -subj "/CN=Darkflake Local CA"
 
-  # 2. Cria a chave do servidor (coringa para todos os subdomínios)
-  openssl genrsa -out $out/server.key 2048
-  openssl req -new -key $out/server.key -out $out/server.csr -subj "/CN=*.darkflake.local"
+    # 2. Cria a chave do servidor (coringa para todos os subdomínios)
+    openssl genrsa -out $out/server.key 2048
+    openssl req -new -key $out/server.key -out $out/server.csr -subj "/CN=*.darkflake.local"
 
-  # 3. Configura o SAN (obrigatório para navegadores modernos)
-  echo "subjectAltName=DNS:*.darkflake.local" > $out/san.cnf
+    # 3. Configura o SAN (obrigatório para navegadores modernos)
+    echo "subjectAltName=DNS:*.darkflake.local" > $out/san.cnf
 
-  # 4. Assina o certificado do servidor com a CA local
-  openssl x509 -req -in $out/server.csr -CA $out/ca.crt -CAkey $out/ca.key -CAcreateserial -out $out/server.crt -days 3650 -sha256 -extfile $out/san.cnf
+    # 4. Assina o certificado do servidor com a CA local
+    openssl x509 -req -in $out/server.csr -CA $out/ca.crt -CAkey $out/ca.key -CAcreateserial -out $out/server.crt -days 3650 -sha256 -extfile $out/san.cnf
 
-  # Limpeza
-  rm $out/server.csr $out/san.cnf $out/ca.srl
-'';
+    # Limpeza
+    rm $out/server.csr $out/san.cnf $out/ca.srl
+  '';
 
   caCert = "${certs}/ca.crt";
   serverCert = "${certs}/server.crt";
@@ -38,30 +38,41 @@ in
     enable = true;
 
     virtualHosts = {
+      "Adguard.darkflake.local" = {
+        extraConfig = ''
+          tls ${serverCert} ${serverKey}
+          reverse_proxy localhost:3000
+        '';
+      };
+
       "nextcloud.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
           reverse_proxy localhost:8085
         '';
       };
+
       "jellyfin.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
           reverse_proxy localhost:8096
         '';
       };
+
       "search.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
           reverse_proxy localhost:8080
         '';
       };
+
       "librechat.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
           reverse_proxy localhost:3080
         '';
       };
+
       "cockpit.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
@@ -72,42 +83,49 @@ in
           }
         '';
       };
+
       "homarr.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
           reverse_proxy localhost:8083
         '';
       };
+
       "stirling.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
           reverse_proxy localhost:8089
         '';
       };
+
       "chat.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
           reverse_proxy localhost:7000
         '';
       };
+
       "metube.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
           reverse_proxy localhost:8081
         '';
       };
+
       "netdata.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
           reverse_proxy localhost:19999
         '';
       };
+
       "ha.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
           reverse_proxy localhost:8123
         '';
       };
+
       "portainer.darkflake.local" = {
         extraConfig = ''
           tls ${serverCert} ${serverKey}
