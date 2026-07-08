@@ -34,10 +34,13 @@
         do-ip4 = true;
         do-ip6 = true;
         prefer-ip6 = false;
-        do-udp = false;
+
+        # ATIVA UDP E TCP
+        do-udp = true;
         do-tcp = true;
         edns-buffer-size = 1232;
         max-udp-size = 1232;
+
         unwanted-reply-threshold = 10000;
         root-hints = "${pkgs.dns-root-data}/root.hints";
         auto-trust-anchor-file = "/var/lib/unbound/root.key";
@@ -64,7 +67,9 @@
         tls-ciphers = "ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305";
 
         tls-use-sni = true;
-        verbosity = 1;
+        verbosity = 5;
+        log-queries = true;
+        log-replies = true;
         harden-large-queries = true;
       };
     };
