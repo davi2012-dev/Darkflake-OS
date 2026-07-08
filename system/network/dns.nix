@@ -66,9 +66,9 @@
         tls-ciphers = "ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305";
 
         tls-use-sni = true;
-        verbosity = 5;
+        verbosity = 1;
         log-queries = true;
-        log-replies = true;
+        log-replies = false;
         harden-large-queries = true;
       };
     };
