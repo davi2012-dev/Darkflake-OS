@@ -7,12 +7,7 @@
       server = {
         interface = [ "127.0.0.1" "::1" ];
         port = 5335;
-
-        access-control = [
-          "127.0.0.0/8 allow"
-          "::1/128 allow"
-        ];
-
+        access-control = [ "127.0.0.0/8 allow" "::1/128 allow" ];
         num-threads = 4;
         so-reuseport = true;
         msg-cache-slabs = 4;
@@ -38,12 +33,14 @@
 
         do-ip4 = true;
         do-ip6 = true;
-        prefer-ip6 = true;
-        dns64-prefix = "64:ff9b::/96";
-        dns64-synthall = true;
+        prefer-ip6 = false;
+        do-udp = false;
+        do-tcp = true;
         edns-buffer-size = 1232;
+        max-udp-size = 1232;
         unwanted-reply-threshold = 10000;
         root-hints = "${pkgs.dns-root-data}/root.hints";
+        auto-trust-anchor-file = "/var/lib/unbound/root.key";
 
         harden-glue = true;
         harden-dnssec-stripped = true;
@@ -73,7 +70,6 @@
     };
   };
 
-  # Gera a âncora DNSSEC se não existir
   systemd.services.unbound.preStart = ''
     if [ ! -f /var/lib/unbound/root.key ]; then
       ${pkgs.unbound}/bin/unbound-anchor -a /var/lib/unbound/root.key
