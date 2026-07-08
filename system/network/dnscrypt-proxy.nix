@@ -11,7 +11,7 @@
       ];
 
       server_names = [
-        "cloudflare"
+        "cloudflare-dnscrypt" 
         "quad9-dnscrypt-main"
         "scaleway-fr"
       ];
@@ -21,11 +21,12 @@
       require_dnssec = true;
 
       anonymized_dns = {
-        routes = [
-          { server_name = "cloudflare"; via = [ "anon-cs-de" ]; }
-          { server_name = "quad9-dnscrypt-main"; via = [ "anon-cs-nl" ]; }
-        ];
-      };
+      routes = [
+      { server_name = "cloudflare-dnscrypt"; via = [ "anon-cs-de" ]; }
+      { server_name = "quad9-dnscrypt-main"; via = [ "anon-cs-nl" ]; }
+      { server_name = "scaleway-fr"; via = [ "anon-cs-fr" ]; }
+     ];
+    };
 
       force_tcp = false;
       ipv4_servers = true;
