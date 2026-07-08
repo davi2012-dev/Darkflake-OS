@@ -34,15 +34,15 @@
         do-ip4 = true;
         do-ip6 = true;
         prefer-ip6 = true;
-
         do-udp = true;
         do-tcp = true;
         edns-buffer-size = 1232;
         max-udp-size = 1232;
-
         unwanted-reply-threshold = 10000;
         root-hints = "${pkgs.dns-root-data}/root.hints";
         auto-trust-anchor-file = "/var/lib/unbound/root.key";
+        trust-anchor-signaling = false;  
+        val-permissive-mode = true;       
 
         harden-glue = true;
         harden-dnssec-stripped = true;
