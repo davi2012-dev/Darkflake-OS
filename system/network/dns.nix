@@ -38,7 +38,10 @@
 
         do-ip4 = true;
         do-ip6 = true;
-        prefer-ip6 = false;
+        prefer-ip6 = true;
+        module-config = "dns64 validator iterator";
+        dns64-prefix = "64:ff9b::/96";
+        dns64-synthall = yes;
         edns-buffer-size = 1232;
         unwanted-reply-threshold = 10000;
         root-hints = "${pkgs.dns-root-data}/root.hints";
