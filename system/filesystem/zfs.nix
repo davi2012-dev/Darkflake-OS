@@ -2,16 +2,30 @@
 
   networking.hostId = "cdb22960"; 
 
+  # --- Configurações do Boot e Kernel ---
   boot.supportedFilesystems = [ "zfs" ];
   boot.initrd.supportedFilesystems = [ "zfs" ];
   boot.zfs.devNodes = "/dev/disk/by-id";
   boot.zfs.requestEncryptionCredentials = true;
   boot.zfs.forceImportRoot = true; 
-  
-  services.zfs.autoScrub.enable = true;
-  services.zfs.trim.enable = true;
-  boot.kernelParams = [ "zfs.zfs_arc_max=8589934592" ]; 
+  boot.kernelParams = [ "zfs.zfs_arc_max=8589934592" ];
 
+  # --- Serviços do ZFS ---
+  services.zfs.autoScrub = {
+    enable = true;
+    pools = [ "rpool" ];
+    interval = "Mon,Wed,Fri,Sun *-*-* 12:00:00";
+  };
+
+  services.zfs.trim.enable = true; 
+
+  # Configuração do ZED (ZFS Event Daemon) integrada
+  services.zfs.zed.settings = {
+    ZED_NOTIFY_VERBOSE = true;
+    ZED_NOTIFY_COMMAND = "${zedNotifySlack}"; # Envia alertas para o Slack
+  };
+
+  # --- Automação de Snapshots (Sanoid) ---
   services.sanoid = {
     enable = true;
     interval = "minutely"; 
