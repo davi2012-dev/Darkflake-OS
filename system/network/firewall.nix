@@ -20,7 +20,7 @@
             # === PORTAS EXTERNAS ===
             tcp dport { 22, 53, 80, 139, 443, 445, 631, 4460, 51820, 8080, 3000, 8123, 9090, 8083, 53317 } accept
 
-            udp dport { 53, 123, 4460, 631, 5353, 41641 } accept
+            udp dport { 53, 123, 4460, 631, 5353, 41641 3544  } accept
 
             icmp type echo-request accept
             icmpv6 type echo-request accept
