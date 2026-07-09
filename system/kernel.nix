@@ -70,7 +70,6 @@
 
   # --- 4. Sysctl ---
   boot.kernel.sysctl = {
-    # Performance de I/O, Memória e Cache
     "vm.vfs_cache_pressure" = 50;
     "kernel.io_uring_disabled" = 0;
     "vm.nr_hugepages" = 0;
