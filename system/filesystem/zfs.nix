@@ -22,7 +22,6 @@
   # Configuração do ZED (ZFS Event Daemon) integrada
   services.zfs.zed.settings = {
     ZED_NOTIFY_VERBOSE = true;
-    ZED_NOTIFY_COMMAND = "${zedNotifySlack}"; # Envia alertas para o Slack
   };
 
   # --- Automação de Snapshots (Sanoid) ---
