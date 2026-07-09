@@ -45,4 +45,9 @@
       authselectmode require
     '';
   };
+
+  services.miredo = {
+  enable = true;
+  bindPort = 3544;
+ };
 }
