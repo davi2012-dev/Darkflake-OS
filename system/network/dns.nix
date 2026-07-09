@@ -33,7 +33,7 @@
 
         do-ip4 = true;
         do-ip6 = true;
-        prefer-ip6 = true;
+        prefer-ip6 = false;
         do-udp = true;
         do-tcp = true;
         edns-buffer-size = 1232;
