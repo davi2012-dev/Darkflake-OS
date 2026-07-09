@@ -57,7 +57,7 @@
   # --- 3. Módulos do Kernel ---
   boot.kernelModules = [
     "virtio_pci" "virtio_blk" "virtio_gpu" "xen-blkfront" "xen-netfront" "xen-pciback"
-    "wireguard" "qxl" "tap" "uhci_hcd" "ehci_hcd" "nvme" "sd_mod" "tcp_bbr3"
+    "wireguard" "qxl" "tap" "uhci_hcd" "ehci_hcd" "nvme" "sd_mod" "tcp_bbr"
     "kvm-intel" "tun" "bridge" "vhost_net" "macvlan" "ipvlan" "bonding" "8021q"
     "tpm_tis" "tpm_crb" "sch_htb" "sch_ingress" "sch_fq" "sch_fq_codel" "binder_linux"
     "uinput" "joydev" "evdev" "hid_generic" "ahci" "9pnet_virtio" "9p" "9pnet"
