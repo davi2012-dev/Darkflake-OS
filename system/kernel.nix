@@ -68,7 +68,7 @@
     "vfio" "vfio_iommu_type1" "vfio_pci"
   ];
 
-  # --- 4. Sysctl (Apenas o que NÃO está no swap.nix) ---
+  # --- 4. Sysctl ---
   boot.kernel.sysctl = {
     # Performance de I/O, Memória e Cache
     "vm.vfs_cache_pressure" = 50;
