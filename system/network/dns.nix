@@ -41,8 +41,8 @@
         unwanted-reply-threshold = 10000;
         root-hints = "${pkgs.dns-root-data}/root.hints";
         auto-trust-anchor-file = "/var/lib/unbound/root.key";
-        trust-anchor-signaling = false;  
-        val-permissive-mode = true;       
+        trust-anchor-signaling = false;
+        val-permissive-mode = true;
 
         harden-glue = true;
         harden-dnssec-stripped = true;
@@ -74,10 +74,37 @@
     };
   };
 
-  systemd.services.unbound.preStart = ''
-    if [ ! -f /var/lib/unbound/root.key ]; then
-      ${pkgs.unbound}/bin/unbound-anchor -a /var/lib/unbound/root.key
-      chown unbound:unbound /var/lib/unbound/root.key
-    fi
-  '';
+  # ===== HARDENING SYSTEMD =====
+  systemd.services.unbound = {
+    preStart = ''
+      if [ ! -f /var/lib/unbound/root.key ]; then
+        ${pkgs.unbound}/bin/unbound-anchor -a /var/lib/unbound/root.key
+        chown unbound:unbound /var/lib/unbound/root.key
+      fi
+    '';
+
+    serviceConfig = {
+      ProtectSystem = "strict";
+      ProtectHome = true;
+      PrivateTmp = true;
+      ProtectControlGroups = true;
+      ProtectKernelModules = true;
+      ProtectKernelTunables = true;
+      NoNewPrivileges = true;
+      RestrictNamespaces = true;
+      RestrictRealtime = true;
+      RestrictSUIDSGID = true;
+      MemoryDenyWriteExecute = true;
+
+      CapabilityBoundingSet = [ "" ];
+      AmbientCapabilities = [ "" ];
+
+      SystemCallArchitectures = "native";
+      SystemCallFilter = [
+        "@system-service"
+        "~@privileged"
+        "~@resources"
+      ];
+    };
+  };
 }
