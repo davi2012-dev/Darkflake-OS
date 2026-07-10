@@ -100,4 +100,48 @@
       };
     };
   };
+
+  # ===== HARDENING SYSTEMD PARA O ADGUARD HOME =====
+  systemd.services.adguardhome = {
+    serviceConfig = {
+      # Isolamento de sistema e arquivos
+      ProtectSystem = "strict";
+      ProtectHome = true;
+      PrivateTmp = true;
+      PrivateDevices = true;
+      PrivateMounts = true;
+      ProtectControlGroups = true;
+      ProtectKernelModules = true;
+      ProtectKernelTunables = true;
+      ProtectProc = "invisible";
+      ProtectHostname = true;
+      PrivateIPC = true;
+      LockPersonality = true;
+
+      # Proteção de memória e processos
+      MemoryDenyWriteExecute = true;
+      NoNewPrivileges = true;
+      RestrictRealtime = true;
+      RestrictSUIDSGID = true;
+      RestrictNamespaces = true;
+      ProcSubset = "all";  
+
+      # Restrições de rede e sistema
+      RestrictAddressFamilies = [
+        "AF_INET"
+        "AF_INET6"
+        "AF_UNIX"
+      ];
+      SystemCallArchitectures = "native";
+      SystemCallFilter = [
+        "@system-service"
+        "~@privileged"
+        "~@resources"
+      ];
+
+      # Capacidades: necessário CAP_NET_BIND_SERVICE para porta 53
+      CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
+      AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
+    };
+  };
 }
