@@ -45,4 +45,37 @@
       authselectmode require
     '';
   };
+
+  systemd.services.NetworkManager = {
+    serviceConfig = {
+      User = "";
+      NoNewPrivileges = true;
+      PrivateDevices = true;
+      ProtectClock = true;
+      CapabilityBoundingSet = [ ];
+      ProtectKernelLogs = true;
+      ProtectControlGroups = true;
+      ProtectKernelModules = false;
+      SystemCallArchitectures = "native";
+      MemoryDenyWriteExecute = true;
+      RestrictNamespaces = true;
+      RestrictSUIDSGID = true;
+      ProtectHostname = true;
+      LockPersonality = true;
+      ProtectKernelTunables = false;
+      RestrictAddressFamilies = [ ];
+      RestrictRealtime = true;
+      ProtectHome = true;
+      DeviceAllow = "";
+      ProtectSystem = false;
+      ProtectProc = true;
+      ProcSubset = true;
+      PrivateNetwork = false;
+      PrivateUsers = false;
+      PrivateTmp = true;
+      SystemCallFilter = [ ];
+      IPAddressDeny = "";
+      UMask = "0077";
+    };
+  };
 }
