@@ -34,6 +34,14 @@
           "4.2.2.2"
         ];
 
+        # Fallback DNS - usado quando todos os upstreams falham
+        fallback_dns = [
+          "1.1.1.1"
+          "9.9.9.9"
+          "8.8.8.8"
+          "1.0.0.1"
+        ];
+
         bootstrap_dns = [
           "127.0.0.1:5354"
           "127.0.0.1:5335"
