@@ -4,86 +4,73 @@
     settings = {
       display = {
         separator = " ";
-        constants = [
-          "" # {$1}
-          "" # {$2}
-          "" # {$3}
-          "" # {$4}
-          "" # {$5}
-          "" # {$6}
-          "" # {$7}
-          "" # {$8}
-          "" # {$9}
-          "" # {$10}
-          "┌──────" # {$11}
-          "───────" # {$12}
-          "──────┐" # {$13}
-        ];
-        percent = {
-          type = 9;
-          color = {
-            green = "#a6e3a1";
-            yellow = "#fab387";
-            red = "#f38ba8";
-          };
-        };
       };
 
       modules = [
         "break"
         {
           type = "version";
-          color = {
-            keys = "";
-          };
-          key = "{$4}                󱐋󱐋 Fastfetch ";
-          format = "{$6}{2}";
+          key = "                󱐋󱐋 Fastfetch ";
+          format = "{2}";
         }
+
+        # --- Bloco HARDWARE (Cyan) ---
         {
-         type = "custom";
-         format = "{$1}{$11}{$2}{$12}{$3}{$12}{$4}{$12}{$5}{$12}{$6}{$12}{$7}{$12}{$8}{$12}{$9}{$12}{$10}{$13} 󰍹  ハードウェア";
+          type = "custom";
+          key = "╭─────────────────────────────────── Hardware ─────────────────────────────────────╮";
+          keyColor = "cyan";
         }
         {
           type = "chassis";
-          key = "{$2}├ 󰡪 Chassis  ";
+          key = "│ ├ 󰇅 Chassis  ";
+          keyColor = "cyan";
         }
         {
-           type = "command";
-           key = "{$8}├ 󰋽 Hostname ";
-           text = "hostname 2>/dev/null || echo 'desconhecido'";
+          type = "command";
+          key = "│ ├ 󰋽 Hostname ";
+          text = "hostname 2>/dev/null || echo 'desconhecido'";
+          keyColor = "cyan";
         }
         {
           type = "board";
-          key =  "{$2}├ 󱔼 Board ";
+          key = "│ ├ 󱔼 Board ";
+          keyColor = "cyan";
         }
         {
           type = "tpm";
-          key = "{$9}├ 󰌆 TPM ";
+          key = "│ ├ 󰌆 TPM ";
+          keyColor = "cyan";
         }
         {
           type = "cpu";
-          key =  "{$3}├  CPU ";
+          key = "│ ├  CPU ";
+          keyColor = "cyan";
         }
         {
           type = "gpu";
-          key =  "{$4}├ 󰾲 GPU ";
+          key = "│ ├ 󰾲 GPU ";
+          keyColor = "cyan";
         }
         {
           type = "display";
-          key =  "{$5}├ 󰍹 Display ";
+          key = "│ ├ 󰍹  Display ";
+          keyColor = "cyan";
         }
         {
           type = "sound";
-          key =  "{$6}├  Sound ";
+          key = "│ ├   Sound ";
+          keyColor = "cyan";
         }
         {
           type = "battery";
-          key =  "{$6}├ 󰢟 Battery   ";
+          key = "│ ├ 󰢟 Battery   ";
           format = "{manufacturer} {model-name} ({capacity})";
+          keyColor = "cyan";
         }
         {
           type = "memory";
-          key = "{$7}├  Memory ";
+          key = "│ ├  Memory ";
+          keyColor = "cyan";
           percent = {
             type = 3;
             green = 30;
@@ -92,7 +79,8 @@
         }
         {
           type = "swap";
-          key = "{$8}├ 󰯍 Swap ";
+          key = "│ ├ 󰯍 Swap ";
+          keyColor = "cyan";
           percent = {
             type = 3;
             green = 30;
@@ -101,8 +89,9 @@
         }
         {
           type = "disk";
-          key = "{$9}├  NixOS ";
+          key = "│ ├  NixOS ";
           folders = [ "/" ];
+          keyColor = "cyan";
           percent = {
             type = 3;
             green = 30;
@@ -111,8 +100,9 @@
         }
         {
           type = "disk";
-          key = "{$10}├  Home ";
+          key = "│ ├  Home ";
           folders = [ "/home" ];
+          keyColor = "cyan";
           percent = {
             type = 3;
             green = 30;
@@ -121,201 +111,348 @@
         }
         {
           type = "disk";
-          key = "{$10}└  Guix ";
+          key = "│ └  Guix ";
           folders = [ "/gnu/store" ];
+          keyColor = "cyan";
           percent = {
             type = 3;
             green = 30;
             yellow = 70;
-        };
+          };
         }
         {
-         type = "custom";
-         format = "{$10}{$11}{$9}{$12}{$8}{$12}{$7}{$12}{$6}{$12}{$5}{$12}{$4}{$12}{$3}{$12}{$2}{$12}{$1}{$13}   ソフトウェア";
+          type = "custom";
+          key = "╰──────────────────────────────────────────────────────────────────────────────────╯";
+          keyColor = "cyan";
+        }
+        "break"
+
+        # --- Bloco SOFTWARE (Magenta/Mauve) ---
+        {
+          type = "custom";
+          key = "╭─────────────────────────────────── Software ─────────────────────────────────────╮";
+          keyColor = "magenta";
         }
         {
           type = "bios";
-          key =  "{$9}├ 󰚗 BIOS ";
+          key = "│ ├ 󰚗 BIOS ";
+          keyColor = "magenta";
         }
         {
           type = "command";
-          key = "{$8}├  Secure Boot";
+          key = "│ ├  Secure Boot";
           text = "bootctl status 2>/dev/null | grep 'Secure Boot' | awk '{print $3}' || echo 'N/A'";
+          keyColor = "magenta";
         }
         {
           type = "bootmgr";
-          key = "{$9}├ 󰚗 Bootmgr ";
+          key = "│ ├ 󰚗 Bootmgr ";
+          keyColor = "magenta";
         }
         {
           type = "command";
-          key = "{$8}├  Hypervisor";
+          key = "│ ├  Hypervisor";
           text = "systemd-detect-virt 2>/dev/null";
+          keyColor = "magenta";
         }
         {
           type = "os";
-          key =  "{$10}├  Distro ";
+          key = "│ ├  Distro ";
           format = "{name} {build-id} ({codename}) {arch}";
+          keyColor = "magenta";
         }
         {
           type = "kernel";
-          key =  "{$10}├  Kernel ";
+          key = "│ ├  Kernel ";
+          keyColor = "magenta";
         }
         {
           type = "command";
-          key = "{$8}├ 󰿃 License ";
+          key = "│ ├ 󰿃 License ";
           text = "if [ $(cat /proc/sys/kernel/tainted 2>/dev/null) -eq 0 ]; then echo '100% GPL'; else echo 'Tainted (não-GPL)'; fi";
+          keyColor = "magenta";
         }
         {
           type = "command";
-          key = "{$8}├ 󰗼 Init ";
+          key = "│ ├ 󰗼 Init ";
           text = "if ps -p 1 -o comm= | grep -q systemd; then echo \"systemd ($(systemd --version | head -1 | awk '{print $2}'))\"; else echo 'desconhecido'; fi";
+          keyColor = "magenta";
         }
         {
           type = "command";
-          key = "{$8}├  AppArmor ";
+          key = "│ ├  AppArmor ";
           text = "aa-status --enabled 2>/dev/null && echo \"Ativo ($(aa-status | grep -c 'profiles' | head -1) perfis)\" || echo 'Inativo'";
+          keyColor = "magenta";
         }
         {
           type = "Processes";
-          key =  "{$9}├ 󰑮 Processes ";
+          key = "│ ├ 󰑮 Processes ";
+          keyColor = "magenta";
         }
         {
           type = "terminal";
-          key =  "{$7}├  Terminal ";
+          key = "│ ├  Terminal ";
+          keyColor = "magenta";
         }
         {
           type = "terminalfont";
-          key =  "{$6}├ 󰛖 Term Font ";
+          key = "│ ├ 󰛖 Term Font ";
+          keyColor = "magenta";
         }
         {
           type = "shell";
-          key =  "{$8}├  Shell ";
+          key = "│ ├  Shell ";
+          keyColor = "magenta";
         }
         {
           type = "lm";
-          key =  "{$4}├ 󰧨 Login ";
+          key = "│ ├ 󰧨 Login ";
+          keyColor = "magenta";
         }
         {
           type = "command";
-          key = "{$1}├  Xorg ";
+          key = "│ ├  Xorg ";
           text = "X -version 2>&1 | grep 'X Server' | awk '{print $3}' || echo 'N/A'";
+          keyColor = "magenta";
         }
         {
           type = "opengl";
-          key =  "{$1}├ 󰆧 OpenGL ";
+          key = "│ ├ 󰆧 OpenGL ";
+          keyColor = "magenta";
         }
         {
           type = "vulkan";
-          key =  "{$1}├ 󰈸 Vulkan ";
+          key = "│ ├ 󰈸 Vulkan ";
+          keyColor = "magenta";
         }
         {
           type = "opencl";
-          key = "{$1}├ 󰆧 OpenCL ";
+          key = "│ ├ 󰆧 OpenCL ";
           format = "{1}";
+          keyColor = "magenta";
         }
         {
           type = "wm";
-          key =  "{$3}├  Window Managers ";
+          key = "│ ├  Window Managers ";
+          keyColor = "magenta";
         }
         {
           type = "de";
-          key =  "{$5}├  Desktop Environment ";
+          key = "│ ├  Desktop Environment ";
+          keyColor = "magenta";
         }
         {
           type = "wmtheme";
-          key =  "{$2}├ 󰉼 Theme ";
+          key = "│ ├ 󰉼 Theme ";
+          keyColor = "magenta";
         }
         {
           type = "font";
-          key =  "{$2}└ 󰛖 Font ";
+          key = "│ ╰ 󰛖 Font ";
+          keyColor = "magenta";
         }
         {
-         type = "custom";
-         format = "{$1}{$11}{$2}{$12}{$3}{$12}{$4}{$12}{$5}{$12}{$6}{$12}{$7}{$12}{$8}{$12}{$9}{$12}{$10}{$13}   セツゾクセイ";
+          type = "custom";
+          key = "╰──────────────────────────────────────────────────────────────────────────────────╯";
+          keyColor = "magenta";
+        }
+        "break"
+
+        # --- Bloco NETWORKS (Green) ---
+        {
+          type = "custom";
+          key = "╭─────────────────────────────────── Networks ─────────────────────────────────────╮";
+          keyColor = "green";
         }
         {
           type = "bluetoothradio";
-          key = "{$1}├ 󰂯 BT Radio ";
+          key = "│ ├ 󰂯 BT Radio ";
           format = "{5}";
+          keyColor = "green";
         }
         {
           type = "bluetooth";
-          key = "{$1}├ 󰂱 Bluetooth ";
+          key = "│ ├ 󰂱 Bluetooth ";
           format = "{1} - {4}";
+          keyColor = "green";
         }
         {
           type = "wifi";
-          key = "{$2}├  WiFi ";
+          key = "│ ├  WiFi ";
           format = "{4} - {7} - {13} GHz - {10}";
           showErrors = "never";
+          keyColor = "green";
         }
         {
           type = "command";
-          key = "{$7}├ 󰩟 Placas ";
+          key = "│ ├ 󰩟 Placas ";
           text = "ip -4 -br addr | grep -v 'lo\\|virbr\\|docker\\|veth\\|br-' | awk '{printf \"%s: %s  \", $1, $3}' | sed 's/  $//' || echo 'nenhuma'";
+          keyColor = "green";
         }
         {
           type = "localip";
-          key = "{$6}├ 󰩟 Local IP ";
+          key = "│ ├ 󰩟 Local IP ";
           format = "{1} - {3}";
           showMac = true;
+          keyColor = "green";
         }
         {
           type = "command";
-          key = "{$7}├ 󰩟 Gateway ";
+          key = "│ ├ 󰩟 Gateway ";
           text = "ip route | grep default | awk '{print $3}' || echo 'nenhum'";
+          keyColor = "green";
         }
         {
           type = "dns";
-          key = "{$4}├ 󱦂 DNS ";
+          key = "│ ├ 󱦂 DNS ";
+          keyColor = "green";
         }
         {
           type = "command";
-          key = "{$8}└ 󱨑 Firewall ";
+          key = "│ ╰ 󱨑 Firewall ";
           text = "if systemctl is-active --quiet nftables; then echo 'Active (nftables)'; else echo 'Inactive'; fi";
+          keyColor = "green";
         }
         {
-         type = "custom";
-         format = "{$10}{$11}{$9}{$12}{$8}{$12}{$7}{$12}{$6}{$12}{$5}{$12}{$4}{$12}{$3}{$12}{$2}{$12}{$1}{$13}   ジカン";
+          type = "custom";
+          key = "╰──────────────────────────────────────────────────────────────────────────────────╯";
+          keyColor = "green";
+        }
+        "break"
+
+        # --- Bloco TIME (Red/Flamingo) ---
+        {
+          type = "custom";
+          key = "╭───────────────────────────────────── Time ───────────────────────────────────────╮";
+          keyColor = "red";
         }
         {
           type = "uptime";
-          key = "{$6}├  Uptime ";
+          key = "│ ├  Uptime ";
+          keyColor = "red";
         }
         {
           type = "DateTime";
-          key = "{$10}├ 󰥔 Date/Time ";
+          key = "│ ├ 󰥔 Date/Time ";
+          keyColor = "red";
         }
         {
-          key = "{$8}├  OS Age ";
+          key = "│ ├  OS Age ";
           type = "disk";
           folders = "/";
           format = "{create-time:10} ({days} days)";
+          keyColor = "red";
         }
         {
           type = "command";
-          key = "{$7}└ 󰖐 Clima ";
+          key = "│ ╰ 󰖐 Clima ";
           text = "curl -s 'wttr.in/Ituberá?format=%t+%C+%l' 2>/dev/null | sed 's/+/ /g' || echo '--'";
+          keyColor = "red";
         }
         {
-           type = "custom";
-           format = "{$10}{$11}{$9}{$12}{$8}{$12}{$7}{$12}{$6}{$12}{$5}{$12}{$4}{$12}{$3}{$12}{$2}{$12}{$1}{$13}  リヨウシャ";
+          type = "custom";
+          key = "╰──────────────────────────────────────────────────────────────────────────────────╯";
+          keyColor = "red";
+        }
+        "break"
+
+        # --- Bloco USER (Blue/Lavender) ---
+        {
+          type = "custom";
+          key = "╭───────────────────────────────────── User ───────────────────────────────────────╮";
+          keyColor = "blue";
         }
         {
-           type = "users";
-           key = "{$4}├ 󰋽 user ";
-           format = "{1}@{2} - {3}";
+          type = "users";
+          key = "│ ├ 󰋽 user ";
+          format = "{1}@{2} - {3}";
+          keyColor = "blue";
         }
         {
-           type = "wallpaper";
-           key = "{$6}├ 󰸉 wallpaper ";
-           format = "{1}";
+          type = "wallpaper";
+          key = "│ ├ 󰸉 wallpaper ";
+          format = "{1}";
+          keyColor = "blue";
         }
         {
           type = "command";
-          key =  "└ 󰝚  Now Playing ";
+          key = "│ ╰ 󰝚  Now Playing ";
           text = "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo 'nenhuma'";
+          keyColor = "blue";
         }
+        {
+          type = "custom";
+          key = "╰──────────────────────────────────────────────────────────────────────────────────╯";
+          keyColor = "blue";
+        }
+        "break"
+
+        # --- Bloco DEVELOPMENT & LANGUAGES (Yellow/Peach) ---
+        {
+          type = "custom";
+          key = "╭────────────────────────────────── Development ───────────────────────────────────╮";
+          keyColor = "yellow";
+        }
+        {
+          type = "command";
+          key = "│ ├  Go ";
+          text = "go version 2>/dev/null | awk '{print $3}' || echo 'N/A'";
+          keyColor = "yellow";
+        }
+        {
+          type = "command";
+          key = "│ ├  Python ";
+          text = "python3 --version 2>/dev/null | awk '{print $2}' || echo 'N/A'";
+          keyColor = "yellow";
+        }
+        {
+          type = "command";
+          key = "│ ├  C++ ";
+          text = "(g++ -dumpfullversion -dumpversion || clang++ --version | head -n1 | awk '{print $3}') 2>/dev/null || echo 'N/A'";
+          keyColor = "yellow";
+        }
+        {
+          type = "command";
+          key = "│ ├  Java ";
+          text = "java -version 2>&1 | head -n1 | sed 's/.*version \"//;s/\".*//' || javac -version 2>&1 | awk '{print $2}' || echo 'N/A'";
+          keyColor = "yellow";
+        }
+        {
+          type = "command";
+          key = "│ ├   Rust ";
+          text = "rustc --version 2>/dev/null | awk '{print $2}' || echo 'N/A'";
+          keyColor = "yellow";
+        }
+        {
+          type = "command";
+          key = "│ ├   Nix ";
+          text = "nix-env --version 2>/dev/null | awk '{print $3}' || echo 'N/A'";
+          keyColor = "yellow";
+        }
+        {
+          type = "command";
+          key = "│ ├   Editor ";
+          text = "echo $EDITOR || echo 'nano'";
+          keyColor = "yellow";
+        }
+        {
+          type = "command";
+          key = "│ ├  Git ";
+          text = "git --version 2>/dev/null | awk '{print $3}' || echo 'N/A'";
+          keyColor = "yellow";
+        }
+        {
+          type = "command";
+          key = "│ ╰ 󰋜 Interface ";
+          text = "echo 'Adwaita Sans (11pt) [GTK2/3/4]'";
+          keyColor = "yellow";
+        }
+        {
+          type = "custom";
+          key = "╰──────────────────────────────────────────────────────────────────────────────────╯";
+          keyColor = "yellow";
+        }
+        "break"
         {
           type = "custom";
           format = "                󱄅 󱄅 󱄅 󱄅 󱄅 󱄅 󱄅 󱄅 󱄅 󱄅";
