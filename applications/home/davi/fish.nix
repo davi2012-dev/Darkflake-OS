@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ lib, ... }:
 {
   programs.fish = {
     generateCompletions = true;
@@ -7,12 +7,53 @@
     shellAbbrs = {
       cl = "clear";
 
-      ga = "git add";
-      gcm = "git commit -m";
-      gss = "git status";
+      # JJ (Jujutsu) abbreviations
+      j = "jj";
+      js = "jj status";
+      jd = "jj diff";
+      jl = "jj log";
+      jc = "jj commit";
+      jcm = "jj commit -m";
+      je = "jj edit";
+      jb = "jj bookmark";
+      jt = "jj tag";
+      jr = "jj restore";
+      ju = "jj undo";
+      jf = "jj fix";
+      jn = "jj next";
+      jp = "jj prev";
+      jsp = "jj split";
+      jsq = "jj squash";
+      jdesc = "jj describe";
+      jab = "jj abandon";
+      jshow = "jj show";
+      jrebase = "jj rebase";
+      jredo = "jj redo";
+      jresolve = "jj resolve";
+      jrevert = "jj revert";
+      jnew = "jj new";
 
-      nv = "neovide --fork";
-      v = "nvim";
+      # JJ Git integration
+      jg = "jj git";
+      jgf = "jj git fetch";
+      jgp = "jj git push";
+      jgi = "jj git init";
+      jclone = "jj git clone";
+
+      # JJ operations
+      jop = "jj operation";
+      jopl = "jj operation log";
+
+      # JJ workspaces
+      jw = "jj workspace";
+      jwa = "jj workspace add";
+      jwf = "jj workspace forget";
+      jwl = "jj workspace list";
+      jwr = "jj workspace rename";
+      jwroot = "jj workspace root";
+      jwu = "jj workspace update-stale";
+
+      nv = "nvim";
       weather = "curl 'https://wttr.in'";
 
       # used in the `multicd` function below
@@ -25,15 +66,15 @@
     # Non-expanding aliases like traditional shell.
     # long command can go here to declutter the terminal.
     shellAliases = {
-  l = lib.mkForce "eza --color=auto --icons=auto --long --all --header --time-style=long-iso";
-};
+      l = lib.mkForce "eza --color=auto --icons=auto --long --all --header --time-style=long-iso";
+    };
 
     functions = {
       multicd = {
-          description = ".. to cd .., ... to cd ../.., etc.";
-          body = ''
-            echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
-          '';
+        description = ".. to cd .., ... to cd ../.., etc.";
+        body = ''
+          echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
+        '';
       };
 
       mkcd = ''
@@ -72,10 +113,10 @@
           if test $status -eq 0
             echo "Symlink created: $target -> $source"
           end
-          '';
+        '';
       };
 
-      fish_greeting ={
+      fish_greeting = {
         description = "OLIVER SAYS HI";
         body = ''
           # Colors
@@ -161,7 +202,6 @@
           echo
         '';
       };
-
     };
 
     interactiveShellInit = ''
