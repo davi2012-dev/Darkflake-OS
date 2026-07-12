@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   networking.firewall.enable = false;
@@ -81,7 +86,7 @@
 
   boot.kernel.sysctl = {
     "net.core.default_qdisc" = "fq";
-    "net.ipv4.tcp_congestion_control" = "bbr3";
+    "net.ipv4.tcp_congestion_control" = "bbr";
     "net.ipv4.tcp_fastopen" = 3;
     "net.ipv4.tcp_sack" = 1;
     "net.ipv4.tcp_window_scaling" = 1;
@@ -103,7 +108,8 @@
     "net.ipv4.tcp_retries1" = 3;
     "net.ipv4.tcp_retries2" = 8;
     "net.ipv4.tcp_max_orphans" = 65536;
-    "net.ipv4.ip_local_reserved_ports" = "22,53,80,139,443,445,631,4460,51820,8080,3000,8123,9090,8083,53317";
+    "net.ipv4.ip_local_reserved_ports" =
+      "22,53,80,139,443,445,631,4460,51820,8080,3000,8123,9090,8083,53317";
     "net.ipv4.ip_local_port_range" = "1024 65000";
     "net.core.somaxconn" = 8192;
     "net.ipv4.conf.all.log_martians" = 1;
@@ -131,5 +137,58 @@
     "net.ipv4.tcp_timestamps" = 1;
     "net.ipv4.tcp_slow_start_after_idle" = 0;
     "net.ipv4.tcp_notsent_lowat" = 16384;
+  };
+
+  # ===== HARDENING PARA NFTABLES =====
+  systemd.services.nftables = {
+    serviceConfig = {
+      ProtectSystem = "strict";
+      ProtectHome = true;
+      PrivateTmp = true;
+      PrivateDevices = true;
+      PrivateMounts = true;
+      ProtectControlGroups = true;
+      ProtectHostname = true;
+      ProtectProc = "invisible";
+      ProcSubset = "all";
+      PrivateIPC = true;
+      LockPersonality = true;
+      MemoryDenyWriteExecute = true;
+      NoNewPrivileges = true;
+      RestrictRealtime = true;
+      RestrictSUIDSGID = true;
+      RestrictNamespaces = true;
+      RestrictAddressFamilies = [
+        "AF_INET"
+        "AF_INET6"
+        "AF_NETLINK"
+        "AF_UNIX"
+      ];
+      SystemCallArchitectures = "native";
+      SystemCallFilter = [
+        "@system-service"
+        "~@privileged"
+        "~@resources"
+        "~@clock"
+        "~@module"
+        "~@mount"
+        "~@reboot"
+        "~@swap"
+        "~@raw-io"
+      ];
+      CapabilityBoundingSet = [
+        "CAP_NET_ADMIN"
+        "CAP_NET_RAW"
+      ];
+      AmbientCapabilities = [
+        "CAP_NET_ADMIN"
+        "CAP_NET_RAW"
+      ];
+      ProtectKernelModules = true;
+      ProtectKernelLogs = true;
+      ProtectClock = true;
+      RemoveIPC = true;
+      UMask = "0077";
+    };
   };
 }
