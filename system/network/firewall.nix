@@ -22,7 +22,6 @@
             iifname { lo, waydroid0, tailscale0, podman*, veth*, proton*, wg*, tun*, pvpn* } accept
             ct state { established, related } accept
 
-            # === PORTAS EXTERNAS ===
             tcp dport { 22, 53, 80, 139, 443, 445, 631, 4460, 51820, 8080, 3000, 8123, 9090, 8083, 53317 } accept
 
             udp dport { 53, 123, 4460, 631, 5353, 41641, 3544  } accept
@@ -139,18 +138,13 @@
     "net.ipv4.tcp_notsent_lowat" = 16384;
   };
 
-  # ===== HARDENING PARA NFTABLES =====
   systemd.services.nftables = {
     serviceConfig = {
-      ProtectSystem = "strict";
-      ProtectHome = true;
-      PrivateTmp = true;
       PrivateDevices = true;
       PrivateMounts = true;
       ProtectControlGroups = true;
       ProtectHostname = true;
       ProtectProc = "invisible";
-      ProcSubset = "all";
       PrivateIPC = true;
       LockPersonality = true;
       MemoryDenyWriteExecute = true;
@@ -177,10 +171,6 @@
         "~@raw-io"
       ];
       CapabilityBoundingSet = [
-        "CAP_NET_ADMIN"
-        "CAP_NET_RAW"
-      ];
-      AmbientCapabilities = [
         "CAP_NET_ADMIN"
         "CAP_NET_RAW"
       ];
