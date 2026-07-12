@@ -108,7 +108,7 @@
     "net.ipv4.tcp_retries2" = 8;
     "net.ipv4.tcp_max_orphans" = 65536;
     "net.ipv4.ip_local_reserved_ports" =
-      "22,53,80,139,443,445,631,4460,51820,8080,3000,8123,9090,8083,53317";
+    "22,53,80,139,443,445,631,4460,51820,8080,3000,8123,9090,8083,53317";
     "net.ipv4.ip_local_port_range" = "1024 65000";
     "net.core.somaxconn" = 8192;
     "net.ipv4.conf.all.log_martians" = 1;
