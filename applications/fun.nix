@@ -42,7 +42,6 @@
     er-patcher
     xbill
     wineWow64Packages.unstableFull
-    wine-discord-ipc-bridge
     dxvk
     vkd3d-proton
 
