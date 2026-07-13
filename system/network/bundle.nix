@@ -67,7 +67,7 @@
       PrivateTmp = true;
       PrivateMounts = true;
       ProtectProc = "invisible";
-      ProcSubset = "pid"
+      ProcSubset = "pid";
       PrivateIPC = true;
       LockPersonality = true;
 
