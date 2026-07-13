@@ -41,44 +41,41 @@
   services.timesyncd.enable = false;
 
   services.chrony = {
+  enable = true;
+  enableNTS = true;
+  enableRTCTrimming = true;
+  autotrimThreshold = 30;
+  enableMemoryLocking = true;
+
+  makestep = {
     enable = true;
-    enableNTS = true;
-    enableRTCTrimming = true;
-    autotrimThreshold = 30;
-    enableMemoryLocking = true;
-
-    makestep = {
-      enable = true;
-      threshold = 1.0;
-      limit = 3;
-    };
-
-    servers = [
-      "time.cloudflare.com iburst nts"
-      "nts.netnod.se iburst nts"
-      "nts.ekspresso.se iburst nts"
-      "ptbtime1.ptb.de iburst nts"
-      "nts.ntp.se iburst nts"
-      "virginia.time.system76.com iburst nts"
-      "ohio.time.system76.com iburst nts"
-      "oregon.time.system76.com iburst nts"
-      "paris.time.system76.com iburst nts"
-      "brazil.time.system76.com iburst nts"
-    ];
-
-    extraConfig = ''
-      authselectmode require
-      ntsrefresh 3600
-      maxsamples 8
-      minsources 3
-      maxsources 6
-      minpoll 6
-      maxpoll 9
-      logchange 0.5
-      maxupdateskew 100.0
-      ntsdumpdir /var/lib/chrony
-    '';
+    threshold = 1.0;
+    limit = 3;
   };
+
+  servers = [
+    "time.cloudflare.com iburst nts minpoll 6 maxpoll 9"
+    "nts.netnod.se iburst nts minpoll 6 maxpoll 9"
+    "nts.ekspresso.se iburst nts minpoll 6 maxpoll 9"
+    "ptbtime1.ptb.de iburst nts minpoll 6 maxpoll 9"
+    "nts.ntp.se iburst nts minpoll 6 maxpoll 9"
+    "virginia.time.system76.com iburst nts minpoll 6 maxpoll 9"
+    "ohio.time.system76.com iburst nts minpoll 6 maxpoll 9"
+    "oregon.time.system76.com iburst nts minpoll 6 maxpoll 9"
+    "paris.time.system76.com iburst nts minpoll 6 maxpoll 9"
+    "brazil.time.system76.com iburst nts minpoll 6 maxpoll 9"
+  ];
+
+  extraConfig = ''
+    authselectmode require
+    ntsrefresh 3600
+    maxsamples 8
+    minsources 3
+    logchange 0.5
+    maxupdateskew 100.0
+    ntsdumpdir /var/lib/chrony
+  '';
+};
 
   # ===== HARDENING PARA NETWORKMANAGER =====
   systemd.services.NetworkManager = {
