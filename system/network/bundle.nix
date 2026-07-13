@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
   imports = [
     ./ssh.nix
@@ -49,8 +49,7 @@
   # ===== HARDENING PARA CHRONY =====
   systemd.services.chronyd = {
     serviceConfig = {
-      # System Call Filtering
-      SystemCallFilter = [
+      SystemCallFilter = lib.mkForce [
         "~@swap"
         "~@resources"
         "~@reboot"
@@ -62,42 +61,42 @@
         "~@cpu-emulation"
       ];
 
-      ProtectSystem = "strict";
-      ProtectHome = true;
-      PrivateTmp = true;
-      PrivateMounts = true;
-      ProtectProc = "invisible";
-      ProcSubset = "pid";
-      PrivateIPC = true;
-      LockPersonality = true;
+      ProtectSystem = lib.mkForce "full";
+      ProtectHome = lib.mkForce true;
+      PrivateTmp = lib.mkForce true;
+      PrivateMounts = lib.mkForce true;
+      ProtectProc = lib.mkForce "invisible";
+      ProcSubset = lib.mkForce "pid";
+      PrivateIPC = lib.mkForce true;
+      LockPersonality = lib.mkForce true;
 
-      ProtectKernelModules = true;
-      ProtectKernelLogs = true;
-      ProtectKernelTunables = true;
-      ProtectControlGroups = true;
-      ProtectHostname = true;
+      ProtectKernelModules = lib.mkForce true;
+      ProtectKernelLogs = lib.mkForce true;
+      ProtectKernelTunables = lib.mkForce true;
+      ProtectControlGroups = lib.mkForce true;
+      ProtectHostname = lib.mkForce true;
 
-      MemoryDenyWriteExecute = true;
-      NoNewPrivileges = true;
-      RestrictRealtime = true;
-      RestrictSUIDSGID = true;
-      RestrictNamespaces = true;
+      MemoryDenyWriteExecute = lib.mkForce true;
+      NoNewPrivileges = lib.mkForce true;
+      RestrictRealtime = lib.mkForce true;
+      RestrictSUIDSGID = lib.mkForce true;
+      RestrictNamespaces = lib.mkForce true;
 
-      RestrictAddressFamilies = [
+      RestrictAddressFamilies = lib.mkForce [
         "AF_INET"
         "AF_INET6"
         "AF_UNIX"
       ];
 
-      SystemCallArchitectures = "native";
-      CapabilityBoundingSet = [
+      SystemCallArchitectures = lib.mkForce "native";
+
+      CapabilityBoundingSet = lib.mkForce [
         "CAP_SYS_TIME"
         "CAP_NET_BIND_SERVICE"
       ];
 
-      RemoveIPC = true;
-      UMask = "0077";
-
+      RemoveIPC = lib.mkForce true;
+      UMask = lib.mkForce "0077";
     };
   };
 
