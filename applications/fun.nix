@@ -1,16 +1,37 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ... }: {
 
-{
-  # 1. Pacotes de Diversão e Lazer
+  # 1. Habilita o Steam e Ferramentas de Compatibilidade no Sistema
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+    extest.enable = true;
+    protontricks.enable = true;
+    gamescopeSession = {
+      enable = true;
+    };
+  };
+
+  # Controlador de comandos universal para a Steam
+  programs.streamcontroller.enable = true;
+
+  # 2. Pacotes de Diversão, Lazer e Utilitários Steam
   environment.systemPackages = with pkgs; [
+    # Suporte e Extras da Steam
+    steam-rom-manager
+    sgdboop
+    steamtinkerlaunch
+    mangohud
+
     # Jogos e Emuladores
     azahar
     hydralauncher
     ppsspp
     dolphin-emu
-    pcsx2            
-    heroic            
-    prismlauncher    
+    pcsx2
+    heroic
+    prismlauncher
     ryubing
     supertuxkart
     supertux
@@ -29,10 +50,10 @@
     cmatrix
     gpufetch
     speechd
-    espeak-ng         
-    pipes            
+    espeak-ng
+    pipes
     hollywood
-    asciiquarium         
+    asciiquarium
     sl
     cowsay
     oneko
