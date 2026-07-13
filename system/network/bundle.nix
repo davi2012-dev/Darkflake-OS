@@ -95,7 +95,6 @@
         "CAP_NET_BIND_SERVICE"
       ];
 
-      PrivateDevices = true;
       RemoveIPC = true;
       UMask = "0077";
 
