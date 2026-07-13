@@ -46,7 +46,7 @@
     '';
   };
 
-  # ===== HARDENING PARA CHRONY (TODAS AS OPÇÕES QUE JÁ ESTÃO ATIVAS) =====
+  # ===== HARDENING PARA CHRONY =====
   systemd.services.chronyd = {
     serviceConfig = {
       # System Call Filtering
@@ -62,7 +62,6 @@
         "~@cpu-emulation"
       ];
 
-      # Proteção de sistema
       ProtectSystem = "strict";
       ProtectHome = true;
       PrivateTmp = true;
@@ -72,37 +71,30 @@
       PrivateIPC = true;
       LockPersonality = true;
 
-      # Proteção de kernel
       ProtectKernelModules = true;
       ProtectKernelLogs = true;
       ProtectKernelTunables = true;
       ProtectControlGroups = true;
       ProtectHostname = true;
 
-      # Proteção de memória e processos
       MemoryDenyWriteExecute = true;
       NoNewPrivileges = true;
       RestrictRealtime = true;
       RestrictSUIDSGID = true;
       RestrictNamespaces = true;
 
-      # Restrições de rede
       RestrictAddressFamilies = [
         "AF_INET"
         "AF_INET6"
         "AF_UNIX"
       ];
 
-      # Chamadas de sistema
       SystemCallArchitectures = "native";
-
-      # Capacidades (mínimo necessário)
       CapabilityBoundingSet = [
         "CAP_SYS_TIME"
         "CAP_NET_BIND_SERVICE"
       ];
 
-      # Outras proteções
       PrivateDevices = true;
       RemoveIPC = true;
       UMask = "0077";
