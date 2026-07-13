@@ -46,6 +46,71 @@
     '';
   };
 
+  # ===== HARDENING PARA CHRONY (TODAS AS OPÇÕES QUE JÁ ESTÃO ATIVAS) =====
+  systemd.services.chronyd = {
+    serviceConfig = {
+      # System Call Filtering
+      SystemCallFilter = [
+        "~@swap"
+        "~@resources"
+        "~@reboot"
+        "~@raw-io"
+        "~@obsolete"
+        "~@mount"
+        "~@module"
+        "~@debug"
+        "~@cpu-emulation"
+      ];
+
+      # Proteção de sistema
+      ProtectSystem = "strict";
+      ProtectHome = true;
+      PrivateTmp = true;
+      PrivateMounts = true;
+      ProtectProc = "invisible";
+      ProcSubset = "all";
+      PrivateIPC = true;
+      LockPersonality = true;
+
+      # Proteção de kernel
+      ProtectKernelModules = true;
+      ProtectKernelLogs = true;
+      ProtectKernelTunables = true;
+      ProtectControlGroups = true;
+      ProtectHostname = true;
+
+      # Proteção de memória e processos
+      MemoryDenyWriteExecute = true;
+      NoNewPrivileges = true;
+      RestrictRealtime = true;
+      RestrictSUIDSGID = true;
+      RestrictNamespaces = true;
+
+      # Restrições de rede
+      RestrictAddressFamilies = [
+        "AF_INET"
+        "AF_INET6"
+        "AF_UNIX"
+      ];
+
+      # Chamadas de sistema
+      SystemCallArchitectures = "native";
+
+      # Capacidades (mínimo necessário)
+      CapabilityBoundingSet = [
+        "CAP_SYS_TIME"
+        "CAP_NET_BIND_SERVICE"
+      ];
+
+      # Outras proteções
+      PrivateDevices = true;
+      RemoveIPC = true;
+      UMask = "0077";
+
+    };
+  };
+
+  # ===== HARDENING PARA NETWORKMANAGER =====
   systemd.services.NetworkManager = {
     serviceConfig = {
       User = "";
