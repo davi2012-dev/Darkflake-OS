@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   imports = [
     ./ssh.nix
@@ -36,68 +42,42 @@
 
   services.chrony = {
     enable = true;
+    enableNTS = true;
+    enableRTCTrimming = true;
+    autotrimThreshold = 30;
+    enableMemoryLocking = true;
+
+    makestep = {
+      enable = true;
+      threshold = 1.0;
+      limit = 3;
+    };
+
     servers = [
       "time.cloudflare.com iburst nts"
       "nts.netnod.se iburst nts"
       "nts.ekspresso.se iburst nts"
+      "ptbtime1.ptb.de iburst nts"
+      "nts.ntp.se iburst nts"
+      "virginia.time.system76.com iburst nts"
+      "ohio.time.system76.com iburst nts"
+      "oregon.time.system76.com iburst nts"
+      "paris.time.system76.com iburst nts"
+      "brazil.time.system76.com iburst nts"
     ];
+
     extraConfig = ''
       authselectmode require
+      ntsrefresh 3600
+      maxsamples 8
+      minsources 3
+      maxsources 6
+      minpoll 6
+      maxpoll 9
+      logchange 0.5
+      maxupdateskew 100.0
+      ntsdumpdir /var/lib/chrony
     '';
-  };
-
-  # ===== HARDENING PARA CHRONY =====
-  systemd.services.chronyd = {
-    serviceConfig = {
-      SystemCallFilter = lib.mkForce [
-        "~@swap"
-        "~@resources"
-        "~@reboot"
-        "~@raw-io"
-        "~@obsolete"
-        "~@mount"
-        "~@module"
-        "~@debug"
-        "~@cpu-emulation"
-      ];
-
-      ProtectSystem = lib.mkForce "full";
-      ProtectHome = lib.mkForce true;
-      PrivateTmp = lib.mkForce true;
-      PrivateMounts = lib.mkForce true;
-      ProtectProc = lib.mkForce "invisible";
-      ProcSubset = lib.mkForce "pid";
-      PrivateIPC = lib.mkForce true;
-      LockPersonality = lib.mkForce true;
-
-      ProtectKernelModules = lib.mkForce true;
-      ProtectKernelLogs = lib.mkForce true;
-      ProtectKernelTunables = lib.mkForce true;
-      ProtectControlGroups = lib.mkForce true;
-      ProtectHostname = lib.mkForce true;
-
-      MemoryDenyWriteExecute = lib.mkForce true;
-      NoNewPrivileges = lib.mkForce true;
-      RestrictRealtime = lib.mkForce true;
-      RestrictSUIDSGID = lib.mkForce true;
-      RestrictNamespaces = lib.mkForce true;
-
-      RestrictAddressFamilies = lib.mkForce [
-        "AF_INET"
-        "AF_INET6"
-        "AF_UNIX"
-      ];
-
-      SystemCallArchitectures = lib.mkForce "native";
-
-      CapabilityBoundingSet = lib.mkForce [
-        "CAP_SYS_TIME"
-        "CAP_NET_BIND_SERVICE"
-      ];
-
-      RemoveIPC = lib.mkForce true;
-      UMask = lib.mkForce "0077";
-    };
   };
 
   # ===== HARDENING PARA NETWORKMANAGER =====
