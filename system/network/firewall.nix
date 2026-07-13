@@ -12,42 +12,70 @@
     enable = true;
     checkRuleset = true;
 
-    tables = {
-      filter = {
-        family = "inet";
-        content = ''
-          chain input {
-            type filter hook input priority 10; policy drop;
+    ruleset = ''
+      table inet filter {
+        flowtable fastpath {
+          hook ingress priority 0;
+          devices = { lo };
+        }
 
-            iifname { lo, waydroid0, tailscale0, podman*, veth*, proton*, wg*, tun*, pvpn* } accept
-            ct state { established, related } accept
+        chain input {
+          type filter hook input priority -200; policy drop;
 
-            tcp dport { 22, 53, 80, 139, 443, 445, 631, 4460, 51820, 8080, 3000, 8123, 9090, 8083, 53317 } accept
+          iifname != "lo" ip saddr { 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } drop
+          iifname != "lo" ip6 saddr { ::1/128, fc00::/7, fe80::/10, ff00::/8 } drop
 
-            udp dport { 53, 123, 4460, 631, 5353, 41641, 3544  } accept
+          iifname { lo, waydroid0, tailscale0, podman*, veth*, proton*, wg*, tun*, pvpn* } accept
+          ct state { established, related } accept
 
-            icmp type echo-request accept
-            icmpv6 type echo-request accept
+          tcp dport { 22, 53, 80, 139, 443, 445, 631, 4460, 51820, 8080, 3000, 8123, 9090, 8083, 53317 } accept
+          udp dport { 53, 123, 4460, 631, 5353, 41641, 3544 } accept
 
-            tcp flags & (fin|syn|rst|ack) == syn ct count over 500 drop
-            tcp flags & (fin|syn|rst|ack) == rst ct count over 20 drop
-            tcp flags & (fin|syn|rst|psh|ack|urg) == 0 drop
-            tcp flags & (fin|syn|rst|psh|ack|urg) == fin|syn|rst|psh|ack|urg drop
+          icmp type echo-request limit rate 10/second accept
+          icmpv6 type echo-request limit rate 10/second accept
 
-            tcp flags & (fin|syn|rst|ack) == syn log prefix "refused connection: " level info
-          }
+          tcp flags & (fin|syn|rst|ack) == syn ct count over 500 drop
+          tcp flags & (fin|syn|rst|ack) == rst ct count over 20 drop
 
-          chain forward {
-            type filter hook forward priority 0; policy drop;
-            ct state invalid drop
-          }
+          tcp dport != { 22, 53, 80, 139, 443, 445, 631, 4460, 51820, 8080, 3000, 8123, 9090, 8083, 53317 } log prefix "nftables DROP TCP: " drop
+          udp dport != { 53, 123, 4460, 631, 5353, 41641, 3544 } log prefix "nftables DROP UDP: " drop
 
-          chain output {
-            type filter hook output priority 0; policy accept;
-          }
-        '';
-      };
-    };
+          tcp flags & (fin|syn|rst|psh|ack|urg) == 0 drop
+          tcp flags & (fin|syn|rst|psh|ack|urg) == fin|syn|rst|psh|ack|urg drop
+
+          tcp flags & (fin|syn|rst|ack) == syn log prefix "refused connection: " level info
+        }
+
+        chain forward {
+          type filter hook forward priority 0; policy drop;
+          ct state invalid drop
+
+          ip saddr { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16 } drop
+          ip6 saddr { fc00::/7, fe80::/10 } drop
+
+          oifname { lo } ct state established,related flow offload @fastpath
+          iifname { lo } ct state established,related flow offload @fastpath
+        }
+
+        chain output {
+          type filter hook output priority 0; policy accept;
+        }
+      }
+
+      table inet nat {
+        chain PREROUTING {
+          type nat hook prerouting priority -100; policy accept;
+        }
+
+        chain POSTROUTING {
+          type nat hook postrouting priority 100; policy accept;
+        }
+
+        chain OUTPUT {
+          type nat hook output priority -100; policy accept;
+        }
+      }
+    '';
   };
 
   networking.hosts = {
