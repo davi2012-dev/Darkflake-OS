@@ -57,16 +57,36 @@
 
   # --- 3. Módulos do Kernel ---
   boot.kernelModules = [
+    # Virtio & Virtualização
     "virtio_pci" "virtio_blk" "virtio_gpu" "xen-blkfront" "xen-netfront" "xen-pciback"
-    "wireguard" "qxl" "tap" "uhci_hcd" "ehci_hcd" "nvme" "sd_mod" "tcp_bbr"
-    "kvm-intel" "tun" "bridge" "vhost_net" "macvlan" "ipvlan" "bonding" "8021q"
-    "tpm_tis" "tpm_crb" "sch_htb" "sch_ingress" "sch_fq" "sch_fq_codel" "binder_linux"
-    "uinput" "joydev" "evdev" "hid_generic" "ahci" "9pnet_virtio" "9p" "9pnet"
-    "snd_seq" "i2c_dev" "snd_hda_intel" "snd_usb_audio" "snd_aloop" "hidp"
-    "coretemp" "it87" "nct6775" "intel_rapl_common"
-    "iso9660" "vfat" "ntfs3" "fuse" "crypto_user" "dm_mod" "loop" "squashfs" "overlay" "btrfs" "uas" "usb_storage" "xhci_pci" "thunderbolt" "veth" "zfs"
-    "amdgpu"
-    "vfio" "vfio_iommu_type1" "vfio_pci"
+    "qxl" "tap" "tun" "bridge" "vhost_net" "veth" "9pnet_virtio" "9p" "9pnet"
+
+    # Rede, VPN & Protocolos
+    "wireguard" "tcp_bbr" "macvlan" "ipvlan" "bonding" "8021q" "sch_htb" "sch_ingress" "sch_fq" "sch_fq_codel"
+
+    # Hardware, Processador & KVM
+    "kvm-intel" "tpm_tis" "tpm_crb" "coretemp" "it87" "nct6775" "intel_rapl_common" "ahci"
+
+    # Armazenamento & Sistemas de Arquivos
+    "nvme" "sd_mod" "iso9660" "vfat" "ntfs3" "fuse" "crypto_user" "dm_mod" "loop" "squashfs" "overlay" "btrfs" "uas" "usb_storage" "xhci_pci" "thunderbolt" "zfs"
+
+    # Gráficos e GPU Passthrough
+    "amdgpu" "vfio" "vfio_iommu_type1" "vfio_pci"
+
+    # USB & Bluetooth de Baixo Nível
+    "uhci_hcd" "ehci_hcd" "hidp" "i2c_dev"
+
+    # Áudio
+    "snd_seq" "snd_hda_intel" "snd_usb_audio" "snd_aloop"
+
+    # INPUT & CONTROLES (Drivers Solicitados)
+    "uinput"          # Criação de dispositivos virtuais de entrada
+    "joydev"          # API legada de joystick (/dev/input/js*)
+    "evdev"           # Manipulação de eventos de input genéricos
+    "hid_generic"     # Fallback USB HID genérico
+    "ff_memless"      # Efeitos de vibração (Force-Feedback) para controles
+    "hid_playstation" # Suporte oficial aos controles DualShock 4 e DualSense
+    "hid_nintendo"    # Suporte oficial aos Joy-Cons e Switch Pro Controller
   ];
 
   # --- 4. Sysctl ---
