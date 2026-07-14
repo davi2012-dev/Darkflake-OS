@@ -8,6 +8,7 @@
     "bbr3"
     "numa_balancing=enable"
     "cpuidle.governor=teo"
+    "usbhid.quirks=0x057e:0x2009:0x80000000"
     "threadirqs"
     "preempt=full"
     "skew_tick=1"
