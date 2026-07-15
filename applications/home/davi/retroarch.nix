@@ -10,7 +10,7 @@ let
     "openbor" "pc98" "pce" "pce-cd" "pcfx" "pokemini" "ps1" "ps2" "psp" "saturn"
     "segacd" "sega-32x" "sega-cd" "sfc" "sg-1000" "snes" "sufami-turbo"
     "supergrafx" "switch" "turbo-grafx-16" "turbo-grafx-cd" "vectrex"
-    "virtualboy" "wii" "wonderswan" "wonderswan-color" "xbox" "zelda64"
+    "virtualboy" "windows" "wii" "wonderswan" "wonderswan-color" "xbox" "zelda64"
   ];
 
   biosDirs = [
@@ -91,6 +91,8 @@ in {
       video_driver = "vulkan";
       video_fullscreen = "true";
       system_directory = "/home/games/bios";
+      rgui_browser_directory = "/home/games/roms";
+      playlist_directory = "/home/games/roms";
     };
   };
 }
