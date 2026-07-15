@@ -154,7 +154,7 @@ in {
       overlay_directory = "/home/games/overlays";
       shader_directory = "/home/games/shaders";
       config_save_on_exit = "true";
-      menu_driver = "ozone";
+      menu_driver = "xmb";
     };
   };
 }
