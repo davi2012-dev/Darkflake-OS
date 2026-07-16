@@ -21,6 +21,13 @@
     ];
     auto-optimise-store = true;
 
+    system-features = [
+      "benchmark"
+      "big-parallel"
+      "kvm"
+      "gccarch-native"
+    ];
+
     substituters = [
       "https://cache.nixos.org/"
       "https://nix-community.cachix.org"
