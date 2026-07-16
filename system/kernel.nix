@@ -177,6 +177,7 @@
   hardware.cpu.intel.sgx.enableDcapCompat = true;
   hardware.brillo.enable = true;
   hardware.amdgpu.zluda.enable = true;
+  hardware.amdgpu.opencl.enable = true;
   hardware.intel-gpu-tools.enable = true;
 
   programs.tmux.secureSocket = true;
