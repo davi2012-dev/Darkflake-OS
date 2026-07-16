@@ -14,6 +14,7 @@
           "10.0.3.1"
           "10.88.0.1"
           "::1"
+          "100.114.251.60"
         ];
         port = 53;
 
@@ -71,6 +72,7 @@
           "127.0.0.1:5335"
           "1.1.1.1"
           "9.9.9.9"
+          "100.100.100.100"
         ];
 
         upstream_dns_mode = "parallel";
@@ -124,7 +126,7 @@
       RestrictRealtime = true;
       RestrictSUIDSGID = true;
       RestrictNamespaces = true;
-      ProcSubset = "all";  
+      ProcSubset = "all"; # Restringe /proc apenas a processos próprios
 
       # Restrições de rede e sistema
       RestrictAddressFamilies = [
