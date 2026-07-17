@@ -7,6 +7,7 @@ let
         @echo "     njust latesh"
         @echo "     njust get-emudeck [status|install|uninstall]"
         @echo "     njust bios-info"
+        @echo "     njust benchmark"
 
     hmx:
         curl -fsSL https://get.hmx.dev | bash
@@ -21,6 +22,12 @@ let
         echo "Product Name: \$(cat /sys/class/dmi/id/board_name 2>/dev/null || echo 'Unknown')"
         echo "Version:      \$(cat /sys/class/dmi/id/bios_version 2>/dev/null || echo 'Unknown')"
         echo "Release Date: \$(cat /sys/class/dmi/id/bios_date 2>/dev/null || echo 'Unknown')"
+
+    # Run a one minute system benchmark
+    benchmark:
+        #!/usr/bin/bash
+        echo 'Running a 1 minute benchmark ...'
+        cd /tmp && stress-ng --matrix 0 -t 1m --times
 
     alias install-emudeck := get-emudeck
 
@@ -115,6 +122,7 @@ let
           pkgs.jq        
           pkgs.findutils  
           pkgs.gum      
+          pkgs.stress-ng
         ]}
     '';
   };
