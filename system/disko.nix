@@ -21,8 +21,8 @@
               size = "16G";
               type = "8200"; # Linux swap
               content = {
-                type = "filesystem";
-                format = "swap";
+                type = "swap";
+                discardPolicy = "both"; # Ativa TRIM no swap para SSDs
               };
             };
             zfs = {
