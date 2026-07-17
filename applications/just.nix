@@ -6,12 +6,21 @@ let
         @echo "Uso: njust hmx"
         @echo "     njust latesh"
         @echo "     njust get-emudeck [status|install|uninstall]"
+        @echo "     njust bios-info"
 
     hmx:
         curl -fsSL https://get.hmx.dev | bash
 
     latesh:
         ssh -4 late.sh
+
+    # Show BIOS info (Bazzite-like style)
+    bios-info:
+        #!/usr/bin/bash
+        echo "Manufacturer: \$(cat /sys/class/dmi/id/board_vendor 2>/dev/null || echo 'Unknown')"
+        echo "Product Name: \$(cat /sys/class/dmi/id/board_name 2>/dev/null || echo 'Unknown')"
+        echo "Version:      \$(cat /sys/class/dmi/id/bios_version 2>/dev/null || echo 'Unknown')"
+        echo "Release Date: \$(cat /sys/class/dmi/id/bios_date 2>/dev/null || echo 'Unknown')"
 
     alias install-emudeck := get-emudeck
 
@@ -41,7 +50,6 @@ let
                 curl -s https://api.github.com/repos/EmuDeck/emudeck-electron/releases/latest | \
                 jq -r ".assets[] | select(.name | test(\".*AppImage\")) | .browser_download_url"
             )"
-            # Aqui chama o próprio njust para processar a instalação do arquivo obtido se necessário
             njust _install_appimage_file "$remote_appimage_url"
         }
         uninstall_emudeck() {
