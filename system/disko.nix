@@ -35,29 +35,13 @@
           };
         };
       };
-      sdb = {
-        type = "disk";
-        device = "/dev/sdb";
-        content = {
-          type = "gpt";
-          partitions = {
-            zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "rpool";
-              };
-            };
-          };
-        };
-      };
     };
     zpool = {
       rpool = {
         type = "zpool";
         options = {
           ashift = "12";
-          autotrim = "on";
+          autotrim = "on"; # Ótimo para SSDs
         };
         datasets = {
           "encrypted" = {
