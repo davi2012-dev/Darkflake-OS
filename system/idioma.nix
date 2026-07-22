@@ -6,9 +6,9 @@
   # --- 2. Teclado no Terminal (Console TTY) ---
   console = {
     enable = true;
-    keyMap = "br-abnt2";               # Layout do teclado no terminal puro
-    font = "Lat2-Terminus16";          # Fonte nítida para modo texto
-    earlySetup = true;                 # Carrega na initrd para evitar bugs de exibição no boot
+    keyMap = "br-abnt2";              
+    font = "sun12x22";        
+    earlySetup = true;                
   };
 
   # --- 3. Teclado no Servidor Gráfico (X11 / Wayland / Display Managers) ---
