@@ -21,7 +21,6 @@
 
   networking.hostName = "Darkflake";
   networking.domain = "local";
-  networking.stevenblack.enable = true;
   networking.tempAddresses = "default";
   networking.nameservers = [
     "127.0.0.1"
