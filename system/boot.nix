@@ -36,9 +36,9 @@
   # --- TEMA DO PLYMOUTH (ANIMADO VIA FLAKE) ---
   boot.plymouth = {
     enable = true;
-    theme = "kartoza";
+    theme = "nixos";
     themePackages = [
-      inputs.kartoza-plymouth-theme.packages.${pkgs.system}.default
+      inputs.nixos-plymouth-theme.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
 
