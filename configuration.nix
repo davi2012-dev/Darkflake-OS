@@ -18,7 +18,7 @@
     ./system/hardware/printing.nix
     ./ai/ollama.nix
     # 3. Módulos Agrupados (Bundles)
-    ./system/filesystem/bundle.nix  
+    ./system/filesystem/default.nix  
     ./system/network/bundle.nix     
     ./system/optimization/bundle.nix
     ./virtualization/bundle.nix
