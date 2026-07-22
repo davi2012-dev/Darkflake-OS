@@ -22,7 +22,7 @@
     ./system/network/default.nix     
     ./system/optimization/default.nix
     ./virtualization/bundle.nix
-    ./security/bundle.nix
+    ./security/default.nix
     # 4. Interface e Aplicativos
     ./applications/apps.nix
     ./applications/just.nix
