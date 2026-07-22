@@ -19,8 +19,8 @@
     ./ai/ollama.nix
     # 3. Módulos Agrupados (Bundles)
     ./system/filesystem/default.nix  
-    ./system/network/bundle.nix     
-    ./system/optimization/bundle.nix
+    ./system/network/default.nix     
+    ./system/optimization/default.nix
     ./virtualization/bundle.nix
     ./security/bundle.nix
     # 4. Interface e Aplicativos
