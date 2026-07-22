@@ -8,7 +8,6 @@
   boot.zfs.devNodes = "/dev/disk/by-id";
   boot.zfs.requestEncryptionCredentials = true;
   boot.zfs.forceImportRoot = true; 
-  boot.kernelParams = [ "zfs.zfs_arc_max=8589934592" ];
 
   # --- Serviços do ZFS ---
   services.zfs.autoScrub = {
