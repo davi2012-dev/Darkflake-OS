@@ -3,34 +3,33 @@
   # ========== SUPORTE A APPIMAGE ==========
   programs.appimage = {
     enable = true;
-    binfmt = true;      # Permite executar AppImages como programas normais
+    binfmt = true;      
   };
 
   environment.systemPackages = with pkgs; [
     # --- Internet e Comunicação ---
-    vesktop             # Discord com melhorias (Vencord)
-    beeper              # O app de chat universal moderno
-    crow-translate      # Tradutor rápido
+    vesktop           
+    beeper             
+    crow-translate     
     tor-browser
-    guixpkgs.hello
 
     # --- Multimídia e Design ---
-    mpv                 # Player de vídeo minimalista
-    gimp                # Editor de imagens
-    inkscape            # Vetores
-    krita               # Pintura digital
-    dippi               # Analisador de densidade de pixels
+    mpv                 
+    gimp              
+    inkscape            
+    krita             
+    dippi             
     cryptomator 
     # --- Terminal Moderno (Rust Tools) ---
-    fastfetch           # O substituto do neofetch
-    btop               # Monitor de recursos visual
-    starship            # O melhor prompt universal
-    carapace            # Completions para o shell
-    eza                 # O 'ls' do futuro
-    yazi                # Gerenciador de arquivos via terminal
-    zoxide              # O 'cd' inteligente
-    fzf                 # Filtro borrado (fuzzy finder)
-    television          # TUI de busca
+    fastfetch          
+    btop              
+    starship       
+    carapace            
+    eza             
+    yazi              
+    zoxide           
+    fzf              
+    television       
     bluetui
     impala
     wiremix
@@ -40,35 +39,34 @@
     ripsecrets
     amdgpu_top
     # --- Desenvolvimento e Sistema ---
-    git
-    lazygit             # Interface TUI para git
+    lazygit          
     vscodium 
     ghostty
-    distrobox           # Rodar outras distros no terminal
+    distrobox          
     distrobox-tui
-    distroshelf         # Menu para gerenciar suas distroboxes
-    appimage-run        # Rodar AppImages fácil (ainda útil como fallback)
-    gearlever           # Gerenciar AppImages com interface
-    topgrade            # Atualiza TUDO (Nix, Flatpak, Firmware) de uma vez
+    distroshelf       
+    appimage-run
+    gearlever         
+    topgrade          
     termius
     nixfmt
     statix
     cockpit-machines
     # --- Diagnóstico e Stress ---
-    outils              # Ferramentas clássicas estilo BSD
-    stress-ng           # Stress test de hardware
-    nicstat             # Estatísticas de rede
-    gping               # Ping com gráfico
-    duf                 # Uso de disco visual
-    ncdu                # Analisador de uso de disco (TUI)
-    mission-center      # Monitor de sistema estilo Windows 11
+    outils              
+    stress-ng          
+    nicstat            
+    gping              
+    duf              
+    ncdu               
+    mission-center     
     winboat
     # --- Utilitários e Organização ---
     iredis
-    flameshot           # Screenshots
-    localsend           # Transferir arquivos via Wi-Fi
-    obsidian            # Suas notas
-    bazaar              # Gerenciador de arquivos leve
+    flameshot           
+    localsend          
+    obsidian            
+    bazaar             
     proton-pass
     proton-authenticator
     proton-vpn
@@ -78,7 +76,7 @@
     kdePackages.qtwebsockets
     # --- Produtividade ---
     onlyoffice-desktopeditors
-    zathura             # Leitor de PDF minimalista
+    zathura            
     unrar
     p7zip
     rclone              
@@ -101,7 +99,6 @@
       "com.cassidyjames.butler"
       "io.github.giantpinkrobots.flatsweep"
       "com.github.johnfactotum.Foliate"
-      "net.agalwood.Motrix"
       "dev.deedles.Trayscale"
       "io.github.linx_systems.ClamUI"
       "io.gitlab.theevilskeleton.Upscaler"
