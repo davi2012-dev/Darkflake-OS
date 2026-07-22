@@ -28,7 +28,6 @@
     ./cava.nix
     ./librewolf.nix
     ./lazyvim.nix
-    ./retroarch.nix
   ];
 
   # 4 X11
