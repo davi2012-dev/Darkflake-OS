@@ -1,6 +1,5 @@
 { config, pkgs, ... }: {
 
-  # 1. Habilita o Steam e Ferramentas de Compatibilidade no Sistema
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
@@ -13,30 +12,15 @@
     };
   };
 
-  # Controlador de comandos universal para a Steam
-  programs.streamcontroller.enable = true;
-
-  # 2. Pacotes de Diversão, Lazer e Utilitários Steam
   environment.systemPackages = with pkgs; [
-    # Suporte e Extras da Steam
-    steam-rom-manager
     sgdboop
     steamtinkerlaunch
     mangohud
-
-    # Jogos e Emuladores
-    azahar
     hydralauncher
-    ppsspp
-    dolphin-emu
-    pcsx2
     heroic
     prismlauncher
-    ryubing
     supertuxkart
     supertux
-    dosbox
-    rpcs3
     extremetuxracer
     tuxpaint
     er-patcher
@@ -45,7 +29,6 @@
     dxvk
     vkd3d-proton
 
-    # Visual e Personalização
     cmatrix
     gpufetch
     speechd
