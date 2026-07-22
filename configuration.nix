@@ -18,7 +18,7 @@
     ./system/filesystem/default.nix  
     ./system/network/default.nix     
     ./system/optimization/default.nix
-    ./virtualization/bundle.nix
+    ./virtualization/default.nix
     ./security/default.nix
     ./applications/apps.nix
     ./applications/just.nix
