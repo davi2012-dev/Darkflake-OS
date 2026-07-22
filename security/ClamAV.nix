@@ -6,14 +6,13 @@
     updater.interval = "12h";
 
     daemon.settings = {
-      # --- SCAN EM TEMPO REAL ---
+
       OnAccessMaxFileSize = "150M";
       OnAccessIncludePath = [ "/home/davi" "/tmp" "/var/tmp" ];
       OnAccessExcludePath = [ "/proc" "/sys" "/dev" "/run" "/nix/store" ];
       OnAccessPrevention = true;
       OnAccessExtraScanning = true;
 
-      # --- MODO AGRESSIVO ---
       DetectPUA = true;
       HeuristicAlerts = true;
       HeuristicScanPrecedence = true;
@@ -32,14 +31,14 @@
     };
   };
 
-  # --- NOVO HARDENING PROFUNDO (IGUAL AO SSH/SAMBA) ---
+  # --- HARDENING ---
   systemd.services.clamav-daemon = {
   serviceConfig = {
-    # RODE DIRETAMENTE COMO O USUÁRIO clamav (NÃO PRECISA DE setuid)
+
     User = lib.mkForce "clamav";
     Group = lib.mkForce "clamav";
 
-    # PERMISSÕES CAP (o usuário clamav precisa de CAP_SYS_ADMIN para escanear)
+    # PERMISSÕES CAP
     CapabilityBoundingSet = [ "CAP_SYS_ADMIN" "CAP_IPC_LOCK" ];
     AmbientCapabilities = [ "CAP_SYS_ADMIN" "CAP_IPC_LOCK" ];
 
@@ -69,10 +68,7 @@
     ProtectControlGroups = true;
     ProtectKernelModules = true;
     ProtectKernelTunables = true;
-
-    # REMOVA O NoNewPrivileges (ou defina como false)
-    NoNewPrivileges = false;   # <-- ESSENCIAL!
-
+    NoNewPrivileges = false;  
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
     RestrictNamespaces = true;
