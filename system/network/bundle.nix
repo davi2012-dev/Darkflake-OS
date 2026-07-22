@@ -65,13 +65,23 @@
       "oregon.time.system76.com iburst nts minpoll 6 maxpoll 9"
       "paris.time.system76.com iburst nts minpoll 6 maxpoll 9"
       "brazil.time.system76.com iburst nts minpoll 6 maxpoll 9"
+      "gbg1.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
+      "gbg2.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
+      "mmo1.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
+      "mmo2.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
+      "sth1.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
+      "sth2.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
+      "ptbtime2.ptb.de iburst nts minpoll 6 maxpoll 9"
+      "ptbtime3.ptb.de iburst nts minpoll 6 maxpoll 9"
+      "ntppool1.time.nl iburst nts minpoll 6 maxpoll 9"
+      "ntppool2.time.nl iburst nts minpoll 6 maxpoll 9"
     ];
 
     extraConfig = ''
       authselectmode require
       ntsrefresh 3600
       maxsamples 8
-      minsources 3
+      minsources 4
       logchange 0.5
       maxupdateskew 100.0
       ntsdumpdir /var/lib/chrony
