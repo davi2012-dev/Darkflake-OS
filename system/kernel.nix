@@ -5,6 +5,36 @@
 
   # --- 2. Parâmetros de Boot ---
   boot.kernelParams = [
+
+    # Silenciar o Boot
+    "quiet"
+    "splash"
+    "loglevel=3"
+    "rd.systemd.show_status=false"
+    "rd.udev.log_level=3"
+    "rd.udev.log_priority=3"
+    "vt.global_cursor_default=0"
+
+    
+    # Hardening do Kernel
+    "slab_nomerge"
+    "page_alloc.shuffle=1"
+    "vsyscall=none"
+    "debugfs=off"
+    "randomize_kstack_offset=on"
+    "init_on_alloc=1"
+    "init_on_free=1"
+    "page_poisoning=off"
+    "module.sig_enforce=1"
+    "xen_msr_safe=1"
+    "xen_scrub_pages=1"
+    "mce=on"
+    "ras=on"
+    "lockdown=confidentiality"
+    "mitigations=auto"
+    "intel_iommu=on"
+    "iommu=pt" 
+
     "bbr3"
     "numa_balancing=enable"
     "cpuidle.governor=teo"
@@ -25,34 +55,8 @@
     "ksm.max_page_sharing=256"
     "ksm.pages_to_scan=100"
     "ksm.merge_across_nodes=0"
+    "zfs.zfs_arc_max=8589934592"
 
-    # Silenciar o Boot
-    "quiet"
-    "splash"
-    "loglevel=3"
-    "rd.systemd.show_status=false"
-    "rd.udev.log_level=3"
-    "rd.udev.log_priority=3"
-    "vt.global_cursor_default=0"
-
-    # Hardening do Kernel
-    "slab_nomerge"
-    "page_alloc.shuffle=1"
-    "vsyscall=none"
-    "debugfs=off"
-    "randomize_kstack_offset=on"
-    "init_on_alloc=1"
-    "init_on_free=1"
-    "page_poisoning=off"
-    "module.sig_enforce=1"
-    "xen_msr_safe=1"
-    "xen_scrub_pages=1"
-    "mce=on"
-    "ras=on"
-    "lockdown=confidentiality"
-    "mitigations=auto"
-    "intel_iommu=on"
-    "iommu=pt"
   ];
 
   # --- 3. Módulos do Kernel ---
@@ -79,14 +83,14 @@
     # Áudio
     "snd_seq" "snd_hda_intel" "snd_usb_audio" "snd_aloop"
 
-    # INPUT & CONTROLES (Drivers Solicitados)
-    "uinput"          # Criação de dispositivos virtuais de entrada
-    "joydev"          # API legada de joystick (/dev/input/js*)
-    "evdev"           # Manipulação de eventos de input genéricos
-    "hid_generic"     # Fallback USB HID genérico
-    "ff_memless"      # Efeitos de vibração (Force-Feedback) para controles
-    "hid_playstation" # Suporte oficial aos controles DualShock 4 e DualSense
-    "hid_nintendo"    # Suporte oficial aos Joy-Cons e Switch Pro Controller
+    # INPUT & CONTROLES 
+    "uinput"         
+    "joydev"         
+    "evdev"         
+    "hid_generic"     
+    "ff_memless"      
+    "hid_playstation" 
+    "hid_nintendo"    
   ];
 
   # --- 4. Sysctl ---
