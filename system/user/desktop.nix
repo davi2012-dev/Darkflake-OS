@@ -3,7 +3,7 @@
 {
   # --- Servidor Gráfico e Display Manager ---
   services.xserver.enable = true;
-  services.displayManager.plasma-login-manager.enable = true;
+  services.displayManager.ly.enable = true;
 
   # --- Ambiente de Desktop ---
   services.desktopManager.plasma6.enable = true;
