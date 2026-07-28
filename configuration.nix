@@ -25,7 +25,7 @@
     ./applications/fun.nix       
   ];
 
-  system.nixos.codeName = "Lynx";
+  system.nixos.codeName = "Frozen Lynx";
   system.nixos.variantName = "Darkflake-OS Edition Desktop";
   system.stateVersion = "25.11"; 
 }
