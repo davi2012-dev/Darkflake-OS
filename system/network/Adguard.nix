@@ -1,22 +1,20 @@
 { config, pkgs, ... }:
-
 {
   services.adguardhome = {
     enable = true;
-
     settings = {
       http.address = "127.0.0.1:3000";
-
       dns = {
         bind_hosts = [
          "0.0.0.0"
          "::"
         ];
         port = 53;
-
         upstream_dns = [
           "127.0.0.1:5354"
-          "127.0.0.1:5335"
+          "127.0.0.1:5335" 
+          "quic://unfiltered.adguard-dns.com"   # AdGuard DoQ (sem filtro)
+          "quic://dns.quad9.net"                # Quad9 DoQ
           "1.1.1.1"
           "9.9.9.9"
           "8.26.56.26"
@@ -33,7 +31,6 @@
           "216.146.35.35"
           "193.17.47.1"
         ];
-
         fallback_dns = [
           "1.0.0.1"
           "149.112.112.112"
@@ -52,7 +49,6 @@
           "216.146.36.36"
           "185.43.135.1"
         ];
-
         bootstrap_dns = [
           "127.0.0.1:5354"
           "127.0.0.1:5335"
@@ -62,7 +58,6 @@
           "45.90.28.0"
           "208.67.222.222"
         ];
-
         private_reverse_dns_servers = [
           "127.0.0.1:5354"
           "127.0.0.1:5335"
@@ -70,7 +65,6 @@
           "9.9.9.9"
           "100.100.100.100"
         ];
-
         upstream_dns_mode = "parallel";
         blocking_mode = "nxdomain";
         cache_size = 67108864;
@@ -85,12 +79,10 @@
         blocking_ipv4 = "";
         blocking_ipv6 = "";
       };
-
       statistics = {
         enabled = true;
         interval = "24h";
       };
-
       querylog = {
         enabled = true;
         interval = "24h";
@@ -98,7 +90,6 @@
       };
     };
   };
-
   # ===== HARDENING SYSTEMD PARA O ADGUARD HOME =====
   systemd.services.adguardhome = {
     serviceConfig = {
@@ -115,7 +106,6 @@
       ProtectHostname = true;
       PrivateIPC = true;
       LockPersonality = true;
-
       # Proteção de memória e processos
       MemoryDenyWriteExecute = true;
       NoNewPrivileges = true;
@@ -123,7 +113,6 @@
       RestrictSUIDSGID = true;
       RestrictNamespaces = true;
       ProcSubset = "all"; # Restringe /proc apenas a processos próprios
-
       # Restrições de rede e sistema
       RestrictAddressFamilies = [
         "AF_INET"
@@ -136,7 +125,6 @@
         "~@privileged"
         "~@resources"
       ];
-
       # Capacidades: necessário CAP_NET_BIND_SERVICE para porta 53
       CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
       AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
