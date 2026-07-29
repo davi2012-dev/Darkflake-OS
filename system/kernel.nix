@@ -15,26 +15,6 @@
     "rd.udev.log_priority=3"
     "vt.global_cursor_default=0"
 
-    
-    # Hardening do Kernel
-    "slab_nomerge"
-    "page_alloc.shuffle=1"
-    "vsyscall=none"
-    "debugfs=off"
-    "randomize_kstack_offset=on"
-    "init_on_alloc=1"
-    "init_on_free=1"
-    "page_poisoning=off"
-    "module.sig_enforce=1"
-    "xen_msr_safe=1"
-    "xen_scrub_pages=1"
-    "mce=on"
-    "ras=on"
-    "lockdown=confidentiality"
-    "mitigations=auto"
-    "intel_iommu=on"
-    "iommu=pt" 
-
     "i915.enable_guc=3"
     "i915.enable_fbc=1"
     "i915.fastboot=1"
@@ -59,6 +39,25 @@
     "ksm.pages_to_scan=100"
     "ksm.merge_across_nodes=0"
     "zfs.zfs_arc_max=8589934592"
+    
+    # Hardening do Kernel
+    "slab_nomerge"
+    "page_alloc.shuffle=1"
+    "vsyscall=none"
+    "debugfs=off"
+    "randomize_kstack_offset=on"
+    "init_on_alloc=1"
+    "init_on_free=1"
+    "page_poisoning=off"
+    "module.sig_enforce=1"
+    "xen_msr_safe=1"
+    "xen_scrub_pages=1"
+    "mce=on"
+    "ras=on"
+    "lockdown=confidentiality"
+    "mitigations=auto"
+    "intel_iommu=on"
+    "iommu=pt" 
 
   ];
 
