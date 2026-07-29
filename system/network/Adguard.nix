@@ -72,6 +72,8 @@
         cache_size = 67108864;
         cache_ttl_min = 300;
         cache_ttl_max = 86400;
+        fastest_addr = true;
+        enable_dnssec = true;
         cache_optimistic = true;
         serve_stale = true;
         ratelimit = 20;
