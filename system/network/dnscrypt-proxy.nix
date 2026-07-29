@@ -42,8 +42,7 @@
 
       force_tcp = false;
       ipv4_servers = true;
-      ipv6_servers = false;
-
+      ipv6_servers = true;
       cache = true;
       cache_size = 4096;
     };
