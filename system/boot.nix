@@ -28,7 +28,7 @@
 
   # --- CONFIGURAÇÃO DE EMULAÇÃO (ARM E POWERPC) ---
   boot.binfmt = {
-    emulatedSystems = [ "aarch64-linux" "armv7l-linux" "powerpc64le-linux" "power64-linux" "riscv64-linux" "s390x-linux"  "mips64el-linux"  "mipsel-linux"  "i686-linux"  "riscv32-linux" ];
+    emulatedSystems = [ "aarch64-linux" "armv7l-linux" "powerpc64le-linux" "powerpc64-linux" "riscv64-linux" "s390x-linux"  "mips64el-linux"  "mipsel-linux"  "i686-linux"  "riscv32-linux" ];
     addEmulatedSystemsToNixSandbox = true;
     preferStaticEmulators = true;
   };
