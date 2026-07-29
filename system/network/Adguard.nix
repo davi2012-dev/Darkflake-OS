@@ -13,8 +13,10 @@
         upstream_dns = [
           "127.0.0.1:5354"
           "127.0.0.1:5335" 
-          "quic://unfiltered.adguard-dns.com"   # AdGuard DoQ (sem filtro)
-          "quic://dns.quad9.net"                # Quad9 DoQ
+          "quic://unfiltered.adguard-dns.com"  
+          "quic://dns.quad9.net"               
+          "quic://dns.alidns.com"
+          "quic://doq.ffmuc.net"
           "1.1.1.1"
           "9.9.9.9"
           "8.26.56.26"
