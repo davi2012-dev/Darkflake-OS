@@ -24,5 +24,4 @@
     ./applications/just.nix
     ./applications/fun.nix       
   ];
-
 }
