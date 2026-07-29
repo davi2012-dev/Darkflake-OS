@@ -47,7 +47,7 @@
         unwanted-reply-threshold = 10000;
         root-hints = "${pkgs.dns-root-data}/root.hints";
         auto-trust-anchor-file = "/var/lib/unbound/root.key";
-        trust-anchor-signaling = false;
+        trust-anchor-signaling = true;
         val-permissive-mode = true;
 
         harden-glue = true;
