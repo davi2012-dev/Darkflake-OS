@@ -5,7 +5,6 @@
   ...
 }:
 {
-
   imports = [
     ./ssh.nix
     ./dns.nix
@@ -18,7 +17,6 @@
     ./caddy.nix
     ./dnscrypt-proxy.nix
   ];
-
   networking.hostName = "Darkflake";
   networking.domain = "local";
   networking.tempAddresses = "default";
@@ -29,7 +27,6 @@
   networking.networkmanager.dns = "none";
   networking.resolvconf.enable = false;
   services.resolved.enable = false;
-
   networking.networkmanager = {
     enable = true;
     wifi.backend = "iwd";
@@ -37,56 +34,60 @@
     wifi.macAddress = "random";
     ethernet.macAddress = "random";
   };
-
   services.timesyncd.enable = false;
-
   services.chrony = {
     enable = true;
     enableNTS = true;
     enableRTCTrimming = true;
     autotrimThreshold = 30;
     enableMemoryLocking = true;
-
     makestep = {
       enable = true;
       threshold = 1.0;
       limit = 3;
     };
-
     servers = [
+      # ===== Brasil  =====
+      "a.st1.ntp.br iburst nts minpoll 6 maxpoll 9"
+      "b.st1.ntp.br iburst nts minpoll 6 maxpoll 9"
+      "c.st1.ntp.br iburst nts minpoll 6 maxpoll 9"
+      "d.st1.ntp.br iburst nts minpoll 6 maxpoll 9"
+      "gps.ntp.br iburst nts minpoll 6 maxpoll 9"
+      "brazil.time.system76.com iburst nts minpoll 6 maxpoll 9"
+      "time.bolha.one iburst nts minpoll 6 maxpoll 9"
+
+      # ===== Europa (diversidade / redundância) =====
       "time.cloudflare.com iburst nts minpoll 6 maxpoll 9"
       "nts.netnod.se iburst nts minpoll 6 maxpoll 9"
-      "nts.ekspresso.se iburst nts minpoll 6 maxpoll 9"
-      "ptbtime1.ptb.de iburst nts minpoll 6 maxpoll 9"
-      "nts.ntp.se iburst nts minpoll 6 maxpoll 9"
-      "virginia.time.system76.com iburst nts minpoll 6 maxpoll 9"
-      "ohio.time.system76.com iburst nts minpoll 6 maxpoll 9"
-      "oregon.time.system76.com iburst nts minpoll 6 maxpoll 9"
-      "paris.time.system76.com iburst nts minpoll 6 maxpoll 9"
-      "brazil.time.system76.com iburst nts minpoll 6 maxpoll 9"
       "gbg1.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
-      "gbg2.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
-      "mmo1.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
-      "mmo2.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
       "sth1.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
-      "sth2.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
+      "ptbtime1.ptb.de iburst nts minpoll 6 maxpoll 9"
       "ptbtime2.ptb.de iburst nts minpoll 6 maxpoll 9"
-      "ptbtime3.ptb.de iburst nts minpoll 6 maxpoll 9"
+      "ntp3.fau.de iburst nts minpoll 6 maxpoll 9"
+      "1.nts.nothingtohide.nl iburst nts minpoll 6 maxpoll 9"
       "ntppool1.time.nl iburst nts minpoll 6 maxpoll 9"
-      "ntppool2.time.nl iburst nts minpoll 6 maxpoll 9"
-    ];
+      "ntp0.cam.ac.uk iburst nts minpoll 6 maxpoll 9"
 
+      # ===== EUA (fallback fora do continente) =====
+      "virginia.time.system76.com iburst nts minpoll 6 maxpoll 9"
+      "oregon.time.system76.com iburst nts minpoll 6 maxpoll 9"
+    ];
     extraConfig = ''
       authselectmode require
       ntsrefresh 3600
+      ntsrotate 604800
+      ntsdumpdir /var/lib/chrony
       maxsamples 8
       minsources 4
       logchange 0.5
       maxupdateskew 100.0
-      ntsdumpdir /var/lib/chrony
+      maxdistance 1.0
+      maxjitter 0.5
+      corrtimeratio 3.0
+      leapsectz right/UTC
+      dumponexit
     '';
   };
-
   # ===== HARDENING PARA NETWORKMANAGER =====
   systemd.services.NetworkManager = {
     serviceConfig = {
