@@ -7,7 +7,6 @@
 {
   imports = [
     ./ssh.nix
-    ./dns.nix
     ./samba.nix
     ./cockpit.nix
     ./firewall.nix
@@ -15,7 +14,6 @@
     ./Adguard.nix
     ./searxng.nix
     ./caddy.nix
-    ./dnscrypt-proxy.nix
   ];
   networking.hostName = "Darkflake";
   networking.domain = "local";
