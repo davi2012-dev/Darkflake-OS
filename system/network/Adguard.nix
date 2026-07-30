@@ -11,8 +11,6 @@
         ];
         port = 53;
         upstream_dns = [
-          "127.0.0.1:5354"
-          "127.0.0.1:5335" 
           "quic://unfiltered.adguard-dns.com"  
           "quic://dns.quad9.net"               
           "quic://dns.alidns.com"
@@ -52,8 +50,6 @@
           "185.43.135.1"
         ];
         bootstrap_dns = [
-          "127.0.0.1:5354"
-          "127.0.0.1:5335"
           "8.8.8.8"
           "1.1.1.1"
           "9.9.9.9"
