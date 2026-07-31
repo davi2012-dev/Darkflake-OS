@@ -11,44 +11,61 @@
         ];
         port = 53;
         upstream_dns = [
-          "quic://unfiltered.adguard-dns.com"  
-          "quic://dns.quad9.net"               
+          # ---- DoQ nativos ----
+          "quic://unfiltered.adguard-dns.com"
+          "quic://dns.quad9.net"
           "quic://dns.alidns.com"
           "quic://doq.ffmuc.net"
-          "1.1.1.1"
-          "9.9.9.9"
-          "8.26.56.26"
-          "156.154.70.1"
-          "4.2.2.1"
-          "45.90.28.0"
-          "76.76.2.0"
-          "8.8.8.8"
-          "94.140.14.14"
-          "185.228.168.9"
-          "208.67.222.222"
-          "64.6.64.6"
-          "209.244.0.3"
-          "216.146.35.35"
-          "193.17.47.1"
+          "quic://dns.adguard-dns.com"          # (perfil filtrado da AdGuard)
+
+          # ---- DoT ----
+          "tls://one.one.one.one"               # (Cloudflare)
+          "tls://dns.quad9.net"                 # (redundante com o DoQ acima, )
+          "tls://dns.nextdns.io"                # (NextDNS, perfil padrão)
+          "tls://p0.freedns.controld.com"       # (ControlD, resolver gratuito não filtrado)
+          "tls://dns.google"                    # (Google)
+          "tls://security-filter-dns.cleanbrowsing.org" # (CleanBrowsing)
+          "tls://odvr.nic.cz"                   # (CZ.NIC ODVR)
+
+          # ---- DoH ----
+          "https://doh.opendns.com/dns-query"   #  (OpenDNS/Cisco, não tem DoT público)
+
+          # ---- Sem suporte a criptografia ----
+          "8.26.56.26"     # Comodo Secure DNS
+          "156.154.70.1"   # Neustar/UltraDNS Public (DoH/DoT só sob contrato enterprise)
+          "4.2.2.1"        # Level3 (legado)
+          "64.6.64.6"      # Verisign (descontinuou DoT/DoH público)
+          "209.244.0.3"    # Level3/CenturyLink
+          "216.146.35.35"  # Dyn (Oracle, praticamente abandonado)
         ];
         fallback_dns = [
-          "1.0.0.1"
-          "149.112.112.112"
-          "8.20.247.20"
-          "84.200.70.40"
-          "156.154.71.1"
-          "4.2.2.2"
-          "45.90.30.0"
-          "8.8.4.4"
-          "76.76.10.0"
-          "94.140.15.15"
-          "185.228.169.9"
-          "208.67.220.220"
-          "64.6.65.6"
-          "209.244.0.4"
-          "216.146.36.36"
-          "185.43.135.1"
+          # ---- DoQ ----
+          "quic://dns.adguard-dns.com"
+
+          # ---- DoT ----
+          "tls://one.one.one.one"
+          "tls://dns.quad9.net"
+          "tls://dns.nextdns.io"
+          "tls://p0.freedns.controld.com"
+          "tls://dns.google"
+          "tls://security-filter-dns.cleanbrowsing.org"
+          "tls://odvr.nic.cz"
+
+          # ---- DoH ----
+          "https://doh.opendns.com/dns-query"
+
+          # ---- Sem suporte a criptografia  ----
+          "8.20.247.20"    # Comodo secundário
+          "84.200.70.40"   # DNS.WATCH secundário
+          "156.154.71.1"   # Neustar secundário
+          "4.2.2.2"        # Level3 secundário
+          "64.6.65.6"      # Verisign secundário
+          "209.244.0.4"    # Level3/CenturyLink secundário
+          "216.146.36.36"  # Dyn secundário
         ];
+        # bootstrap_dns precisa continuar em texto puro: é usado pelo AdGuard Home
+        # para resolver os hostnames dos upstreams DoT/DoH/DoQ acima, então não pode
+        # depender deles mesmos (dependência circular).
         bootstrap_dns = [
           "8.8.8.8"
           "1.1.1.1"
@@ -57,8 +74,6 @@
           "208.67.222.222"
         ];
         private_reverse_dns_servers = [
-          "127.0.0.1:5354"
-          "127.0.0.1:5335"
           "1.1.1.1"
           "9.9.9.9"
           "100.100.100.100"
