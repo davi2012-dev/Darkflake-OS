@@ -25,7 +25,7 @@ in
           args = {
             "node.description" = "Voice";
             "capture.props" = { "node.name" = "voice_output"; "media.class" = "Audio/Sink"; "audio.position" = [ "FL" "FR" ]; };
-            "playback.props" = { "node.name" = "playback.game_output"; "audio.position" = [ "FL" "FR" ]; "node.passive" = true; };
+            "playback.props" = { "node.name" = "playback.voice_output"; "audio.position" = [ "FL" "FR" ]; "node.passive" = true; };
           };
         }
         {
@@ -33,7 +33,7 @@ in
           args = {
             "node.description" = "Browser";
             "capture.props" = { "node.name" = "browser_output"; "media.class" = "Audio/Sink"; "audio.position" = [ "FL" "FR" ]; };
-            "playback.props" = { "node.name" = "playback.game_output"; "audio.position" = [ "FL" "FR" ]; "node.passive" = true; };
+            "playback.props" = { "node.name" = "playback.browser_output"; "audio.position" = [ "FL" "FR" ]; "node.passive" = true; };
           };
         }
         {
@@ -41,7 +41,7 @@ in
           args = {
             "node.description" = "Music";
             "capture.props" = { "node.name" = "music_output"; "media.class" = "Audio/Sink"; "audio.position" = [ "FL" "FR" ]; };
-            "playback.props" = { "node.name" = "playback.game_output"; "audio.position" = [ "FL" "FR" ]; "node.passive" = true; };
+            "playback.props" = { "node.name" = "playback.music_output"; "audio.position" = [ "FL" "FR" ]; "node.passive" = true; };
           };
         }
       ];
@@ -65,7 +65,7 @@ in
                 { type = "sofa"; label = "spatializer"; name = "spRR"; config = { filename = "${hrtf_file}"; }; control = { "Azimuth" = 210.0; }; }
                 { type = "sofa"; label = "spatializer"; name = "spSL"; config = { filename = "${hrtf_file}"; }; control = { "Azimuth" = 90.0; }; }
                 { type = "sofa"; label = "spatializer"; name = "spSR"; config = { filename = "${hrtf_file}"; }; control = { "Azimuth" = 270.0; }; }
-                
+
                 { type = "builtin"; label = "mixer"; name = "mixL"; }
                 { type = "builtin"; label = "mixer"; name = "mixR"; }
               ];
