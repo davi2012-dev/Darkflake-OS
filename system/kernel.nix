@@ -18,7 +18,6 @@
     "i915.enable_guc=3"
     "i915.enable_fbc=1"
     "i915.fastboot=1"
-    "bbr3"
     "numa_balancing=enable"
     "cpuidle.governor=teo"
     "usbhid.quirks=0x057e:0x2009:0x80000000"
