@@ -9,52 +9,59 @@
          "0.0.0.0"
          "::"
         ];
+
         port = 53;
         upstream_dns = [
-          # ---- DoQ nativos ----
-          "quic://unfiltered.adguard-dns.com"
-          "quic://dns.quad9.net"
-          "quic://dns.alidns.com"
-          "quic://doq.ffmuc.net"
-          "quic://dns.adguard-dns.com"          # (perfil filtrado da AdGuard)
+          # ================= DoQ (4) =================
+          "quic://unfiltered.adguard-dns.com"   # AdGuard, sem filtro
+          "quic://dns.alidns.com"               # AliDNS (China, Alibaba)
+          "quic://doq.ffmuc.net"                # FFMUC (Alemanha, Freifunk München)
+          "quic://dns.surfsharkdns.com"         # Surfshark, sem bloqueio
 
-          # ---- DoT ----
-          "tls://one.one.one.one"               # (Cloudflare)
-          "tls://dns.quad9.net"                 # (redundante com o DoQ acima, )
-          "tls://dns.nextdns.io"                # (NextDNS, perfil padrão)
-          "tls://p0.freedns.controld.com"       # (ControlD, resolver gratuito não filtrado)
-          "tls://dns.google"                    # (Google)
-          "tls://security-filter-dns.cleanbrowsing.org" # (CleanBrowsing)
-          "tls://odvr.nic.cz"                   # (CZ.NIC ODVR)
+          # ================= DoT (16) =================
+          "tls://one.one.one.one"               # Cloudflare
+          "tls://dns10.quad9.net"               # Quad9, variante sem filtro
+          "tls://dns.nextdns.io"                # NextDNS, perfil padrão
+          "tls://dns.google"                    # Google
+          "tls://p0.freedns.controld.com"       # ControlD, sem filtro
+          "tls://odvr.nic.cz"                   # CZ.NIC ODVR
+          "tls://dns.mullvad.net"               # Mullvad, sem bloqueio
+          "tls://dns.switch.ch"                 # SWITCH (Suíça, acadêmica)
+          "tls://ordns.he.net"                  # Hurricane Electric
+          "tls://private.canadianshield.cira.ca" # CIRA, privacidade sem bloqueio
+          "tls://unfiltered.joindns4.eu"        # DNS4EU, sem filtro
+          "tls://dot.libredns.gr"               # LibreDNS (Grécia)
+          "tls://dns.digitale-gesellschaft.ch"  # Digitale Gesellschaft (Suíça)
+          "tls://dns.alidns.com"                # AliDNS, DoT
+          "tls://dnsforge.de"                   # DNS Forge (Alemanha)
+          "tls://kaitain.restena.lu"             # RESTENA (Luxemburgo, acadêmica)
 
-          # ---- DoH ----
-          "https://doh.opendns.com/dns-query"   #  (OpenDNS/Cisco, não tem DoT público)
-
-          # ---- Sem suporte a criptografia ----
-          "8.26.56.26"     # Comodo Secure DNS
-          "156.154.70.1"   # Neustar/UltraDNS Public (DoH/DoT só sob contrato enterprise)
-          "4.2.2.1"        # Level3 (legado)
-          "64.6.64.6"      # Verisign (descontinuou DoT/DoH público)
-          "209.244.0.3"    # Level3/CenturyLink
-          "216.146.35.35"  # Dyn (Oracle, praticamente abandonado)
+          # ================= DoH (21) =================
+          "https://doh.opendns.com/dns-query"                  # OpenDNS/Cisco, padrão
+          "https://cloudflare-dns.com/dns-query"                # Cloudflare
+          "https://dns10.quad9.net/dns-query"                   # Quad9, sem filtro
+          "https://dns.google/dns-query"                        # Google
+          "https://dns.nextdns.io"                              # NextDNS, perfil padrão
+          "https://freedns.controld.com/p0"                     # ControlD, sem filtro
+          "https://odvr.nic.cz/doh"                             # CZ.NIC
+          "https://dns.mullvad.net/dns-query"                   # Mullvad, sem bloqueio
+          "https://dns.switch.ch/dns-query"                     # SWITCH
+          "https://ordns.he.net/dns-query"                      # Hurricane Electric
+          "https://private.canadianshield.cira.ca/dns-query"    # CIRA, sem bloqueio
+          "https://unfiltered.joindns4.eu/dns-query"            # DNS4EU, sem filtro
+          "https://doh.libredns.gr/dns-query"                   # LibreDNS
+          "https://dns.digitale-gesellschaft.ch/dns-query"      # Digitale Gesellschaft
+          "https://dns.alidns.com/dns-query"                    # AliDNS
+          "https://dnsforge.de/dns-query"                       # DNS Forge
+          "https://kaitain.restena.lu/dns-query"                # RESTENA
+          "https://wikimedia-dns.org/dns-query"                 # Wikimedia Foundation
+          "https://dns.surfsharkdns.com/dns-query"              # Surfshark
+          "https://common.dot.dns.yandex.net/dns-query"         # Yandex, perfil básico sem filtro (Rússia )
+          "https://resolver.dnsprivacy.org.uk/dns-query"        # DNS Privacy Project (Reino Unido)
         ];
+
         fallback_dns = [
-          # ---- DoQ ----
-          "quic://dns.adguard-dns.com"
-
-          # ---- DoT ----
-          "tls://one.one.one.one"
-          "tls://dns.quad9.net"
-          "tls://dns.nextdns.io"
-          "tls://p0.freedns.controld.com"
-          "tls://dns.google"
-          "tls://security-filter-dns.cleanbrowsing.org"
-          "tls://odvr.nic.cz"
-
-          # ---- DoH ----
-          "https://doh.opendns.com/dns-query"
-
-          # ---- Sem suporte a criptografia  ----
+          # ---- Sem suporte a criptografia (todos secundários) ----
           "8.20.247.20"    # Comodo secundário
           "84.200.70.40"   # DNS.WATCH secundário
           "156.154.71.1"   # Neustar secundário
@@ -62,7 +69,11 @@
           "64.6.65.6"      # Verisign secundário
           "209.244.0.4"    # Level3/CenturyLink secundário
           "216.146.36.36"  # Dyn secundário
+          "208.67.220.220" # OpenDNS/Cisco secundário
+          "94.140.14.141"  # AdGuard DNS sem filtro, secundário
+          "76.76.10.0"     # ControlD sem filtro, secundário
         ];
+
         # bootstrap_dns precisa continuar em texto puro: é usado pelo AdGuard Home
         # para resolver os hostnames dos upstreams DoT/DoH/DoQ acima, então não pode
         # depender deles mesmos (dependência circular).
@@ -108,7 +119,6 @@
   # ===== HARDENING SYSTEMD PARA O ADGUARD HOME =====
   systemd.services.adguardhome = {
     serviceConfig = {
-      # Isolamento de sistema e arquivos
       ProtectSystem = "strict";
       ProtectHome = true;
       PrivateTmp = true;
@@ -121,14 +131,12 @@
       ProtectHostname = true;
       PrivateIPC = true;
       LockPersonality = true;
-      # Proteção de memória e processos
       MemoryDenyWriteExecute = true;
       NoNewPrivileges = true;
       RestrictRealtime = true;
       RestrictSUIDSGID = true;
       RestrictNamespaces = true;
-      ProcSubset = "all"; # Restringe /proc apenas a processos próprios
-      # Restrições de rede e sistema
+      ProcSubset = "all";
       RestrictAddressFamilies = [
         "AF_INET"
         "AF_INET6"
@@ -140,7 +148,6 @@
         "~@privileged"
         "~@resources"
       ];
-      # Capacidades: necessário CAP_NET_BIND_SERVICE para porta 53
       CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
       AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
     };
