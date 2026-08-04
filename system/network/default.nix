@@ -30,7 +30,7 @@
     wifi.backend = "iwd";
     wifi.scanRandMacAddress = true;
     wifi.macAddress = "random";
-    ethernet.macAddress = "random";
+    ethernet.macAddress = "stable";
   };
   services.ddns-updater.enable = true;
   services.timesyncd.enable = false;
@@ -54,22 +54,36 @@
       "gps.ntp.br iburst nts minpoll 6 maxpoll 9"
       "brazil.time.system76.com iburst nts minpoll 6 maxpoll 9"
       "time.bolha.one iburst nts minpoll 6 maxpoll 9"
-
-      # ===== Europa (diversidade / redundância) =====
+      # ===== Europa =====
       "time.cloudflare.com iburst nts minpoll 6 maxpoll 9"
       "nts.netnod.se iburst nts minpoll 6 maxpoll 9"
       "gbg1.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
       "sth1.nts.netnod.se iburst nts minpoll 6 maxpoll 9"
+      "lul1.nts.netnod.se iburst nts minpoll 6 maxpoll 9"    
+      "mmo1.nts.netnod.se iburst nts minpoll 6 maxpoll 9"     
       "ptbtime1.ptb.de iburst nts minpoll 6 maxpoll 9"
       "ptbtime2.ptb.de iburst nts minpoll 6 maxpoll 9"
+      "ptbtime3.ptb.de iburst nts minpoll 6 maxpoll 9"          
+      "ptbtime4.ptb.de iburst nts minpoll 6 maxpoll 9"       
       "ntp3.fau.de iburst nts minpoll 6 maxpoll 9"
       "1.nts.nothingtohide.nl iburst nts minpoll 6 maxpoll 9"
+      "2.nts.nothingtohide.nl iburst nts minpoll 6 maxpoll 9"  
       "ntppool1.time.nl iburst nts minpoll 6 maxpoll 9"
+      "ntppool2.time.nl iburst nts minpoll 6 maxpoll 9"     
       "ntp0.cam.ac.uk iburst nts minpoll 6 maxpoll 9"
-
-      # ===== EUA (fallback fora do continente) =====
+      "ntp1.cam.ac.uk iburst nts minpoll 6 maxpoll 9"           
+      "nts1.ntp.hr iburst nts minpoll 6 maxpoll 9"           
+      "time.cincura.net iburst nts minpoll 6 maxpoll 9"       
+      "nts.teambelgium.net iburst nts minpoll 6 maxpoll 9"    
+      "ntp1.dmz.terryburton.co.uk iburst nts minpoll 6 maxpoll 9" 
+      "paris.time.system76.com iburst nts minpoll 6 maxpoll 9" 
+      # ===== América do Norte =====
       "virginia.time.system76.com iburst nts minpoll 6 maxpoll 9"
       "oregon.time.system76.com iburst nts minpoll 6 maxpoll 9"
+      "ohio.time.system76.com iburst nts minpoll 6 maxpoll 9"   
+      "ntp1.wiktel.com iburst nts minpoll 6 maxpoll 9"         
+      "time1.mbix.ca iburst nts minpoll 6 maxpoll 9"            
+      "time2.mbix.ca iburst nts minpoll 6 maxpoll 9"          
     ];
     extraConfig = ''
       authselectmode require
@@ -85,6 +99,12 @@
       corrtimeratio 3.0
       leapsectz right/UTC
       dumponexit
+      maxdrift 500
+      stratumweight 0
+      rtcsync
+      dumpdir /var/lib/chrony
+      cmdport 0
+      clientloglimit 0 
     '';
   };
   # ===== HARDENING PARA NETWORKMANAGER =====
