@@ -21,6 +21,12 @@
     defaults.monitored = "-a -o on -S on -s (S/../.././02|L/../../7/04) -W 4,45,55";
   };
 
+  # --- Otimização de Perfil de Navegadores (RAM / tmpfs) ---
+  services.psd = {
+    enable = true;
+    resyncTimer = "1h";
+  };
+
   services.nvme-rs = {
     enable = true;
     settings = {
@@ -47,7 +53,9 @@
   services.irqbalance.enable = true;                
   security.rtkit.enable = true;
   security.polkit.enable = true;
+  services.aesmd.enable = true;
   security.chromiumSuidSandbox.enable = true;
+  services.bpftune.enable = true;
  
   services.hardware.openrgb.enable = true;
   programs.cpu-energy-meter.enable = true;
