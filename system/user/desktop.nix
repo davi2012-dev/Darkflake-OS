@@ -89,7 +89,7 @@
 
   powerManagement = {
     enable = true;
-    powertop.enable = true; 
+    powertop.enable = false; 
   };
 
   # --- Portais XDG para KDE ---
