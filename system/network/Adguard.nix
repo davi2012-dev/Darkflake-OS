@@ -61,7 +61,7 @@
         ];
 
         fallback_dns = [
-          # ---- Sem suporte a criptografia (todos secundários) ----
+          # ---- Sem suporte a criptografia secundários  ----
           "8.20.247.20"    # Comodo secundário
           "84.200.70.40"   # DNS.WATCH secundário
           "156.154.71.1"   # Neustar secundário
@@ -72,6 +72,11 @@
           "208.67.220.220" # OpenDNS/Cisco secundário
           "94.140.14.141"  # AdGuard DNS sem filtro, secundário
           "76.76.10.0"     # ControlD sem filtro, secundário
+          "8.8.4.4"        # Google Public DNS, secundário
+          "1.0.0.1"        # Cloudflare, secundário
+          "149.112.112.10" # Quad9, variante sem filtro (9.9.9.10), secundário
+          "149.112.122.10" # CIRA Canadian Shield "Private" (sem bloqueio), secundário
+          "86.54.11.200"   # DNS4EU, perfil "unfiltered", secundário
         ];
 
         # bootstrap_dns precisa continuar em texto puro: é usado pelo AdGuard Home
