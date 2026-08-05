@@ -13,9 +13,8 @@ in {
     };
   };
 
-  # --- HARDENING AJUSTADO (SEM BLOQUEIOS QUE QUEBRAM) ---
+  # --- HARDENING  ---
   systemd.services.${cockpitService}.serviceConfig = {
-    # 1. DIRETÓRIOS ONDE O COCKPIT PODE ESCREVER
     ReadWritePaths = [
       "/var/log/cockpit"
       "/var/lib/cockpit"
@@ -25,22 +24,16 @@ in {
       "/var/run/libvirt"
     ];
 
-    # 2. SISTEMA DE ARQUIVOS 
     ProtectSystem = "full";
     ProtectHome = "read-only";
     PrivateTmp = "yes";
     ProtectControlGroups = "yes";
     ProtectKernelModules = "yes";
     ProtectKernelTunables = "yes";
-
-    # 3. PRIVILÉGIOS 
-
     RestrictRealtime = "yes";
     RestrictSUIDSGID = "yes";
     RestrictNamespaces = "yes";
     MemoryDenyWriteExecute = "yes";
-
-    # 4. CAPABILITIES (MANTIDAS)
     CapabilityBoundingSet = [
       "CAP_SYS_ADMIN"
       "CAP_DAC_READ_SEARCH"
@@ -48,14 +41,12 @@ in {
       "CAP_SYSLOG"
     ];
 
-    # 5. SYSCALLS (SEM BLOQUEIO DE setuid)
     SystemCallArchitectures = "native";
     SystemCallFilter = [
       "@system-service"
-      "~@resources"        # BLOQUEIA APENAS ioperm, iopl, etc. (NÃO BLOQUEIA setuid)
+      "~@resources"       
     ];
 
-    # 6. REINÍCIO AUTOMÁTICO
     Restart = "on-failure";
     RestartSec = "10s";
   };
@@ -65,6 +56,6 @@ in {
     "d /var/log/cockpit 0750 cockpit-ws cockpit-ws -"
     "d /var/lib/cockpit 0750 cockpit-ws cockpit-ws -"
     "d /var/cache/cockpit 0750 cockpit-ws cockpit-ws -"
-    "d /run/cockpit 0755 root root -"          # <-- ADICIONADO
+    "d /run/cockpit 0755 root root -"    
   ];
 }
