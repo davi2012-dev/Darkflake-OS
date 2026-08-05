@@ -154,7 +154,7 @@
       "search.darkflake.local"
       "librechat.darkflake.local"
       "cockpit.darkflake.local"
-      "Adguard.darkflake.local"
+      "adguard.darkflake.local"
       "homarr.darkflake.local"
       "stirling.darkflake.local"
       "chat.darkflake.local"
