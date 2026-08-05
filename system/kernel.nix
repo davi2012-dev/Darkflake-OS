@@ -15,9 +15,12 @@
     "rd.udev.log_priority=3"
     "vt.global_cursor_default=0"
 
+    # --- iGPU (HD Graphics 630 / Kaby Lake GT2) ---
     "i915.enable_guc=3"
     "i915.enable_fbc=1"
     "i915.fastboot=1"
+
+    # --- CPU / Scheduling ---
     "numa_balancing=enable"
     "cpuidle.governor=teo"
     "usbhid.quirks=0x057e:0x2009:0x80000000"
@@ -38,7 +41,12 @@
     "ksm.pages_to_scan=100"
     "ksm.merge_across_nodes=0"
     "zfs.zfs_arc_max=8589934592"
-    
+
+    # --- Clock ---
+
+    "clocksource=tsc"
+    "tsc=reliable"
+
     # Hardening do Kernel
     "slab_nomerge"
     "page_alloc.shuffle=1"
@@ -185,6 +193,6 @@
   hardware.amdgpu.opencl.enable = true;
   hardware.intel-gpu-tools.enable = true;
   hardware.mcelog.enable = true;
-
   programs.tmux.secureSocket = true;
 }
+
