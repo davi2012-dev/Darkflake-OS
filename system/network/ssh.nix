@@ -18,7 +18,7 @@
 
       LoginGraceTime = 20; 
       MaxAuthTries = 3; 
-      MaxSessions = 2; 
+      MaxSessions = 5; 
       MaxStartups = "10:30:60"; 
 
       LogLevel = "VERBOSE"; 
