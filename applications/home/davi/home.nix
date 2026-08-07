@@ -34,7 +34,7 @@
   xsession.preferStatusNotifierItems = true;
   xsession.numlock.enable = true;
 
-  # daemon 
+  # services 
   services.activitywatch = {
   enable = true;
   package = pkgs.aw-server-rust;
@@ -48,6 +48,7 @@
   services.plan9port.plumber.enable = true;
   services.plan9port.fontsrv.enable = true;
   services.plan9port.package = pkgs.plan9port-wayland;
+
   # 5. Pacotes
   home.packages = with pkgs; [
     tree
