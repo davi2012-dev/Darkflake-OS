@@ -3,7 +3,6 @@
   services.openssh = {
     enable = true;
     startWhenNeeded = true;
-    ports = [ 2222 ];
     settings = {
       AllowTcpForwarding = false;
       X11Forwarding = false;
