@@ -3,7 +3,7 @@
   services.openssh = {
     enable = true;
     startWhenNeeded = true;
-    openFirewall = true; 
+    openFirewall = true;
     hostKeys = [
       { path = "/etc/ssh/ssh_host_ed25519_key"; type = "ed25519"; }
     ];
@@ -45,5 +45,11 @@
       TCPKeepAlive = false;
       PubkeyAuthentication = true;
     };
+  };
+
+  programs.mosh = {
+    enable = true;
+    openFirewall = true; 
+    withUtempter = true;   
   };
 }
