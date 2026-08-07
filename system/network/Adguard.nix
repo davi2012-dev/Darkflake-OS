@@ -83,15 +83,12 @@
         # para resolver os hostnames dos upstreams DoT/DoH/DoQ acima, então não pode
         # depender deles mesmos (dependência circular).
         bootstrap_dns = [
-          "8.8.8.8"
-          "1.1.1.1"
-          "9.9.9.9"
-          "45.90.28.0"
-          "208.67.222.222"
+          "1.1.1.1"       # Cloudflare — sem filtro
+          "8.8.8.8"       # Google — sem filtro
+          "9.9.9.11"      # Quad9 — sem filtro + DNSSEC
+          "94.140.14.140" # AdGuard DNS — variante unfiltered
         ];
         private_reverse_dns_servers = [
-          "1.1.1.1"
-          "9.9.9.9"
           "100.100.100.100"
         ];
         upstream_dns_mode = "parallel";
