@@ -84,7 +84,7 @@
           "94.140.14.140" # AdGuard DNS — variante unfiltered
         ];
 
-        # Nome de campo correto (era private_reverse_dns_servers)
+        # Nome de campo correto
         local_ptr_upstreams = [
           "100.100.100.100" # Tailscale MagicDNS
         ];
