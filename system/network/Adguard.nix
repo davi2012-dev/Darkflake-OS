@@ -91,7 +91,7 @@
         private_reverse_dns_servers = [
           "100.100.100.100"
         ];
-        upstream_dns_mode = "parallel";
+        upstream_mode = "parallel";
         blocking_mode = "nxdomain";
         cache_size = 67108864;
         cache_ttl_min = 300;
