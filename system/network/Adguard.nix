@@ -6,62 +6,58 @@
       http.address = "127.0.0.1:3000";
       dns = {
         bind_hosts = [
-         "0.0.0.0"
-         "::"
+          "0.0.0.0"
+          "::"
         ];
-
         port = 53;
         upstream_dns = [
           # ================= DoQ (4) =================
-          "quic://unfiltered.adguard-dns.com"   # AdGuard, sem filtro
-          "quic://dns.alidns.com"               # AliDNS (China, Alibaba)
-          "quic://doq.ffmuc.net"                # FFMUC (Alemanha, Freifunk München)
-          "quic://dns.surfsharkdns.com"         # Surfshark, sem bloqueio
-
+          "quic://unfiltered.adguard-dns.com"    # AdGuard, sem filtro
+          "quic://dns.alidns.com"                # AliDNS (China, Alibaba)
+          "quic://doq.ffmuc.net"                 # FFMUC (Alemanha, Freifunk München)
+          "quic://dns.surfsharkdns.com"          # Surfshark, sem bloqueio
           # ================= DoT (16) =================
-          "tls://one.one.one.one"               # Cloudflare
-          "tls://dns10.quad9.net"               # Quad9, variante sem filtro
-          "tls://dns.nextdns.io"                # NextDNS, perfil padrão
-          "tls://dns.google"                    # Google
-          "tls://p0.freedns.controld.com"       # ControlD, sem filtro
-          "tls://odvr.nic.cz"                   # CZ.NIC ODVR
-          "tls://dns.mullvad.net"               # Mullvad, sem bloqueio
-          "tls://dns.switch.ch"                 # SWITCH (Suíça, acadêmica)
-          "tls://ordns.he.net"                  # Hurricane Electric
+          "tls://one.one.one.one"                # Cloudflare
+          "tls://dns10.quad9.net"                # Quad9, variante sem filtro
+          "tls://dns.nextdns.io"                 # NextDNS, perfil padrão
+          "tls://dns.google"                     # Google
+          "tls://p0.freedns.controld.com"        # ControlD, sem filtro
+          "tls://odvr.nic.cz"                    # CZ.NIC ODVR
+          "tls://dns.mullvad.net"                # Mullvad, sem bloqueio
+          "tls://dns.switch.ch"                  # SWITCH (Suíça, acadêmica)
+          "tls://ordns.he.net"                   # Hurricane Electric
           "tls://private.canadianshield.cira.ca" # CIRA, privacidade sem bloqueio
-          "tls://unfiltered.joindns4.eu"        # DNS4EU, sem filtro
-          "tls://dot.libredns.gr"               # LibreDNS (Grécia)
-          "tls://dns.digitale-gesellschaft.ch"  # Digitale Gesellschaft (Suíça)
-          "tls://dns.alidns.com"                # AliDNS, DoT
-          "tls://dnsforge.de"                   # DNS Forge (Alemanha)
+          "tls://unfiltered.joindns4.eu"         # DNS4EU, sem filtro
+          "tls://dot.libredns.gr"                # LibreDNS (Grécia)
+          "tls://dns.digitale-gesellschaft.ch"   # Digitale Gesellschaft (Suíça)
+          "tls://dns.alidns.com"                 # AliDNS, DoT
+          "tls://dnsforge.de"                    # DNS Forge (Alemanha)
           "tls://kaitain.restena.lu"             # RESTENA (Luxemburgo, acadêmica)
-
           # ================= DoH (21) =================
-          "https://doh.opendns.com/dns-query"                  # OpenDNS/Cisco, padrão
-          "https://cloudflare-dns.com/dns-query"                # Cloudflare
-          "https://dns10.quad9.net/dns-query"                   # Quad9, sem filtro
-          "https://dns.google/dns-query"                        # Google
-          "https://dns.nextdns.io"                              # NextDNS, perfil padrão
-          "https://freedns.controld.com/p0"                     # ControlD, sem filtro
-          "https://odvr.nic.cz/doh"                             # CZ.NIC
-          "https://dns.mullvad.net/dns-query"                   # Mullvad, sem bloqueio
-          "https://dns.switch.ch/dns-query"                     # SWITCH
-          "https://ordns.he.net/dns-query"                      # Hurricane Electric
-          "https://private.canadianshield.cira.ca/dns-query"    # CIRA, sem bloqueio
-          "https://unfiltered.joindns4.eu/dns-query"            # DNS4EU, sem filtro
-          "https://doh.libredns.gr/dns-query"                   # LibreDNS
-          "https://dns.digitale-gesellschaft.ch/dns-query"      # Digitale Gesellschaft
-          "https://dns.alidns.com/dns-query"                    # AliDNS
-          "https://dnsforge.de/dns-query"                       # DNS Forge
-          "https://kaitain.restena.lu/dns-query"                # RESTENA
-          "https://wikimedia-dns.org/dns-query"                 # Wikimedia Foundation
-          "https://dns.surfsharkdns.com/dns-query"              # Surfshark
-          "https://common.dot.dns.yandex.net/dns-query"         # Yandex, perfil básico sem filtro (Rússia )
-          "https://resolver.dnsprivacy.org.uk/dns-query"        # DNS Privacy Project (Reino Unido)
+          "https://doh.opendns.com/dns-query"                 # OpenDNS/Cisco, padrão
+          "https://cloudflare-dns.com/dns-query"              # Cloudflare
+          "https://dns10.quad9.net/dns-query"                 # Quad9, sem filtro
+          "https://dns.google/dns-query"                      # Google
+          "https://dns.nextdns.io"                            # NextDNS, perfil padrão
+          "https://freedns.controld.com/p0"                   # ControlD, sem filtro
+          "https://odvr.nic.cz/doh"                           # CZ.NIC
+          "https://dns.mullvad.net/dns-query"                 # Mullvad, sem bloqueio
+          "https://dns.switch.ch/dns-query"                   # SWITCH
+          "https://ordns.he.net/dns-query"                    # Hurricane Electric
+          "https://private.canadianshield.cira.ca/dns-query"  # CIRA, sem bloqueio
+          "https://unfiltered.joindns4.eu/dns-query"          # DNS4EU, sem filtro
+          "https://doh.libredns.gr/dns-query"                 # LibreDNS
+          "https://dns.digitale-gesellschaft.ch/dns-query"    # Digitale Gesellschaft
+          "https://dns.alidns.com/dns-query"                  # AliDNS
+          "https://dnsforge.de/dns-query"                     # DNS Forge
+          "https://kaitain.restena.lu/dns-query"              # RESTENA
+          "https://wikimedia-dns.org/dns-query"               # Wikimedia Foundation
+          "https://dns.surfsharkdns.com/dns-query"            # Surfshark
+          "https://common.dot.dns.yandex.net/dns-query"       # Yandex, perfil básico sem filtro (Rússia)
+          "https://resolver.dnsprivacy.org.uk/dns-query"      # DNS Privacy Project (Reino Unido)
         ];
-
         fallback_dns = [
-          # ---- Sem suporte a criptografia secundários  ----
+          # ---- Sem suporte a criptografia, secundários ----
           "8.20.247.20"    # Comodo secundário
           "84.200.70.40"   # DNS.WATCH secundário
           "156.154.71.1"   # Neustar secundário
@@ -78,25 +74,26 @@
           "149.112.122.10" # CIRA Canadian Shield "Private" (sem bloqueio), secundário
           "86.54.11.200"   # DNS4EU, perfil "unfiltered", secundário
         ];
-
         # bootstrap_dns precisa continuar em texto puro: é usado pelo AdGuard Home
         # para resolver os hostnames dos upstreams DoT/DoH/DoQ acima, então não pode
         # depender deles mesmos (dependência circular).
         bootstrap_dns = [
-          "1.1.1.1"       # Cloudflare — sem filtro
-          "8.8.8.8"       # Google — sem filtro
-          "9.9.9.11"      # Quad9 — sem filtro + DNSSEC
+          "1.1.1.1"       # Cloudflare — sem filtro, rápido
+          "8.8.8.8"       # Google — sem filtro, rápido
+          "9.9.9.10"      # Quad9 Unsecured — sem filtro, sem DNSSEC (era 9.9.9.11, que filtra)
           "94.140.14.140" # AdGuard DNS — variante unfiltered
         ];
-        private_reverse_dns_servers = [
-          "100.100.100.100"
+
+        # Nome de campo correto (era private_reverse_dns_servers)
+        local_ptr_upstreams = [
+          "100.100.100.100" # Tailscale MagicDNS
         ];
+
         upstream_mode = "parallel";
         blocking_mode = "nxdomain";
         cache_size = 67108864;
         cache_ttl_min = 300;
         cache_ttl_max = 86400;
-        fastest_addr = true;
         enable_dnssec = true;
         cache_optimistic = true;
         serve_stale = true;
@@ -118,6 +115,7 @@
       };
     };
   };
+
   # ===== HARDENING SYSTEMD PARA O ADGUARD HOME =====
   systemd.services.adguardhome = {
     serviceConfig = {
