@@ -10,8 +10,8 @@
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/var/lib/sbctl";
-    autoGenerateKeys.enable = false;
-    autoEnrollKeys.enable = false;
+    autoGenerateKeys.enable = true;
+    autoEnrollKeys.enable = true;
   };
 
   # --- CONFIGURAÇÃO DO INITRD (SYSTEMD NO BOOT) ---
