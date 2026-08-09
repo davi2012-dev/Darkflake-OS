@@ -80,7 +80,7 @@
         bootstrap_dns = [
           "1.1.1.1"       # Cloudflare — sem filtro, rápido
           "8.8.8.8"       # Google — sem filtro, rápido
-          "9.9.9.10"      # Quad9 Unsecured — sem filtro, sem DNSSEC (era 9.9.9.11, que filtra)
+          "9.9.9.10"      # Quad9 Unsecured — sem filtro, sem DNSSEC 
           "94.140.14.140" # AdGuard DNS — variante unfiltered
         ];
 
