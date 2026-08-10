@@ -32,7 +32,7 @@
     wifi.macAddress = "random";
     ethernet.macAddress = "stable";
   };
-  services.ddns-updater.enable = true;
+
   services.timesyncd.enable = false;
   services.chrony = {
     enable = true;
