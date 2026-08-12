@@ -3,13 +3,11 @@
 {
   imports = [ 
     ./hardware-configuration.nix
-
     ./system/boot.nix
     ./system/kernel.nix
     ./system/idioma.nix
     ./system/nix/nix.nix
     ./system/user/user.nix
-    ./system/user/users.motd.nix
     ./system/user/desktop.nix
     ./system/hardware/Bluetooth.nix
     ./system/hardware/Audio/surround.nix
