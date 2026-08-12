@@ -1,26 +1,21 @@
 { config, pkgs, lib, unstable, guixpkgs, ... }: {
 
-  # ========== SUPORTE A APPIMAGE ==========
   programs.appimage = {
     enable = true;
     binfmt = true;      
   };
 
   environment.systemPackages = with pkgs; [
-    # --- Internet e Comunicação ---
     vesktop           
     beeper             
     crow-translate     
     tor-browser
-
-    # --- Multimídia e Design ---
     mpv                 
     gimp              
     inkscape            
     krita             
     dippi             
     cryptomator 
-    # --- Terminal Moderno (Rust Tools) ---
     fastfetch          
     btop              
     starship       
@@ -38,11 +33,9 @@
     deadnix
     ripsecrets
     amdgpu_top
-    # --- Desenvolvimento e Sistema ---
     lazygit          
     vscodium 
-    ghostty
-    distrobox          
+    ghostty       
     distrobox-tui
     distroshelf       
     appimage-run
@@ -52,7 +45,6 @@
     nixfmt
     statix
     cockpit-machines
-    # --- Diagnóstico e Stress ---
     outils              
     stress-ng          
     nicstat            
@@ -61,7 +53,6 @@
     ncdu               
     mission-center     
     winboat
-    # --- Utilitários e Organização ---
     iredis
     flameshot           
     localsend          
@@ -82,7 +73,6 @@
     rclone              
   ];
 
-  # --- Flatpak Config ---
   services.flatpak = {
     enable = true;
     packages = [
