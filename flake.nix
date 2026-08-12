@@ -14,7 +14,6 @@
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
     mcp-nixos.url = "github:utensils/mcp-nixos";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
-    guixpkgs.url = "github:fzakaria/guixpkgs";
     nixsecauditor.url = "github:unnamed-systems/nixsecauditor";
     lazyvim.url = "github:pfassina/lazyvim-nix";
 
@@ -35,11 +34,6 @@
 
     matugen = {
       url = "github:InioX/Matugen";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -89,7 +83,6 @@
           inherit system;
           config.allowUnfree = true;
         };       
-        packages.pythowo = pkgs.callPackage ./pythowo.nix {};
         devShells.default = 
           let
             makeDevshell = import "${inputs.devshell}/modules" pkgs;
@@ -115,7 +108,6 @@
               { package = pkgs.deadnix; } 
               { package = pkgs.statix; }   
               { package = pkgs.ripsecrets; } 
-              { package = self.packages.${system}.pythowo; }
             ];
             motd = ''
               {202}🔨 Bem-vindo ao Shell de Desenvolvimento Darkflake ❄️
@@ -194,11 +186,9 @@
                   system = "x86_64-linux";
                   config.allowUnfree = true;
                 };
-                guixpkgs = inputs.guixpkgs.packages."x86_64-linux";
               };
               
               home-manager.users.davi = import ./applications/home/davi/home.nix;
-
               home-manager.sharedModules = [
                 inputs.sops-nix.homeManagerModules.sops
                 inputs.chaotic.homeManagerModules.default
