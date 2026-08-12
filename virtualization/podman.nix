@@ -1,7 +1,6 @@
 { config, pkgs, ... }: {
 
   virtualisation.containers.enable = true;
-
   virtualisation.podman = {
     enable = true;
     dockerSocket.enable = true;
