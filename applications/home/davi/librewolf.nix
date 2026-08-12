@@ -5,20 +5,22 @@ let
     exec ${pkgs.bubblewrap}/bin/bwrap \
       --unshare-all \
       --share-net \
-      --bind /nix /nix \
+      --die-with-parent \
+      --new-session \
+      --ro-bind /nix /nix \
+      --ro-bind /etc /etc \
+      --ro-bind-try /usr /usr \
+      --ro-bind-try /bin /bin \
+      --ro-bind-try /lib /lib \
+      --ro-bind-try /lib64 /lib64 \
       --bind /run/user/$(id -u) /run/user/$(id -u) \
       --bind /tmp/.X11-unix /tmp/.X11-unix \
-      --bind /dev/dri /dev/dri \
       --dev /dev \
+      --dev-bind /dev/dri /dev/dri \
       --proc /proc \
       --tmpfs /tmp \
-      --bind "${config.home.homeDirectory}/.mozilla" "${config.home.homeDirectory}/.mozilla" \
+      --bind "${config.home.homeDirectory}/.librewolf" "${config.home.homeDirectory}/.librewolf" \
       --bind "${config.home.homeDirectory}/Downloads" "${config.home.homeDirectory}/Downloads" \
-      --ro-bind /etc /etc \
-      --ro-bind /usr /usr \
-      --ro-bind /bin /bin \
-      --ro-bind /lib /lib \
-      --ro-bind /lib64 /lib64 \
       --chdir "${config.home.homeDirectory}" \
       ${pkgs.librewolf}/bin/librewolf "$@"
   '';
