@@ -9,4 +9,5 @@
   virtualisation.waydroid.package = pkgs.waydroid-nftables;
   virtualisation.spiceUSBRedirection.enable = true;
   programs.virt-manager.enable = true;
+
 }
