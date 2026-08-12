@@ -24,7 +24,6 @@
     ./starship.nix
     ./fastfetch.nix
     ./spotify.nix
-    ./mpv.nix
     ./cava.nix
     ./librewolf.nix
     ./lazyvim.nix
