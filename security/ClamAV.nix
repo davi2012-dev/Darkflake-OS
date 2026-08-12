@@ -84,6 +84,4 @@
     "d /var/lib/clamav 0750 clamav clamav -"
     "d /var/log/clamav 0750 clamav clamav -"
   ];
-
-  environment.systemPackages = with pkgs; [ clamav ];
 }
