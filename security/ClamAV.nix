@@ -42,7 +42,7 @@
     CapabilityBoundingSet = [ "CAP_SYS_ADMIN" "CAP_IPC_LOCK" ];
     AmbientCapabilities = [ "CAP_SYS_ADMIN" "CAP_IPC_LOCK" ];
 
-    # PRIORIDADE (mantida)
+    # PRIORIDADE
     CPUSchedulingPolicy = "fifo";
     CPUSchedulingPriority = 60;
     IOSchedulingClass = "realtime";
@@ -51,7 +51,7 @@
     Restart = "always";
     RestartSec = "1s";
 
-    # PERMISSÕES DE ESCRITA (mantidas)
+    # PERMISSÕES DE ESCRITA 
     ReadWritePaths = [
       "/var/lib/clamav"
       "/var/log/clamav"
@@ -61,7 +61,7 @@
       "/var/run/clamav"
     ];
 
-    # ISOLAMENTO (mantido)
+    # ISOLAMENTO 
     ProtectSystem = "full";
     ProtectHome = "read-only";
     PrivateTmp = lib.mkForce "yes";
