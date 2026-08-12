@@ -65,7 +65,6 @@
     mcp-nixos
     kando
     kdePackages.qtwebsockets
-    # --- Produtividade ---
     onlyoffice-desktopeditors
     zathura            
     unrar
