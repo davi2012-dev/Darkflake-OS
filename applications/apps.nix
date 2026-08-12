@@ -1,4 +1,4 @@
-{ config, pkgs, lib, unstable, guixpkgs, ... }: {
+{ config, pkgs, lib, unstable, ... }: {
 
   programs.appimage = {
     enable = true;
