@@ -5,7 +5,7 @@
     enable = true;
     dockerSocket.enable = true;
     dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = false;  # Desativa o DNS interno
+    defaultNetwork.settings.dns_enabled = false;  
 
     autoPrune = {
       enable = true;
