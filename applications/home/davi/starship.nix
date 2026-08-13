@@ -46,33 +46,27 @@
         vimcmd_visual_symbol = "[❮](bold yellow)";
       };
       directory = {
-        format = "[$path]($style) ";
-        style = "bold lavender";
+        format = "[◖](fg:blue)[ $path ](bg:blue fg:crust)[◗](fg:blue) ";
         truncation_length = 3;
         truncation_symbol = "…/";
       };
       git_branch = {
-        format = "[ $symbol$branch]($style) ";
+        format = "[◖](fg:mauve)[ $symbol$branch ](bg:mauve fg:crust)[◗](fg:mauve) ";
         symbol = " ";
-        style = "mauve";
       };
       git_status = {
-        format = "[($all_status$ahead_behind)]($style) ";
-        style = "peach";
+        format = "[◖](fg:peach)[ $all_status$ahead_behind ](bg:peach fg:crust)[◗](fg:peach) ";
       };
       python = {
-        format = "[ $symbol($version )]($style)";
-        style = "yellow";
+        format = "[◖](fg:yellow)[ $symbol$version ](bg:yellow fg:crust)[◗](fg:yellow) ";
         symbol = " ";
       };
       nix_shell = {
-        format = "[ $symbol$state ]($style)";
-        style = "sapphire";
+        format = "[◖](fg:sapphire)[ $symbol$state ](bg:sapphire fg:crust)[◗](fg:sapphire) ";
         symbol = " ";
       };
       nodejs = {
-        format = "[ $symbol($version )]($style)";
-        style = "green";
+        format = "[◖](fg:green)[ $symbol$version ](bg:green fg:crust)[◗](fg:green) ";
         symbol = " ";
       };
     };
