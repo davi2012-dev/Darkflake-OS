@@ -9,11 +9,11 @@
     wayland = true;
     experimentalFeatures = true;
 
-    # 1. Temas e Cores (Catppuccin Mocha)
+    # 1. Temas e Cores 
     theme = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system}.themes.catppuccin;
     colorScheme = "mocha";
 
-    # 2. Extensões (Melhorias e Adblock)
+    # 2. Extensões 
     enabledExtensions = with inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system}.extensions; [
       adblockify
       hidePodcasts
@@ -45,7 +45,7 @@
 
     # 4. Snippets do Marketplace (Nyan Cat adicionado com sucesso!)
     enabledSnippets = with inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system}.snippets; [
-      nyanCatProgressBar        # <--- Barra do Nyan Cat voando no arco-íris! 
+      nyanCatProgressBar         # Barra do Nyan Cat voando no arco-íris
       pointer                    # Mantém o cursor de mãozinha nos botões
       roundedNowPlaying          # Cantos arredondados na barra de reprodução
     ];
