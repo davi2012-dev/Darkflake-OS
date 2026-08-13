@@ -17,6 +17,7 @@
   # --- CONFIGURAÇÃO DO INITRD (SYSTEMD NO BOOT) ---
   boot.initrd = {
     enable = true;
+    compressor = "zstd";
     compressorArgs = [ "-1" "--threads=0" ];
     systemd = {
       enable = true; 
