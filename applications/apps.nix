@@ -7,18 +7,14 @@
 
   environment.systemPackages = with pkgs; [
     vesktop           
-    beeper             
-    crow-translate     
+    beeper                
     tor-browser
-    mpv                 
     gimp              
     inkscape            
     krita             
     dippi             
-    cryptomator 
-    fastfetch          
-    btop              
-    starship       
+    cryptomator       
+    btop                  
     carapace            
     eza             
     yazi              
@@ -44,7 +40,6 @@
     termius
     nixfmt
     statix
-    cockpit-machines
     outils              
     stress-ng          
     nicstat            
@@ -85,15 +80,11 @@
       "io.gitlab.metadatacleaner.metadatacleaner"
       "io.github.plrigaux.sysd-manager"
       "de.schmidhuberj.DieBahn"
-      "com.cassidyjames.butler"
       "io.github.giantpinkrobots.flatsweep"
       "com.github.johnfactotum.Foliate"
       "dev.deedles.Trayscale"
       "io.github.linx_systems.ClamUI"
       "io.gitlab.theevilskeleton.Upscaler"
-      "runtime/org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/25.08"
-      "runtime/org.freedesktop.Platform.VulkanLayer.vkBasalt/x86_64/25.08"
-      "runtime/org.freedesktop.Platform.VulkanLayer.OBSVkCapture/x86_64/25.08"
     ];
   };
 }
