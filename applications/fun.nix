@@ -25,12 +25,10 @@
     tuxpaint
     er-patcher
     xbill
-    wineWow64Packages.unstableFull
     dxvk
     vkd3d-proton
 
     cmatrix
-    gpufetch
     speechd
     espeak-ng
     pipes
