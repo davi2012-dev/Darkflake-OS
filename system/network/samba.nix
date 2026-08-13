@@ -44,7 +44,6 @@
 
    # --- Endurecimento profundo do processo smbd via Systemd ---
    systemd.services.samba-smbd.serviceConfig = {
-     # Restrições de Sistema de Arquivos
      ReadWritePaths = [ "/var/log/samba" "/var/lib/samba"  "/srv/samba/public" ];
      ProtectSystem = "full";          
      ProtectHome = "read-only";        
