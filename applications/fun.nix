@@ -45,7 +45,6 @@
     nyancat
     links2
     peaclock
-    openrgb-with-all-plugins
     bibata-cursors
     papirus-icon-theme
   ];
