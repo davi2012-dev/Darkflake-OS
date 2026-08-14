@@ -5,9 +5,12 @@
   # --- Configurações do Boot e Kernel ---
   boot.supportedFilesystems = [ "zfs" ];
   boot.initrd.supportedFilesystems = [ "zfs" ];
-  boot.zfs.devNodes = "/dev/disk/by-id";
-  boot.zfs.requestEncryptionCredentials = true;
-  boot.zfs.forceImportRoot = true; 
+  boot.zfs = {
+    devNodes = "/dev/disk/by-id";
+    requestEncryptionCredentials = true;
+    useKeyringForCredentials = true; 
+    forceImportRoot = true; 
+  };
 
   # --- Serviços do ZFS ---
   services.zfs.autoScrub = {
