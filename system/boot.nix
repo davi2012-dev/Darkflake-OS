@@ -70,7 +70,7 @@
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "${pkgs.pipewire}/bin/pw-play /etc/nixos/sounds/startup.wav";
+        ExecStart = "${pkgs.pipewire}/bin/pw-play ${./sounds/startup.wav}";
         RemainAfterExit = false;
         TimeoutStartSec = 5;
       };
@@ -85,7 +85,7 @@
       wantedBy = [ "shutdown.target" "reboot.target" "halt.target" ];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "${pkgs.pipewire}/bin/pw-play /etc/nixos/sounds/shutdown.wav";
+        ExecStart = "${pkgs.pipewire}/bin/pw-play ${./sounds/shutdown.wav}";
         RemainAfterExit = true;
         TimeoutStartSec = 5;
       };
