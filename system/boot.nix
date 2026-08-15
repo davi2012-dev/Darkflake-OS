@@ -1,11 +1,9 @@
 { config, pkgs, lib, inputs, ... }: {
-
   boot.loader = {
-    systemd-boot.enable = lib.mkForce false; 
+    systemd-boot.enable = lib.mkForce false;
     efi.canTouchEfiVariables = true;
     efi.efiSysMountPoint = "/boot";
   };
-
   # --- SECURE BOOT (LANZABOOTE) ---
   boot.lanzaboote = {
     enable = true;
@@ -13,28 +11,25 @@
     autoGenerateKeys.enable = true;
     autoEnrollKeys.enable = true;
   };
-
   # --- CONFIGURAÇÃO DO INITRD (SYSTEMD NO BOOT) ---
   boot.initrd = {
     enable = true;
     compressor = "zstd";
     compressorArgs = [ "-1" "--threads=0" ];
     systemd = {
-      enable = true; 
+      enable = true;
       tpm2.enable = true;
       tpm2.pcrphases.enable = true;
     };
     includeDefaultModules = true;
     verbose = false;
   };
-
   # --- CONFIGURAÇÃO DE EMULAÇÃO ---
   boot.binfmt = {
-    emulatedSystems = [ "aarch64-linux" "armv7l-linux" "powerpc64le-linux" "powerpc64-linux" "riscv64-linux" "s390x-linux"  "mips64el-linux"  "mipsel-linux"  "i686-linux"  "riscv32-linux" ];
+    emulatedSystems = [ "aarch64-linux" "armv7l-linux" "powerpc64le-linux" "powerpc64-linux" "riscv64-linux" "s390x-linux" "mips64el-linux" "mipsel-linux" "i686-linux" "riscv32-linux" ];
     addEmulatedSystemsToNixSandbox = true;
     preferStaticEmulators = true;
   };
-
   # --- TEMA DO PLYMOUTH (ANIMADO VIA FLAKE) ---
   boot.plymouth = {
     enable = true;
@@ -43,29 +38,26 @@
       inputs.nixos-plymouth-theme.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
-
   # --- OUTRAS CONFIGURAÇÕES DO SISTEMA ---
   systemd.shutdownRamfs.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
   boot.bootspec.enableValidation = true;
   boot.consoleLogLevel = 0;
   boot.hardwareScan = true;
-  
-  # Gerenciamento avançado de arquivos temporários na RAM 
+
+  # Gerenciamento avançado de arquivos temporários na RAM
   boot.tmp = {
     cleanOnBoot = true;
     useTmpfs = true;
     tmpfsSize = "50%";
-    tmpfsHugeMemoryPages = "within_size";
   };
-
   # ========== SONS DE INICIALIZAÇÃO E DESLIGAMENTO ==========
   systemd.services = {
     boot-sound = {
       enable = true;
       description = "Som de inicialização";
-      wants = [ "sound.target" "pipewire.service" ];
-      after = [ "sound.target" "pipewire.service" "multi-user.target" ];
+      wants = [ "sound.target" ];
+      after = [ "sound.target" ];
       before = [ "plymouth-quit.service" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
@@ -75,12 +67,11 @@
         TimeoutStartSec = 5;
       };
     };
-
     shutdown-sound = {
       enable = true;
       description = "Som de desligamento";
-      wants = [ "sound.target" "pipewire.service" ];
-      after = [ "sound.target" "pipewire.service" ];
+      wants = [ "sound.target" ];
+      after = [ "sound.target" ];
       before = [ "plymouth-shutdown.service" "shutdown.target" "reboot.target" "halt.target" ];
       wantedBy = [ "shutdown.target" "reboot.target" "halt.target" ];
       serviceConfig = {
