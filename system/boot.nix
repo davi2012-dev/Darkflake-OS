@@ -28,7 +28,7 @@
     verbose = false;
   };
 
-  # --- CONFIGURAÇÃO DE EMULAÇÃO (ARM E POWERPC) ---
+  # --- CONFIGURAÇÃO DE EMULAÇÃO ---
   boot.binfmt = {
     emulatedSystems = [ "aarch64-linux" "armv7l-linux" "powerpc64le-linux" "powerpc64-linux" "riscv64-linux" "s390x-linux"  "mips64el-linux"  "mipsel-linux"  "i686-linux"  "riscv32-linux" ];
     addEmulatedSystemsToNixSandbox = true;
@@ -51,11 +51,44 @@
   boot.consoleLogLevel = 0;
   boot.hardwareScan = true;
   
-  # Gerenciamento avançado de arquivos temporários na RAM (Performance)
+  # Gerenciamento avançado de arquivos temporários na RAM 
   boot.tmp = {
     cleanOnBoot = true;
     useTmpfs = true;
     tmpfsSize = "50%";
     tmpfsHugeMemoryPages = "within_size";
+  };
+
+  # ========== SONS DE INICIALIZAÇÃO E DESLIGAMENTO ==========
+  systemd.services = {
+    boot-sound = {
+      enable = true;
+      description = "Som de inicialização";
+      wants = [ "sound.target" "pipewire.service" ];
+      after = [ "sound.target" "pipewire.service" "multi-user.target" ];
+      before = [ "plymouth-quit.service" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.pipewire}/bin/pw-play /etc/nixos/sounds/startup.wav";
+        RemainAfterExit = false;
+        TimeoutStartSec = 5;
+      };
+    };
+
+    shutdown-sound = {
+      enable = true;
+      description = "Som de desligamento";
+      wants = [ "sound.target" "pipewire.service" ];
+      after = [ "sound.target" "pipewire.service" ];
+      before = [ "plymouth-shutdown.service" "shutdown.target" "reboot.target" "halt.target" ];
+      wantedBy = [ "shutdown.target" "reboot.target" "halt.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.pipewire}/bin/pw-play /etc/nixos/sounds/shutdown.wav";
+        RemainAfterExit = true;
+        TimeoutStartSec = 5;
+      };
+    };
   };
 }
