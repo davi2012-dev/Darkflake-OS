@@ -179,6 +179,7 @@
     enable = true;
     sleep = 20;
   };
+
   hardware.cpu.intel.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
   hardware.firmwareCompression = "zstd";
