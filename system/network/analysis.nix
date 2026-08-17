@@ -19,6 +19,5 @@
   permissions = "u+rx,g+rx,o+r";
 }; 
 
-  programs.bandwhich.enable = true;
   programs.wireshark.enable = true;
 }
