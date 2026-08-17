@@ -1,5 +1,5 @@
 {
-  description = "Darkflake: + Repos Extras + Home Manager + NUR + MCP-NixOS + CachyOS Kernel + Garuda Dev Automation";
+  description = "Darkflake: + Repos Extras + Home Manager + NUR + MCP-NixOS + CachyOS Kernel ";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
