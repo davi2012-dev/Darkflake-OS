@@ -2,8 +2,7 @@
 {
   programs.eza = {
     enable = true;
-    enableZshIntegration = false;
-    enableFishIntegration = false;
+    enableFishIntegration = true;
 
     colors = "auto";
     icons = "auto";
