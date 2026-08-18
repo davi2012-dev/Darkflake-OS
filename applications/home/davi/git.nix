@@ -8,9 +8,7 @@
 
   programs.git = {
     enable = true;
-    
     settings = {
-      # --- Usuário e Identidade ---
       user = {
         name = "davi2012-dev";
         email = "DaviMigue@proton.me";
