@@ -8,6 +8,7 @@
 
   programs.lazygit.enable = true;
   programs.lazygit.enableFishIntegration = true;
+  programs.jujutsu.enable = true;
 
   programs.git = {
     enable = true;
