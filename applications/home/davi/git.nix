@@ -6,6 +6,9 @@
     gh
   ];
 
+  programs.lazygit.enable = true;
+  programs.lazygit.enableFishIntegration = true;
+
   programs.git = {
     enable = true;
     settings = {
