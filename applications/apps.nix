@@ -19,24 +19,19 @@
     eza             
     yazi              
     zoxide           
-    fzf              
-    television       
+    fzf                
     bluetui
     impala
     wiremix
     bat
     nil
     deadnix
-    ripsecrets
-    amdgpu_top
-    lazygit          
+    ripsecrets      
     vscodium 
     ghostty       
     distrobox-tui
     distroshelf       
-    appimage-run
-    gearlever         
-    topgrade          
+    gearlever                
     termius
     nixfmt
     statix
@@ -57,14 +52,11 @@
     proton-authenticator
     proton-vpn
     waydroid-helper
-    mcp-nixos
     kando
     kdePackages.qtwebsockets
-    onlyoffice-desktopeditors
-    zathura            
+    onlyoffice-desktopeditors          
     unrar
-    p7zip
-    rclone              
+    p7zip          
   ];
 
   services.flatpak = {
