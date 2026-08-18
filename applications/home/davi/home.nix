@@ -64,7 +64,6 @@
     cargo
     rustc
     sqlite
-    inputs.zen-browser.packages."${system}".specific
 
     (if stdenv.isLinux then platformio else platformio-core)
   ];
