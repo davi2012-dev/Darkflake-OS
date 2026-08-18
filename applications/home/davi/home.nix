@@ -46,6 +46,18 @@
   services.plan9port.plumber.enable = true;
   services.plan9port.fontsrv.enable = true;
   services.plan9port.package = pkgs.plan9port-wayland;
+  programs.navi.enable = true;
+  programs.navi.enableFishIntegration = true;
+  programs.nix-search-tv.enable = true; 
+  programs.nix-search-tv.enableTelevisionIntegration = true;
+  programs.television.enable = true;
+  programs.television.enableFishIntegration = true;
+  programs.nix-your-shell.enable = true;
+  programs.nix-your-shell.enableFishIntegration = true;
+  programs.nix-your-shell.nix-output-monitor.enable = true;
+  programs.nix-init.enable = true;
+  programs.nix-index.enable = true; 
+  programs.nix-index.enableFishIntegration = true;
 
   # 5. Pacotes
   home.packages = with pkgs; [
