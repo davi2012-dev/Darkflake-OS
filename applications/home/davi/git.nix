@@ -17,7 +17,7 @@
         email = "DaviMigue@proton.me";
       };
 
-      # --- Editor e Display (OTIMIZADO PARA VSCODE) ---
+      # --- Editor e Display ---
       core = {
         editor = "code --wait";
         pager = "less";
