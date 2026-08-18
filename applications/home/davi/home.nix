@@ -58,6 +58,7 @@
   programs.nix-init.enable = true;
   programs.nix-index.enable = true; 
   programs.nix-index.enableFishIntegration = true;
+  programs.topgrade.enable = true;
 
   # 5. Pacotes
   home.packages = with pkgs; [
