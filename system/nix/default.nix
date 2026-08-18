@@ -90,6 +90,7 @@
 
   nixpkgs.config.allowUnfree = true;
   programs.ccache.enable = true;
+  programs.ccache.trace = true;
   programs.nixbit.enable = true;
   programs.nixbit.repository = "https://github.com/davi2012-dev/Darkflake-OS";
   programs.nix-required-mounts.enable = true;
