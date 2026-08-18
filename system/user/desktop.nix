@@ -6,7 +6,7 @@
   services.displayManager.ly.enable = true;
 
   # --- Ambiente de Desktop ---
-  services.desktopManager.plasma6.enable = true;
+  services.displayManager.plasma-login-manager.enable = true;
 
   # --- Otimizações de Hardware para AMD GPU ---
   hardware.amdgpu = {
