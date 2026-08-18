@@ -57,8 +57,6 @@
     "init_on_free=1"
     "page_poisoning=off"
     "module.sig_enforce=1"
-    "xen_msr_safe=1"
-    "xen_scrub_pages=1"
     "mce=on"
     "ras=on"
     "lockdown=confidentiality"
