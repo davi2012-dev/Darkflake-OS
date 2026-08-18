@@ -41,7 +41,6 @@
   services.amberol.enable = true;
   services.podman.autoUpdate.enable = true;
   services.amberol.enableRecoloring = true;
-  programs.distrobox.enable = true;
   services.amberol.replaygain = "album";
   services.xsettingsd.enable = true;
   services.plan9port.plumber.enable = true;
