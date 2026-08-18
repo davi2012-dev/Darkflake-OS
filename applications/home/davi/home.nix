@@ -59,6 +59,8 @@
   programs.nix-index.enable = true; 
   programs.nix-index.enableFishIntegration = true;
   programs.topgrade.enable = true;
+  programs.mangohud.enable = true;
+  programs.lazysql.enable = true;
 
   # 5. Pacotes
   home.packages = with pkgs; [
