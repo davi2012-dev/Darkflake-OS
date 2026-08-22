@@ -43,7 +43,6 @@
     "zfs.zfs_arc_max=8589934592"
 
     # --- Clock ---
-
     "clocksource=tsc"
     "tsc=reliable"
 
