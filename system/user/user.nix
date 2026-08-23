@@ -4,7 +4,7 @@
   # --- 1. Configuração de Usuários ---
   users.users.davi = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "video" "podman" "libvirtd" "gamemode" "wireshark" "scanner" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "podman" "libvirtd" "gamemode" "wireshark" "scanner" "kvm"  ];
     shell = pkgs.fish;
     hashedPasswordFile = config.sops.secrets."user-davi-hashed-password".path;
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzBpVHAyiVi9K/lYXC4QsIYkbUsSAhrzlF592oXtOyc davi@darkflake" ];
