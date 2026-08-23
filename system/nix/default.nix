@@ -19,7 +19,6 @@
       "dynamic-derivations"
       "fetch-tree"
     ];
-    auto-optimise-store = true;
 
     system-features = [
       "benchmark"
@@ -50,6 +49,8 @@
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
 
+    require-sigs = true;
+    auto-optimise-store = true;
     max-substitution-jobs = 30;
     builders-use-substitutes = true;
     sandbox = true;
