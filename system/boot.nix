@@ -41,6 +41,7 @@
   # --- OUTRAS CONFIGURAÇÕES DO SISTEMA ---
   systemd.shutdownRamfs.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.coredump.enable = false;
   boot.bootspec.enableValidation = true;
   boot.consoleLogLevel = 0;
   boot.hardwareScan = true;
