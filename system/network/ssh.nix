@@ -9,7 +9,7 @@
     ];
     settings = {
       AllowTcpForwarding = false;
-      X11Forwarding = false;
+      X11Forwarding = config.services.xserver.enable;
       AllowAgentForwarding = false;
       PermitTunnel = false;
       PasswordAuthentication = false;
