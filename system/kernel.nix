@@ -164,7 +164,7 @@
   };
 
   # --- 7. Hardware ---
-  security.unprivilegedUsernsClone = true;
+  security.unprivilegedUsernsClone = config.virtualisation.containers.enable;
   security.lockKernelModules = false;
   security.forcePageTableIsolation = false;
   security.protectKernelImage = true;
