@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   services.usbguard = {
     enable = true;
+    dbus.enable = true;
     implicitPolicyTarget = "block";
     presentDevicePolicy = "apply-policy";
     IPCAllowedUsers = [ "root" "davi" ];
