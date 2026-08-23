@@ -83,4 +83,13 @@
       };
     };
   };
+
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "-";
+      item = "core";
+      value = "0";
+    }
+  ];
 }
