@@ -4,6 +4,12 @@
     ./lxc.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    qemu
+    virt-viewer
+    xz
+  ];
+
   virtualisation.libvirtd.enable = true;
   virtualisation.waydroid.enable = true;
   virtualisation.waydroid.package = pkgs.waydroid-nftables;
