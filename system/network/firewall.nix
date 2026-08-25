@@ -166,7 +166,7 @@
   };
 
   boot.kernel.sysctl = {
-    "net.core.default_qdisc" = "fq";
+    "net.core.default_qdisc" = "cake";
     "net.ipv4.tcp_congestion_control" = "bbr";
     "net.ipv4.tcp_fastopen" = 3;
     "net.ipv4.tcp_sack" = 1;
