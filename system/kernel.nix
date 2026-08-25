@@ -58,7 +58,7 @@
     "module.sig_enforce=1"
     "mce=on"
     "ras=on"
-    "lockdown=confidentiality"
+    "lockdown=integrity"
     "mitigations=auto"
     "intel_iommu=on"
     "iommu=pt" 
