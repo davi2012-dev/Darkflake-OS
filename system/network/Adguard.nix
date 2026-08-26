@@ -55,6 +55,8 @@
           "https://dns.surfsharkdns.com/dns-query"            # Surfshark
           "https://common.dot.dns.yandex.net/dns-query"       # Yandex, perfil básico sem filtro (Rússia)
           "https://resolver.dnsprivacy.org.uk/dns-query"      # DNS Privacy Project (Reino Unido)
+          # ================= ODoH (via dnscrypt-proxy local) =================
+          "127.0.0.1:5453" # dnscrypt-proxy, Oblivious DoH (odoh-cloudflare/odoh-snowstorm)
         ];
         fallback_dns = [
           # ---- Sem suporte a criptografia, secundários ----
@@ -74,9 +76,6 @@
           "149.112.122.10" # CIRA Canadian Shield "Private" (sem bloqueio), secundário
           "86.54.11.200"   # DNS4EU, perfil "unfiltered", secundário
         ];
-        # bootstrap_dns precisa continuar em texto puro: é usado pelo AdGuard Home
-        # para resolver os hostnames dos upstreams DoT/DoH/DoQ acima, então não pode
-        # depender deles mesmos (dependência circular).
         bootstrap_dns = [
           "1.1.1.1"       # Cloudflare — sem filtro, rápido
           "8.8.8.8"       # Google — sem filtro, rápido
@@ -84,7 +83,6 @@
           "94.140.14.140" # AdGuard DNS — variante unfiltered
         ];
 
-        # Nome de campo correto
         local_ptr_upstreams = [
           "100.100.100.100" # Tailscale MagicDNS
         ];
@@ -116,7 +114,6 @@
     };
   };
 
-  # ===== HARDENING SYSTEMD PARA O ADGUARD HOME =====
   systemd.services.adguardhome = {
     serviceConfig = {
       ProtectSystem = "strict";
