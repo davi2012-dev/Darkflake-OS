@@ -14,6 +14,7 @@
     ./Adguard.nix
     ./searxng.nix
     ./caddy.nix
+    ./dnscrypt-proxy.nix 
   ];
   networking.hostName = "Darkflake";
   networking.domain = "local";
