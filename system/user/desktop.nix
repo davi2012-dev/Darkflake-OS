@@ -66,6 +66,9 @@
   nixowos.enable = true;
   security.nixsecauditor.enable = true;
 
+  services.scx.enable = true;
+  services.scx.scheduler = "scx_pandemonium";
+
   services.earlyoom = {
     enable = true;
     freeMemThreshold = 10;
