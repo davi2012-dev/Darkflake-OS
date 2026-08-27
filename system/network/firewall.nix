@@ -47,7 +47,7 @@
       table inet filter {
         flowtable fastpath {
           hook ingress priority 0;
-          devices = { lo };
+          devices = { lo wlan0 };
         }
 
         set blacklist_ipv4 {
