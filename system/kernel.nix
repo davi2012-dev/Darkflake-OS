@@ -56,6 +56,9 @@
     "random.trust_cpu=on"
     "cryptomgr.notests"
     "amdgpu.ppfeaturemask=0xffffffff"
+    "amdgpu.vm_update_mode=0"
+    "amdgpu.sched_policy=0"
+    "amdgpu.lockup_timeout=10000"
 
     # --- Clock ---
     "clocksource=tsc"
