@@ -55,6 +55,7 @@
     "processor.max_cstate=1"
     "random.trust_cpu=on"
     "cryptomgr.notests"
+    "amdgpu.ppfeaturemask=0xffffffff"
 
     # --- Clock ---
     "clocksource=tsc"
