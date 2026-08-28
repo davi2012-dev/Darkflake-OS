@@ -49,7 +49,6 @@
     "rcu_nocbs=2-3"
     "isolcpus=nohz,domain,2-3"
     "irqaffinity=0-1"
-    "isolcpus=nohz,domain,2-5"
     "pcie_aspm=performance"
     "nvme_core.default_ps_max_latency_us=0"
     "intel_idle.max_cstate=1"
