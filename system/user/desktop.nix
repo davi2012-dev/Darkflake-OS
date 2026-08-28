@@ -83,10 +83,13 @@
   
 
   services.earlyoom = {
-    enable = true;
-    freeMemThreshold = 10;
-    freeMemKillThreshold = 5;
-  };
+  enable = true;
+  freeMemThreshold = 10;
+  freeMemKillThreshold = 5;
+  extraArgs = [
+    "--avoid '(steam|wine|proton|gamescope|lutris|heroic|minecraft|java|csgo|hl2)'"
+  ];
+};
 
   programs.gnupg.agent = {
     enable = true;
