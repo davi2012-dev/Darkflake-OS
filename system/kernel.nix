@@ -48,6 +48,13 @@
     "nohz_full=2-5"
     "rcu_nocbs=2-5"
     "irqaffinity=0-1"
+    "isolcpus=nohz,domain,2-5"
+    "pcie_aspm=performance"
+    "nvme_core.default_ps_max_latency_us=0"
+    "intel_idle.max_cstate=1"
+    "processor.max_cstate=1"
+    "random.trust_cpu=on"
+    "cryptomgr.notests"
 
     # --- Clock ---
     "clocksource=tsc"
