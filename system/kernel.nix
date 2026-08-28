@@ -41,6 +41,13 @@
     "ksm.pages_to_scan=100"
     "ksm.merge_across_nodes=0"
     "zfs.zfs_arc_max=8589934592"
+    "rcupdate.rcu_expedited=1"
+    "rcutree.kthread_prio=2"
+    "workqueue.power_efficient=0"
+    "hpet=disable"
+    "nohz_full=2-5"
+    "rcu_nocbs=2-5"
+    "irqaffinity=0-1"
 
     # --- Clock ---
     "clocksource=tsc"
