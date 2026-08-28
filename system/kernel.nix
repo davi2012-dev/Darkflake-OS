@@ -59,6 +59,12 @@
     "amdgpu.vm_update_mode=0"
     "amdgpu.sched_policy=0"
     "amdgpu.lockup_timeout=10000"
+    "amdgpu.dc=1"
+    "amdgpu.dpm=1"
+    "amdgpu.gpu_recovery=1"
+    "amdgpu.vm_fragment_size=9"
+    "amdgpu.freesync_video=1"
+    "video=efifb:off"
 
     # --- Clock ---
     "clocksource=tsc"
