@@ -8,7 +8,7 @@
     shell = pkgs.fish;
     hashedPasswordFile = config.sops.secrets."user-davi-hashed-password".path;
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzBpVHAyiVi9K/lYXC4QsIYkbUsSAhrzlF592oXtOyc davi@darkflake" ];
-    };
+  };
 
   users.users.guest = {
     isNormalUser = true;
@@ -20,7 +20,7 @@
   # --- 2. Trancando o Nix (Restrição de Acesso) ---
   nix.settings = {
     allowed-users = [ "root" "@wheel" ];
-    trusted-users = [ "root" "davi"   ];
+    trusted-users = [ "root" "davi" ];
   };
 
   # --- 3. Segurança do Sistema e Elevação de Privilégios ---
@@ -39,18 +39,4 @@
     wheelNeedsPassword = true;
     enableSudoAlias = true;
   };
-
-  services.howdy = {
-    enable = false;
-    package = pkgs.howdy;
-    settings = {
-      video.device = "/dev/video0";
-      core.abort_if_no_match = false;
-    };
-  };
-
-  # --- 4. Ferramentas prontas nos bastidores ---
-  environment.systemPackages = [
-    pkgs.oath-toolkit
-  ];
-}
+} 
