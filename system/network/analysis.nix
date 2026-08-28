@@ -8,7 +8,6 @@
     wireshark
     bind.dnsutils
     vulnix  
-    pwru
 ];
   
   
