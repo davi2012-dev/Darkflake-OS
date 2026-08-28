@@ -69,6 +69,19 @@
   services.scx.enable = true;
   services.scx.scheduler = "scx_pandemonium";
 
+  services.geoclue2 = {
+  enable = true;
+  enableWifi = false;   
+  enable3G = false;
+  enableCDMA = false;
+  enableModemGPS = false;
+  enableStatic = true;    
+  staticLatitude = -23.5505;   
+  staticLongitude = -46.6333;
+  submitData = false;      
+};
+  
+
   services.earlyoom = {
     enable = true;
     freeMemThreshold = 10;
