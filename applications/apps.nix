@@ -56,7 +56,8 @@
     kdePackages.qtwebsockets
     onlyoffice-desktopeditors          
     unrar
-    p7zip          
+    p7zip
+    qbittorrent
   ];
 
   services.flatpak = {
