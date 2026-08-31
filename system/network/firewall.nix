@@ -44,10 +44,10 @@
     checkRuleset = true;
 
     ruleset = ''
-      table inet filter {
+      table inet prefilter {
         flowtable fastpath {
           hook ingress priority 0;
-          devices = { lo wlan0 };
+          devices = { eth0, tailscale0, wg0 };
         }
 
         set blacklist_ipv4 {
@@ -68,13 +68,16 @@
           timeout 1h
         }
 
-        map ip_verdict {
-          type ipv4_addr : verdict
-          flags interval
-          elements = {
-            192.168.0.100 : accept,
-            10.0.0.0/8 : drop
-          }
+        set synflood_meter {
+          type ipv4_addr
+          flags dynamic,timeout
+          timeout 10s
+        }
+
+        set rstflood_meter {
+          type ipv4_addr
+          flags dynamic,timeout
+          timeout 10s
         }
 
         chain scan_detection {
@@ -83,50 +86,31 @@
         }
 
         chain input {
-          type filter hook input priority -200; policy drop;
+          type filter hook input priority -200; policy accept;
 
           iifname { lo, waydroid0, tailscale0, podman*, veth*, proton*, wg*, tun*, pvpn* } accept
 
           ct state { established, related } accept
+          ct state invalid drop
 
           ip saddr @blacklist_dynamic drop
-
           iifname != "lo" ip saddr @blacklist_ipv4 drop
           iifname != "lo" ip6 saddr @blacklist_ipv6 drop
 
           jump scan_detection
 
-          tcp flags & (fin|syn|rst|ack) == syn ct count over 500 drop
-          tcp flags & (fin|syn|rst|ack) == rst ct count over 20 drop
+          tcp flags & (fin|syn|rst|ack) == syn ct state new update @synflood_meter { ip saddr limit rate over 50/second } drop
+          tcp flags & (fin|syn|rst|ack) == rst ct state new update @rstflood_meter { ip saddr limit rate over 20/second } drop
         }
 
         chain forward {
-          type filter hook forward priority 0; policy drop;
+          type filter hook forward priority -200; policy accept;
           ct state invalid drop
 
           ip saddr @blacklist_ipv4 drop
           ip6 saddr @blacklist_ipv6 drop
 
-          oifname { lo } ct state established,related flow offload @fastpath
-          iifname { lo } ct state established,related flow offload @fastpath
-        }
-
-        chain output {
-          type filter hook output priority 0; policy accept;
-        }
-      }
-
-      table inet nat {
-        chain PREROUTING {
-          type nat hook prerouting priority -100; policy accept;
-        }
-
-        chain POSTROUTING {
-          type nat hook postrouting priority 100; policy accept;
-        }
-
-        chain OUTPUT {
-          type nat hook output priority -100; policy accept;
+          ct state established,related flow add @fastpath
         }
       }
     '';
