@@ -134,6 +134,10 @@
       RestrictSUIDSGID = true;
       RestrictNamespaces = true;
       ProcSubset = "all";
+      ProtectKernelLogs = true;
+      ProtectClock = true;
+      RemoveIPC = true;
+      UMask = "0077";
       RestrictAddressFamilies = [
         "AF_INET"
         "AF_INET6"
