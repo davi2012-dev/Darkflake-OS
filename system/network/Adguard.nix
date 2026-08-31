@@ -87,7 +87,7 @@
           "100.100.100.100" # Tailscale MagicDNS
         ];
 
-        upstream_mode = "parallel";
+        upstream_mode = "load_balance";
         blocking_mode = "nxdomain";
         cache_size = 67108864;
         cache_ttl_min = 300;
