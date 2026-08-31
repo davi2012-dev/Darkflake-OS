@@ -57,7 +57,6 @@
     onlyoffice-desktopeditors          
     unrar
     p7zip
-    qbittorrent
   ];
 
   services.flatpak = {
