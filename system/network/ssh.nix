@@ -51,6 +51,7 @@
       TCPKeepAlive = false;
       Compression = false;
       PerSourcePenalties = "crash:3600s authfail:3600s max:86400s";
+      PerSourcePenaltyExemptList = "100.64.0.0/10";
       VersionAddendum = "none";
       KexAlgorithms = [
         "mlkem768x25519-sha256"      # Pós-quântico
