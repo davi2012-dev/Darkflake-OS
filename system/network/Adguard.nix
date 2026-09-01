@@ -2,6 +2,7 @@
 {
   services.adguardhome = {
     enable = true;
+    mutableSettings = false;
     settings = {
       http.address = "127.0.0.1:3000";
       dns = {
@@ -99,9 +100,19 @@
         refuse_any = true;
         filtering_enabled = true;
         protection_enabled = true;
-        blocking_ipv4 = "";
-        blocking_ipv6 = "";
+        safebrowsing_enabled = true;
       };
+      filters = [
+        { enabled = true; id = 1; name = "AdGuard DNS filter"; url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt"; }
+        { enabled = true; id = 2; name = "HaGeZi Pro"; url = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt"; }
+        { enabled = true; id = 3; name = "HaGeZi Threat Intelligence Feeds"; url = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/tif.txt"; }
+        { enabled = true; id = 4; name = "HaGeZi NRD 14-day"; url = "https://raw.githubusercontent.com/xRuffKez/NRD/main/lists/14-day/adblock/nrd-14day_adblock.txt"; }
+        { enabled = true; id = 5; name = "HaGeZi DynDNS Blocklist"; url = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/dyndns.txt"; }
+        { enabled = true; id = 6; name = "HaGeZi Badware Hoster"; url = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/hoster.txt"; }
+        { enabled = true; id = 7; name = "NoCoin"; url = "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt"; }
+        { enabled = true; id = 8; name = "Maltrail Malware Domains"; url = "https://raw.githubusercontent.com/stamparm/aux/master/maltrail-malware-domains.txt"; }
+        { enabled = true; id = 9; name = "hBlock"; url = "https://hblock.molinero.dev/hosts_adblock.txt"; }
+      ];
       statistics = {
         enabled = true;
         interval = "24h";
@@ -154,3 +165,4 @@
     };
   };
 }
+
