@@ -84,7 +84,9 @@
       "ohio.time.system76.com iburst nts minpoll 6 maxpoll 9"   
       "ntp1.wiktel.com iburst nts minpoll 6 maxpoll 9"         
       "time1.mbix.ca iburst nts minpoll 6 maxpoll 9"            
-      "time2.mbix.ca iburst nts minpoll 6 maxpoll 9"          
+      "time2.mbix.ca iburst nts minpoll 6 maxpoll 9"
+      # ===== Ásia =====
+      "ntpmon.dcs1.biz iburst nts minpoll 6 maxpoll 9"
     ];
     extraConfig = ''
       authselectmode require
