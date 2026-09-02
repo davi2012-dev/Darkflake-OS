@@ -149,6 +149,8 @@
       ntsdumpdir /var/lib/chrony
       maxsamples 8
       minsources 4
+      combinelimit 8
+      minsources 6
       logchange 0.5
       maxupdateskew 100.0
       maxdistance 1.0
