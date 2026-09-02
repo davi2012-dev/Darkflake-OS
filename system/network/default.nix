@@ -79,7 +79,12 @@
       "time.cincura.net iburst nts minpoll 6 maxpoll 9"       
       "nts.teambelgium.net iburst nts minpoll 6 maxpoll 9"    
       "ntp1.dmz.terryburton.co.uk iburst nts minpoll 6 maxpoll 9" 
-      "paris.time.system76.com iburst nts minpoll 6 maxpoll 9" 
+      "paris.time.system76.com iburst nts minpoll 6 maxpoll 9"
+      "nts.amethyst.name iburst nts minpoll 6 maxpoll 9"
+      "time.txryan.com iburst nts minpoll 6 maxpoll 9"
+      "stratum1.time.cifelli.xyz iburst nts minpoll 6 maxpoll 9"
+      "ntp1.glypnod.com iburst nts minpoll 6 maxpoll 9"
+      "ntp2.wiktel.com iburst nts minpoll 6 maxpoll 9"
       # ===== América do Norte =====
       "virginia.time.system76.com iburst nts minpoll 6 maxpoll 9"
       "oregon.time.system76.com iburst nts minpoll 6 maxpoll 9"
@@ -87,6 +92,7 @@
       "ntp1.wiktel.com iburst nts minpoll 6 maxpoll 9"         
       "time1.mbix.ca iburst nts minpoll 6 maxpoll 9"            
       "time2.mbix.ca iburst nts minpoll 6 maxpoll 9"
+      "time.web-clock.ca iburst nts minpoll 6 maxpoll 9"
       # ===== Ásia =====
       "ntpmon.dcs1.biz iburst nts minpoll 6 maxpoll 9"
       "ntp.neu.edu.cn iburst nts minpoll 6 maxpoll 9"
