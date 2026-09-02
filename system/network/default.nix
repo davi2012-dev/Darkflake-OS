@@ -107,6 +107,9 @@
       rtcsync
       dumpdir /var/lib/chrony
       cmdport 0
+      minsamples 4
+      maxslewrate 1000
+      dscp 46
       clientloglimit 0 
     '';
   };
