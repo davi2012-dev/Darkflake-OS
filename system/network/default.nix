@@ -72,7 +72,9 @@
       "ntppool1.time.nl iburst nts minpoll 6 maxpoll 9"
       "ntppool2.time.nl iburst nts minpoll 6 maxpoll 9"     
       "ntp0.cam.ac.uk iburst nts minpoll 6 maxpoll 9"
-      "ntp1.cam.ac.uk iburst nts minpoll 6 maxpoll 9"           
+      "ntp1.cam.ac.uk iburst nts minpoll 6 maxpoll 9"
+      "ntp.miuku.net iburst nts minpoll 6 maxpoll 9"
+      "ntp.3eck.net iburst nts minpoll 6 maxpoll 9"
       "nts1.ntp.hr iburst nts minpoll 6 maxpoll 9"           
       "time.cincura.net iburst nts minpoll 6 maxpoll 9"       
       "nts.teambelgium.net iburst nts minpoll 6 maxpoll 9"    
@@ -87,6 +89,8 @@
       "time2.mbix.ca iburst nts minpoll 6 maxpoll 9"
       # ===== Ásia =====
       "ntpmon.dcs1.biz iburst nts minpoll 6 maxpoll 9"
+      "ntp.neu.edu.cn iburst nts minpoll 6 maxpoll 9"
+      "ntp1.neu.edu.cn iburst nts minpoll 6 maxpoll 9"
     ];
     extraConfig = ''
       authselectmode require
