@@ -1,5 +1,5 @@
 {
-  description = "Darkflake: + Repos Extras + Home Manager + NUR + MCP-NixOS ";
+  description = "Darkflake: + Repos Extras + Home Manager + NUR + MCP-NixOS + CachyOS Kernel ";
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/DeterminateSystems/nixpkgs-26.05-chilled/0.1";
