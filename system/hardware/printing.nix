@@ -19,7 +19,7 @@
     openFirewall = false;
   };
 
-  # Hardening do CUPS (sem root)
+  # Hardening do CUPS
   systemd.services.cups = {
     overrideStrategy = "asDropin";
     serviceConfig = {
@@ -68,7 +68,7 @@
   services.avahi = {
     enable = true;
     domainName = "local";
-    allowInterfaces = [ "wlan0" ];   # ou "enp*" se for cabo
+    allowInterfaces = [ "wlan0" ]; 
     nssmdns4 = true;
     nssmdns6 = true;
     reflector = false;
