@@ -1,145 +1,74 @@
 { config, pkgs, lib, ... }:
-
-let
-  # --- GERA OS CERTIFICADOS DURANTE O BUILD (nixos-rebuild) ---
-  certs = pkgs.runCommand "caddy-local-certs" {
-    buildInputs = [ pkgs.openssl ];
-  } ''
-    mkdir -p $out
-
-    # 1. Cria a Autoridade Certificadora (CA) local
-    openssl genrsa -out $out/ca.key 2048
-    openssl req -x509 -new -nodes -key $out/ca.key -sha256 -days 3650 -out $out/ca.crt -subj "/CN=Darkflake Local CA"
-
-    # 2. Cria a chave do servidor (coringa para todos os subdomínios)
-    openssl genrsa -out $out/server.key 2048
-    openssl req -new -key $out/server.key -out $out/server.csr -subj "/CN=*.darkflake.local"
-
-    # 3. Configura o SAN (obrigatório para navegadores modernos)
-    echo "subjectAltName=DNS:*.darkflake.local" > $out/san.cnf
-
-    # 4. Assina o certificado do servidor com a CA local
-    openssl x509 -req -in $out/server.csr -CA $out/ca.crt -CAkey $out/ca.key -CAcreateserial -out $out/server.crt -days 3650 -sha256 -extfile $out/san.cnf
-
-    # Limpeza
-    rm $out/server.csr $out/san.cnf $out/ca.srl
-  '';
-
-  caCert = "${certs}/ca.crt";
-  serverCert = "${certs}/server.crt";
-  serverKey = "${certs}/server.key";
-in
 {
-  # --- INSTALA A CA NO SISTEMA (curl, wget, Chromium, etc. confiam) ---
-  security.pki.certificateFiles = [ caCert ];
+  security.pki.certificateFiles = lib.optional (builtins.pathExists ./caddy-ca.crt) ./caddy-ca.crt;
 
-  # --- CADDY USANDO OS CERTIFICADOS GERADOS NO BUILD ---
   services.caddy = {
     enable = true;
 
     virtualHosts = {
-      "adguard.darkflake.local" = {
-        extraConfig = ''
-          tls ${serverCert} ${serverKey}
-          reverse_proxy localhost:3000
-        '';
-      };
-
-      "nextcloud.darkflake.local" = {
-        extraConfig = ''
-          tls ${serverCert} ${serverKey}
-          reverse_proxy localhost:8085
-        '';
-      };
-
-      "jellyfin.darkflake.local" = {
-        extraConfig = ''
-          tls ${serverCert} ${serverKey}
-          reverse_proxy localhost:8096
-        '';
-      };
-
-      "search.darkflake.local" = {
-        extraConfig = ''
-          tls ${serverCert} ${serverKey}
-          reverse_proxy localhost:8080
-        '';
-      };
-
-      "librechat.darkflake.local" = {
-        extraConfig = ''
-          tls ${serverCert} ${serverKey}
-          reverse_proxy localhost:3080
-        '';
-      };
-
-      "cockpit.darkflake.local" = {
-        extraConfig = ''
-          tls ${serverCert} ${serverKey}
-          reverse_proxy localhost:9090 {
-            transport http {
-              tls_insecure_skip_verify
-            }
+      "adguard.darkflake.local".extraConfig = ''
+        tls internal
+        reverse_proxy localhost:3000
+      '';
+      "nextcloud.darkflake.local".extraConfig = ''
+        tls internal
+        reverse_proxy localhost:8085
+      '';
+      "jellyfin.darkflake.local".extraConfig = ''
+        tls internal
+        reverse_proxy localhost:8096
+      '';
+      "search.darkflake.local".extraConfig = ''
+        tls internal
+        reverse_proxy localhost:8080
+      '';
+      "librechat.darkflake.local".extraConfig = ''
+        tls internal
+        reverse_proxy localhost:3080
+      '';
+      "cockpit.darkflake.local".extraConfig = ''
+        tls internal
+        reverse_proxy localhost:9090 {
+          transport http {
+            tls_insecure_skip_verify
           }
-        '';
-      };
-
-      "homarr.darkflake.local" = {
-        extraConfig = ''
-          tls ${serverCert} ${serverKey}
-          reverse_proxy localhost:8083
-        '';
-      };
-
-      "stirling.darkflake.local" = {
-        extraConfig = ''
-          tls ${serverCert} ${serverKey}
-          reverse_proxy localhost:8089
-        '';
-      };
-
-      "chat.darkflake.local" = {
-        extraConfig = ''
-          tls ${serverCert} ${serverKey}
-          reverse_proxy localhost:7000
-        '';
-      };
-
-      "metube.darkflake.local" = {
-        extraConfig = ''
-          tls ${serverCert} ${serverKey}
-          reverse_proxy localhost:8081
-        '';
-      };
-
-      "netdata.darkflake.local" = {
-        extraConfig = ''
-          tls ${serverCert} ${serverKey}
-          reverse_proxy localhost:19999
-        '';
-      };
-
-      "ha.darkflake.local" = {
-        extraConfig = ''
-          tls ${serverCert} ${serverKey}
-          reverse_proxy localhost:8123
-        '';
-      };
-
-      "portainer.darkflake.local" = {
-        extraConfig = ''
-          tls ${serverCert} ${serverKey}
-          reverse_proxy localhost:9443 {
-            transport http {
-              tls_insecure_skip_verify
-            }
+        }
+      '';
+      "homarr.darkflake.local".extraConfig = ''
+        tls internal
+        reverse_proxy localhost:8083
+      '';
+      "stirling.darkflake.local".extraConfig = ''
+        tls internal
+        reverse_proxy localhost:8089
+      '';
+      "chat.darkflake.local".extraConfig = ''
+        tls internal
+        reverse_proxy localhost:7000
+      '';
+      "metube.darkflake.local".extraConfig = ''
+        tls internal
+        reverse_proxy localhost:8081
+      '';
+      "netdata.darkflake.local".extraConfig = ''
+        tls internal
+        reverse_proxy localhost:19999
+      '';
+      "ha.darkflake.local".extraConfig = ''
+        tls internal
+        reverse_proxy localhost:8123
+      '';
+      "portainer.darkflake.local".extraConfig = ''
+        tls internal
+        reverse_proxy localhost:9443 {
+          transport http {
+            tls_insecure_skip_verify
           }
-        '';
-      };
+        }
+      '';
     };
   };
 
-  # --- ENDURECIMENTO ---
   systemd.services.caddy.serviceConfig = {
     ProtectSystem = "strict";
     ProtectHome = true;
@@ -156,5 +85,40 @@ in
     MemoryDenyWriteExecute = true;
     SystemCallArchitectures = "native";
     SystemCallFilter = [ "@system-service" "~@privileged" "~@resources" ];
+  };
+
+  systemd.services.caddy-trust-autosync = {
+    description = "Copia a CA local do Caddy pro flake e reconstroi o sistema uma vez, pra confiar nela automaticamente";
+    after = [ "caddy.service" "network-online.target" ];
+    wants = [ "caddy.service" "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    unitConfig.ConditionPathExists = "!/etc/nixos/caddy-ca.crt";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+      TimeoutStartSec = "600";
+    };
+    script = ''
+      set -e
+      CERT_SRC=/var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt
+      CERT_DST=/etc/nixos/caddy-ca.crt
+
+      for i in $(seq 1 60); do
+        if [ -f "$CERT_SRC" ]; then
+          break
+        fi
+        sleep 5
+      done
+
+      if [ ! -f "$CERT_SRC" ]; then
+        echo "Caddy nao gerou a CA a tempo (5min), abortando sem reconstruir" >&2
+        exit 1
+      fi
+
+      cp "$CERT_SRC" "$CERT_DST"
+      chmod 644 "$CERT_DST"
+
+      /run/current-system/sw/bin/nixos-rebuild switch --flake /etc/nixos#Darkflake
+    '';
   };
 }
