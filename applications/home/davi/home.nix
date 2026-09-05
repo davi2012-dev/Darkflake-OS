@@ -46,8 +46,6 @@
   services.plan9port.plumber.enable = true;
   services.plan9port.fontsrv.enable = true;
   services.plan9port.package = pkgs.plan9port-wayland;
-  programs.navi.enable = true;
-  programs.navi.enableFishIntegration = true;
   programs.nix-search-tv.enable = true; 
   programs.nix-search-tv.enableTelevisionIntegration = true;
   programs.television.enable = true;
