@@ -1,15 +1,15 @@
 { config, pkgs, ... }:
 
 let
-  # Baixa o arquivo HRTF da Valve de forma segura via Nix
   hrtf_file = pkgs.fetchurl {
     url = "https://github.com/ValveSoftware/steam-audio/raw/master/core/data/hrtf/sadie_d1.sofa";
     sha256 = "sha256-5scqhN2Ue173VDirlqnCoy7RDwM0crnEwRpJr/AKijE=";
   };
 in
 {
+  environment.systemPackages = [ pkgs.noise-suppression-for-voice ];
+
   services.pipewire.extraConfig.pipewire = {
-    # 1. Canais de Áudio Virtuais (Game, Voice, Browser, Music)
     "98-virtual-channels" = {
       "context.modules" = [
         {
@@ -47,7 +47,6 @@ in
       ];
     };
 
-    # 2. Som Spatializer / Surround 7.1 Virtual para Fones de Ouvido
     "99-spatializer" = {
       "context.modules" = [
         {
@@ -65,7 +64,6 @@ in
                 { type = "sofa"; label = "spatializer"; name = "spRR"; config = { filename = "${hrtf_file}"; }; control = { "Azimuth" = 210.0; }; }
                 { type = "sofa"; label = "spatializer"; name = "spSL"; config = { filename = "${hrtf_file}"; }; control = { "Azimuth" = 90.0; }; }
                 { type = "sofa"; label = "spatializer"; name = "spSR"; config = { filename = "${hrtf_file}"; }; control = { "Azimuth" = 270.0; }; }
-
                 { type = "builtin"; label = "mixer"; name = "mixL"; }
                 { type = "builtin"; label = "mixer"; name = "mixR"; }
               ];
@@ -94,6 +92,76 @@ in
               "audio.channels" = 2;
               "audio.position" = [ "FL" "FR" ];
             };
+          };
+        }
+      ];
+    };
+
+    "100-voice-isolation" = {
+      "context.modules" = [
+        {
+          name = "libpipewire-module-filter-chain";
+          args = {
+            "node.description" = "Voice Isolation (RNNoise)";
+            "media.name" = "Voice Isolation (RNNoise)";
+            "filter.graph" = {
+              "nodes" = [
+                {
+                  type = "ladspa";
+                  name = "rnnoise";
+                  plugin = "${pkgs.noise-suppression-for-voice}/lib/ladspa/librnnoise_ladspa.so";
+                  label = "noise_suppressor_mono";
+                  control = {
+                    "VAD Threshold (%)" = 50.0;
+                    "VAD Grace Period (ms)" = 200;
+                    "Retroactive VAD Grace (ms)" = 0;
+                  };
+                }
+              ];
+            };
+            "capture.props" = {
+              "node.name" = "capture.rnnoise_source";
+              "node.passive" = true;
+              "audio.rate" = 48000;
+            };
+            "playback.props" = {
+              "node.name" = "rnnoise_source";
+              "media.class" = "Audio/Source";
+              "audio.rate" = 48000;
+            };
+          };
+        }
+      ];
+    };
+
+    "101-apple-eq-presets" = {
+      "context.modules" = [
+        {
+          name = "libpipewire-module-filter-chain";
+          args = {
+            "node.description" = "Bass Booster (estilo Apple Music)";
+            "media.name" = "Bass Booster (estilo Apple Music)";
+            "filter.graph" = {
+              "nodes" = [
+                { type = "builtin"; label = "bq_lowshelf"; name = "bassBoost"; control = { "Freq" = 150.0; "Q" = 0.7; "Gain" = 6.0; }; }
+              ];
+            };
+            "capture.props" = { "node.name" = "bass_booster_output"; "media.class" = "Audio/Sink"; "audio.position" = [ "FL" "FR" ]; };
+            "playback.props" = { "node.name" = "playback.bass_booster_output"; "audio.position" = [ "FL" "FR" ]; "node.passive" = true; };
+          };
+        }
+        {
+          name = "libpipewire-module-filter-chain";
+          args = {
+            "node.description" = "Treble Booster (estilo Apple Music)";
+            "media.name" = "Treble Booster (estilo Apple Music)";
+            "filter.graph" = {
+              "nodes" = [
+                { type = "builtin"; label = "bq_highshelf"; name = "trebleBoost"; control = { "Freq" = 6000.0; "Q" = 0.7; "Gain" = 5.0; }; }
+              ];
+            };
+            "capture.props" = { "node.name" = "treble_booster_output"; "media.class" = "Audio/Sink"; "audio.position" = [ "FL" "FR" ]; };
+            "playback.props" = { "node.name" = "playback.treble_booster_output"; "audio.position" = [ "FL" "FR" ]; "node.passive" = true; };
           };
         }
       ];
