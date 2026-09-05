@@ -97,13 +97,13 @@ in
       ];
     };
 
-    "100-voice-isolation" = {
+    "100-noise-suppression" = {
       "context.modules" = [
         {
           name = "libpipewire-module-filter-chain";
           args = {
-            "node.description" = "Voice Isolation (RNNoise)";
-            "media.name" = "Voice Isolation (RNNoise)";
+            "node.description" = "Noise Suppression Microphone";
+            "media.name" = "Noise Suppression Microphone";
             "filter.graph" = {
               "nodes" = [
                 {
@@ -134,34 +134,60 @@ in
       ];
     };
 
-    "101-apple-eq-presets" = {
+    "101-eq-presets" = {
       "context.modules" = [
         {
           name = "libpipewire-module-filter-chain";
           args = {
-            "node.description" = "Bass Booster (estilo Apple Music)";
-            "media.name" = "Bass Booster (estilo Apple Music)";
+            "node.description" = "Bass Boost";
+            "media.name" = "Bass Boost";
             "filter.graph" = {
               "nodes" = [
                 { type = "builtin"; label = "bq_lowshelf"; name = "bassBoost"; control = { "Freq" = 150.0; "Q" = 0.7; "Gain" = 6.0; }; }
               ];
             };
-            "capture.props" = { "node.name" = "bass_booster_output"; "media.class" = "Audio/Sink"; "audio.position" = [ "FL" "FR" ]; };
-            "playback.props" = { "node.name" = "playback.bass_booster_output"; "audio.position" = [ "FL" "FR" ]; "node.passive" = true; };
+            "capture.props" = { "node.name" = "bass_boost_output"; "media.class" = "Audio/Sink"; "audio.position" = [ "FL" "FR" ]; };
+            "playback.props" = { "node.name" = "playback.bass_boost_output"; "audio.position" = [ "FL" "FR" ]; "node.passive" = true; };
           };
         }
         {
           name = "libpipewire-module-filter-chain";
           args = {
-            "node.description" = "Treble Booster (estilo Apple Music)";
-            "media.name" = "Treble Booster (estilo Apple Music)";
+            "node.description" = "Treble Boost";
+            "media.name" = "Treble Boost";
             "filter.graph" = {
               "nodes" = [
                 { type = "builtin"; label = "bq_highshelf"; name = "trebleBoost"; control = { "Freq" = 6000.0; "Q" = 0.7; "Gain" = 5.0; }; }
               ];
             };
-            "capture.props" = { "node.name" = "treble_booster_output"; "media.class" = "Audio/Sink"; "audio.position" = [ "FL" "FR" ]; };
-            "playback.props" = { "node.name" = "playback.treble_booster_output"; "audio.position" = [ "FL" "FR" ]; "node.passive" = true; };
+            "capture.props" = { "node.name" = "treble_boost_output"; "media.class" = "Audio/Sink"; "audio.position" = [ "FL" "FR" ]; };
+            "playback.props" = { "node.name" = "playback.treble_boost_output"; "audio.position" = [ "FL" "FR" ]; "node.passive" = true; };
+          };
+        }
+      ];
+    };
+
+    "102-echo-cancellation" = {
+      "context.modules" = [
+        {
+          name = "libpipewire-module-echo-cancel";
+          args = {
+            "library.name" = "aec/libspa-aec-webrtc";
+            "monitor.mode" = true;
+            "aec.args" = {
+              "webrtc.gain_control" = true;
+              "webrtc.extended_filter" = true;
+              "webrtc.high_pass_filter" = true;
+              "webrtc.noise_suppression" = true;
+            };
+            "capture.props" = {
+              "node.name" = "ec_capture";
+              "node.description" = "Echo Cancellation Capture";
+            };
+            "source.props" = {
+              "node.name" = "ec_source";
+              "node.description" = "Echo-Cancelled Microphone";
+            };
           };
         }
       ];
