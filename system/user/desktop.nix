@@ -78,6 +78,7 @@
   enableStatic = true;    
   staticLatitude = -23.5505;   
   staticLongitude = -46.6333;
+  staticAltitude = 760;
   submitData = false;      
 };
   
