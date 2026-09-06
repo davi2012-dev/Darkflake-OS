@@ -30,13 +30,10 @@
     addEmulatedSystemsToNixSandbox = true;
     preferStaticEmulators = true;
   };
-  # --- TEMA DO PLYMOUTH (ANIMADO VIA FLAKE) ---
+  # --- PLYMOUTH (TEMA PADRÃO NIXOS) ---
   boot.plymouth = {
     enable = true;
     theme = "nixos";
-    themePackages = [
-      inputs.nixos-plymouth-theme.packages.${pkgs.stdenv.hostPlatform.system}.default
-    ];
   };
   # --- OUTRAS CONFIGURAÇÕES DO SISTEMA ---
   systemd.shutdownRamfs.enable = true;
