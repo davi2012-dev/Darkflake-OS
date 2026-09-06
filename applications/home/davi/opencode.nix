@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   # ========== OPENCODE - Agente de Código com IA ==========
@@ -15,6 +15,113 @@
     settings = {
       # Update declarativo via nix (nada de autoupdate solto)
       autoupdate = false;
+
+      # 2.1 MCP servers (iguais aos do opencode do CachyOS)
+      mcp = {
+        playwright = {
+          type = "local";
+          command = [
+            "npx"
+            "-y"
+            "@playwright/mcp@latest"
+            "--browser"
+            "chromium"
+          ];
+          enabled = true;
+        };
+        memory = {
+          type = "local";
+          command = [
+            "npx"
+            "-y"
+            "@modelcontextprotocol/server-memory"
+          ];
+          enabled = true;
+        };
+        fetch = {
+          type = "local";
+          command = [
+            "npx"
+            "-y"
+            "mcp-server-fetch"
+          ];
+          enabled = true;
+        };
+        wikipedia = {
+          type = "local";
+          command = [
+            "npx"
+            "-y"
+            "wikipedia-mcp"
+          ];
+          enabled = true;
+        };
+        weather = {
+          type = "local";
+          command = [
+            "npx"
+            "-y"
+            "@atorresg/weather-mcp"
+          ];
+          enabled = true;
+        };
+        chart = {
+          type = "local";
+          command = [
+            "npx"
+            "-y"
+            "@antv/mcp-server-chart"
+          ];
+          enabled = true;
+        };
+        "sequential-thinking" = {
+          type = "local";
+          command = [
+            "npx"
+            "-y"
+            "@modelcontextprotocol/server-sequential-thinking"
+          ];
+          enabled = true;
+        };
+        terminal = {
+          type = "local";
+          command = [
+            "npx"
+            "-y"
+            "@wonderwhy-er/desktop-commander@latest"
+          ];
+          enabled = true;
+        };
+        context7 = {
+          type = "local";
+          command = [
+            "npx"
+            "-y"
+            "@upstash/context7-mcp"
+          ];
+          enabled = true;
+        };
+
+        # github (desativado até criar o segredo no sops):
+        #   1) sops secrets.yaml -> adicionar: github-token: <TOKEN>
+        #   2) security/sops.nix -> adicionar sops.secrets."github-token"
+        #   3) descomentar o bloco abaixo
+        # github = {
+        #   type = "local";
+        #   command = [
+        #     "npx"
+        #     "-y"
+        #     "@github/mcp-server"
+        #     "stdio"
+        #     "--toolsets"
+        #     "git,issues,pull_requests,repos,users"
+        #   ];
+        #   environment = {
+        #     GITHUB_PERSONAL_ACCESS_TOKEN = "${config.sops.secrets.github-token.path}";
+        #   };
+        #   enabled = true;
+        # };
+      };
     };
 
     # 3. Configuração do TUI (tui.json)
