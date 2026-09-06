@@ -27,6 +27,7 @@
     ./cava.nix
     ./librewolf.nix
     ./lazyvim.nix
+    ./opencode.nix
   ];
 
   # 4 X11
