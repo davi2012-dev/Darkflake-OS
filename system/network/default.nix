@@ -173,7 +173,7 @@
       ProtectHome = true;
       ReadWritePaths = [ "/var/lib/chrony" ];
       PrivateTmp = true;
-      PrivateDevices = true;
+      PrivateDevices = false;
       DeviceAllow = [ "char-rtc rw" ];
       PrivateIPC = true;
       ProtectControlGroups = true;
