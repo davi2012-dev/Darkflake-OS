@@ -57,6 +57,26 @@
     onlyoffice-desktopeditors          
     unrar
     p7zip
+
+    # === Rust/C Modern CLI ===
+    dust              # du visual bonito
+    procs             # ps moderno com ports/docker/memoria
+    sd                # sed simplificado
+    hexyl             # hex viewer colorido
+    tokei             # conta linhas de codigo
+    hyperfine         # benchmarking rigoroso
+    bandwhich         # traffic por processo
+    gitui             # git TUI rapido
+    git-delta         # diff syntax highlight
+    tealdeer          # tldr rapido
+    broot             # tree interativo com navigacao
+    ouch              # compressao multi-formato
+    xh                # curl moderno e bonito
+    dogdns            # dig moderno
+    watchexec         # executa comando ao alterar ficheiros
+    grex              # gera regex de exemplos
+    navi              # cheatsheet interativo
+    erdtree           # tree com tamanho
   ];
 
   services.flatpak = {
