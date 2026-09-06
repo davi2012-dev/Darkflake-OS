@@ -1,6 +1,6 @@
 { config, pkgs, unstable, lib, ... }:
 {
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.zfs.package = pkgs.zfs_unstable;
 
   # --- 2. Parâmetros de Boot ---
