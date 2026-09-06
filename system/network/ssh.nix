@@ -68,7 +68,7 @@
         "umac-128-etm@openssh.com"
       ];
       
-      HostKeyAlgorithms = [ "ssh-ed25519" ];
+      HostKeyAlgorithms = "ssh-ed25519";
     };
   };
 
