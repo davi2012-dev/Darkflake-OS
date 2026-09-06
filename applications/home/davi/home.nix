@@ -28,6 +28,7 @@
     ./librewolf.nix
     ./lazyvim.nix
     ./opencode.nix
+    ./openclaw.nix
   ];
 
   # 4 X11
