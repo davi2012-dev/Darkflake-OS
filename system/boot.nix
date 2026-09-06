@@ -30,7 +30,7 @@
     addEmulatedSystemsToNixSandbox = true;
     preferStaticEmulators = true;
   };
-  # --- PLYMOUTH (TEMA PADRÃO NIXOS) ---
+  # --- PLYMOUTH  ---
   boot.plymouth = {
     enable = true;
     theme = "nixos";
