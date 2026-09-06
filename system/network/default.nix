@@ -158,7 +158,6 @@
       dumponexit
       maxdrift 500
       stratumweight 0
-      rtcsync
       dumpdir /var/lib/chrony
       cmdport 0
       minsamples 4
