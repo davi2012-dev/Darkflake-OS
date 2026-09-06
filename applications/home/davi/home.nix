@@ -61,6 +61,36 @@
   programs.mangohud.enable = true;
   programs.lazysql.enable = true;
 
+  # === Rust/C Modern CLI (home-manager programs) ===
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "Catppuccin Mocha";
+      style = "numbers,changes,header,grid";
+    };
+  };
+
+  programs.bottom = {
+    enable = true;
+    settings = {
+      colors = {
+        high_battery_color = "red";
+        mid_battery_color = "yellow";
+        low_battery_color = "green";
+      };
+    };
+  };
+
+  programs.delta = {
+    enable = true;
+    options = {
+      navigate = true;
+      line-numbers = true;
+      side-by-side = true;
+      syntax-theme = "Catppuccin Mocha";
+    };
+  };
+
   # 5. Pacotes
   home.packages = with pkgs; [
     tree
@@ -79,6 +109,25 @@
     sqlite
 
     (if stdenv.isLinux then platformio else platformio-core)
+
+    # === Rust/C Modern CLI ===
+    dust              # du visual bonito
+    procs             # ps moderno com ports/docker/memoria
+    sd                # sed simplificado
+    hexyl             # hex viewer colorido
+    tokei             # conta linhas de codigo
+    hyperfine         # benchmarking rigoroso
+    bandwhich         # traffic por processo
+    gitui             # git TUI rapido
+    tealdeer          # tldr rapido
+    broot             # tree interativo com navigacao
+    ouch              # compressao multi-formato
+    xh                # curl moderno e bonito
+    dogdns            # dig moderno
+    watchexec         # executa comando ao alterar ficheiros
+    grex              # gera regex de exemplos
+    navi              # cheatsheet interativo
+    erdtree           # tree com tamanho
   ];
 
   # 6 . Compatibilidade
