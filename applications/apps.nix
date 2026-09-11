@@ -78,6 +78,7 @@
       "dev.deedles.Trayscale"
       "io.github.linx_systems.ClamUI"
       "org.upscayl.Upscayl"
+      "org.gnome.Recipes"
     ];
   };
 }
