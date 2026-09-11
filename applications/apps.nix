@@ -67,6 +67,7 @@
       "org.vinegarhq.Sober"
       "sh.ppy.osu"
       "com.usebottles.bottles"
+      "io.github.screwys.Rufin"
       "com.vysp3r.ProtonPlus"
       "app.fotema.Fotema"
       "io.gitlab.metadatacleaner.metadatacleaner"
