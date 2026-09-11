@@ -77,7 +77,7 @@
       "com.github.johnfactotum.Foliate"
       "dev.deedles.Trayscale"
       "io.github.linx_systems.ClamUI"
-      "io.gitlab.theevilskeleton.Upscaler"
+      "org.upscayl.Upscayl"
     ];
   };
 }
