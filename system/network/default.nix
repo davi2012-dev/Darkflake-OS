@@ -166,51 +166,6 @@
       clientloglimit 0 
     '';
   };
-  # ===== HARDENING PARA CHRONYD =====
-  systemd.services.chronyd = {
-    serviceConfig = {
-      ProtectSystem = "strict";
-      ProtectHome = true;
-      ReadWritePaths = [ "/var/lib/chrony" ];
-      PrivateTmp = true;
-      PrivateDevices = false;
-      DeviceAllow = [ "char-rtc rw" ];
-      PrivateIPC = true;
-      ProtectControlGroups = true;
-      ProtectKernelModules = true;
-      ProtectKernelTunables = true;
-      ProtectKernelLogs = true;
-      ProtectHostname = true;
-      LockPersonality = true;
-      MemoryDenyWriteExecute = true;
-      NoNewPrivileges = true;
-      RestrictRealtime = true;
-      RestrictSUIDSGID = true;
-      RestrictNamespaces = true;
-      RemoveIPC = true;
-      UMask = "0077";
-      RestrictAddressFamilies = [
-        "AF_INET"
-        "AF_INET6"
-        "AF_UNIX"
-      ];
-      SystemCallArchitectures = "native";
-      SystemCallFilter = [
-        "@system-service"
-        "@clock"
-      ];
-      CapabilityBoundingSet = [
-        "CAP_SYS_TIME"
-        "CAP_NET_BIND_SERVICE"
-        "CAP_SETUID"
-        "CAP_SETGID"
-      ];
-      AmbientCapabilities = [
-        "CAP_SYS_TIME"
-        "CAP_NET_BIND_SERVICE"
-      ];
-    };
-  };
   # ===== HARDENING PARA NETWORKMANAGER =====
   systemd.services.NetworkManager = {
     serviceConfig = {
