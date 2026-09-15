@@ -39,33 +39,7 @@
         extraOptions = [ "--dns=10.88.0.1" ];
       };
 
-      # 3. MongoDB (LibreChat)
-      librechat-db = {
-        image = "docker.io/library/mongo:latest";
-        volumes = [
-          "librechat_mongo_data:/data/db:Z"
-        ];
-        extraOptions = [ "--dns=10.88.0.1" ];
-      };
-
-      # 4. LibreChat
-      librechat = {
-        image = "ghcr.io/danny-avila/librechat:latest";
-        ports = [ "3080:3080" ];
-        extraOptions = [ "--dns=10.88.0.1" ];
-        environment = {
-          MONGO_URI = "mongodb://librechat-db:27017/LibreChat";
-          CONFIG_BYPASS_VALIDATION = "true";
-          CREW_SECRET = "ZkahHL3KRtZ5JT/N9lGqqFoERSFLkK6F92nk9GPhYQ4=";
-          JWT_SECRET = "+7glROSrzmEs+/YfRr7dBtk4Rc8LLrI81dsxN8Gp8qE=";
-          TRUSTED_PROXIES = "127.0.0.1";
-          REFRESH_TOKEN_SECRET = "1UQiAma+QslvZMFSQUdwDChqy3UeBeUnoHtN1Atp0kc=";
-          ALLOW_REGISTRATION = "true";
-        };
-        dependsOn = [ "librechat-db" ];
-      };
-
-      # 5. MariaDB (Nextcloud)
+      # 3. MariaDB (Nextcloud)
       nextcloud-db = {
         image = "docker.io/library/mariadb:latest";
         environment = {
@@ -80,7 +54,7 @@
         extraOptions = [ "--dns=10.88.0.1" ];
       };
 
-      # 6. Nextcloud
+      # 4. Nextcloud
       nextcloud = {
         image = "docker.io/library/nextcloud:latest";
         ports = [ "8085:80" ];
@@ -98,21 +72,7 @@
         dependsOn = [ "nextcloud-db" ];
       };
 
-      # 7. Homarr
-      homarr = {
-        image = "ghcr.io/homarr-labs/homarr:latest";
-        ports = [ "8083:7575" ];
-        extraOptions = [ "--dns=10.88.0.1" ];
-        environment = {
-          SECRET_ENCRYPTION_KEY = "28fc6b3f07d57c4d4349bd976ad5d247aef82d2e3afe3e78dced7444d374e7bd";
-        };
-        volumes = [
-          "homarr_configs:/app/data/configs:Z"
-          "homarr_data:/data:Z"
-        ];
-      };
-
-      # 8. Jellyfin
+      # 5. Jellyfin
       jellyfin = {
         image = "docker.io/jellyfin/jellyfin:latest";
         ports = [ "8096:8096" ];
@@ -128,7 +88,7 @@
         ];
       };
 
-      # 9. MeTube
+      # 6. MeTube
       metube = {
         image = "ghcr.io/alexta69/metube:latest";
         ports = [ "8081:8081" ];
@@ -138,7 +98,7 @@
         ];
       };
 
-      # 10. Netdata
+      # 7. Netdata
       netdata = {
         image = "docker.io/netdata/netdata:stable";
         ports = [ "19999:19999" ];
@@ -157,7 +117,7 @@
         ];
       };
 
-      # 11. Home Assistant
+      # 8. Home Assistant
       homeassistant = {
         image = "ghcr.io/home-assistant/home-assistant:stable";
         extraOptions = [
@@ -174,7 +134,7 @@
         };
       };
 
-      # 12. Databag
+      # 9. Databag
       databag = {
         image = "docker.io/balzack/databag:latest";
         ports = [ "7000:7000" ];
