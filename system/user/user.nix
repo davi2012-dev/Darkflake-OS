@@ -25,18 +25,7 @@
 
   # --- 3. Segurança do Sistema e Elevação de Privilégios ---
   security.sudo.enable = false;
-
-  security.doas = {
-    enable = true;
-    extraRules = [{
-      users = [ "davi" ];
-      keepEnv = false;
-      persist = false;
-    }];
-  };
-
-  security.run0 = {
-    wheelNeedsPassword = true;
-    enableSudoAlias = true;
-  };
+  security.sudo-rs.enable = true;
+  security.account-utils.enable = true;
+  security.sudo-rs.execWheelOnly = true;
 } 
