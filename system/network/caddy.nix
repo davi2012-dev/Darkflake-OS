@@ -22,10 +22,6 @@
         tls internal
         reverse_proxy localhost:8080
       '';
-      "librechat.darkflake.local".extraConfig = ''
-        tls internal
-        reverse_proxy localhost:3080
-      '';
       "cockpit.darkflake.local".extraConfig = ''
         tls internal
         reverse_proxy localhost:9090 {
@@ -33,10 +29,6 @@
             tls_insecure_skip_verify
           }
         }
-      '';
-      "homarr.darkflake.local".extraConfig = ''
-        tls internal
-        reverse_proxy localhost:8083
       '';
       "stirling.darkflake.local".extraConfig = ''
         tls internal
