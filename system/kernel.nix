@@ -30,7 +30,7 @@
     "nosoftlockup"
     "kvm.intel_nested=1"
     "kvm.amd_nested=1"
-    "intel_pstate=active"
+    "intel_pstate=passive"
     "psi=1"
     "transparent_hugepage=madvise"
     "lru_gen=1"
