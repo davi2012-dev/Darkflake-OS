@@ -72,7 +72,7 @@
     "vsyscall=none"
     "debugfs=off"
     "randomize_kstack_offset=on"
-    "init_on_alloc=1"
+    "init_on_alloc=0"
     "init_on_free=1"
     "page_poisoning=off"
     "module.sig_enforce=1"
