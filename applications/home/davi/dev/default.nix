@@ -1,6 +1,6 @@
 {
   imports = [
-    ./lazyvim.nix
-    ./opencode.nix
+    ./editor/default.nix
+    ./ai/default.nix
   ];
 }

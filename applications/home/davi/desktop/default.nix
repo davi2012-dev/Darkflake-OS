@@ -1,7 +1,6 @@
 {
   imports = [
-    ./spotify.nix
-    ./cava.nix
-    ./librewolf.nix
+    ./browser/default.nix
+    ./media/default.nix
   ];
 }
