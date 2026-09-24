@@ -125,7 +125,7 @@
     };
   };
 
-  systemd.services.adguardhome = {
+    systemd.services.adguardhome = {
     serviceConfig = {
       ProtectSystem = "strict";
       ProtectHome = true;
@@ -160,9 +160,14 @@
         "~@privileged"
         "~@resources"
       ];
-      CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
-      AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
+      CapabilityBoundingSet = [
+        "CAP_NET_BIND_SERVICE"
+        "CAP_NET_RAW"
+      ];
+      AmbientCapabilities = [
+        "CAP_NET_BIND_SERVICE"
+        "CAP_NET_RAW"
+      ];
     };
   };
 }
-
