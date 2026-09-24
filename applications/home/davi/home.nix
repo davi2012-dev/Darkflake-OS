@@ -15,10 +15,10 @@
 
   # 3. Imports (organizados por categoria)
   imports = [
-    ./cli
-    ./shell
-    ./desktop
-    ./dev
+    ./cli/default.nix
+    ./shell/default.nix
+    ./desktop/default.nix
+    ./dev/default.nix
     ./services.nix
     ./programs.nix
     ./packages.nix
