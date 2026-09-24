@@ -2,7 +2,7 @@
 
 {
   # 1. Suporte a XDG
-  xdg.enable = true; 
+  xdg.enable = true;
 
   # 2. Variáveis de Sessão
   home.sessionVariables = {
@@ -13,79 +13,21 @@
     VISUAL = "nvim";
   };
 
-  # 3. Imports
+  # 3. Imports (organizados por categoria)
   imports = [
-    ./eza.nix
-    ./fd.nix
-    ./fzf.nix
-    ./git.nix
-    ./zoxide.nix
-    ./fish.nix
-    ./starship.nix
-    ./fastfetch.nix
-    ./spotify.nix
-    ./cava.nix
-    ./librewolf.nix
-    ./lazyvim.nix
-    ./opencode.nix
+    ./cli
+    ./shell
+    ./desktop
+    ./dev
+    ./services.nix
+    ./programs.nix
+    ./packages.nix
   ];
 
-  # 4 X11
+  # 4. X11
   xsession.preferStatusNotifierItems = true;
   xsession.numlock.enable = true;
 
-  # services 
-  services.activitywatch = {
-  enable = true;
-  package = pkgs.aw-server-rust;
-  };
-  services.amberol.enable = true;
-  services.podman.autoUpdate.enable = true;
-  services.amberol.enableRecoloring = true;
-  services.amberol.replaygain = "album";
-  services.xsettingsd.enable = true;
-  services.plan9port.plumber.enable = true;
-  services.plan9port.fontsrv.enable = true;
-  services.plan9port.package = pkgs.plan9port-wayland;
-  programs.nix-search-tv.enable = true; 
-  programs.nix-search-tv.enableTelevisionIntegration = true;
-  programs.television.enable = true;
-  programs.television.enableFishIntegration = true;
-  programs.nix-your-shell.enable = true;
-  programs.nix-your-shell.enableFishIntegration = true;
-  programs.nix-your-shell.nix-output-monitor.enable = true;
-  programs.nix-init.enable = true;
-  programs.nix-index.enable = true; 
-  programs.nix-index.enableFishIntegration = true;
-  programs.topgrade.enable = true;
-  programs.mangohud.enable = true;
-  programs.lazysql.enable = true;
-
-  # 5. Pacotes
-  home.packages = with pkgs; [
-    tree
-    wget
-    hugo
-    openconnect
-    qemu
-    exiftool
-    ffmpeg
-    figlet
-    imagemagick
-    nodejs_24
-    python3
-    cargo
-    rustc
-    sqlite
-
-    (if stdenv.isLinux then platformio else platformio-core)
-  ];
-
-  # 6 . Compatibilidade
-  programs.man.generateCaches =
-    lib.mkIf pkgs.stdenv.isDarwin false;
-
-  programs.home-manager.enable = true;
-
+  # 5. Estado
   home.stateVersion = "25.11";
 }
