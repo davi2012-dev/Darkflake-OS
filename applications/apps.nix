@@ -12,8 +12,7 @@
     inkscape            
     krita             
     dippi             
-    cryptomator                           
-    eza             
+    cryptomator                                    
     yazi              
     zoxide           
     fzf                
