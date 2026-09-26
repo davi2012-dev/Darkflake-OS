@@ -6,8 +6,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    vesktop           
-    beeper                
+    vesktop                         
     tor-browser
     gimp              
     inkscape            
