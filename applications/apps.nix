@@ -12,9 +12,7 @@
     inkscape            
     krita             
     dippi             
-    cryptomator       
-    btop                  
-    carapace            
+    cryptomator                           
     eza             
     yazi              
     zoxide           
