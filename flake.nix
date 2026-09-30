@@ -15,6 +15,11 @@
     nixsecauditor.url = "github:unnamed-systems/nixsecauditor";
     lazyvim.url = "github:pfassina/lazyvim-nix";
 
+    nix-snapd = {
+      url = "github:nix-community/nix-snapd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -156,6 +161,11 @@
             }
             ./configuration.nix
             
+            inputs.nix-snapd.nixosModules.default
+            {
+              services.snap.enable = true;
+            }
+
             inputs.chaotic.nixosModules.default
             inputs.stylix.nixosModules.stylix
             inputs.nix-flatpak.nixosModules.nix-flatpak
