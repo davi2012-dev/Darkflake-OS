@@ -4,9 +4,14 @@
     daemon.enable = true;
     updater.enable = true;
     updater.interval = "12h";
+    fangfrisch.enable = true;
+    clamonacc.enable = true;
 
     daemon.settings = {
 
+      OnAccessPrevention = true;
+      OnAccessIncludePath = "/home/davi/Downloads";
+     
       OnAccessMaxFileSize = "150M";
       OnAccessIncludePath = [ "/home/davi" "/tmp" "/var/tmp" ];
       OnAccessExcludePath = [ "/proc" "/sys" "/dev" "/run" "/nix/store" ];
