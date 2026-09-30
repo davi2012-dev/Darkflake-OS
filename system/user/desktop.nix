@@ -59,10 +59,7 @@
   programs.coolercontrol.enable = true;
 
   services.tailscale.enable = true;
-  programs.feedbackd.enable = true;
-  programs.mouse-actions.enable = true;
-  programs.mouse-actions.autorun = true;
-  programs.librepods.enable = true;                  
+  programs.feedbackd.enable = true;             
   nixowos.enable = true;
   security.nixsecauditor.enable = true;
 
