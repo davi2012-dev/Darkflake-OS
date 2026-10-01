@@ -1,23 +1,26 @@
 { config, pkgs, ... }: {
-  # --- 1. Horário e Localidade ---
   time.timeZone = "America/Bahia";
   i18n.defaultLocale = "pt_BR.UTF-8";
 
-  # --- 2. Teclado no Terminal (Console TTY) ---
   console = {
     enable = true;
-    keyMap = "br-abnt2";              
-    font = "sun12x22";        
-    earlySetup = true;                
+    keyMap = "br-abnt2";
+    packages = [ pkgs.terminus_font ];
+    font = "ter-v22b";
+    earlySetup = true;
+    colors = [
+      "1e1e2e" "f38ba8" "a6e3a1" "f9e2af"
+      "89b4fa" "f5c2e7" "94e2d5" "bac2de"
+      "585b70" "f38ba8" "a6e3a1" "f9e2af"
+      "89b4fa" "f5c2e7" "94e2d5" "cdd6f4"
+    ];
   };
 
-  # --- 3. Teclado no Servidor Gráfico (X11 / Wayland / Display Managers) ---
   services.xserver.xkb = {
     layout = "br";
     variant = "abnt2";
   };
 
-  # --- 4. Variáveis Regionais Extras (Formatos de Data, Moeda e Medidas) ---
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "pt_BR.UTF-8";
     LC_IDENTIFICATION = "pt_BR.UTF-8";
