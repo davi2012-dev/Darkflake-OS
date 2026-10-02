@@ -8,13 +8,10 @@
     hugo
     diskwatch
     openconnect
-    qemu
     exiftool
     ffmpeg
-    figlet
     imagemagick
     nodejs_24
-    python3
     rustc
     sqlite
 
