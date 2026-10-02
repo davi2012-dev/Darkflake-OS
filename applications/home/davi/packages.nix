@@ -15,7 +15,6 @@
     imagemagick
     nodejs_24
     python3
-    cargo
     rustc
     sqlite
 
