@@ -73,7 +73,6 @@
 
   environment.systemPackages = with pkgs; [
     nvd
-    nix-output-monitor
     git
     gcc
     gnumake
