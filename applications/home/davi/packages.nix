@@ -6,6 +6,7 @@
     tree
     wget
     hugo
+    diskwatch
     openconnect
     qemu
     exiftool
