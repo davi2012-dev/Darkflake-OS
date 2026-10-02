@@ -22,6 +22,7 @@
   };
 
   programs.nix-init.enable = true;
+  programs.cargo.enable = true ;
   programs.topgrade.enable = true;
   programs.mangohud.enable = true;
   programs.lazysql.enable = true;
