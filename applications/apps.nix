@@ -10,12 +10,9 @@
     tor-browser
     gimp              
     inkscape            
-    krita             
-    dippi             
+    krita                     
     cryptomator                                    
-    yazi              
-    zoxide           
-    fzf                
+    yazi                            
     bluetui
     impala
     wiremix
@@ -74,6 +71,7 @@
       "dev.deedles.Trayscale"
       "io.github.linx_systems.ClamUI"
       "org.upscayl.Upscayl"
+      "com.cassidyjames.dippi"
     ];
   };
 }
