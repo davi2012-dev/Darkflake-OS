@@ -15,7 +15,6 @@
   environment.systemPackages = with pkgs; [
     sgdboop
     steamtinkerlaunch
-    mangohud
     hydralauncher
     heroic
     prismlauncher
@@ -38,8 +37,6 @@
     cowsay
     oneko
     figlet
-    espeak
-    cava
     xeyes
     gnugo
     nyancat
