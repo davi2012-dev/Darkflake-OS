@@ -46,8 +46,7 @@
     proton-vpn
     waydroid-helper
     kando
-    kdePackages.qtwebsockets
-    onlyoffice-desktopeditors          
+    kdePackages.qtwebsockets       
     unrar
     p7zip
   ];
@@ -72,6 +71,7 @@
       "io.github.linx_systems.ClamUI"
       "org.upscayl.Upscayl"
       "com.cassidyjames.dippi"
+      "org.onlyoffice.desktopeditors"
     ];
   };
 }
