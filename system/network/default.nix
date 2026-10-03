@@ -11,7 +11,7 @@
     ./cockpit.nix
     ./firewall.nix
     ./analysis.nix
-    ./Adguard.nix
+    ./adguard.nix
     ./searxng.nix
     ./caddy.nix
     ./dnscrypt-proxy.nix 

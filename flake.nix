@@ -178,7 +178,6 @@
             inputs.nixsecauditor.nixosModules.default
             inputs.preservation.nixosModules.preservation
             inputs.disko.nixosModules.disko
-            ./system/disko.nix
             {
               nixpkgs.overlays = [ 
                 mcp-nixos.overlays.default 
@@ -201,7 +200,7 @@
                 };
               };
               
-              home-manager.users.davi = import ./applications/home/davi/home.nix;
+              home-manager.users.davi = import ./home/davi/home.nix;
               home-manager.sharedModules = [
                 inputs.sops-nix.homeManagerModules.sops
                 inputs.chaotic.homeManagerModules.default
