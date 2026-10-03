@@ -101,15 +101,6 @@
               recordsize = "1M";
             };
           };
-          "encrypted/data/projects" = {
-            type = "zfs_fs";
-            options = {
-              mountpoint = "legacy";
-              compression = "zstd-fast";
-              atime = "off";
-              recordsize = "16K";
-            };
-          };
           "encrypted/system" = {
             type = "zfs_fs";
             options = {

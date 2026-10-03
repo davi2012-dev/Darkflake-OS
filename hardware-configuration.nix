@@ -63,11 +63,6 @@
     };
   
 
-  fileSystems."/home/projects" =
-    { device = "rpool/encrypted/data/projects";
-      fsType = "zfs";
-    };
-
   fileSystems."/boot" = {
       device = "/dev/disk/by-partlabel/disk-sda-ESP";
       fsType = "vfat";
