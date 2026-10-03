@@ -1,0 +1,77 @@
+{ config, pkgs, lib, unstable, ... }: {
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;      
+  };
+
+  environment.systemPackages = with pkgs; [
+    vesktop                         
+    tor-browser
+    gimp              
+    inkscape            
+    krita                     
+    cryptomator                                    
+    yazi                            
+    bluetui
+    impala
+    wiremix
+    bat
+    nil
+    deadnix
+    ripsecrets      
+    vscodium 
+    ghostty       
+    distrobox-tui
+    distroshelf       
+    gearlever                
+    termius
+    nixfmt
+    statix
+    outils              
+    stress-ng          
+    nicstat            
+    gping              
+    duf              
+    ncdu               
+    mission-center     
+    winboat
+    iredis
+    flameshot           
+    localsend          
+    obsidian            
+    bazaar             
+    proton-pass
+    proton-authenticator
+    proton-vpn
+    waydroid-helper
+    kando
+    kdePackages.qtwebsockets       
+    unrar
+    p7zip
+  ];
+
+  services.flatpak = {
+    enable = true;
+    packages = [
+      "com.github.tchx84.Flatseal"
+      "io.github.flattool.Warehouse"
+      "org.vinegarhq.Sober"
+      "sh.ppy.osu"
+      "com.usebottles.bottles"
+      "io.github.screwys.Rufin"
+      "com.vysp3r.ProtonPlus"
+      "app.fotema.Fotema"
+      "io.gitlab.metadatacleaner.metadatacleaner"
+      "io.github.plrigaux.sysd-manager"
+      "de.schmidhuberj.DieBahn"
+      "io.github.giantpinkrobots.flatsweep"
+      "com.github.johnfactotum.Foliate"
+      "dev.deedles.Trayscale"
+      "io.github.linx_systems.ClamUI"
+      "org.upscayl.Upscayl"
+      "com.cassidyjames.dippi"
+      "org.onlyoffice.desktopeditors"
+    ];
+  };
+}
